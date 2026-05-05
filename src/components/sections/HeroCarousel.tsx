@@ -16,15 +16,12 @@ const HeroCarousel = () => {
     goToNext,
     goToPrev,
     goToIndex,
-    setHoverPaused,
   } = useHeroCarousel();
 
   return (
     <div
       role="region"
       aria-label="Présentation des pôles d'expertise"
-      onMouseEnter={() => setHoverPaused(true)}
-      onMouseLeave={() => setHoverPaused(false)}
       className="relative w-full h-screen min-h-[100dvh] overflow-hidden bg-surface-darker text-text-on-dark"
       style={
         {

@@ -15,14 +15,12 @@ export interface UseHeroCarousel {
   goToPrev: () => void;
   goToIndex: (i: number) => void;
   isPaused: boolean;
-  setHoverPaused: (paused: boolean) => void;
 }
 
 export function useHeroCarousel(): UseHeroCarousel {
   const prefersReduced = useReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<CarouselDirection>("next");
-  const [hoverPaused, setHoverPaused] = useState(false);
 
   const goToNext = useCallback(() => {
     setDirection("next");
@@ -44,7 +42,7 @@ export function useHeroCarousel(): UseHeroCarousel {
     });
   }, []);
 
-  const isPaused = hoverPaused || !!prefersReduced;
+  const isPaused = !!prefersReduced;
 
   // Auto-rotate — restarts on every index/pause change.
   const intervalRef = useRef<number | null>(null);
@@ -79,6 +77,5 @@ export function useHeroCarousel(): UseHeroCarousel {
     goToPrev,
     goToIndex,
     isPaused,
-    setHoverPaused,
   };
 }

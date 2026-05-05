@@ -28,14 +28,14 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
         duration: 0.8,
         ease: EASE_OUT,
         staggerChildren: reduced ? 0 : 0.08,
-        delayChildren: 0.05,
+        delayChildren: 0,
         when: "beforeChildren",
       },
     },
     exit: (dir: CarouselDirection) => ({
       x: reduced ? 0 : dir === "next" ? -60 : 60,
       opacity: 0,
-      transition: { duration: 0.5, ease: EASE_IN },
+      transition: { duration: 0.35, ease: EASE_IN },
     }),
   };
 
@@ -54,7 +54,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
     center: {
       transition: {
         staggerChildren: reduced ? 0 : 0.06,
-        delayChildren: reduced ? 0 : 0.2,
+        delayChildren: reduced ? 0 : 0.08,
       },
     },
     exit: {},

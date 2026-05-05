@@ -20,7 +20,7 @@ const HeroStatCard = ({ pole, direction }: HeroStatCardProps) => {
     center: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.7, ease: EASE, delay: 0.25 },
+      transition: { duration: 0.7, ease: EASE, delay: 0.15 },
     },
     exit: (dir: CarouselDirection) => ({
       x: reduced ? 0 : dir === "next" ? -30 : 30,
