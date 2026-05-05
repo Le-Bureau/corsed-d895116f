@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUp } from "lucide-react";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const BackToTop = () => {
   const [visible, setVisible] = useState(false);
   const reduced = useReducedMotion();
+  const lenis = useLenis();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600);
@@ -16,7 +18,11 @@ const BackToTop = () => {
   }, []);
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
