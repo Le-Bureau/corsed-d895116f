@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import FooterCtaBlock from "./FooterCtaBlock";
+import BrandLogo from "./BrandLogo";
 import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 
@@ -41,39 +42,8 @@ const Footer = () => {
           {/* COL 1 — BRAND */}
           <FadeInWhenVisible delay={0}>
             <div className="flex flex-col gap-6">
-              <div className="flex items-center gap-3">
-                {/* TODO: Replace this placeholder SVG with the real MCG Corse Drone logo when provided. */}
-                <svg
-                  width="56"
-                  height="56"
-                  viewBox="0 0 56 56"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden
-                >
-                  <rect width="56" height="56" rx="14" fill="var(--logo-base)" />
-                  <text
-                    x="50%"
-                    y="54%"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily="Geist, sans-serif"
-                    fontSize="22"
-                    fontWeight="800"
-                    fill="var(--surface-darker)"
-                  >
-                    CD
-                  </text>
-                </svg>
-                <div className="flex flex-col leading-tight">
-                  <span className="font-display text-[19px] font-semibold tracking-tight">
-                    Corse Drone
-                  </span>
-                  <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-text-on-dark-muted mt-1">
-                    Morganti · Cacciari · Gaspard
-                  </span>
-                </div>
-              </div>
+              <BrandLogo variant="on-dark" />
+
 
               <p className="text-sm leading-relaxed text-text-on-dark-muted max-w-[380px]">
                 La première solution globale de logistique et services par drone
