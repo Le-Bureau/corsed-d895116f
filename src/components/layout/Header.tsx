@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu } from "lucide-react";
 import HeaderLogo from "./HeaderLogo";
 import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
@@ -47,29 +47,44 @@ const Header = () => {
     setServicesOpen(true);
   };
 
-  const pillStateClass =
-    headerState === "top"
-      ? "bg-transparent border-transparent text-text-on-dark"
-      : headerState === "scrolled-dark"
-        ? "glass-light-strong text-text-on-dark"
-        : "glass-white text-text-primary";
+  const isTop = headerState === "top";
 
-  const ctaClass =
-    onLight
-      ? "bg-text-primary text-text-on-dark"
-      : "bg-text-on-dark text-surface-darker";
+  const pillStateClass = isTop
+    ? "bg-[rgba(10,14,26,0.5)] border-white/10 text-text-on-dark rounded-[0_0_12px_12px] py-4 px-7 shadow-none"
+    : headerState === "scrolled-dark"
+      ? "bg-[rgba(10,14,26,0.5)] border-white/10 text-text-on-dark rounded-full py-2.5 pr-3 pl-6 shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
+      : "bg-white/70 border-white/50 text-text-primary rounded-full py-2.5 pr-3 pl-6 shadow-[0_8px_32px_rgba(10,14,26,0.08)]";
+
+  const ctaGlassClass = onLight ? "cta-tinted-liquid-dark" : "cta-tinted-liquid";
+  const ctaTextColor = onLight ? "text-text-primary" : "text-text-on-dark";
+  const ctaBaseStyle = onLight
+    ? undefined
+    : ({
+        background:
+          "linear-gradient(180deg, rgba(168,192,212,0.18) 0%, rgba(168,192,212,0.08) 50%, rgba(168,192,212,0.14) 100%)",
+        backdropFilter: "blur(28px) saturate(200%) brightness(1.05)",
+        WebkitBackdropFilter: "blur(28px) saturate(200%) brightness(1.05)",
+        border: "1px solid rgba(168,192,212,0.3)",
+        boxShadow:
+          "inset 0 1px 0 rgba(255,255,255,0.35), 0 4px 16px rgba(168,192,212,0.15), 0 1px 3px rgba(0,0,0,0.1)",
+      } as React.CSSProperties);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div className="relative mx-auto max-w-[1280px] px-5 py-3 sm:px-10 md:py-5">
+    <header
+      className={cn(
+        "fixed left-0 right-0 top-0 z-50 transition-[padding] duration-700 ease-out-expo",
+        isTop ? "px-8" : "pt-4 px-[max(20px,calc(50%-640px))]",
+      )}
+    >
+      <div className="relative">
         <div
           className={cn(
-            "flex items-center justify-between gap-4 rounded-full border px-4 py-2 md:px-5 md:py-2.5",
-            "transition-[background-color,border-color,color,backdrop-filter] duration-500 ease-out-expo",
+            "flex w-full items-center justify-between gap-4 backdrop-blur-[28px] saturate-180 border",
+            "transition-[border-radius,padding,box-shadow,background-color,border-color,color] duration-700 ease-out-expo",
             pillStateClass,
           )}
         >
-          <HeaderLogo />
+          <HeaderLogo headerState={headerState} />
 
           {/* Desktop nav */}
           <nav className="relative hidden items-center gap-1 md:flex">
@@ -139,14 +154,21 @@ const Header = () => {
             {showCta && (
               <Link
                 to="/contact"
+                style={ctaBaseStyle}
                 className={cn(
-                  "hidden rounded-full px-5 py-2.5 text-[14px] font-semibold transition-[background-color,color,transform] duration-500 ease-out-expo md:inline-block",
+                  "group relative hidden items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold md:inline-flex",
+                  "transition-[transform,background,border-color,box-shadow] duration-300 ease-out-expo",
                   "hover:-translate-y-px",
-                  ctaClass,
+                  ctaGlassClass,
+                  ctaTextColor,
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                 )}
               >
                 Demander un devis
+                <ArrowRight
+                  size={14}
+                  className="transition-transform duration-300 ease-out-expo group-hover:translate-x-[3px]"
+                />
               </Link>
             )}
 

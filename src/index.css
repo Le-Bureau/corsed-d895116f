@@ -154,3 +154,75 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* Header CTA — tinted liquid glass (dark surfaces) */
+.cta-tinted-liquid {
+  position: relative;
+  overflow: hidden;
+}
+.cta-tinted-liquid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(168, 192, 212, 0.25) 50%,
+    transparent 100%
+  );
+  transition: left 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.cta-tinted-liquid:hover::before {
+  left: 200%;
+}
+.cta-tinted-liquid:hover {
+  border-color: rgba(168, 192, 212, 0.5) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 8px 28px rgba(168, 192, 212, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Header CTA — tinted liquid glass (light surfaces) */
+.cta-tinted-liquid-dark {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+    rgba(80, 130, 172, 0.12) 0%,
+    rgba(80, 130, 172, 0.06) 50%,
+    rgba(80, 130, 172, 0.10) 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(80, 130, 172, 0.25);
+  color: var(--text-primary);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 4px 12px rgba(80, 130, 172, 0.1);
+}
+.cta-tinted-liquid-dark::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(80, 130, 172, 0.2) 50%, transparent 100%);
+  transition: left 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.cta-tinted-liquid-dark:hover::before { left: 200%; }
+.cta-tinted-liquid-dark:hover {
+  border-color: rgba(80, 130, 172, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 8px 28px rgba(80, 130, 172, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-tinted-liquid::before,
+  .cta-tinted-liquid-dark::before {
+    display: none;
+  }
+}
