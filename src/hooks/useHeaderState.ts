@@ -8,28 +8,57 @@ export type SectionBg = "dark" | "light";
  * Adaptive header state hook.
  *
  * Convention: any major section in pages must set `data-header-bg="dark" | "light"`
- * on its outermost <section> wrapper. Example: the home hero uses
- * `data-header-bg="dark"`, a stats section on white bg uses `data-header-bg="light"`.
+ * on its outermost <section> wrapper.
  *
- * Returns:
- *  - 'top'              when window.scrollY < 50
- *  - 'scrolled-dark'    when the active section under the header is dark
- *  - 'scrolled-light'   otherwise (default if no section is detected)
+ * Behavior:
+ *  - rAF-coalesced scroll listener (one computation per frame, no-op on equal scrollY)
+ *  - Directional hysteresis: enter 'scrolled' at y > 60, exit at y < 30
+ *  - While in 'top', activeBg updates are suppressed so the morph transition
+ *    is not clobbered by a simultaneous dark↔light color change
+ *  - IntersectionObserver entries are coalesced to the latest one per frame
  */
 export function useHeaderState(): HeaderState {
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(
-    typeof window !== "undefined" ? window.scrollY >= 50 : false,
+    typeof window !== "undefined" ? window.scrollY > 60 : false,
   );
   const [activeBg, setActiveBg] = useState<SectionBg>("light");
-  const activeRef = useRef<Element | null>(null);
 
-  // Scroll listener
+  const scrolledRef = useRef(scrolled);
+  scrolledRef.current = scrolled;
+
+  // rAF-coalesced scroll listener with directional hysteresis
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY >= 50);
-    onScroll();
+    let rafId: number | null = null;
+    let lastY = -1;
+
+    const tick = () => {
+      rafId = null;
+      const y = window.scrollY;
+      if (y === lastY) return;
+      lastY = y;
+
+      const current = scrolledRef.current;
+      if (!current && y > 60) {
+        scrolledRef.current = true;
+        setScrolled(true);
+      } else if (current && y < 30) {
+        scrolledRef.current = false;
+        setScrolled(false);
+      }
+    };
+
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(tick);
+    };
+
+    tick();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // IntersectionObserver — re-query on route change
@@ -37,7 +66,6 @@ export function useHeaderState(): HeaderState {
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("[data-header-bg]"),
     );
-    activeRef.current = null;
 
     if (sections.length === 0) {
       setActiveBg("light");
@@ -61,27 +89,45 @@ export function useHeaderState(): HeaderState {
         }
       }
       if (!chosen) chosen = sections[0];
-      activeRef.current = chosen;
       setActiveBg(readBg(chosen));
     };
 
     pickInitial();
 
+    let pendingBg: SectionBg | null = null;
+    let rafId: number | null = null;
+
+    const flush = () => {
+      rafId = null;
+      // Suppress activeBg updates while at top — returned state is 'top' regardless,
+      // and committing now would cascade an extra render mid-morph.
+      if (!scrolledRef.current) {
+        pendingBg = null;
+        return;
+      }
+      if (pendingBg !== null) {
+        const next = pendingBg;
+        pendingBg = null;
+        setActiveBg((prev) => (prev === next ? prev : next));
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
-        // Pick the latest entry that is intersecting
         const intersecting = entries.filter((e) => e.isIntersecting);
-        if (intersecting.length > 0) {
-          const target = intersecting[intersecting.length - 1].target;
-          activeRef.current = target;
-          setActiveBg(readBg(target));
-        }
+        if (intersecting.length === 0) return;
+        const target = intersecting[intersecting.length - 1].target;
+        pendingBg = readBg(target);
+        if (rafId === null) rafId = requestAnimationFrame(flush);
       },
       { rootMargin: "-80px 0px -85% 0px", threshold: 0 },
     );
 
     sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [pathname]);
 
   if (!scrolled) return "top";
