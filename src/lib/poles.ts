@@ -115,6 +115,7 @@ export const POLES: Pole[] = [
       { name: "Traitement phytosanitaire" },
       { name: "Analyses multispectrales" },
     ],
+    heroImage: agricultureImg,
   },
   {
     key: "transport",
@@ -140,5 +141,6 @@ export const POLES: Pole[] = [
       "Coût divisé vs hélicoptère",
     ],
     subServices: [{ name: "Logistique de chantier isolé" }],
+    heroImage: transportImg,
   },
 ];
