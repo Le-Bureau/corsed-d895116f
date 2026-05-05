@@ -33,7 +33,7 @@ const PolesShowcase = () => {
           <PolesStickyVisual activePoleKey={activePoleKey} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-[60px] items-start">
-          <div className="hidden lg:sticky lg:top-[100px] lg:block">
+          <div className="hidden lg:sticky lg:top-[calc((100vh-720px)/2)] lg:block">
             <PolesStickyVisual activePoleKey={activePoleKey} />
           </div>
           <div className="flex flex-col">
@@ -42,7 +42,7 @@ const PolesShowcase = () => {
                 key={pole.key}
                 pole={pole}
                 isActive={pole.key === activePoleKey}
-                registerRef={(el) => registerPanel(pole.key, el)}
+                registerPanel={registerPanel}
               />
             ))}
           </div>
