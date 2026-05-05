@@ -33,8 +33,31 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
     ? { duration: 0 }
     : { duration: 2.2, ease: EASE };
 
+  const currentPole = POLES[currentIndex];
+  const heroImage = currentPole?.heroImage;
+
   return (
     <div className="absolute inset-0 overflow-hidden">
+      {/* Layer 0 — Pole photo (when available) */}
+      <AnimatePresence mode="sync">
+        {heroImage && (
+          <motion.img
+            key={currentPole.key}
+            src={heroImage}
+            alt=""
+            aria-hidden
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              opacity: { duration: reduced ? 0 : 1.2, ease: EASE },
+              scale: { duration: reduced ? 0 : 7, ease: "linear" },
+            }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+      </AnimatePresence>
+
       {/* Layer 1 — Mesh gradient */}
       <motion.div
         animate={meshControls}
