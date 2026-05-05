@@ -184,23 +184,29 @@ const MegaMenu = ({
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          ref={panelRef}
-          role="menu"
-          aria-label="Services et expertises"
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          variants={reduced ? reducedContainer : containerVariants}
-          initial="hidden"
-          animate="show"
-          exit="exit"
+        <div
           className={cn(
-            "absolute left-1/2 top-[calc(100%+12px)] z-40 -translate-x-1/2 rounded-3xl p-8 shadow-2xl",
+            "absolute left-1/2 top-[calc(100%+12px)] z-40 -translate-x-1/2",
             "w-[1100px] max-w-[calc(100vw-80px)]",
-            panelClass,
-            textTone,
           )}
         >
+          <motion.div
+            ref={panelRef}
+            role="menu"
+            aria-label="Services et expertises"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            variants={reduced ? reducedContainer : containerVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className={cn(
+              "rounded-3xl p-8 shadow-2xl",
+              panelClass,
+              textTone,
+            )}
+          >
+
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 lg:gap-7">
             {COLUMNS.map((col) => {
               const Icon = col.Icon;
