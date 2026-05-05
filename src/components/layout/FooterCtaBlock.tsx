@@ -49,7 +49,7 @@ const FooterCtaBlock = () => {
             variants={make(16, 0.15)}
             className="font-display font-semibold text-[clamp(38px,5vw,64px)] leading-[1.05] tracking-[-0.035em] text-text-on-dark"
           >
-            Particulier ou professionnel, parlons de votre projet drone.
+            Particulier ou professionnel, parlons de votre projet.
           </motion.h2>
         </div>
 
