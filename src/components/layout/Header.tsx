@@ -133,14 +133,6 @@ const Header = () => {
               </NavLink>
             ))}
 
-            <MegaMenu
-              open={servicesOpen}
-              headerState={headerState}
-              onClose={() => setServicesOpen(false)}
-              onMouseEnter={openNow}
-              onMouseLeave={scheduleClose}
-              triggerRef={servicesBtnRef}
-            />
           </nav>
 
           <div className="flex items-center gap-2">
@@ -173,7 +165,17 @@ const Header = () => {
               <Menu size={20} />
             </button>
           </div>
+
+          <MegaMenu
+            open={servicesOpen}
+            headerState={headerState}
+            onClose={() => setServicesOpen(false)}
+            onMouseEnter={openNow}
+            onMouseLeave={scheduleClose}
+            triggerRef={servicesBtnRef}
+          />
         </div>
+
       </div>
 
       <MobileDrawer

@@ -196,7 +196,7 @@ const MegaMenu = ({
           exit="exit"
           className={cn(
             "absolute left-1/2 top-[calc(100%+12px)] z-40 -translate-x-1/2 rounded-3xl p-8 shadow-2xl",
-            "w-[1100px] max-w-[calc(100vw-40px)]",
+            "w-[1100px] max-w-[calc(100vw-80px)]",
             panelClass,
             textTone,
           )}
