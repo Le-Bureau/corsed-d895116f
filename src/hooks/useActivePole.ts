@@ -3,29 +3,11 @@ import type { PoleKey } from "@/lib/poles";
 
 export function useActivePole(initial: PoleKey = "nettoyage") {
   const [activePoleKey, setActivePoleKey] = useState<PoleKey>(initial);
-  const [version, setVersion] = useState(0);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const mapRef = useRef<Map<PoleKey, HTMLElement>>(new Map());
 
-  const registerPanel = useCallback(
-    (key: PoleKey, el: HTMLElement | null) => {
-      const map = mapRef.current;
-      if (el) {
-        if (map.get(key) === el) return;
-        map.set(key, el);
-      } else {
-        if (!map.has(key)) return;
-        map.delete(key);
-      }
-      setVersion((v) => v + 1);
-    },
-    [],
-  );
-
-  useEffect(() => {
-    const elements = Array.from(mapRef.current.entries());
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
+  if (typeof window !== "undefined" && !observerRef.current) {
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
@@ -38,10 +20,32 @@ export function useActivePole(initial: PoleKey = "nettoyage") {
       },
       { rootMargin: "-40% 0px -40% 0px", threshold: 0 },
     );
+  }
 
-    elements.forEach(([, el]) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [version]);
+  useEffect(() => {
+    return () => {
+      observerRef.current?.disconnect();
+      observerRef.current = null;
+    };
+  }, []);
+
+  const registerPanel = useCallback(
+    (key: PoleKey, el: HTMLElement | null) => {
+      const map = mapRef.current;
+      const observer = observerRef.current;
+      const prev = map.get(key);
+      if (el) {
+        if (prev === el) return;
+        if (prev) observer?.unobserve(prev);
+        map.set(key, el);
+        observer?.observe(el);
+      } else if (prev) {
+        observer?.unobserve(prev);
+        map.delete(key);
+      }
+    },
+    [],
+  );
 
   return { activePoleKey, registerPanel };
 }
