@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Animatable color custom properties for hero pole transitions */
+@property --pole-base {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #5082AC;
+}
+@property --pole-deep {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #2C5784;
+}
+
 /* Corse Drone design tokens. Colors are kept as raw hex/rgba per brand spec. */
 
 @layer base {
