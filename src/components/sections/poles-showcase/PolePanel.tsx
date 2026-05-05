@@ -1,12 +1,13 @@
+import { useCallback } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check } from "lucide-react";
-import { POLES, type Pole } from "@/lib/poles";
+import { POLES, type Pole, type PoleKey } from "@/lib/poles";
 
 interface Props {
   pole: Pole;
   isActive: boolean;
-  registerRef: (el: HTMLElement | null) => void;
+  registerPanel: (key: PoleKey, el: HTMLElement | null) => void;
 }
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -18,18 +19,23 @@ const PANEL_TITLES: Record<Pole["key"], string> = {
   transport: "Transport aérien",
 };
 
-const PolePanel = ({ pole, isActive, registerRef }: Props) => {
+const PolePanel = ({ pole, isActive, registerPanel }: Props) => {
   const reduced = useReducedMotion();
   const indexZeroPad = String(
     POLES.findIndex((p) => p.key === pole.key) + 1,
   ).padStart(2, "0");
+
+  const setRef = useCallback(
+    (el: HTMLElement | null) => registerPanel(pole.key, el),
+    [registerPanel, pole.key],
+  );
 
   const focusRing =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-darker";
 
   return (
     <article
-      ref={(el) => registerRef(el)}
+      ref={setRef}
       data-pole-key={pole.key}
       aria-current={isActive || undefined}
       className="min-h-0 py-6 lg:min-h-screen lg:flex lg:items-center lg:py-20"
