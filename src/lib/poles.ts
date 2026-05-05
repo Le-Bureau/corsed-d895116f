@@ -1,3 +1,6 @@
+import nettoyageImg from "@/assets/hero/nettoyage.png";
+import diagnosticImg from "@/assets/hero/diagnostic.png";
+
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
 export interface PoleSubService {
@@ -23,6 +26,7 @@ export interface Pole {
   description: string;
   highlights: string[];
   subServices: PoleSubService[];
+  heroImage?: string;
 }
 
 export const POLES: Pole[] = [
@@ -50,6 +54,7 @@ export const POLES: Pole[] = [
       { name: "Nettoyage de façades", slug: "facades" },
       { name: "Panneaux photovoltaïques", slug: "panneaux-solaires" },
     ],
+    heroImage: nettoyageImg,
   },
   {
     key: "diagnostic",
@@ -78,6 +83,7 @@ export const POLES: Pole[] = [
       { name: "Diagnostic thermique", slug: "thermique" },
       { name: "Inspection visuelle", slug: "visuel" },
     ],
+    heroImage: diagnosticImg,
   },
   {
     key: "agriculture",
