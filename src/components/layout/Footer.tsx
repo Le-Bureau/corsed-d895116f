@@ -189,7 +189,7 @@ const Footer = () => {
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Couverture</span>
                 <span className="text-sm font-normal text-text-on-dark-muted leading-snug">
-                  Toute la Corse, intervention sous 48h
+                  Intervention dans toute la Corse
                 </span>
               </div>
             </div>
