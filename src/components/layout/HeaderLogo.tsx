@@ -19,7 +19,7 @@ const HeaderLogo = ({ className, tone = "auto", onClick, headerState }: Props) =
         ? "text-text-primary"
         : "";
 
-  const heightClass = headerState === "top" ? "h-14" : "h-8";
+  const heightClass = headerState === "top" ? "h-16" : "h-9";
 
   return (
     <Link
