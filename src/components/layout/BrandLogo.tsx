@@ -14,7 +14,7 @@ export function BrandLogo({ variant = "auto", className }: BrandLogoProps) {
     <img
       src={src}
       alt="Corse Drone — Morganti Cacciari Gaspard"
-      className={cn("h-28 w-auto", className)}
+      className={cn("h-44 w-auto -ml-2", className)}
     />
   );
 }
