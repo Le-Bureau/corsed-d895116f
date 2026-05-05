@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import {
+  AnimatePresence,
   motion,
   useAnimationControls,
   useReducedMotion,
 } from "motion/react";
 import type { CarouselDirection } from "@/hooks/useHeroCarousel";
+import { POLES } from "@/lib/poles";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
