@@ -61,10 +61,10 @@ const Header = () => {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto max-w-[1280px] px-5 py-3 sm:px-10 md:py-5">
+      <div className="relative mx-auto max-w-[1280px] px-5 py-3 sm:px-10 md:py-5">
         <div
           className={cn(
-            "relative flex items-center justify-between gap-4 rounded-full border px-4 py-2 md:px-5 md:py-2.5",
+            "flex items-center justify-between gap-4 rounded-full border px-4 py-2 md:px-5 md:py-2.5",
             "transition-[background-color,border-color,color,backdrop-filter] duration-500 ease-out-expo",
             pillStateClass,
           )}
