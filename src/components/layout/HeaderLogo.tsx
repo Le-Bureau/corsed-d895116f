@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import logoMark from "@/assets/logo-mcg-mark.svg";
 
 interface Props {
   className?: string;
@@ -27,15 +28,11 @@ const HeaderLogo = ({ className, tone = "auto", onClick }: Props) => {
       )}
       aria-label="Corse Drone — Accueil"
     >
-      <span
-        className="flex h-7 w-7 items-center justify-center rounded-[7px] font-display font-extrabold text-[13px] text-surface-darker"
-        style={{ backgroundColor: "var(--logo-base)" }}
-      >
-        CD
-      </span>
+      <img src={logoMark} alt="" aria-hidden="true" className="h-7 w-auto" />
       <span className="text-[15px] font-semibold leading-none">Corse Drone</span>
     </Link>
   );
 };
 
 export default HeaderLogo;
+
