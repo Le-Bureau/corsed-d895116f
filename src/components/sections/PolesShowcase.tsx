@@ -15,7 +15,7 @@ const PolesShowcase = () => {
       data-active-pole={activePoleKey}
       role="region"
       aria-label="Présentation détaillée des 4 pôles d'expertise"
-      className="relative overflow-hidden bg-surface-darker text-text-on-dark"
+      className="relative bg-surface-darker text-text-on-dark"
       style={
         {
           "--pole-base": active.baseColorOnDark,
