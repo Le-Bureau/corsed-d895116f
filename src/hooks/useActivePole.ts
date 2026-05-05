@@ -9,16 +9,32 @@ export function useActivePole(initial: PoleKey = "nettoyage") {
   if (typeof window !== "undefined" && !observerRef.current) {
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const key = (entry.target as HTMLElement).dataset.poleKey as
-              | PoleKey
-              | undefined;
-            if (key) setActivePoleKey(key);
+        const intersecting = entries.filter(
+          (e) =>
+            e.isIntersecting &&
+            e.target instanceof HTMLElement &&
+            e.target.dataset.poleKey,
+        );
+        if (intersecting.length === 0) return;
+
+        const viewportCenter = window.innerHeight / 2;
+        let best: IntersectionObserverEntry | null = null;
+        let bestDistance = Infinity;
+        for (const entry of intersecting) {
+          const rect = entry.boundingClientRect;
+          const center = rect.top + rect.height / 2;
+          const distance = Math.abs(center - viewportCenter);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            best = entry;
           }
         }
+        if (best && best.target instanceof HTMLElement) {
+          const key = best.target.dataset.poleKey as PoleKey;
+          setActivePoleKey(key);
+        }
       },
-      { rootMargin: "-35% 0px -45% 0px", threshold: 0 },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
     );
   }
 
