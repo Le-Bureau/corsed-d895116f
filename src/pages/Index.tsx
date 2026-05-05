@@ -1,3 +1,11 @@
-import PagePlaceholder from "@/components/layout/PagePlaceholder";
-const Index = () => <PagePlaceholder route="/" />;
+import HeroCarousel from "@/components/sections/HeroCarousel";
+
+const Index = () => {
+  return (
+    <section data-header-bg="dark">
+      <HeroCarousel />
+    </section>
+  );
+};
+
 export default Index;
