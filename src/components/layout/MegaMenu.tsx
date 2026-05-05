@@ -95,18 +95,26 @@ const COLUMNS: Column[] = [
 ];
 
 const containerVariants: Variants = {
-  hidden: { opacity: 0, y: -8 },
+  hidden: {},
   show: {
-    opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.35,
-      ease: EASE,
       staggerChildren: 0.06,
       delayChildren: 0.1,
     },
   },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.25, ease: EASE } },
+  exit: {},
+};
+
+const colVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
+  exit: { opacity: 0, transition: { duration: 0.15 } },
+};
+
+const reducedContainer: Variants = {
+  hidden: {},
+  show: {},
+  exit: {},
 };
 
 const colVariants: Variants = {
