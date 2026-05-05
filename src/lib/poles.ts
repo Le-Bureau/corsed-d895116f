@@ -54,6 +54,7 @@ export const POLES: Pole[] = [
       { name: "Nettoyage de façades", slug: "facades" },
       { name: "Panneaux photovoltaïques", slug: "panneaux-solaires" },
     ],
+    heroImage: nettoyageImg,
   },
   {
     key: "diagnostic",
