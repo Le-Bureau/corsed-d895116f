@@ -165,17 +165,16 @@ const Header = () => {
               <Menu size={20} />
             </button>
           </div>
-
-          <MegaMenu
-            open={servicesOpen}
-            headerState={headerState}
-            onClose={() => setServicesOpen(false)}
-            onMouseEnter={openNow}
-            onMouseLeave={scheduleClose}
-            triggerRef={servicesBtnRef}
-          />
         </div>
 
+        <MegaMenu
+          open={servicesOpen}
+          headerState={headerState}
+          onClose={() => setServicesOpen(false)}
+          onMouseEnter={openNow}
+          onMouseLeave={scheduleClose}
+          triggerRef={servicesBtnRef}
+        />
       </div>
 
       <MobileDrawer
