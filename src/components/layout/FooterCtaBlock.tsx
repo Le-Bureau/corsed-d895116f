@@ -58,12 +58,12 @@ const FooterCtaBlock = () => {
             to="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-text-on-dark px-7 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5"
           >
-            Démarrer un projet
+            Demander un devis
             <ArrowRight size={16} />
           </Link>
           <a
             href="tel:0604501120"
-            className="glass-light inline-flex items-center rounded-full px-7 py-4 text-[15px] font-medium text-text-on-dark transition-transform duration-200 hover:-translate-y-0.5"
+            className="glass-light hover:bg-white/[0.14] inline-flex items-center rounded-full px-7 py-4 text-[15px] font-medium text-text-on-dark transition-all duration-200 hover:-translate-y-0.5"
           >
             06 04 50 11 20
           </a>
