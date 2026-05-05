@@ -1,3 +1,6 @@
+import nettoyageImg from "@/assets/hero/nettoyage.png";
+import diagnosticImg from "@/assets/hero/diagnostic.png";
+
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
 export interface PoleSubService {
@@ -23,6 +26,7 @@ export interface Pole {
   description: string;
   highlights: string[];
   subServices: PoleSubService[];
+  heroImage?: string;
 }
 
 export const POLES: Pole[] = [
