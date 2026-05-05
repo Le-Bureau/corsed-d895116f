@@ -5,6 +5,7 @@ import { ChevronDown, X } from "lucide-react";
 import HeaderLogo from "./HeaderLogo";
 import { POLES } from "@/lib/poles";
 import { cn } from "@/lib/utils";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -56,6 +57,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
   const { pathname } = useLocation();
   const panelRef = useRef<HTMLDivElement>(null);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const lenis = useLenis();
 
   // Close on route change
   useEffect(() => {
@@ -63,15 +65,17 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // Body scroll lock
+  // Body scroll lock + Lenis stop
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    lenis?.stop();
     return () => {
       document.body.style.overflow = prev;
+      lenis?.start();
     };
-  }, [open]);
+  }, [open, lenis]);
 
   // Escape + initial focus + restore
   useEffect(() => {
