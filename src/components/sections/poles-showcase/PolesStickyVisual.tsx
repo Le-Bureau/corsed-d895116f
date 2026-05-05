@@ -26,7 +26,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
       };
 
   return (
-    <div className="relative h-[50vh] mb-6 lg:mb-0 lg:sticky lg:top-[100px] lg:h-[calc(100vh-100px)] lg:max-h-[720px] rounded-3xl overflow-hidden border border-white/10">
+    <div className="relative h-[50vh] mb-6 lg:mb-0 lg:h-[calc(100vh-100px)] lg:max-h-[720px] rounded-3xl overflow-hidden border border-white/10">
       {/* Mesh fill — colors transition via CSS vars on parent */}
       <div
         className="absolute inset-0"

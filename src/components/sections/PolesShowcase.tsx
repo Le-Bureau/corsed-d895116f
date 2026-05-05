@@ -33,7 +33,7 @@ const PolesShowcase = () => {
           <PolesStickyVisual activePoleKey={activePoleKey} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-[60px] items-start">
-          <div className="hidden lg:block">
+          <div className="hidden lg:sticky lg:top-[100px] lg:block">
             <PolesStickyVisual activePoleKey={activePoleKey} />
           </div>
           <div className="flex flex-col">
