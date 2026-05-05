@@ -64,7 +64,8 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
         className="absolute"
         style={{
           inset: "-5%",
-          opacity: 0.85,
+          opacity: heroImage ? 0.55 : 0.85,
+          mixBlendMode: heroImage ? "multiply" : undefined,
           background:
             "radial-gradient(at 20% 30%, var(--pole-base) 0%, transparent 55%)," +
             "radial-gradient(at 80% 20%, var(--pole-deep) 0%, transparent 50%)," +
