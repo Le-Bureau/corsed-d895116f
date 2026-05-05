@@ -83,6 +83,7 @@ export const POLES: Pole[] = [
       { name: "Diagnostic thermique", slug: "thermique" },
       { name: "Inspection visuelle", slug: "visuel" },
     ],
+    heroImage: diagnosticImg,
   },
   {
     key: "agriculture",
