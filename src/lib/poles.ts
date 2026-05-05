@@ -1,5 +1,10 @@
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
+export interface PoleSubService {
+  name: string;
+  slug?: string;
+}
+
 export interface Pole {
   key: PoleKey;
   label: string;
@@ -14,6 +19,10 @@ export interface Pole {
   statValue: string;
   statDetail: string;
   comingSoon: boolean;
+  pitch: string;
+  description: string;
+  highlights: string[];
+  subServices: PoleSubService[];
 }
 
 export const POLES: Pole[] = [
@@ -32,6 +41,15 @@ export const POLES: Pole[] = [
     statValue: "30%",
     statDetail: "vs méthodes traditionnelles",
     comingSoon: false,
+    pitch: "Une alternative sécurisée et économique aux échafaudages.",
+    description:
+      "Pulvérisation précise sur façades, toitures et panneaux photovoltaïques, sans immobilisation de site. L'opérateur reste au sol, l'intervention se fait en quelques heures, et le rendu est immédiat.",
+    highlights: ["Aucun échafaudage", "Site non immobilisé", "Économie d'eau"],
+    subServices: [
+      { name: "Nettoyage de toitures", slug: "toitures" },
+      { name: "Nettoyage de façades", slug: "facades" },
+      { name: "Panneaux photovoltaïques", slug: "panneaux-solaires" },
+    ],
   },
   {
     key: "diagnostic",
@@ -48,6 +66,18 @@ export const POLES: Pole[] = [
     statValue: "48h",
     statDetail: "de livraison du rapport détaillé",
     comingSoon: false,
+    pitch: "L'œil aérien qui voit l'invisible.",
+    description:
+      "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
+    highlights: [
+      "Caméra thermique infrarouge",
+      "Rapport sous 48h",
+      "Accès difficile résolu",
+    ],
+    subServices: [
+      { name: "Diagnostic thermique", slug: "thermique" },
+      { name: "Inspection visuelle", slug: "visuel" },
+    ],
   },
   {
     key: "agriculture",
@@ -64,6 +94,19 @@ export const POLES: Pole[] = [
     statValue: "−90%",
     statDetail: "vs pulvérisation au tracteur",
     comingSoon: true,
+    pitch: "La précision au mètre carré, parcelle par parcelle.",
+    description:
+      "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Une approche adaptée au terroir corse qui optimise vos rendements tout en allégeant votre charge de travail et votre empreinte écologique.",
+    highlights: [
+      "Précision GPS centimétrique",
+      "Adapté au terroir corse",
+      "Bilan carbone réduit",
+    ],
+    subServices: [
+      { name: "Épandage ciblé" },
+      { name: "Traitement phytosanitaire" },
+      { name: "Analyses multispectrales" },
+    ],
   },
   {
     key: "transport",
@@ -80,5 +123,14 @@ export const POLES: Pole[] = [
     statValue: "100kg",
     statDetail: "par rotation de drone cargo",
     comingSoon: true,
+    pitch: "La logistique aérienne nouvelle génération.",
+    description:
+      "Acheminement de matériel vers les zones difficiles d'accès. Une alternative à l'hélicoptère, plus rapide, plus précise, moins coûteuse pour vos chantiers isolés en moyenne montagne ou sur sites côtiers escarpés.",
+    highlights: [
+      "Charge utile 100kg",
+      "Zones inaccessibles",
+      "Coût divisé vs hélicoptère",
+    ],
+    subServices: [{ name: "Logistique de chantier isolé" }],
   },
 ];
