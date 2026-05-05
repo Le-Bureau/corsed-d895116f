@@ -272,7 +272,8 @@ const MegaMenu = ({
               );
             })}
           </div>
-        </motion.div>
+          </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
