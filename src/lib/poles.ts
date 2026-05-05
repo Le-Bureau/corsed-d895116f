@@ -1,5 +1,7 @@
 import nettoyageImg from "@/assets/hero/nettoyage.png";
 import diagnosticImg from "@/assets/hero/diagnostic.png";
+import agricultureImg from "@/assets/hero/agriculture.png";
+import transportImg from "@/assets/hero/transport.png";
 
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
