@@ -105,10 +105,10 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
             )}
           </motion.div>
 
-          {/* Title rendered by HeroCarousel's continuous track. Reserve space. */}
+          {/* Title rendered by HeroCarousel's persistent track. Reserve space. */}
           <div
             aria-hidden="true"
-            style={{ height: "clamp(120px, 16vw, 200px)" }}
+            style={{ height: "clamp(70px, 14vw, 180px)" }}
             className="mb-8"
           />
           <h1 className="sr-only">{pole.label}</h1>

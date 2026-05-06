@@ -60,7 +60,7 @@ const HeroCarousel = () => {
     const update = () =>
       setViewport({
         width: window.innerWidth,
-        isMobile: window.innerWidth <= 768,
+        isMobile: window.innerWidth < 768,
       });
     update();
     window.addEventListener("resize", update);
@@ -85,16 +85,17 @@ const HeroCarousel = () => {
     >
       <HeroBackground currentIndex={currentIndex} direction={direction} />
 
-      {/* Title rotation track — all titles mounted, animated together */}
-      <div
-        className="absolute inset-x-0 z-[8] px-5 md:px-10"
-        style={{
-          top: "50%",
-          transform: "translateY(-50%)",
-          height: "clamp(70px, 14vw, 180px)",
-        }}
-      >
-        <div className="relative w-full h-full max-w-[1280px] mx-auto">
+      {/* Title rotation track — all titles always mounted, animated together.
+          Mirrors HeroSlideContent's layout so the track sits exactly in the title slot. */}
+      <div className="absolute inset-0 z-[8] flex items-center pointer-events-none">
+        <div className="w-full px-5 md:px-10">
+          <div className="w-full max-w-[780px]">
+            {/* Spacer matches eyebrow height + mb-7 */}
+            <div aria-hidden="true" style={{ height: "calc(1.5rem + 1.75rem)" }} />
+            <div
+              className="relative w-full"
+              style={{ height: "clamp(70px, 14vw, 180px)" }}
+            >
           {POLES.map((pole, i) => {
             const { x, opacity, scale, isGhost } = getTitleProps(
               i,
@@ -139,7 +140,7 @@ const HeroCarousel = () => {
                     : "pointer-events-none"
                 }`}
                 style={{
-                  fontSize: "clamp(42px, 8vw, 120px)",
+                  fontSize: "clamp(42px, 7vw, 110px)",
                   letterSpacing: "-0.035em",
                   lineHeight: 1,
                   transformOrigin: "left center",
@@ -154,14 +155,7 @@ const HeroCarousel = () => {
                 }}
                 transition={{ duration, ease: EASE }}
               >
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.25em",
-                    position: "relative",
-                  }}
-                >
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25em", position: "relative" }}>
                   <span style={{ position: "relative", display: "inline-block" }}>
                     {pole.label}
                     {isGhost && (
@@ -172,8 +166,7 @@ const HeroCarousel = () => {
                           bottom: "0.08em",
                           height: "2px",
                           width: "var(--ghost-underline, 0%)",
-                          transition:
-                            "width 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
+                          transition: "width 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
                         }}
                       />
                     )}
@@ -185,10 +178,8 @@ const HeroCarousel = () => {
                         fontSize: "0.4em",
                         fontWeight: 400,
                         opacity: "var(--ghost-arrow-opacity, 0)",
-                        transform:
-                          "translateX(var(--ghost-arrow-x, -12px))",
-                        transition:
-                          "opacity 0.35s ease, transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
+                        transform: "translateX(var(--ghost-arrow-x, -12px))",
+                        transition: "opacity 0.35s ease, transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
                       }}
                     >
                       →
@@ -198,6 +189,8 @@ const HeroCarousel = () => {
               </motion.div>
             );
           })}
+            </div>
+          </div>
         </div>
       </div>
 
