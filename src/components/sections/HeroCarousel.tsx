@@ -189,6 +189,8 @@ const HeroCarousel = () => {
               </motion.div>
             );
           })}
+            </div>
+          </div>
         </div>
       </div>
 
