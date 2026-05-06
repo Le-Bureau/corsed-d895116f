@@ -18,6 +18,8 @@ const HeroCarousel = () => {
     goToIndex,
   } = useHeroCarousel();
 
+  const nextPole = POLES[(currentIndex + 1) % POLES.length];
+
   return (
     <div
       role="region"
@@ -33,6 +35,28 @@ const HeroCarousel = () => {
       }
     >
       <HeroBackground currentIndex={currentIndex} direction={direction} />
+
+      {/* Ghost of next pole — peeks from the right edge */}
+      <div className="hidden lg:flex absolute inset-0 z-[5] items-center justify-end pr-0 pointer-events-none overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={nextPole.key}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.18 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="font-display font-semibold tracking-[-0.04em] leading-[0.95] whitespace-nowrap select-none text-text-on-dark"
+            style={{
+              fontSize: "clamp(80px, 11vw, 180px)",
+              transform: "translateX(18%)",
+              textShadow: "0 2px 18px rgba(0,0,0,0.45)",
+            }}
+            aria-hidden="true"
+          >
+            {nextPole.label}
+          </motion.span>
+        </AnimatePresence>
+      </div>
 
       <AnimatePresence mode="wait" custom={direction} initial={false}>
         <HeroSlideContent
