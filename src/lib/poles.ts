@@ -301,5 +301,16 @@ export const POLES: Pole[] = [
     heroImage: transportImg,
     showcaseImage: transportShowcase,
     mobileImagePosition: "center 25%",
+    isInDevelopment: true,
+    heroPoleNumber: "PÔLE 04",
+    heroPitch:
+      "Une nouvelle approche de la logistique aérienne. Nos drones assurent le transport de matériel vers les zones difficiles d'accès, en complément ou alternative à l'hélicoptère.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: PLACEHOLDER_USE_CASES,
+    poleFAQ: PLACEHOLDER_FAQ,
+    finalCTATitle: "Service en préparation.",
+    finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
+    finalCTAButtonLabel: "Être prévenu du lancement",
   },
 ];
