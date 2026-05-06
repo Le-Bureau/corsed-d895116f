@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useLenis } from "@/components/SmoothScrollProvider";
 import type { Pole } from "@/lib/poles";
 
 interface Props {
