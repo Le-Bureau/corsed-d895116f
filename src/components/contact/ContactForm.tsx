@@ -113,40 +113,19 @@ const ContactForm = () => {
         />
       </div>
 
-      <div className="mt-12 pt-8 border-t border-white/10 flex flex-col gap-6">
-        {isSubmitted && errorList.length > 0 && (
-          <div
-            role="alert"
-            className="text-sm text-red-300/90 space-y-1.5 rounded-xl border border-red-300/20 bg-red-500/5 p-4"
-          >
-            <p className="font-semibold uppercase tracking-[0.12em] text-[11px] text-red-200/80 mb-1">
-              Quelques détails à compléter
-            </p>
-            {errorList.map((e) => (
-              <p key={e.key}>• {e.message}</p>
-            ))}
-          </div>
-        )}
-
-        <label className="flex items-start gap-3 text-[13px] leading-relaxed text-text-on-dark-muted cursor-pointer">
-          <input
-            type="checkbox"
-            {...register("rgpdConsent")}
-            className="w-[18px] h-[18px] mt-0.5 accent-logo-base flex-shrink-0 cursor-pointer"
-          />
-          <span>
-            J'accepte que mes données soient traitées dans le cadre de cette
-            demande conformément à la{" "}
-            <Link
-              to="/mentions-legales"
-              className="text-logo-base underline hover:text-text-on-dark transition-colors"
-            >
-              politique de confidentialité
-            </Link>
-            .
-          </span>
-        </label>
-      </div>
+      {isSubmitted && errorList.length > 0 && (
+        <div
+          role="alert"
+          className="mt-10 text-sm text-red-300/90 space-y-1.5 rounded-xl border border-red-300/20 bg-red-500/5 p-4"
+        >
+          <p className="font-semibold uppercase tracking-[0.12em] text-[11px] text-red-200/80 mb-1">
+            Quelques détails à compléter
+          </p>
+          {errorList.map((e) => (
+            <p key={e.key}>• {e.message}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
