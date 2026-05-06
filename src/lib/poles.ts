@@ -200,6 +200,8 @@ export const POLES: Pole[] = [
     finalCTAButtonLabel: "Demander un devis gratuit",
     stat: { value: "30", unit: "%", labelStrong: "d'économies en moyenne", labelMuted: "comparé aux méthodes traditionnelles" },
   },
+  {
+    key: "diagnostic",
     label: "Diagnostic",
     slug: "diagnostic",
     baseColorOnDark: "#A33333",
