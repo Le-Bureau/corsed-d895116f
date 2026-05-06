@@ -75,7 +75,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
       className="fixed top-20 left-0 right-0 mx-auto z-[60]"
       style={{ width: "min(720px, calc(100vw - 2rem))", ...GLASS_STYLE }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
         {POLES.map((pole) => (
           <div key={pole.key} className="flex flex-col gap-2">
             <div className="flex items-center gap-2 mb-1">
