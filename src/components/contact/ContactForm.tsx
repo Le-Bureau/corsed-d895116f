@@ -18,8 +18,8 @@ const ContactForm = () => {
 
   return (
     <div
-      className="text-text-on-dark font-display font-light tracking-tight leading-[1.55]"
-      style={{ fontSize: "clamp(20px, 2.4vw, 30px)" }}
+      className="text-text-on-dark font-display font-light tracking-tight leading-[1.6]"
+      style={{ fontSize: "clamp(17px, 1.6vw, 22px)" }}
     >
       <p className="flex flex-wrap items-baseline gap-x-2 gap-y-3">
         <span>Bonjour, je suis</span>
