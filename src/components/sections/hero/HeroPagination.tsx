@@ -8,7 +8,7 @@ interface HeroPaginationProps {
 
 const HeroPagination = ({ currentIndex, onSelect }: HeroPaginationProps) => {
   return (
-    <div className="absolute bottom-8 left-5 md:left-10 z-[15] glass-light-strong rounded-full p-2 flex gap-1">
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[15] glass-light-strong rounded-full p-2 flex gap-1">
       {POLES.map((p, i) => {
         const active = i === currentIndex;
         return (
