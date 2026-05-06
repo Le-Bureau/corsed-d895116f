@@ -56,8 +56,6 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
         />
       </AnimatePresence>
 
-      {/* Solid neutral base — masks the colored mesh during the photo crossfade gap */}
-      <div className="absolute inset-0 bg-surface-darker" aria-hidden="true" />
 
       {/* Showcase photo simultaneous crossfade — both images coexist and cover each other, so no mesh shows through */}
       <AnimatePresence>
