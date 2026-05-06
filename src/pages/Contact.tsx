@@ -65,9 +65,47 @@ const Contact = () => {
   };
 
   return (
+    <FormProvider {...methods}>
+      <ContactSection
+        submitted={submitted}
+        submissionData={submissionData}
+        onSubmit={methods.handleSubmit(onSubmit)}
+        onReset={handleReset}
+      />
+    </FormProvider>
+  );
+};
+
+interface ContactSectionProps {
+  submitted: boolean;
+  submissionData: ContactFormData | null;
+  onSubmit: (e?: React.BaseSyntheticEvent) => void;
+  onReset: () => void;
+}
+
+const ContactSection = ({
+  submitted,
+  submissionData,
+  onSubmit,
+  onReset,
+}: ContactSectionProps) => {
+  const requestType = useWatch<ContactFormData>({ name: "requestType" });
+  const accent =
+    requestType &&
+    REQUEST_TYPE_COLORS[requestType as keyof typeof REQUEST_TYPE_COLORS]
+      ? REQUEST_TYPE_COLORS[requestType as keyof typeof REQUEST_TYPE_COLORS]
+      : DEFAULT_COLOR;
+
+  return (
     <section
       data-header-bg="dark"
       className="relative min-h-screen bg-surface-darker overflow-hidden"
+      style={
+        {
+          "--contact-accent": accent.base,
+          "--contact-accent-rgb": accent.rgb,
+        } as React.CSSProperties
+      }
     >
       {/* Base ambient mesh (always logo-tinted, full page with soft fade) */}
       <div
@@ -83,27 +121,38 @@ const Contact = () => {
         }}
       />
 
+      {/* Accent ambient mesh — full page, soft edges, transitions on pole change */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 70% 25%, rgba(var(--contact-accent-rgb), 0.10) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 25% 60%, rgba(var(--contact-accent-rgb), 0.06) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 75% 85%, rgba(var(--contact-accent-rgb), 0.04) 0%, transparent 70%)",
+          transition: "background 800ms ease-out",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
+        }}
+      />
+
       <ContactHero />
 
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10 pb-24 lg:pb-32">
         {submitted && submissionData ? (
-          <ContactSuccess data={submissionData} onReset={handleReset} />
+          <ContactSuccess data={submissionData} onReset={onReset} />
         ) : (
-          <FormProvider {...methods}>
-            <AccentWrapper>
-              <form
-                onSubmit={methods.handleSubmit(onSubmit)}
-                aria-label="Formulaire de contact"
-                noValidate
-                className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-14"
-              >
-                <div>
-                  <ContactForm />
-                </div>
-                <ContactRecap />
-              </form>
-            </AccentWrapper>
-          </FormProvider>
+          <form
+            onSubmit={onSubmit}
+            aria-label="Formulaire de contact"
+            noValidate
+            className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-14"
+          >
+            <div>
+              <ContactForm />
+            </div>
+            <ContactRecap />
+          </form>
         )}
 
         <div className="mt-20 lg:mt-28">
@@ -120,39 +169,6 @@ const Contact = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-const AccentWrapper = ({ children }: { children: React.ReactNode }) => {
-  const requestType = useWatch<ContactFormData>({ name: "requestType" });
-  const accent =
-    requestType && REQUEST_TYPE_COLORS[requestType as keyof typeof REQUEST_TYPE_COLORS]
-      ? REQUEST_TYPE_COLORS[requestType as keyof typeof REQUEST_TYPE_COLORS]
-      : DEFAULT_COLOR;
-
-  return (
-    <div
-      className="relative"
-      style={
-        {
-          "--contact-accent": accent.base,
-          "--contact-accent-rgb": accent.rgb,
-          transition: "background 600ms ease-out",
-        } as React.CSSProperties
-      }
-    >
-      {/* Accent ambient mesh — sits behind form content */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 700px at 15% 10%, rgba(var(--contact-accent-rgb), 0.18) 0%, transparent 60%), radial-gradient(ellipse 900px 600px at 85% 60%, rgba(var(--contact-accent-rgb), 0.12) 0%, transparent 65%)",
-          transition: "background 600ms ease-out",
-        }}
-      />
-      {children}
-    </div>
   );
 };
 
