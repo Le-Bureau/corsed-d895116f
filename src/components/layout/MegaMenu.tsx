@@ -113,7 +113,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                     role="menuitem"
                     to={`/pole/${pole.slug}/${sub.slug}`}
                     onClick={onClose}
-                    className="text-[12.5px] py-1.5 text-black/70 hover:text-black transition-colors"
+                    className="text-[12.5px] py-1.5 text-black/70 hover:text-black transition-colors rounded-sm focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15 focus-visible:ring-offset-2 focus-visible:ring-offset-white/0"
                   >
                     {sub.name}
                   </Link>
