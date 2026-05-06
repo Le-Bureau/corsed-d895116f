@@ -66,6 +66,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
             alt={active.label}
             loading="eager"
             decoding="async"
+            fetchPriority="high"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
