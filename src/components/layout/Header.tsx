@@ -71,22 +71,6 @@ const Header = () => {
     closeTimerRef.current = window.setTimeout(() => setPolesOpen(false), 120);
   };
 
-  const isTouch =
-    typeof window !== "undefined" && "ontouchstart" in window;
-  const magnetDisabled = isTouch || !!reduced;
-
-  const handleCtaMove = (e: React.MouseEvent) => {
-    if (magnetDisabled || !ctaRef.current) return;
-    const rect = ctaRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    setMagnetActive(true);
-    setMagnet({ x: (e.clientX - cx) * 0.25, y: (e.clientY - cy) * 0.25 });
-  };
-  const handleCtaLeave = () => {
-    setMagnetActive(false);
-    setMagnet({ x: 0, y: 0 });
-  };
 
   return (
     <>
