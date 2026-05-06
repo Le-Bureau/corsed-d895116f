@@ -195,37 +195,30 @@ const MegaMenu = ({
               className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 lg:gap-7"
             >
               {COLUMNS.map((col) => {
-                const Icon = col.Icon;
                 return (
                   <motion.div
                     key={col.key}
                     variants={reduced ? reducedContainer : colVariants}
                     className="flex flex-col"
                   >
-                    <div
-                      className="flex h-9 w-9 items-center justify-center rounded-[10px] border"
-                      style={{
-                        backgroundColor: `color-mix(in srgb, ${col.iconColor} 18%, transparent)`,
-                        borderColor: `color-mix(in srgb, ${col.iconColor} 30%, transparent)`,
-                        color: col.iconColor,
-                      }}
-                    >
-                      <Icon size={18} strokeWidth={2} />
-                    </div>
                     <p
                       className={cn(
-                        "mb-3.5 mt-3 text-[11px] font-medium uppercase tracking-wider",
+                        "mb-3 text-[11px] font-medium uppercase tracking-wider",
                         mutedTone,
                       )}
                     >
                       {col.tagline}
                     </p>
-                    <h3 className="mb-1 font-display text-[15px] font-semibold">
+                    <h3 className="mb-3 flex items-center gap-2 font-display text-[15px] font-semibold">
+                      <span
+                        className="inline-block h-2 w-2 rounded-full"
+                        style={{
+                          backgroundColor: col.accentColor,
+                          boxShadow: `0 0 10px ${col.accentColor}`,
+                        }}
+                      />
                       {col.title}
                     </h3>
-                    {col.subtitle && (
-                      <p className={cn("mb-3 text-[12px]", mutedTone)}>{col.subtitle}</p>
-                    )}
                     <ul className="flex flex-col gap-0.5">
                       {col.items.map((item) => (
                         <li key={item.label}>
