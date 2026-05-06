@@ -18,13 +18,11 @@ interface Props {
   triggerRef: React.RefObject<HTMLButtonElement>;
 }
 
-type SubItem = { label: string; to: string; soon?: boolean };
 type Column = {
   key: string;
-  tagline: string;
   title: string;
+  to: string;
   accentColor: string;
-  items: SubItem[];
 };
 
 const poleByKey = Object.fromEntries(POLES.map((p) => [p.key, p]));
@@ -32,52 +30,33 @@ const poleByKey = Object.fromEntries(POLES.map((p) => [p.key, p]));
 const COLUMNS: Column[] = [
   {
     key: "nettoyage",
-    tagline: "Pôle 01",
     title: poleByKey.nettoyage.label,
+    to: "/pole/nettoyage",
     accentColor: poleByKey.nettoyage.baseColorOnDark,
-    items: [
-      { label: "Nettoyage de toitures", to: "/pole/nettoyage/toitures" },
-      { label: "Nettoyage de façades", to: "/pole/nettoyage/facades" },
-      { label: "Panneaux solaires", to: "/pole/nettoyage/panneaux-solaires" },
-    ],
   },
   {
     key: "diagnostic",
-    tagline: "Pôle 02",
     title: poleByKey.diagnostic.label,
+    to: "/pole/diagnostic",
     accentColor: poleByKey.diagnostic.baseColorOnDark,
-    items: [
-      { label: "Diagnostic thermique", to: "/pole/diagnostic/thermique" },
-      { label: "Inspection visuelle", to: "/pole/diagnostic/visuel" },
-    ],
   },
   {
     key: "agriculture",
-    tagline: "Pôle 03",
     title: poleByKey.agriculture.label,
+    to: "/pole/agriculture",
     accentColor: poleByKey.agriculture.baseColorOnDark,
-    items: [
-      { label: "Épandage ciblé", to: "/pole/agriculture", soon: true },
-      { label: "Traitement phytosanitaire", to: "/pole/agriculture", soon: true },
-      { label: "Analyses multispectrales", to: "/pole/agriculture", soon: true },
-    ],
   },
   {
     key: "transport",
-    tagline: "Pôle 04",
     title: poleByKey.transport.label,
+    to: "/pole/transport",
     accentColor: poleByKey.transport.baseColorOnDark,
-    items: [{ label: "Logistique aérienne", to: "/pole/transport", soon: true }],
   },
   {
     key: "expertises",
-    tagline: "Expertises",
     title: "Autres expertises",
+    to: "/expertises",
     accentColor: "var(--logo-base)",
-    items: EXPERTISES.map((e) => ({
-      label: e.label,
-      to: `/expertises#${e.slug}`,
-    })),
   },
 ];
 
