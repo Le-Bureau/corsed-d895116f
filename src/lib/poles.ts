@@ -12,6 +12,32 @@ export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 export interface PoleSubService {
   name: string;
   slug?: string;
+  description?: string;
+}
+
+export interface WhyDroneItem {
+  iconName: string;
+  title: string;
+  description: string;
+}
+
+export interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export interface UseCase {
+  image?: string;
+  imageAlt: string;
+  title: string;
+  description: string;
+  advantage: string;
+}
+
+export interface PoleFAQItem {
+  question: string;
+  answer: string;
 }
 
 export interface Pole {
@@ -28,6 +54,17 @@ export interface Pole {
   statValue: string;
   statDetail: string;
   comingSoon: boolean;
+  isInDevelopment?: boolean;
+  heroImageAlt?: string;
+  heroPoleNumber?: string;
+  heroPitch?: string;
+  whyDroneItems?: WhyDroneItem[];
+  processSteps?: ProcessStep[];
+  useCases?: UseCase[];
+  poleFAQ?: PoleFAQItem[];
+  finalCTATitle?: string;
+  finalCTASubtitle?: string;
+  finalCTAButtonLabel?: string;
   pitch: string;
   description: string;
   highlights: string[];
@@ -36,6 +73,82 @@ export interface Pole {
   showcaseImage?: string;
   mobileImagePosition?: string;
 }
+
+const NETTOYAGE_WHY: WhyDroneItem[] = [
+  {
+    iconName: "Shield",
+    title: "Sans échafaudage ni nacelle",
+    description:
+      "On intervient là où le matériel lourd ne peut pas aller, et on évite les coûts d'installation qui alourdissent les devis.",
+  },
+  {
+    iconName: "Zap",
+    title: "Intervention rapide",
+    description:
+      "Pas de montage, pas de démontage. Le drone arrive, travaille, repart. Votre site reste opérationnel.",
+  },
+  {
+    iconName: "FileImage",
+    title: "Documentation automatique",
+    description:
+      "Photos, vidéos et rapport détaillé livrés après chaque mission. Utile pour vos assurances, suivis techniques ou archivage.",
+  },
+  {
+    iconName: "TrendingDown",
+    title: "30% d'économies en moyenne",
+    description:
+      "Comparé aux méthodes traditionnelles. Pas d'échafaudage à louer, pas d'immobilisation, intervention plus rapide.",
+  },
+];
+
+const NETTOYAGE_PROCESS: ProcessStep[] = [
+  { number: "ÉTAPE 01", title: "Étude du site", description: "Visite technique sur place, devis détaillé, validation ensemble du calendrier et des contraintes spécifiques." },
+  { number: "ÉTAPE 02", title: "Sécurisation", description: "Demandes d'autorisations si nécessaire (DICT, mairie, copropriété), périmètre de sécurité au sol." },
+  { number: "ÉTAPE 03", title: "Intervention", description: "Pulvérisation par drone, en moyenne 1 à 3 vols selon la surface. Opérateur certifié au sol, télépilote en duo si requis." },
+  { number: "ÉTAPE 04", title: "Rinçage et finitions", description: "Rinçage à l'eau claire, contrôle visuel des zones traitées, retouches manuelles si besoin (zones basses)." },
+  { number: "ÉTAPE 05", title: "Livraison", description: "Photos avant/après livrées, rapport d'intervention, garantie de satisfaction." },
+];
+
+const NETTOYAGE_USE_CASES: UseCase[] = [
+  {
+    imageAlt: "Cathédrale Sainte-Marie",
+    title: "Cathédrale Sainte-Marie",
+    description: "Nettoyage d'une façade en pierre de taille classée monument historique. Surfaces fragiles, accès interdit aux échafaudages traditionnels.",
+    advantage: "Réalisé en 6h sur 2 jours, sans aucune intervention au contact direct de la pierre",
+  },
+  {
+    imageAlt: "Résidence en bord de mer",
+    title: "Résidence en bord de mer",
+    description: "Nettoyage de façades soumises à l'air marin et aux dépôts de sel. 4 façades pleine hauteur sur immeuble R+5.",
+    advantage: "Aucune nacelle, aucune perturbation pour les résidents, intervention en 1 journée",
+  },
+  {
+    imageAlt: "Centrale photovoltaïque agricole",
+    title: "Centrale photovoltaïque agricole",
+    description: "Nettoyage de 800 panneaux solaires couverts de poussière et fientes d'oiseaux. Production en chute de 18%.",
+    advantage: "Production restaurée à 99% le lendemain, intervention en 4h vs 3 jours en méthode manuelle",
+  },
+];
+
+const NETTOYAGE_FAQ: PoleFAQItem[] = [
+  { question: "Combien coûte un nettoyage par drone en Corse ?", answer: "Le tarif dépend de la surface totale, de l'état d'encrassement et de l'accessibilité du site. En moyenne, le nettoyage par drone est 30 à 50% moins cher que les méthodes traditionnelles car il ne nécessite pas de montage d'échafaudages ni de personnel travaillant en hauteur." },
+  { question: "Le drone peut-il endommager mes surfaces ?", answer: "Absolument pas. C'est l'avantage majeur du drone. Il reste à une distance de sécurité (environ 2-3 mètres) du support. Aucun contact physique, donc aucun risque de casse, de rayure ou de dégradation des matériaux." },
+  { question: "Quelle est la fréquence d'entretien recommandée ?", answer: "Pour une toiture : tous les 3 à 5 ans selon l'exposition. Pour une façade : tous les 5 à 10 ans. Pour des panneaux solaires : 1 à 2 fois par an selon l'environnement (poussière, oiseaux, marin)." },
+  { question: "Intervenez-vous dans toute la Corse ?", answer: "Oui, nous couvrons la Haute-Corse (2B) et la Corse-du-Sud (2A). Nos équipes se déplacent d'Ajaccio à Bastia, en passant par Calvi, l'Île-Rousse, Corte, Porto-Vecchio et Propriano. Nous intervenons également dans les zones rurales et de montagne." },
+  { question: "Quel produit utilisez-vous ?", answer: "Selon la surface : eau pure pour les panneaux solaires, eau adoucie ou produit anti-mousse pour les façades, biodégradable certifié pour les bâtiments classés. Toujours adapté au support et conforme aux réglementations locales." },
+];
+
+const PLACEHOLDER_USE_CASES: UseCase[] = [
+  { imageAlt: "Cas d'usage à venir", title: "Cas d'usage 1", description: "Description détaillée à venir. Nous documenterons ici un cas réel d'intervention type pour ce pôle.", advantage: "Bénéfice mesurable à venir" },
+  { imageAlt: "Cas d'usage à venir", title: "Cas d'usage 2", description: "Description détaillée à venir. Nous documenterons ici un cas réel d'intervention type pour ce pôle.", advantage: "Bénéfice mesurable à venir" },
+  { imageAlt: "Cas d'usage à venir", title: "Cas d'usage 3", description: "Description détaillée à venir. Nous documenterons ici un cas réel d'intervention type pour ce pôle.", advantage: "Bénéfice mesurable à venir" },
+];
+
+const PLACEHOLDER_FAQ: PoleFAQItem[] = [
+  { question: "Comment se déroule une intervention ?", answer: "Le détail complet du processus d'intervention pour ce pôle sera précisé ici prochainement." },
+  { question: "Quel est le délai moyen ?", answer: "Les délais types seront communiqués ici prochainement, en fonction du type de mission." },
+  { question: "Intervenez-vous dans toute la Corse ?", answer: "Oui, nous couvrons l'ensemble du territoire corse, Haute-Corse et Corse-du-Sud incluses." },
+];
 
 export const POLES: Pole[] = [
   {
@@ -65,6 +178,18 @@ export const POLES: Pole[] = [
     heroImage: nettoyageImg,
     showcaseImage: nettoyageShowcase,
     mobileImagePosition: "center 25%",
+    isInDevelopment: false,
+    heroPoleNumber: "PÔLE 01",
+    heroImageAlt: "Drone Corse Drone en intervention de nettoyage de façade",
+    heroPitch:
+      "Notre flotte pulvérise avec précision façades, toitures et panneaux photovoltaïques, sans immobilisation de votre site.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: NETTOYAGE_USE_CASES,
+    poleFAQ: NETTOYAGE_FAQ,
+    finalCTATitle: "Un projet de nettoyage en tête ?",
+    finalCTASubtitle: "Visite technique et devis gratuit. Nous revenons vers vous sous 24h ouvrées.",
+    finalCTAButtonLabel: "Demander un devis gratuit",
   },
   {
     key: "diagnostic",
@@ -95,6 +220,17 @@ export const POLES: Pole[] = [
     ],
     heroImage: diagnosticImg,
     showcaseImage: diagnosticShowcase,
+    isInDevelopment: false,
+    heroPoleNumber: "PÔLE 02",
+    heroPitch:
+      "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: PLACEHOLDER_USE_CASES,
+    poleFAQ: PLACEHOLDER_FAQ,
+    finalCTATitle: "Une inspection à programmer ?",
+    finalCTASubtitle: "Visite technique et devis gratuit.",
+    finalCTAButtonLabel: "Demander un devis gratuit",
   },
   {
     key: "agriculture",
@@ -126,6 +262,17 @@ export const POLES: Pole[] = [
     ],
     heroImage: agricultureImg,
     showcaseImage: agricultureShowcase,
+    isInDevelopment: true,
+    heroPoleNumber: "PÔLE 03",
+    heroPitch:
+      "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: PLACEHOLDER_USE_CASES,
+    poleFAQ: PLACEHOLDER_FAQ,
+    finalCTATitle: "Service en préparation.",
+    finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
+    finalCTAButtonLabel: "Être prévenu du lancement",
   },
   {
     key: "transport",
@@ -154,5 +301,16 @@ export const POLES: Pole[] = [
     heroImage: transportImg,
     showcaseImage: transportShowcase,
     mobileImagePosition: "center 25%",
+    isInDevelopment: true,
+    heroPoleNumber: "PÔLE 04",
+    heroPitch:
+      "Une nouvelle approche de la logistique aérienne. Nos drones assurent le transport de matériel vers les zones difficiles d'accès, en complément ou alternative à l'hélicoptère.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: PLACEHOLDER_USE_CASES,
+    poleFAQ: PLACEHOLDER_FAQ,
+    finalCTATitle: "Service en préparation.",
+    finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
+    finalCTAButtonLabel: "Être prévenu du lancement",
   },
 ];

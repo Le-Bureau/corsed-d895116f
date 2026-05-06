@@ -7,15 +7,12 @@ import RootLayout from "@/components/layout/RootLayout";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
-import PoleNettoyage from "./pages/PoleNettoyage";
+import PoleDetail from "./pages/PoleDetail";
 import NettoyageToitures from "./pages/NettoyageToitures";
 import NettoyageFacades from "./pages/NettoyageFacades";
 import NettoyagePanneauxSolaires from "./pages/NettoyagePanneauxSolaires";
-import PoleDiagnostic from "./pages/PoleDiagnostic";
 import DiagnosticThermique from "./pages/DiagnosticThermique";
 import DiagnosticVisuel from "./pages/DiagnosticVisuel";
-import PoleAgriculture from "./pages/PoleAgriculture";
-import PoleTransport from "./pages/PoleTransport";
 import Expertises from "./pages/Expertises";
 import Partenaires from "./pages/Partenaires";
 import Contact from "./pages/Contact";
@@ -35,18 +32,15 @@ const App = () => (
           <Routes>
             <Route element={<RootLayout />}>
               <Route path="/" element={<Index />} />
-              <Route path="/pole/nettoyage" element={<PoleNettoyage />} />
               <Route path="/pole/nettoyage/toitures" element={<NettoyageToitures />} />
               <Route path="/pole/nettoyage/facades" element={<NettoyageFacades />} />
               <Route
                 path="/pole/nettoyage/panneaux-solaires"
                 element={<NettoyagePanneauxSolaires />}
               />
-              <Route path="/pole/diagnostic" element={<PoleDiagnostic />} />
               <Route path="/pole/diagnostic/thermique" element={<DiagnosticThermique />} />
               <Route path="/pole/diagnostic/visuel" element={<DiagnosticVisuel />} />
-              <Route path="/pole/agriculture" element={<PoleAgriculture />} />
-              <Route path="/pole/transport" element={<PoleTransport />} />
+              <Route path="/pole/:slug" element={<PoleDetail />} />
               <Route path="/expertises" element={<Expertises />} />
               <Route path="/partenaires" element={<Partenaires />} />
               <Route path="/contact" element={<Contact />} />
