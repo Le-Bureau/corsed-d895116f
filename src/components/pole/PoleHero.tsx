@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useLenis } from "@/components/SmoothScrollProvider";
 import type { Pole } from "@/lib/poles";
 
 interface Props {
@@ -7,10 +8,23 @@ interface Props {
 }
 
 const PoleHero = ({ pole }: Props) => {
+  const lenis = useLenis();
   const ctaHref = pole.isInDevelopment
     ? `/contact?type=alerte-lancement&pole=${pole.key}`
     : `/contact?expertise=${pole.key}`;
   const ctaLabel = pole.isInDevelopment ? "Être prévenu du lancement" : "Demander un devis";
+
+  const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+    if (lenis) {
+      lenis.scrollTo(target, { duration: 1.6, offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    history.replaceState(null, "", `#${id}`);
+  };
 
   return (
     <section
@@ -114,6 +128,7 @@ const PoleHero = ({ pole }: Props) => {
           {pole.subServices && pole.subServices.length > 0 && (
             <a
               href="#sous-services"
+              onClick={(e) => handleAnchor(e, "sous-services")}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-surface-card motion-reduce:hover:transform-none whitespace-nowrap"
             >
               Voir les sous-services
