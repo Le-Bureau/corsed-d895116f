@@ -208,7 +208,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                   whileHover={reduced ? undefined : { scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 18 }}
                   className="font-serif italic font-normal leading-none tracking-[-0.02em] text-[clamp(56px,6vw,76px)] flex-shrink-0 origin-left cursor-default flex items-start"
-                  style={{ color, fontFamily: "'Playfair Display', Georgia, serif" }}
+                  style={{ color, fontFamily: "'Fraunces', 'Playfair Display', Georgia, serif" }}
                 >
                   {pole.stat.value}
                   <span className="text-[0.42em] font-normal italic ml-0.5 mt-[0.35em] opacity-85">

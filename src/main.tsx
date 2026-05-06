@@ -10,6 +10,8 @@ import "@fontsource/geist-sans/700.css";
 import "@fontsource/geist-sans/800.css";
 import "@fontsource/geist-sans/900.css";
 import "@fontsource/playfair-display/400-italic.css";
+import "@fontsource/fraunces/400-italic.css";
+import "@fontsource/fraunces/500-italic.css";
 import App from "./App.tsx";
 import "./index.css";
 import { POLES } from "./lib/poles";
