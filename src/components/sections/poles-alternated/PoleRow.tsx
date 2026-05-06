@@ -202,20 +202,20 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
             {pole.stat && (
               <motion.div
                 variants={itemVariants}
-                className="flex items-baseline gap-6 mb-9"
+                className="flex items-center gap-6 mb-9"
               >
                 <motion.div
                   whileHover={reduced ? undefined : { scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                  className="font-display font-semibold leading-none tracking-[-0.04em] text-[clamp(48px,5vw,64px)] flex-shrink-0 origin-left cursor-default"
-                  style={{ color }}
+                  className="font-serif italic font-normal leading-none tracking-[-0.02em] text-[clamp(56px,6vw,76px)] flex-shrink-0 origin-left cursor-default flex items-start"
+                  style={{ color, fontFamily: "'Playfair Display', Georgia, serif" }}
                 >
                   {pole.stat.value}
-                  <span className="text-[0.5em] font-medium ml-0.5 opacity-85">
+                  <span className="text-[0.42em] font-normal italic ml-0.5 mt-[0.35em] opacity-85">
                     {pole.stat.unit}
                   </span>
                 </motion.div>
-                <div className="text-[13px] leading-[1.5] text-text-secondary pt-1">
+                <div className="text-[13px] leading-[1.5] text-text-secondary">
                   <strong className="text-text-primary font-medium block">
                     {pole.stat.labelStrong}
                   </strong>
