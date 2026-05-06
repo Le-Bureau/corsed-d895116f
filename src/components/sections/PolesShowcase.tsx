@@ -13,11 +13,13 @@ const PolesShowcase = () => {
   // Preload pole showcase images so the first crossfade has no pop-in.
   useEffect(() => {
     POLES.forEach((pole) => {
-      if (pole.showcaseImage) {
-        const img = new Image();
-        img.decoding = "async";
-        img.src = pole.showcaseImage;
-      }
+      if (!pole.showcaseImage) return;
+      const img = new Image();
+      img.src = pole.showcaseImage;
+      img.decoding = "async";
+      img.decode().catch(() => {
+        // decode() may reject if format unsupported or aborted
+      });
     });
   }, []);
 
