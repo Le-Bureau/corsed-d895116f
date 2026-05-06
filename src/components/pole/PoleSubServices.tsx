@@ -49,7 +49,7 @@ const PoleSubServices = ({ pole }: Props) => {
             const href = s.slug ? `/pole/${pole.key}/${s.slug}` : undefined;
 
             const inner = (
-              <article className="group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none">
+              <article className="hover-border-card group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
                 <div className="font-mono text-[11px] tracking-[0.18em] uppercase mb-6 text-text-muted">
                   <span style={{ color: "var(--pole-color)" }}>{num}</span> / {totalStr}
                 </div>

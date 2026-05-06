@@ -39,18 +39,21 @@ const SubPoleFormules = ({ formulas }: Props) => {
           {formulas.map((f) => (
             <FadeInWhenVisible key={f.title}>
               <div
-                className={`relative rounded-3xl border shadow-soft-md p-8 h-full transition-all duration-300 ${
+                className={`hover-border-card relative rounded-3xl border shadow-soft-md p-8 h-full transition-all duration-300 ${
                   f.isHighlighted
                     ? "lg:scale-105 shadow-soft-lg"
                     : "bg-surface-card border-border-subtle hover:shadow-soft-lg"
                 }`}
                 style={
-                  f.isHighlighted
-                    ? {
-                        background: "rgba(var(--pole-color-rgb), 0.05)",
-                        borderColor: "rgba(var(--pole-color-rgb), 0.4)",
-                      }
-                    : undefined
+                  {
+                    ["--accent-color" as never]: "var(--pole-color)",
+                    ...(f.isHighlighted
+                      ? {
+                          background: "rgba(var(--pole-color-rgb), 0.05)",
+                          borderColor: "rgba(var(--pole-color-rgb), 0.4)",
+                        }
+                      : {}),
+                  } as React.CSSProperties
                 }
               >
                 {f.badge && (

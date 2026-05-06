@@ -39,7 +39,7 @@ const SubPoleWhyTraiter = ({ content }: Props) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[960px] mx-auto">
           {content.whyItems.map((item) => (
             <FadeInWhenVisible key={item.title}>
-              <div className="rounded-2xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 p-7 h-full">
+              <div className="hover-border-card rounded-2xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 p-7 h-full" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
                 <h3 className="font-display text-lg font-semibold text-text-primary mb-3">
                   {item.title}
                 </h3>

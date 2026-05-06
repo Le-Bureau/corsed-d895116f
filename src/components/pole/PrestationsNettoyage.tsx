@@ -80,7 +80,7 @@ const PrestationsNettoyage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {prestations.map((p) => (
             <FadeInWhenVisible key={p.number}>
-              <article className="flex flex-col h-full rounded-2xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 p-7">
+              <article className="hover-border-card flex flex-col h-full rounded-2xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 p-7" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
                 <div className="flex items-baseline gap-3 mb-5">
                   <span
                     className="font-display text-4xl font-bold leading-none"

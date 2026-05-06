@@ -14,7 +14,55 @@
   initial-value: #2C5784;
 }
 
-/* Corse Drone design tokens. Colors are kept as raw hex/rgba per brand spec. */
+/* Border light pass — animated rotating border on hover */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-light-pass {
+  0% { --border-angle: 0deg; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { --border-angle: 360deg; opacity: 0; }
+}
+
+.hover-border-card {
+  position: relative;
+  isolation: isolate;
+}
+.hover-border-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 340deg,
+    var(--accent-color, #A8C0D4) 360deg,
+    transparent 380deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.hover-border-card:hover::before {
+  animation: border-light-pass 1.6s linear forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-border-card:hover::before {
+    animation: none;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+}
 
 @layer base {
   :root {
