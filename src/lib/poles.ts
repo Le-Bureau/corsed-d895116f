@@ -60,6 +60,7 @@ export const POLES: Pole[] = [
       { name: "Panneaux photovoltaïques", slug: "panneaux-solaires" },
     ],
     heroImage: nettoyageImg,
+    showcaseImage: nettoyageShowcase,
   },
   {
     key: "diagnostic",
@@ -89,6 +90,7 @@ export const POLES: Pole[] = [
       { name: "Inspection visuelle", slug: "visuel" },
     ],
     heroImage: diagnosticImg,
+    showcaseImage: diagnosticShowcase,
   },
   {
     key: "agriculture",
