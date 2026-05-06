@@ -37,7 +37,7 @@ const HeroStatCard = ({ pole, direction }: HeroStatCardProps) => {
       initial="enter"
       animate="center"
       exit="exit"
-      className="hidden md:block absolute bottom-8 right-5 md:right-10 z-[15] glass-light-strong rounded-2xl px-6 py-4 min-w-[220px]"
+      className="hidden md:block absolute bottom-28 lg:bottom-8 right-5 md:right-10 z-[15] glass-light-strong rounded-2xl px-6 py-4 min-w-[220px]"
     >
       <div className="text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-2">
         {pole.statLabel}
