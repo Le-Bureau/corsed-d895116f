@@ -145,21 +145,12 @@ const Header = () => {
           {/* CTA */}
           {showCta ? (
             <Link
-              ref={ctaRef}
               to="/contact"
-              onMouseMove={handleCtaMove}
-              onMouseLeave={handleCtaLeave}
               className={cn(
                 "group hidden lg:inline-flex items-center pl-4 pr-1.5 py-1.5 rounded-full",
-                "text-text-primary text-[13px] font-medium gap-2.5",
+                "text-text-primary text-[13px] font-medium gap-2.5 transition-colors duration-300",
               )}
-              style={{
-                ...CTA_GLASS_STYLE,
-                transform: `translate(${magnet.x}px, ${magnet.y}px)`,
-                transition: magnetActive
-                  ? "transform 100ms ease-out"
-                  : "transform 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
+              style={CTA_GLASS_STYLE}
             >
               <span>Demander un devis</span>
               <span className="w-6 h-6 rounded-full bg-text-primary flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5">
