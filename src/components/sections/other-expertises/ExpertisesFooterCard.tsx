@@ -7,10 +7,10 @@ const ExpertisesFooterCard = () => {
     <FadeInWhenVisible>
       <div className="mt-20 p-7 lg:p-10 rounded-3xl bg-surface-card border border-border-subtle shadow-soft-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
         <div className="flex-1">
-          <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-text-primary mb-1.5">
+          <h3 className="font-display text-2xl lg:text-3xl font-semibold tracking-[-0.02em] text-text-primary mb-2">
             Un besoin spécifique en tête ?
           </h3>
-          <p className="text-sm text-text-muted">
+          <p className="text-base text-text-muted">
             Toutes nos prestations s'adaptent à votre cahier des charges.
           </p>
         </div>
