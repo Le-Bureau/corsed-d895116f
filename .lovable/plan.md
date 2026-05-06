@@ -1,79 +1,72 @@
-# Phase 3A — Light theme migration of pole detail pages
+# Phase 3B — Sub-service detail pages
 
-## Current state
-
-The dynamic route `/pole/:slug` and the 8 sub-components already exist (Phase 1 work), but they are **fully dark-themed** (`bg-surface-darker`, `text-text-on-dark`, `rgba(10,14,26,…)` glass cards, `border-white/10`, `glass-light` buttons, dark gradient overlays on hero, etc.).
-
-The data structure in `src/lib/poles.ts` already matches the spec (whyDroneItems / processSteps / useCases / poleFAQ / finalCTA fields all present, NETTOYAGE content is final). No data work needed except:
-- Use `baseColorOnLight` (not `OnDark`) for `--pole-color`
-- Set Agriculture & Transport `whyDroneItems / processSteps / useCases / poleFAQ` to `undefined` so those sections don't render (currently they reuse Nettoyage placeholders)
-- Replace Diagnostic's `whyDroneItems / processSteps / useCases / poleFAQ` (currently Nettoyage placeholders) with the spec content
-
-Also: 4 placeholder pages (`PoleNettoyage / PoleDiagnostic / PoleAgriculture / PoleTransport`) — **need to verify** they still exist; route in `App.tsx` already uses `<PoleDetail />` only, no imports of those 4 placeholders. Quick check: `src/pages/Pole*.tsx` files weren't listed in the codebase index → already deleted. `App.tsx` is already clean. Nothing to remove there.
+Build a single dynamic template at `/pole/:slug/:subSlug` powering the 5 sub-pages already linked from the Phase 3A SubServices section. Light theme, reusing the Phase 3A primitives where possible.
 
 ## Scope
 
-Convert 8 components + 1 page wrapper from dark to light, swap data var, fill Diagnostic content, blank-out Agri/Transport mid-sections.
+5 sub-pages will be live after this phase:
+- `/pole/nettoyage/toitures`
+- `/pole/nettoyage/facades`
+- `/pole/nettoyage/panneaux-solaires`
+- `/pole/diagnostic/thermique`
+- `/pole/diagnostic/visuel`
 
-## Files to modify
+Agriculture and Transport sub-routes will continue to 404 (no content yet, matches Phase 3A "in development" pattern).
 
-### Data (1 file)
-- `src/lib/poles.ts`
-  - Add `DIAGNOSTIC_WHY / DIAGNOSTIC_PROCESS / DIAGNOSTIC_USE_CASES / DIAGNOSTIC_FAQ` from spec, wire into `diagnostic` pole
-  - Set agriculture & transport `whyDroneItems / processSteps / useCases / poleFAQ` to `undefined`
-  - Update Diagnostic `finalCTASubtitle` → "Devis gratuit, intervention sous 10 jours, rapport sous 72h."
-  - Update Diagnostic `finalCTAButtonLabel` → "Demander un devis"
-  - Update Agri/Transport `finalCTATitle` → "Service en préparation."
+## Files
 
-### Utils (1 file)
-- `src/lib/utils.ts` — add `hexToRgb` export (currently inlined in PoleDetail, move it for cleanliness)
+### Routing
+- `src/App.tsx` — add `<Route path="/pole/:slug/:subSlug" element={<SubPoleDetail />} />` ABOVE the existing `/pole/:slug` route.
 
-### Page (1 file)
-- `src/pages/PoleDetail.tsx`
-  - Swap `--pole-color` source: `pole.baseColorOnLight` (not `OnDark`)
-  - Wrapper: `bg-surface-bg` (not `bg-surface-darker text-text-on-dark`), drop `text-text-on-dark`
-  - Import `hexToRgb` from `@/lib/utils`
+### Data
+- `src/lib/sub-poles.ts` (new) — TypeScript types from the brief + `SUB_POLE_CONTENT: Record<poleKey, Record<subSlug, SubPoleContent>>` populated with all 5 pages of copy from the brief, verbatim.
 
-### Components (8 files) — all converted to light pattern
+### Orchestrator
+- `src/pages/SubPoleDetail.tsx` (new) — exact structure from the brief: lookup pole + content, redirect on miss, set `--pole-color` / `--pole-color-rgb` CSS vars, render sections conditionally, reuse `PoleProcess`, `PoleFAQ`, `PoleFinalCTA` from Phase 3A (build a `ctaPole` augmented with sub-page CTA copy).
 
-| Component | Key changes |
-|---|---|
-| `PoleHero.tsx` | Drop `data-header-bg="dark"` and dark bg/overlay layers. New: `bg-surface-bg`, subtle radial mesh `rgba(var(--pole-color-rgb),0.08)`, optional hero image with **light** linear-gradient overlay (surface-bg → transparent), eyebrow = white pill `bg-white shadow-soft-sm border border-border-subtle`, H1 `text-text-primary`, pitch in `var(--pole-color)`, long pitch `text-text-secondary`, primary CTA `bg-white text-text-primary` border + pole-color glow, secondary CTA outline `border border-border-default text-text-primary` (replaces `glass-light`) |
-| `PoleWhyDrone.tsx` | `bg-surface-elevated`, eyebrow white pill, cards `bg-surface-card border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1`, drop backdrop-blur and dark glass, icon tile `bg-{pole-color}/10 border-{pole-color}/30 text-{pole-color}`, title `text-text-primary`, desc `text-text-secondary`. Keep `getIcon()` resolver. |
-| `PoleSubServices.tsx` | `bg-surface-bg`, white pill eyebrow, cards `bg-surface-card border-border-subtle shadow-soft-md` + lift hover, counter & title in light tones, "Découvrir →" link in `var(--pole-color)` |
-| `PoleProcess.tsx` | `bg-surface-elevated`, eyebrow + H2 light, step cards `bg-surface-card border-border-subtle shadow-soft-sm rounded-2xl p-6`, number col mono `var(--pole-color)`, title `text-text-primary`, desc `text-text-secondary` |
-| `PoleUseCases.tsx` | `bg-surface-bg`, carousel container `bg-surface-card border-border-subtle shadow-soft-md` (drop `border-white/10`), content panel `bg-surface-elevated` (drop `rgba(10,14,26,0.6)`), title `text-text-primary`, desc `text-text-secondary`, advantage box keeps `rgba(var(--pole-color-rgb),0.08/0.25)` (works on light too — verify contrast), arrows = white circle `bg-surface-card border-border-subtle shadow-soft-sm` (replaces `glass-light`), inactive dots `rgba(0,0,0,0.15)` |
-| `PoleFAQ.tsx` | `bg-surface-elevated`, eyebrow + H2 light, items `bg-surface-card border-border-subtle shadow-soft-sm rounded-xl`, hover `bg-white`, `[open]` border `var(--pole-color)/30`, question `text-text-primary`, answer `text-text-secondary`, chevron `var(--pole-color)` |
-| `PoleFinalCTA.tsx` | `bg-surface-bg` + radial pole-color glow, centered card `bg-surface-card border-border-subtle shadow-soft-lg rounded-3xl p-12 lg:p-16`, title `text-text-primary`, subtitle `text-text-secondary`, **single CTA** `bg-{pole-color} text-white` with pole-color glow shadow (was white bg before) |
-| `DevBanner.tsx` | Light variant: `bg rgba(var(--pole-color-rgb),0.10)`, `border-bottom rgba(var(--pole-color-rgb),0.30)`, dot `var(--pole-color)`, text `text-text-primary` (strong) + `text-text-muted` (subtitle), link in `var(--pole-color)` underline. Keep pulse animation + `motion-reduce:animate-none`. |
+### Sub-page components (`src/components/sub-pole/`)
+All light theme, semantic tokens only (`bg-surface-bg`, `bg-surface-card`, `bg-surface-elevated`, `border-border-subtle`, `shadow-soft-*`, `text-text-*`), pole color via `var(--pole-color)` / `rgba(var(--pole-color-rgb), …)`. Each section is `role="region"` with `aria-labelledby`, wrapped in `FadeInWhenVisible`.
 
-## Routing
+1. `SubPoleHero.tsx` — `py-32 lg:py-40`, eyebrow pill, H1 clamp(48–96px), pitch, dual CTA (`Obtenir un devis` → `/contact?expertise={pole.key}`, `Comment ça marche` → `#process`), subtle pole radial mesh, optional `heroImage` with light gradient overlay.
+2. `SubPoleStats.tsx` — `md:grid-cols-3`, card with optional `prefix`, big pole-colored value + unit, strong + muted labels.
+3. `SubPoleWhyTraiter.tsx` — `bg-surface-elevated`, eyebrow + H2 + intro centered (`max-w-[800px]`), 2x2 grid of text cards with hover-lift.
+4. `SubPoleFormules.tsx` — 3 cards, middle highlighted (`bg-[rgba(var(--pole-color-rgb),0.05)]`, `lg:scale-105`, badge top-right), Check icons in pole color for features.
+5. `SubPoleDomaines.tsx` — `md:grid-cols-2 lg:grid-cols-3` of 6 cards with icon tile (Lucide via name lookup), category, title, description, footer with highlightLabel/highlightDescription separated by `border-t`.
+6. `SubPoleTechnologie.tsx` — 3 cards, optional spec footer in mono uppercase pole color.
+7. `SubPoleCompare.tsx` — 3 columns rendered as semantic `<table>` collapsed into stacked cards on mobile (or single horizontal-scroll table). "Ours" column highlighted (pole tint, ring, scale). Disclaimer below.
 
-Already correct in `App.tsx`:
+### Reused (no edits)
+`PoleProcess`, `PoleFAQ`, `PoleFinalCTA`, `FadeInWhenVisible`, `Header`, `Footer`.
+
+## Section ordering in orchestrator
+
 ```
-<Route path="/pole/:slug" element={<PoleDetail />} />
+Hero → Stats → WhyTraiter → Formules (if any) → Domaines
+  → Process (if any) → Technologie (if any)
+  → Compare (if any) → FAQ → FinalCTA
 ```
-The 5 sub-page routes (`/pole/nettoyage/toitures` etc.) already exist and stay (Phase 3B will refactor them). No changes to `App.tsx`.
 
-## Pattern cheat-sheet (consistency)
+`#process` anchor is set on the Process section (or Domaines section as fallback when no process steps — applies to nettoyage pages, which have no processSteps; for those pages the secondary CTA will scroll to Domaines or be omitted — see Open question).
 
-- Section padding: `py-24 lg:py-32` (matches Phase 2 sections)
-- Eyebrow pill: `inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted` + dot in `var(--pole-color)`
-- Cards: `bg-surface-card border border-border-subtle shadow-soft-md rounded-2xl/3xl` + hover `hover:-translate-y-1 hover:shadow-soft-lg transition-all duration-300`
-- No `backdrop-blur` anywhere
-- No `border-white/N`, no `rgba(10,14,26,…)`, no `text-text-on-dark*`
-- Animations: `FadeInWhenVisible` already wired everywhere — keep as-is
+## Technical notes
+
+- `getIcon(name)` helper imported from a small map of the Lucide icons used in the brief (`Home, Layers, MountainSnow, Factory, Building, Building2, Landmark, Store, Sun, Sprout, FileText`). Falls back to `Home`.
+- `ctaPole` is built by spreading `pole` and overriding `finalCTATitle/Subtitle/ButtonLabel` so existing `PoleFinalCTA` can render unchanged.
+- All grids stack to 1 column under `md`; highlighted formula card drops the scale at `<lg`; Compare table becomes stacked cards on mobile.
+- No new tokens, no palette changes, no edits to Phase 3A files except `App.tsx` route addition.
 
 ## Verification
 
-- `/pole/nettoyage` → Hero + 4 WhyDrone + 3 SubServices + 5 Process + 3 UseCases + 5 FAQ + FinalCTA. Blue accents.
-- `/pole/diagnostic` → Hero + 4 WhyDrone + 2 SubServices + 3 Process + 3 UseCases + 4 FAQ + FinalCTA. Red accents.
-- `/pole/agriculture` → DevBanner (light) + Hero + 3 SubServices (`subServices` is non-empty in data) + FinalCTA. Green accents. **Note:** spec says "DevBanner + Hero + FinalCTA only" but data has 3 subServices listed — they will render. If you want to skip them too, say so and I'll also blank out `subServices` for agri/transport.
-- `/pole/transport` → Same shape as agri (1 subService). Orange accents.
-- `/pole/invalid` → redirect to `/`.
-- Header pill stays correct (light pages use light header automatically since we drop `data-header-bg="dark"`).
-- Sub-service links → `/pole/{key}/{slug}` resolve to existing nettoyage/diagnostic sub-pages (still dark — Phase 3B). Expected.
+- Navigate each of the 5 routes, check sections render in correct order, accent color matches pole, no console errors.
+- `/pole/nettoyage/unknown` redirects to `/pole/nettoyage`.
+- `/pole/agriculture/anything` redirects to `/pole/agriculture` (no content registered).
+- Mobile 375px: hero readable, all grids stack, compare table not overflowing.
+- No regression on Phase 3A pole pages, home, /contact, /partenaires.
 
-## Open question (please confirm before I proceed)
+## Open question
 
-**Agriculture & Transport `subServices`:** keep them rendering (current data has them) or also blank them out so the page is truly Hero + FinalCTA only as spec implies? My recommendation: **keep them rendering** — gives the dev-stage page useful content and the SubServices cards work fine in light theme.
+The brief specifies a secondary CTA "Comment ça marche" → `#process` on every hero, but the 3 nettoyage sub-pages have no `processSteps`. Two options:
+1. Anchor falls back to `#domaines` on those pages.
+2. Hide the secondary CTA when there's no process section.
+
+Default plan: option 2 (hide secondary CTA when `processSteps` is absent) — cleaner UX. Tell me if you'd prefer option 1.
