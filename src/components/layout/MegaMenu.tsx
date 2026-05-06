@@ -32,6 +32,7 @@ const MENU_SURFACE_STYLE: React.CSSProperties = {
 
 const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Props) => {
   const { pathname } = useLocation();
+  const { hasBanner } = useUIBanner();
   const panelRef = useRef<HTMLDivElement>(null);
   const lastPath = useRef(pathname);
 
