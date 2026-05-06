@@ -19,6 +19,16 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
   const reduced = useReducedMotion();
   const meshControls = useAnimationControls();
 
+  // Preload all hero images once
+  useEffect(() => {
+    POLES.forEach((p) => {
+      if (p.heroImage) {
+        const img = new Image();
+        img.src = p.heroImage;
+      }
+    });
+  }, []);
+
   useEffect(() => {
     if (reduced) return;
     const sign = direction === "next" ? -1 : 1;
@@ -36,23 +46,54 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
   const currentPole = POLES[currentIndex];
   const heroImage = currentPole?.heroImage;
 
+  const imageVariants = {
+    enter: (dir: CarouselDirection) => ({
+      opacity: 0,
+      x: reduced ? "0%" : dir === "next" ? "3%" : "-3%",
+      scale: reduced ? 1 : 1.05,
+    }),
+    center: {
+      opacity: 1,
+      x: "0%",
+      scale: 1,
+      transition: reduced
+        ? { opacity: { duration: 1.1, ease: EASE } }
+        : {
+            opacity: { duration: 1.1, ease: EASE },
+            x: { duration: 1.5, ease: EASE },
+            scale: { duration: 1.5, ease: EASE },
+          },
+    },
+    exit: (dir: CarouselDirection) => ({
+      opacity: 0,
+      x: reduced ? "0%" : dir === "next" ? "-3%" : "3%",
+      scale: reduced ? 1 : 1.05,
+      transition: reduced
+        ? { opacity: { duration: 1.1, ease: EASE } }
+        : {
+            opacity: { duration: 1.1, ease: EASE },
+            x: { duration: 1.5, ease: EASE },
+            scale: { duration: 1.5, ease: EASE },
+          },
+    }),
+  };
+
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Layer 0 — Pole photo (when available) */}
-      <AnimatePresence mode="sync">
+      {/* Layer 0 — Pole photo (when available), with directional drift crossfade */}
+      <AnimatePresence mode="popLayout" custom={direction} initial={false}>
         {heroImage && (
           <motion.img
             key={currentPole.key}
             src={heroImage}
             alt=""
             aria-hidden
-            initial={{ opacity: 0, scale: 1.06 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              opacity: { duration: reduced ? 0 : 1.2, ease: EASE },
-              scale: { duration: reduced ? 0 : 7, ease: "linear" },
-            }}
+            custom={direction}
+            variants={imageVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            style={{ willChange: "transform, opacity" }}
             className="absolute inset-0 h-full w-full object-cover"
           />
         )}
