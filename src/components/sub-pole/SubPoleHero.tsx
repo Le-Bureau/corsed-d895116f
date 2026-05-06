@@ -101,6 +101,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
             {showProcessAnchor && (
               <a
                 href="#process"
+                onClick={(e) => handleAnchor(e, "process")}
                 className="inline-flex items-center justify-center rounded-full font-semibold text-[15px] px-7 py-3.5 border-2 bg-surface-card text-text-primary border-border-subtle hover:border-[var(--pole-color)] transition-colors duration-300"
               >
                 Comment ça marche
