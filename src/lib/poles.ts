@@ -178,6 +178,18 @@ export const POLES: Pole[] = [
     heroImage: nettoyageImg,
     showcaseImage: nettoyageShowcase,
     mobileImagePosition: "center 25%",
+    isInDevelopment: false,
+    heroPoleNumber: "PÔLE 01",
+    heroImageAlt: "Drone Corse Drone en intervention de nettoyage de façade",
+    heroPitch:
+      "Notre flotte pulvérise avec précision façades, toitures et panneaux photovoltaïques, sans immobilisation de votre site.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: NETTOYAGE_USE_CASES,
+    poleFAQ: NETTOYAGE_FAQ,
+    finalCTATitle: "Un projet de nettoyage en tête ?",
+    finalCTASubtitle: "Visite technique et devis gratuit. Nous revenons vers vous sous 24h ouvrées.",
+    finalCTAButtonLabel: "Demander un devis gratuit",
   },
   {
     key: "diagnostic",
