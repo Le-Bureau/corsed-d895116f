@@ -56,6 +56,30 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
         />
       </AnimatePresence>
 
+      {/* Showcase photo crossfade */}
+      <AnimatePresence mode="wait">
+        {active.showcaseImage && (
+          <motion.img
+            key={`img-${activePoleKey}`}
+            src={active.showcaseImage}
+            alt={active.label}
+            initial={{ opacity: 0, scale: reduced ? 1 : 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: reduced ? 1 : 1.02 }}
+            transition={{ duration: reduced ? 0 : 0.9, ease: EASE }}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ willChange: "transform, opacity" }}
+            loading="eager"
+            decoding="async"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Subtle dark overlay so glass UI keeps contrast over photos */}
+      {active.showcaseImage && (
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-black/30 pointer-events-none" />
+      )}
+
       {/* Counter (top-left) */}
       <div
         aria-live="polite"
