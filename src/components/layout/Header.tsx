@@ -43,9 +43,9 @@ const CTA_GLASS_STYLE: React.CSSProperties = {
 const navItemClass = ({ isActive }: { isActive: boolean }) =>
   cn(
     "px-3.5 py-[3.5px] rounded-full text-[13px] font-medium transition-colors duration-300",
-    "text-black/70 hover:text-black hover:bg-black/[0.05]",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-    isActive && "text-black bg-black/[0.05]",
+    "text-black/70 hover:text-black",
+    "focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15",
+    isActive && "text-black",
   );
 
 const Header = () => {
