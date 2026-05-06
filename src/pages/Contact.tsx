@@ -92,6 +92,14 @@ const Contact = () => {
               className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-14"
             >
               <div>
+                <div className="mb-8 flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-text-on-dark-muted/60">
+                  <span className="inline-block h-px w-6 bg-text-on-dark-muted/30" />
+                  <span>
+                    Complétez la phrase, le récap se compose
+                    <span className="hidden lg:inline"> à droite</span>
+                    <span className="inline lg:hidden"> en dessous</span>
+                  </span>
+                </div>
                 <ContactForm />
               </div>
               <ContactRecap />
