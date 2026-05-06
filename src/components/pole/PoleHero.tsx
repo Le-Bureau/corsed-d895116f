@@ -116,16 +116,18 @@ const PoleHero = ({ pole }: Props) => {
         </motion.span>
 
         {/* Title block with ghost of next pole */}
-        <div className="relative">
+        <div className="relative overflow-visible">
           {/* Ghost of next pole */}
           <span
             aria-hidden="true"
-            className="hidden lg:block absolute right-0 top-1/2 pointer-events-none font-display font-bold tracking-[-0.04em] leading-[0.95] whitespace-nowrap select-none"
+            className="hidden lg:block absolute left-[min(42vw,560px)] top-1/2 z-0 pointer-events-none font-display font-bold tracking-[-0.04em] leading-[0.95] whitespace-nowrap select-none"
             style={{
-              fontSize: "clamp(64px, 9vw, 140px)",
-              color: "rgba(255, 255, 255, 0.35)",
-              transform: "translate(15%, -50%)",
-              textShadow: "0 2px 16px rgba(0, 0, 0, 0.4)",
+              fontSize: "clamp(84px, 11vw, 168px)",
+              color: "var(--pole-color)",
+              opacity: 0.24,
+              transform: "translateY(-50%)",
+              textShadow: "0 2px 18px rgba(255, 255, 255, 0.55)",
+              mixBlendMode: "multiply",
             }}
           >
             {nextPole.label}
@@ -135,7 +137,7 @@ const PoleHero = ({ pole }: Props) => {
             key={`${pole.key}-title`}
             {...fadeIn(0.1)}
             id="pole-hero-title"
-            className="relative font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary"
+            className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary"
             style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
           >
             {pole.label}
