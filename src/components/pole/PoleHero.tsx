@@ -47,11 +47,11 @@ const PoleHero = ({ pole }: Props) => {
     history.replaceState(null, "", `#${id}`);
   };
 
-  const initialX = reduced ? 0 : 100;
+  const initialX = reduced ? 0 : 200;
   const fadeIn = (delay: number) => ({
     initial: { opacity: 0, x: initialX },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, delay, ease: EASE },
+    transition: { duration: 0.9, delay: 0.3 + delay, ease: EASE },
   });
 
   const prevColor = prevPole.baseColorOnLight;
@@ -120,12 +120,12 @@ const PoleHero = ({ pole }: Props) => {
           {/* Ghost of next pole */}
           <span
             aria-hidden="true"
-            className="hidden lg:block absolute right-0 top-1/2 pointer-events-none font-display font-semibold tracking-[-0.035em] leading-[0.98] whitespace-nowrap select-none"
+            className="hidden lg:block absolute right-0 top-1/2 pointer-events-none font-display font-bold tracking-[-0.04em] leading-[0.95] whitespace-nowrap select-none"
             style={{
-              fontSize: "clamp(48px, 7vw, 96px)",
-              opacity: 0.1,
-              color: nextColor,
+              fontSize: "clamp(64px, 9vw, 140px)",
+              color: "rgba(255, 255, 255, 0.35)",
               transform: "translate(15%, -50%)",
+              textShadow: "0 2px 16px rgba(0, 0, 0, 0.4)",
             }}
           >
             {nextPole.label}
