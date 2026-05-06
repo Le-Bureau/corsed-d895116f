@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
-import { ArrowRight, Layers, Package, ScanEye, SprayCan, Sprout } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 import { cn } from "@/lib/utils";
