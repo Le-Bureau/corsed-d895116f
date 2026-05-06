@@ -52,6 +52,7 @@ const navItemClass = ({ isActive }: { isActive: boolean }) =>
 
 const Header = () => {
   const { pathname } = useLocation();
+  const { hasBanner } = useUIBanner();
   const [polesOpen, setPolesOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const polesBtnRef = useRef<HTMLButtonElement>(null);
