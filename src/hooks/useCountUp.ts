@@ -8,12 +8,21 @@ interface UseCountUpOptions {
   threshold?: number;
 }
 
+function computeAdaptiveDuration(end: number): number {
+  const abs = Math.abs(end);
+  if (abs < 50) return 1200;
+  if (abs < 500) return 1500;
+  if (abs < 5000) return 1700;
+  return 1900;
+}
+
 export function useCountUp({
   end,
-  duration = 1500,
+  duration,
   decimals = 0,
   threshold = 0.4,
 }: UseCountUpOptions) {
+  const computedDuration = duration ?? computeAdaptiveDuration(end);
   const [value, setValue] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
