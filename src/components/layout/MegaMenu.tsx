@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { POLES } from "@/lib/poles";
+import { hexToRgb } from "@/lib/utils";
 
 interface Props {
   open: boolean;
