@@ -4,14 +4,39 @@ import { Loader2, Send } from "lucide-react";
 import type { ContactFormData } from "@/lib/contactSchema";
 import { REQUEST_TYPE_LABELS } from "@/lib/contactSchema";
 
+type SkeletonVariant = "short" | "medium" | "long" | "message";
+
+function SkeletonLine({ variant = "short" }: { variant?: SkeletonVariant }) {
+  if (variant === "message") {
+    return (
+      <div className="flex flex-col gap-1.5 py-0.5" aria-hidden="true">
+        <div className="h-3.5 w-full rounded-full bg-white/[0.08] animate-pulse" />
+        <div className="h-3.5 w-full rounded-full bg-white/[0.08] animate-pulse" />
+        <div className="h-3.5 w-3/5 rounded-full bg-white/[0.08] animate-pulse" />
+      </div>
+    );
+  }
+  const widths: Record<Exclude<SkeletonVariant, "message">, string> = {
+    short: "w-24",
+    medium: "w-36",
+    long: "w-44",
+  };
+  return (
+    <div
+      aria-hidden="true"
+      className={`h-4 rounded-full bg-white/[0.08] animate-pulse ${widths[variant]}`}
+    />
+  );
+}
+
 interface RecapRowProps {
   label: string;
   value: string | undefined;
-  placeholder: string;
+  skeleton: SkeletonVariant;
   truncate?: number;
 }
 
-function RecapRow({ label, value, placeholder, truncate }: RecapRowProps) {
+function RecapRow({ label, value, skeleton, truncate }: RecapRowProps) {
   const reduceMotion = useReducedMotion();
   const trimmed = value?.trim();
   const displayValue = trimmed
@@ -22,22 +47,22 @@ function RecapRow({ label, value, placeholder, truncate }: RecapRowProps) {
 
   return (
     <div className="py-3 border-b border-white/5 last:border-0">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-on-dark-muted/70 mb-1.5">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-on-dark-muted/70 mb-2">
         {label}
       </div>
-      <motion.div
-        key={displayValue ?? "empty"}
-        initial={reduceMotion ? false : { opacity: 0, y: 4 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className={
-          displayValue
-            ? "text-[15px] text-text-on-dark break-words"
-            : "text-[15px] italic text-text-on-dark-muted/50"
-        }
-      >
-        {displayValue || placeholder}
-      </motion.div>
+      {displayValue ? (
+        <motion.div
+          key={displayValue}
+          initial={reduceMotion ? false : { opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[15px] text-text-on-dark break-words"
+        >
+          {displayValue}
+        </motion.div>
+      ) : (
+        <SkeletonLine variant={skeleton} />
+      )}
     </div>
   );
 }
