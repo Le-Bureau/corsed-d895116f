@@ -18,26 +18,42 @@
 
 @layer base {
   :root {
-    /* Surfaces */
-    --background: #FFFFFF;
+    /* Light surfaces (NEW — dominant) */
+    --surface-bg: #F5F7FA;
+    --surface-card: #FFFFFF;
+    --surface-elevated: #FAFBFC;
+
+    /* Background now resolves to the light grey base */
+    --background: var(--surface-bg);
     --surface-tint: #FAFBFD;
     --surface-dark: #0A0E1A;
     --surface-darker: #050811;
 
     /* Text */
     --text-primary: #0A0E1A;
-    --text-secondary: #5A6478;
+    --text-secondary: #4A5061;
+    --text-muted: #6B7280;
     --text-on-dark: #FAFAFC;
     --text-on-dark-muted: rgba(250, 250, 252, 0.65);
 
     /* Borders */
     --border: rgba(10, 14, 26, 0.08);
+    --border-subtle: #E5E8EC;
+    --border-default: #D8DCE4;
     --border-on-dark: rgba(255, 255, 255, 0.1);
 
     /* Logo identity */
     --logo-base: #A8C0D4;
+    --logo-base-rgb: 168, 192, 212;
     --logo-deep: #4F6F8E;
+    --logo-base-deep: #6B8FB1;
     --logo-tint: #F2F6FA;
+
+    /* Shadow system (light mode) */
+    --shadow-sm: 0 1px 2px rgba(10, 14, 26, 0.04), 0 1px 3px rgba(10, 14, 26, 0.06);
+    --shadow-md: 0 4px 12px rgba(10, 14, 26, 0.06), 0 2px 6px rgba(10, 14, 26, 0.04);
+    --shadow-lg: 0 12px 32px rgba(10, 14, 26, 0.08), 0 4px 12px rgba(10, 14, 26, 0.04);
+    --shadow-xl: 0 24px 60px rgba(10, 14, 26, 0.10), 0 8px 24px rgba(10, 14, 26, 0.06);
 
     /* Brand primary = pôle Nettoyage (phare) */
     --primary: #5082AC;

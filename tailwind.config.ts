@@ -37,6 +37,9 @@ export default {
 
         surface: {
           DEFAULT: "var(--background)",
+          bg: "var(--surface-bg)",
+          card: "var(--surface-card)",
+          elevated: "var(--surface-elevated)",
           tint: "var(--surface-tint)",
           dark: "var(--surface-dark)",
           darker: "var(--surface-darker)",
@@ -44,11 +47,15 @@ export default {
         text: {
           primary: "var(--text-primary)",
           secondary: "var(--text-secondary)",
+          muted: "var(--text-muted)",
           "on-dark": "var(--text-on-dark)",
           "on-dark-muted": "var(--text-on-dark-muted)",
         },
+        "border-subtle": "var(--border-subtle)",
+        "border-default": "var(--border-default)",
         logo: {
           base: "var(--logo-base)",
+          "base-deep": "var(--logo-base-deep)",
           deep: "var(--logo-deep)",
           tint: "var(--logo-tint)",
         },
@@ -115,6 +122,12 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        "soft-sm": "var(--shadow-sm)",
+        "soft-md": "var(--shadow-md)",
+        "soft-lg": "var(--shadow-lg)",
+        "soft-xl": "var(--shadow-xl)",
       },
       keyframes: {
         "accordion-down": {

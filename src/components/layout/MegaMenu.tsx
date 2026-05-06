@@ -1,129 +1,25 @@
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { POLES } from "@/lib/poles";
-import { EXPERTISES } from "@/lib/expertises";
 import { cn } from "@/lib/utils";
-import type { HeaderState } from "@/hooks/useHeaderState";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
 
 interface Props {
   open: boolean;
-  headerState: HeaderState;
   onClose: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
   triggerRef: React.RefObject<HTMLButtonElement>;
 }
 
-type SubItem = { label: string; to: string; soon?: boolean };
-type Column = {
-  key: string;
-  tagline: string;
-  title: string;
-  accentColor: string;
-  items: SubItem[];
-};
-
-const poleByKey = Object.fromEntries(POLES.map((p) => [p.key, p]));
-
-const COLUMNS: Column[] = [
-  {
-    key: "nettoyage",
-    tagline: "Pôle 01",
-    title: poleByKey.nettoyage.label,
-    accentColor: poleByKey.nettoyage.baseColorOnDark,
-    items: [
-      { label: "Nettoyage de toitures", to: "/pole/nettoyage/toitures" },
-      { label: "Nettoyage de façades", to: "/pole/nettoyage/facades" },
-      { label: "Panneaux solaires", to: "/pole/nettoyage/panneaux-solaires" },
-    ],
-  },
-  {
-    key: "diagnostic",
-    tagline: "Pôle 02",
-    title: poleByKey.diagnostic.label,
-    accentColor: poleByKey.diagnostic.baseColorOnDark,
-    items: [
-      { label: "Diagnostic thermique", to: "/pole/diagnostic/thermique" },
-      { label: "Inspection visuelle", to: "/pole/diagnostic/visuel" },
-    ],
-  },
-  {
-    key: "agriculture",
-    tagline: "Pôle 03",
-    title: poleByKey.agriculture.label,
-    accentColor: poleByKey.agriculture.baseColorOnDark,
-    items: [
-      { label: "Épandage ciblé", to: "/pole/agriculture", soon: true },
-      { label: "Traitement phytosanitaire", to: "/pole/agriculture", soon: true },
-      { label: "Analyses multispectrales", to: "/pole/agriculture", soon: true },
-    ],
-  },
-  {
-    key: "transport",
-    tagline: "Pôle 04",
-    title: poleByKey.transport.label,
-    accentColor: poleByKey.transport.baseColorOnDark,
-    items: [{ label: "Logistique aérienne", to: "/pole/transport", soon: true }],
-  },
-  {
-    key: "expertises",
-    tagline: "Expertises",
-    title: "Autres expertises",
-    accentColor: "var(--logo-base)",
-    items: EXPERTISES.map((e) => ({
-      label: e.label,
-      to: `/expertises#${e.slug}`,
-    })),
-  },
-];
-
-const containerVariants: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.1,
-    },
-  },
-  exit: {},
-};
-
-const colVariants: Variants = {
-  hidden: { opacity: 0, y: 8 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
-  exit: { opacity: 0, transition: { duration: 0.15 } },
-};
-
-const reducedContainer: Variants = {
-  hidden: {},
-  show: {},
-  exit: {},
-};
-
-
-const MegaMenu = ({
-  open,
-  headerState,
-  onClose,
-  onMouseEnter,
-  onMouseLeave,
-  triggerRef,
-}: Props) => {
+const MegaMenu = ({ open, onClose, triggerRef }: Props) => {
   const reduced = useReducedMotion();
   const { pathname } = useLocation();
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Close on route change
   useEffect(() => {
     if (open) onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // Escape + focus management
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -133,7 +29,6 @@ const MegaMenu = ({
       }
     };
     window.addEventListener("keydown", onKey);
-    // Focus first interactive element
     const t = window.setTimeout(() => {
       const first = panelRef.current?.querySelector<HTMLElement>(
         'a, button, [tabindex]:not([tabindex="-1"])',
@@ -146,7 +41,6 @@ const MegaMenu = ({
     };
   }, [open, onClose, triggerRef]);
 
-  // Outside click
   useEffect(() => {
     if (!open) return;
     const onClick = (e: MouseEvent) => {
@@ -159,92 +53,89 @@ const MegaMenu = ({
     return () => document.removeEventListener("mousedown", onClick);
   }, [open, onClose, triggerRef]);
 
-  const lightSurface = headerState === "scrolled-light";
-  const panelClass = lightSurface ? "glass-white" : "glass-light-strong";
-  const textTone = lightSurface ? "text-text-primary" : "text-text-on-dark";
-  
-  const hoverBg = lightSurface ? "hover:bg-black/5" : "hover:bg-white/5";
-
   return (
     <AnimatePresence>
       {open && (
-        <div
-          style={{ left: 0, right: 0, marginLeft: "auto", marginRight: "auto" }}
+        <motion.div
+          id="poles-megamenu"
+          role="menu"
+          aria-label="Pôles d'expertise"
+          ref={panelRef}
+          initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -4 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -4 }}
+          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className={cn(
-            "absolute top-[calc(100%+12px)] z-40",
-            "w-[1100px] max-w-[calc(100vw-80px)]",
+            "absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 z-40",
+            "w-[920px] max-w-[calc(100vw-32px)]",
+            "bg-surface-card rounded-3xl shadow-soft-xl border border-border-subtle p-8",
+            "text-text-primary",
           )}
         >
-          <div
-            ref={panelRef}
-            role="menu"
-            aria-label="Services et expertises"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            className={cn(
-              "rounded-3xl p-8 shadow-2xl",
-              panelClass,
-              textTone,
-            )}
-          >
-            <motion.div
-              variants={reduced ? reducedContainer : containerVariants}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 lg:gap-7"
-            >
-              {COLUMNS.map((col) => {
-                return (
-                  <motion.div
-                    key={col.key}
-                    variants={reduced ? reducedContainer : colVariants}
-                    className="flex flex-col"
-                  >
-                    <h3 className="mb-3 flex items-center gap-2 font-display text-[15px] font-semibold">
-                      <span
-                        className="inline-block h-2 w-2 rounded-full"
-                        style={{
-                          backgroundColor: col.accentColor,
-                          boxShadow: `0 0 10px ${col.accentColor}`,
-                        }}
-                      />
-                      {col.title}
-                    </h3>
-                    <ul className="flex flex-col gap-0.5">
-                      {col.items.map((item) => (
-                        <li key={item.label}>
-                          <Link
-                            role="menuitem"
-                            to={item.to}
-                            onClick={onClose}
-                            className={cn(
-                              "group flex items-center justify-between rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors",
-                              hoverBg,
-                              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                            )}
-                          >
-                            <span>{item.label}</span>
-                            {item.soon ? (
-                              <span className="rounded-full bg-amber-500/[0.18] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-300">
-                                Soon
-                              </span>
-                            ) : (
-                              <ArrowRight
-                                size={14}
-                                className="-translate-x-1 opacity-0 transition-all duration-200 ease-out-expo group-hover:translate-x-0 group-hover:opacity-100"
-                              />
-                            )}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {POLES.map((pole) => (
+              <div key={pole.key} className="flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <span
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: pole.baseColorOnLight }}
+                    aria-hidden
+                  />
+                  <span className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase text-text-muted">
+                    {pole.heroPoleNumber ?? `PÔLE 0${POLES.indexOf(pole) + 1}`}
+                  </span>
+                </div>
+
+                <Link
+                  role="menuitem"
+                  to={`/pole/${pole.slug}`}
+                  onClick={onClose}
+                  className="font-display text-base font-semibold text-text-primary transition-colors hover:opacity-80"
+                  style={{
+                    ["--hover-color" as string]: pole.baseColorOnLight,
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = pole.baseColorOnLight)
+                  }
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+                >
+                  {pole.label}
+                </Link>
+
+                <div className="h-px bg-border-subtle my-1" />
+
+                <ul className="flex flex-col gap-1.5">
+                  {pole.subServices?.map((sub) =>
+                    sub.slug ? (
+                      <li key={sub.name}>
+                        <Link
+                          role="menuitem"
+                          to={`/pole/${pole.slug}/${sub.slug}`}
+                          onClick={onClose}
+                          className="text-[13px] text-text-secondary hover:text-text-primary transition-colors"
+                        >
+                          {sub.name}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li
+                        key={sub.name}
+                        className="text-[13px] text-text-secondary"
+                      >
+                        {sub.name}
+                      </li>
+                    ),
+                  )}
+                  {pole.isInDevelopment && (
+                    <li className="text-[11px] text-text-muted italic mt-1">
+                      Prochainement
+                    </li>
+                  )}
+                </ul>
+              </div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

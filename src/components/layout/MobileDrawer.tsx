@@ -112,7 +112,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
           {/* Backdrop */}
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-40 bg-surface-darker/60 backdrop-blur-md"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.3 } }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
@@ -131,19 +131,18 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
             animate="show"
             exit="exit"
             className={cn(
-              "fixed inset-y-0 right-0 z-50 flex w-full max-w-[420px] flex-col border-l border-white/10 p-6 text-text-on-dark",
-              "bg-surface-dark/95 backdrop-blur-2xl saturate-[1.8]",
+              "fixed inset-y-0 right-0 z-50 flex w-full max-w-[420px] flex-col p-6",
+              "bg-surface-card text-text-primary border-l border-border-subtle shadow-soft-xl",
             )}
-            style={{ backdropFilter: "blur(24px) saturate(180%)" }}
           >
             {/* Top bar */}
             <div className="flex items-center justify-between">
-              <HeaderLogo tone="on-dark" onClick={onClose} className="!h-12" />
+              <HeaderLogo tone="on-light" onClick={onClose} />
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Fermer le menu"
-                className="flex h-10 w-10 items-center justify-center rounded-full text-text-on-dark transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-text-primary transition-colors hover:bg-black/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 <X size={20} />
               </button>
@@ -156,10 +155,10 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
               animate="show"
               className="mt-8 flex flex-1 flex-col"
             >
-              {/* Services accordion */}
+              {/* Pôles accordion */}
               <motion.div
                 variants={reduced ? undefined : sectionItem}
-                className="border-b border-white/10 py-4"
+                className="border-b border-border-subtle py-4"
               >
                 <button
                   type="button"
@@ -167,7 +166,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                   aria-expanded={servicesOpen}
                   className="flex w-full items-center justify-between font-display text-[22px] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                 >
-                  <span>Services</span>
+                  <span>Pôles</span>
                   <ChevronDown
                     size={20}
                     className={cn(
@@ -199,7 +198,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                           <Link
                             to={item.to}
                             onClick={onClose}
-                            className="flex items-center gap-3 py-2.5 text-[15px] font-medium text-text-on-dark/90 transition-colors hover:text-text-on-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                            className="flex items-center gap-3 py-2.5 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                           >
                             <span
                               className="h-2 w-2 rounded-full"
@@ -220,7 +219,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                 <motion.div
                   key={link.to}
                   variants={reduced ? undefined : sectionItem}
-                  className="border-b border-white/10 py-4"
+                  className="border-b border-border-subtle py-4"
                 >
                   <Link
                     to={link.to}
@@ -245,7 +244,8 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                 <Link
                   to="/contact"
                   onClick={onClose}
-                  className="block w-full rounded-full bg-text-on-dark py-3 text-center text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="block w-full rounded-full bg-logo-base py-3 text-center text-[15px] font-semibold text-text-primary transition-colors hover:bg-logo-base-deep hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  style={{ boxShadow: "0 2px 8px rgba(168,192,212,0.4)" }}
                 >
                   Demander un devis
                 </Link>

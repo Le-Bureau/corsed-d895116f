@@ -98,7 +98,7 @@ const ContactSection = ({
   return (
     <section
       data-header-bg="dark"
-      className="relative min-h-screen bg-surface-darker overflow-hidden"
+      className="relative min-h-screen pt-20 bg-surface-darker overflow-hidden"
       style={
         {
           "--contact-accent": accent.base,
