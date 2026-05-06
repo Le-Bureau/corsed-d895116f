@@ -13,32 +13,23 @@ const NAV_AFTER = [
   { label: "Contact", to: "/contact" },
 ];
 
-const PILL_STYLE: React.CSSProperties = {
-  background: "rgba(255, 255, 255, 0.65)",
-  backdropFilter: "blur(8px) saturate(140%)",
-  WebkitBackdropFilter: "blur(8px) saturate(140%)",
-  // No border — uniform white border becomes a visible seam on dark backgrounds.
-  // We simulate the glass edge with shadows only.
+const SHELL_STYLE: React.CSSProperties = {
+  background:
+    "linear-gradient(180deg, rgba(248, 251, 253, 0.96) 0%, rgba(225, 235, 243, 0.9) 100%)",
   border: "1px solid transparent",
   boxShadow: [
-    "inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-    "inset 1px 0 0 rgba(255, 255, 255, 0.35)",
-    "inset -1px 0 0 rgba(255, 255, 255, 0.35)",
-    "inset 0 -1px 0 rgba(10, 10, 15, 0.06)",
+    "inset 0 1px 0 rgba(255, 255, 255, 0.9)",
     "0 1px 2px rgba(10, 10, 15, 0.04)",
-    "0 8px 24px rgba(10, 10, 15, 0.06)",
-    "0 24px 48px rgba(10, 10, 15, 0.04)",
+    "0 12px 32px rgba(10, 10, 15, 0.08)",
   ].join(", "),
 };
 
-const CTA_GLASS_STYLE: React.CSSProperties = {
-  background: "rgba(255, 255, 255, 0.55)",
-  backdropFilter: "blur(12px) saturate(160%)",
-  WebkitBackdropFilter: "blur(12px) saturate(160%)",
-  border: "1px solid rgba(255, 255, 255, 0.7)",
+const CTA_STYLE: React.CSSProperties = {
+  background:
+    "linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 248, 251, 0.92) 100%)",
+  border: "1px solid transparent",
   boxShadow: [
-    "inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-    "inset 0 -1px 0 rgba(10, 10, 15, 0.04)",
+    "inset 0 1px 0 rgba(255, 255, 255, 0.95)",
     "0 2px 6px rgba(10, 10, 15, 0.06)",
     "0 8px 20px rgba(10, 10, 15, 0.05)",
   ].join(", "),
@@ -86,7 +77,7 @@ const Header = () => {
         <div
           className="pointer-events-auto mx-auto flex items-center justify-between rounded-full pl-5 pr-2 py-2"
           style={{
-            ...PILL_STYLE,
+            ...SHELL_STYLE,
             width: "min(1200px, 100%)",
           }}
         >
@@ -169,7 +160,7 @@ const Header = () => {
                 "group hidden lg:inline-flex items-center pl-4 pr-1.5 py-1.5 rounded-full",
                 "text-text-primary text-[13px] font-medium gap-2.5 transition-colors duration-300",
               )}
-              style={CTA_GLASS_STYLE}
+              style={CTA_STYLE}
             >
               <span>Demander un devis</span>
               <span className="w-6 h-6 rounded-full bg-text-primary flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5">
