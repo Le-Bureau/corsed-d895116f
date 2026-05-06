@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import RootLayout from "@/components/layout/RootLayout";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { UIBannerProvider } from "@/contexts/UIBannerContext";
 import Index from "./pages/Index";
 import PoleDetail from "./pages/PoleDetail";
 import SubPoleDetail from "./pages/SubPoleDetail";
