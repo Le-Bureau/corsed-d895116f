@@ -162,7 +162,7 @@ const MegaMenu = ({
   const lightSurface = headerState === "scrolled-light";
   const panelClass = lightSurface ? "glass-white" : "glass-light-strong";
   const textTone = lightSurface ? "text-text-primary" : "text-text-on-dark";
-  const mutedTone = lightSurface ? "text-text-secondary" : "text-text-on-dark-muted";
+  
   const hoverBg = lightSurface ? "hover:bg-black/5" : "hover:bg-white/5";
 
   return (
