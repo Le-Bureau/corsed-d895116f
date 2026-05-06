@@ -93,7 +93,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
               role="menuitem"
               to={`/pole/${pole.slug}`}
               onClick={onClose}
-              className="group flex items-center gap-1 font-display text-[15px] font-medium tracking-[-0.02em] text-text-primary transition-colors"
+              className="group flex items-center gap-1 font-display text-[15px] font-medium tracking-[-0.02em] text-text-primary transition-colors rounded-md focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15 focus-visible:ring-offset-2 focus-visible:ring-offset-white/0"
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = pole.baseColorOnLight)
               }
