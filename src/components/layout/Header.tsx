@@ -15,7 +15,9 @@ const NAV_AFTER = [
 
 const SHELL_STYLE: React.CSSProperties = {
   background:
-    "linear-gradient(180deg, rgba(248, 251, 253, 0.96) 0%, rgba(225, 235, 243, 0.9) 100%)",
+    "linear-gradient(180deg, rgba(248, 251, 253, 0.65) 0%, rgba(225, 235, 243, 0.55) 100%)",
+  backdropFilter: "blur(20px) saturate(180%)",
+  WebkitBackdropFilter: "blur(20px) saturate(180%)",
   border: "1px solid transparent",
   boxShadow: [
     "inset 0 1px 0 rgba(255, 255, 255, 0.9)",
@@ -26,7 +28,9 @@ const SHELL_STYLE: React.CSSProperties = {
 
 const CTA_STYLE: React.CSSProperties = {
   background:
-    "linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 248, 251, 0.92) 100%)",
+    "linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(246, 248, 251, 0.6) 100%)",
+  backdropFilter: "blur(16px) saturate(180%)",
+  WebkitBackdropFilter: "blur(16px) saturate(180%)",
   border: "1px solid transparent",
   boxShadow: [
     "inset 0 1px 0 rgba(255, 255, 255, 0.95)",
