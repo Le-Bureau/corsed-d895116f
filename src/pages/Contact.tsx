@@ -69,16 +69,6 @@ const Contact = () => {
       data-header-bg="dark"
       className="relative min-h-screen bg-surface-darker overflow-hidden"
     >
-      {/* Ambient mesh */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-70"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 700px at 15% 10%, rgba(168,192,212,0.18) 0%, transparent 60%), radial-gradient(ellipse 900px 600px at 85% 60%, rgba(80,130,172,0.14) 0%, transparent 65%)",
-        }}
-      />
-
       <ContactHero />
 
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10 pb-24 lg:pb-32">
@@ -86,17 +76,19 @@ const Contact = () => {
           <ContactSuccess data={submissionData} onReset={handleReset} />
         ) : (
           <FormProvider {...methods}>
-            <form
-              onSubmit={methods.handleSubmit(onSubmit)}
-              aria-label="Formulaire de contact"
-              noValidate
-              className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-14"
-            >
-              <div>
-                <ContactForm />
-              </div>
-              <ContactRecap />
-            </form>
+            <AccentWrapper>
+              <form
+                onSubmit={methods.handleSubmit(onSubmit)}
+                aria-label="Formulaire de contact"
+                noValidate
+                className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-14"
+              >
+                <div>
+                  <ContactForm />
+                </div>
+                <ContactRecap />
+              </form>
+            </AccentWrapper>
           </FormProvider>
         )}
 
@@ -114,6 +106,39 @@ const Contact = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const AccentWrapper = ({ children }: { children: React.ReactNode }) => {
+  const requestType = useWatch<ContactFormData>({ name: "requestType" });
+  const accent =
+    requestType && REQUEST_TYPE_COLORS[requestType as keyof typeof REQUEST_TYPE_COLORS]
+      ? REQUEST_TYPE_COLORS[requestType as keyof typeof REQUEST_TYPE_COLORS]
+      : DEFAULT_COLOR;
+
+  return (
+    <div
+      className="relative"
+      style={
+        {
+          "--contact-accent": accent.base,
+          "--contact-accent-rgb": accent.rgb,
+          transition: "background 600ms ease-out",
+        } as React.CSSProperties
+      }
+    >
+      {/* Accent ambient mesh — sits behind form content */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(ellipse 1100px 700px at 15% 10%, rgba(var(--contact-accent-rgb), 0.18) 0%, transparent 60%), radial-gradient(ellipse 900px 600px at 85% 60%, rgba(var(--contact-accent-rgb), 0.12) 0%, transparent 65%)",
+          transition: "background 600ms ease-out",
+        }}
+      />
+      {children}
+    </div>
   );
 };
 
