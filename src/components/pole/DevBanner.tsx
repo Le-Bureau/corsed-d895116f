@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useUIBanner } from "@/contexts/UIBannerContext";
 
 const DevBanner = () => {
+  const { setHasBanner } = useUIBanner();
+
+  useEffect(() => {
+    setHasBanner(true);
+    return () => setHasBanner(false);
+  }, [setHasBanner]);
+
   return (
     <div
       role="status"
