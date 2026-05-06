@@ -86,18 +86,16 @@ const HeroCarousel = () => {
       <HeroBackground currentIndex={currentIndex} direction={direction} />
 
       {/* Title rotation track — all titles always mounted, animated together.
-          Positioned to align with HeroSlideContent's title placeholder. */}
-      <div
-        className="absolute inset-x-0 z-[8] px-5 md:px-10 pointer-events-none"
-        style={{
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      >
-        <div
-          className="relative w-full max-w-[780px] mx-auto md:mx-0"
-          style={{ height: "clamp(70px, 14vw, 180px)" }}
-        >
+          Mirrors HeroSlideContent's layout so the track sits exactly in the title slot. */}
+      <div className="absolute inset-0 z-[8] flex items-center pointer-events-none">
+        <div className="w-full px-5 md:px-10">
+          <div className="w-full max-w-[780px]">
+            {/* Spacer matches eyebrow height + mb-7 */}
+            <div aria-hidden="true" style={{ height: "calc(1.5rem + 1.75rem)" }} />
+            <div
+              className="relative w-full"
+              style={{ height: "clamp(70px, 14vw, 180px)" }}
+            >
           {POLES.map((pole, i) => {
             const { x, opacity, scale, isGhost } = getTitleProps(
               i,
