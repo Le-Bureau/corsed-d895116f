@@ -61,11 +61,31 @@ const PoleHero = ({ pole }: Props) => {
     <section
       role="region"
       aria-labelledby="pole-hero-title"
-      className="relative isolate overflow-hidden bg-surface-bg pt-40 pb-24 lg:pt-48 lg:pb-32"
+      className="relative isolate overflow-hidden bg-surface-bg pt-28 pb-16 lg:pt-48 lg:pb-32"
     >
-      {/* Layer 1: full-bleed bg image */}
+      {/* MOBILE-ONLY: image zone on top */}
       {pole.heroImage && (
-        <div className="absolute inset-0 z-0" aria-hidden="true">
+        <div className="lg:hidden relative w-full aspect-[4/3] overflow-hidden -mt-28 mb-8">
+          <img
+            src={pole.heroImage}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: pole.mobileImagePosition || "center" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 0%, hsl(var(--surface-bg)) 100%)",
+            }}
+          />
+        </div>
+      )}
+
+      {/* DESKTOP-ONLY: full-bleed bg image */}
+      {pole.heroImage && (
+        <div className="hidden lg:block absolute inset-0 z-0" aria-hidden="true">
           <img
             src={pole.heroImage}
             alt=""
@@ -75,17 +95,17 @@ const PoleHero = ({ pole }: Props) => {
         </div>
       )}
 
-      {/* Layer 2: diagonal light gradient for legibility */}
+      {/* DESKTOP-ONLY: diagonal light gradient for legibility */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="hidden lg:block absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
             "linear-gradient(135deg, rgba(245,247,250,0.95) 0%, rgba(245,247,250,0.80) 45%, rgba(245,247,250,0.55) 100%)",
         }}
       />
 
-      {/* Layer 3: subtle pole-color mesh */}
+      {/* Pole-color mesh (both layouts) */}
       <div
         aria-hidden="true"
         className="absolute inset-0 z-[2] pointer-events-none"
