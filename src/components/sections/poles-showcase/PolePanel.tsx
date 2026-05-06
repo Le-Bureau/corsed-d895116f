@@ -52,8 +52,28 @@ const PolePanel = ({ pole, isActive, registerPanel }: Props) => {
               }
         }
         transition={{ duration: 0.6, ease: EASE }}
-        className="glass-light-strong relative w-full rounded-[28px] p-8 lg:p-12"
+        className="glass-light-strong relative w-full rounded-[28px] p-8 lg:p-12 overflow-hidden"
       >
+        {/* Mobile-only image at top of card */}
+        {pole.showcaseImage && (
+          <div className="md:hidden -mx-8 -mt-8 mb-6 h-[240px] relative">
+            <img
+              src={pole.showcaseImage}
+              alt={pole.label}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 0%, transparent 70%, rgba(10,14,26,0.6) 100%)",
+              }}
+            />
+          </div>
+        )}
         {/* Eyebrow */}
         <div className="glass-light inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-6 text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted">
           <span
