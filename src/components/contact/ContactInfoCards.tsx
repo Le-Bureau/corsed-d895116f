@@ -38,7 +38,10 @@ const InfoCard = ({
         <Icon className="h-[18px] w-[18px] text-logo-base" strokeWidth={2} />
       </div>
 
-      <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-text-on-dark-muted/70">
+      <div
+        className="mb-2 text-[11px] font-mono font-semibold uppercase tracking-[0.22em]"
+        style={{ color: "rgba(250, 250, 252, 0.65)" }}
+      >
         {label}
       </div>
 
