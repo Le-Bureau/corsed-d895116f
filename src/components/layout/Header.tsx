@@ -98,7 +98,13 @@ const Header = () => {
             className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
             aria-label="Corse Drone — Accueil"
           >
-            <img src={logoMark} alt="" aria-hidden className="h-6 w-auto" />
+            <img
+              src={logoMark}
+              alt=""
+              aria-hidden
+              className="h-6 w-auto"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
             <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
               CORSE DRONE
             </span>
