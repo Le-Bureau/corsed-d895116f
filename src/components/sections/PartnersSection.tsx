@@ -7,7 +7,7 @@ const PartnersSection = () => {
       data-header-bg="dark"
       role="region"
       aria-labelledby="partners-section-title"
-      className="relative bg-surface-darker text-text-on-dark overflow-hidden isolate py-24 lg:py-36"
+      className="relative bg-surface-dark text-text-on-dark overflow-hidden isolate py-24 lg:py-36"
     >
       {/* Ambient mesh */}
       <div
@@ -15,9 +15,9 @@ const PartnersSection = () => {
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 50%, rgba(168,192,212,0.18) 0%, transparent 55%)," +
-            "radial-gradient(ellipse at 70% 50%, rgba(80,130,172,0.15) 0%, transparent 55%)",
-          opacity: 0.5,
+            "radial-gradient(ellipse at 30% 50%, rgba(168,192,212,0.30) 0%, transparent 55%)," +
+            "radial-gradient(ellipse at 70% 50%, rgba(80,130,172,0.25) 0%, transparent 55%)",
+          opacity: 0.8,
         }}
       />
       {/* Noise overlay */}
