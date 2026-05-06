@@ -1,0 +1,93 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import type { Pole } from "@/lib/poles";
+import type { SubPoleContent } from "@/lib/sub-poles";
+
+interface Props {
+  content: SubPoleContent;
+  pole: Pole;
+}
+
+const SubPoleHero = ({ content, pole }: Props) => {
+  const showProcessAnchor = !!content.processSteps && content.processSteps.length > 0;
+
+  return (
+    <section
+      role="region"
+      aria-labelledby="sub-pole-hero-title"
+      className="relative overflow-hidden isolate bg-surface-bg pt-32 pb-24 lg:pt-40 lg:pb-32"
+    >
+      {content.heroImage && (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${content.heroImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          aria-hidden="true"
+        />
+      )}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: content.heroImage
+            ? "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.85) 60%, hsl(var(--surface-bg)) 100%)"
+            : "radial-gradient(ellipse at 30% 20%, rgba(var(--pole-color-rgb), 0.10) 0%, transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(var(--pole-color-rgb), 0.08) 0%, transparent 60%)",
+        }}
+      />
+
+      <div className="relative z-[5] max-w-[1100px] mx-auto px-5 sm:px-10 text-center">
+        <FadeInWhenVisible>
+          <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-8">
+            <span
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: "var(--pole-color)" }}
+              aria-hidden="true"
+            />
+            {content.heroEyebrow}
+          </span>
+          <h1
+            id="sub-pole-hero-title"
+            className="font-display font-semibold tracking-[-0.04em] leading-[1.02] text-text-primary mb-6"
+            style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
+          >
+            {content.heroTitle}
+          </h1>
+          <p
+            className="text-text-secondary mx-auto leading-relaxed mb-10 max-w-[760px]"
+            style={{ fontSize: "clamp(16px, 1.4vw, 19px)" }}
+          >
+            {content.heroPitch}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to={`/contact?expertise=${pole.key}`}
+              className="group inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none"
+              style={{
+                background: "var(--pole-color)",
+                boxShadow:
+                  "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.35), 0 8px 24px rgba(var(--pole-color-rgb), 0.25)",
+              }}
+            >
+              Obtenir un devis
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Link>
+            {showProcessAnchor && (
+              <a
+                href="#process"
+                className="inline-flex items-center justify-center rounded-full font-semibold text-[15px] px-7 py-3.5 border-2 bg-surface-card text-text-primary border-border-subtle hover:border-[var(--pole-color)] transition-colors duration-300"
+              >
+                Comment ça marche
+              </a>
+            )}
+          </div>
+        </FadeInWhenVisible>
+      </div>
+    </section>
+  );
+};
+
+export default SubPoleHero;
