@@ -27,7 +27,7 @@ const SubPoleStats = ({ stats }: Props) => {
                   className="font-display font-semibold tracking-[-0.03em] leading-none mb-3"
                   style={{ color: "var(--pole-color)", fontSize: "clamp(40px, 5vw, 64px)" }}
                 >
-                  {stat.value}
+                  <AnimatedStatValue value={stat.value} />
                   {stat.unit && (
                     <span
                       className="font-display ml-1"
