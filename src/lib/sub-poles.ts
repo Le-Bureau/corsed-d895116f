@@ -90,7 +90,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Démoussage et nettoyage de toitures par drone. Traitement préventif anti-mousse, eau basse pression, sans monter sur le toit. Intervention partout en Corse, de la villa au patrimoine.",
       heroImageAlt: "Drone en train de nettoyer une toiture en tuiles",
       stats: [
-        { prefix: "+10 à 15", value: "ans", unit: "", labelStrong: "de durée de vie", labelMuted: "sur toiture entretenue vs abandonnée" },
+        { value: "+10 à 15", unit: "ans", labelStrong: "de durée de vie", labelMuted: "sur toiture entretenue vs abandonnée" },
         { value: "3000", unit: "m²/jour", labelStrong: "cadence moyenne", labelMuted: "contre 1000m² en méthode traditionnelle" },
         { value: "0", unit: "risques", labelStrong: "casse & chute", labelMuted: "aucun contact physique avec les tuiles" },
       ],
