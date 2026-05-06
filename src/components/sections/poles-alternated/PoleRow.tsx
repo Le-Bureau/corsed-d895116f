@@ -78,7 +78,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
         <div className="lg:[direction:ltr] relative">
           <div
             ref={imageRef}
-            className="relative aspect-[4/3] lg:aspect-[4/5] rounded-3xl overflow-hidden bg-surface-elevated shadow-soft-lg group transition-all duration-700 ease-out hover:scale-[1.01]"
+            className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-elevated shadow-soft-lg group transition-all duration-700 ease-out hover:scale-[1.01]"
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow = `var(--shadow-xl), 0 24px 60px rgba(${colorRgb}, 0.18)`;
             }}
