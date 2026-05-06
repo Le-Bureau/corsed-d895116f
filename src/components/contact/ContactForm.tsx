@@ -1,5 +1,12 @@
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Link } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { ContactFormData } from "@/lib/contactSchema";
 import { REQUEST_TYPE_LABELS, REQUEST_TYPES } from "@/lib/contactSchema";
 
@@ -9,6 +16,7 @@ const inputBase =
 const ContactForm = () => {
   const {
     register,
+    control,
     formState: { errors, isSubmitted },
   } = useFormContext<ContactFormData>();
 
@@ -54,27 +62,42 @@ const ContactForm = () => {
 
       <p className="flex flex-wrap items-baseline gap-x-2 gap-y-3 mt-8">
         <span>Je vous contacte au sujet de</span>
-        <span className="inline-block relative">
-          <select
-            aria-label="Sujet de votre demande"
-            aria-invalid={!!errors.requestType}
-            {...register("requestType")}
-            className={`${inputBase} appearance-none cursor-pointer pr-8`}
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23A8C0D4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "right 8px center",
-            }}
-          >
-            <option value="">— choisissez —</option>
-            {REQUEST_TYPES.map((rt) => (
-              <option key={rt} value={rt}>
-                {REQUEST_TYPE_LABELS[rt]}
-              </option>
-            ))}
-          </select>
-        </span>
+        <Controller
+          control={control}
+          name="requestType"
+          render={({ field }) => (
+            <Select
+              value={field.value || ""}
+              onValueChange={field.onChange}
+            >
+              <SelectTrigger
+                aria-label="Sujet de votre demande"
+                aria-invalid={!!errors.requestType}
+                className="inline-flex w-auto h-auto bg-transparent border-0 border-b-2 border-logo-base/30 text-logo-base hover:text-logo-base data-[state=open]:border-logo-base focus:ring-0 focus:ring-offset-0 rounded-none px-2 pr-2 py-1 font-display text-[inherit] leading-tight tracking-[inherit] transition-colors gap-2 [&>svg]:opacity-70 [&>svg]:text-logo-base [&[data-placeholder]]:text-logo-base/60 [&[data-placeholder]]:italic"
+              >
+                <SelectValue placeholder="— choisissez —" />
+              </SelectTrigger>
+              <SelectContent
+                className="border border-white/15 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden p-2 min-w-[280px] text-text-on-dark"
+                style={{
+                  background: "rgba(10,14,26,0.85)",
+                  backdropFilter: "blur(28px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(28px) saturate(180%)",
+                }}
+              >
+                {REQUEST_TYPES.map((rt) => (
+                  <SelectItem
+                    key={rt}
+                    value={rt}
+                    className="rounded-lg px-3 py-2.5 text-text-on-dark cursor-pointer focus:bg-logo-base/15 focus:text-logo-base data-[state=checked]:bg-logo-base/20 data-[state=checked]:text-logo-base data-[highlighted]:bg-logo-base/15 data-[highlighted]:text-logo-base transition-colors"
+                  >
+                    {REQUEST_TYPE_LABELS[rt]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
         <span>.</span>
       </p>
 
