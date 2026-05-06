@@ -84,7 +84,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
       aria-live="polite"
       className="absolute inset-0 z-10 flex items-center"
     >
-      <div className="mx-auto w-full max-w-[1280px] px-5 md:px-10">
+      <div className="w-full px-5 md:px-10">
         <div className="w-full max-w-[780px]">
           {/* Eyebrow */}
           <motion.div
