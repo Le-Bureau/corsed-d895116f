@@ -40,6 +40,13 @@ export interface PoleFAQItem {
   answer: string;
 }
 
+export interface PoleStat {
+  value: string;
+  unit: string;
+  labelStrong: string;
+  labelMuted: string;
+}
+
 export interface Pole {
   key: PoleKey;
   label: string;
@@ -72,6 +79,7 @@ export interface Pole {
   heroImage?: string;
   showcaseImage?: string;
   mobileImagePosition?: string;
+  stat?: PoleStat;
 }
 
 const NETTOYAGE_WHY: WhyDroneItem[] = [
@@ -190,6 +198,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Un projet de nettoyage en tête ?",
     finalCTASubtitle: "Visite technique et devis gratuit. Nous revenons vers vous sous 24h ouvrées.",
     finalCTAButtonLabel: "Demander un devis gratuit",
+    stat: { value: "30", unit: "%", labelStrong: "d'économies en moyenne", labelMuted: "comparé aux méthodes traditionnelles" },
   },
   {
     key: "diagnostic",
@@ -231,6 +240,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Une inspection à programmer ?",
     finalCTASubtitle: "Visite technique et devis gratuit.",
     finalCTAButtonLabel: "Demander un devis gratuit",
+    stat: { value: "48", unit: "h", labelStrong: "délai moyen de livraison", labelMuted: "du rapport d'inspection détaillé" },
   },
   {
     key: "agriculture",
@@ -273,6 +283,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
+    stat: { value: "-90", unit: "%", labelStrong: "d'eau utilisée", labelMuted: "vs. pulvérisation au tracteur, précision parcelle" },
   },
   {
     key: "transport",
@@ -312,5 +323,6 @@ export const POLES: Pole[] = [
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
+    stat: { value: "100", unit: "kg", labelStrong: "de charge utile transportée", labelMuted: "par rotation" },
   },
 ];
