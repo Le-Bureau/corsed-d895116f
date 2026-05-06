@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 const STATS = [
   { value: "Sans", accent: "·", suffix: "engagement", label: "Aucune exclusivité, aucun quota" },
@@ -7,6 +8,22 @@ const STATS = [
 ];
 
 const PartenairesHero = () => {
+  const lenis = useLenis();
+
+  const handleAnchorClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    event.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    if (lenis) {
+      lenis.scrollTo(target, { duration: 1.6, offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
   return (
     <section
       role="region"
@@ -56,6 +73,7 @@ const PartenairesHero = () => {
         <div className="flex flex-wrap items-center gap-3">
           <a
             href="#candidature"
+            onClick={(event) => handleAnchorClick(event, "candidature")}
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
             style={{
               boxShadow:
@@ -68,6 +86,7 @@ const PartenairesHero = () => {
 
           <a
             href="#fonctionnement"
+            onClick={(event) => handleAnchorClick(event, "fonctionnement")}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default bg-transparent text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 hover:bg-surface-card hover:border-text-primary hover:-translate-y-0.5 whitespace-nowrap"
           >
             Comment ça marche
