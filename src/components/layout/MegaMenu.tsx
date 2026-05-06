@@ -201,14 +201,6 @@ const MegaMenu = ({
                     variants={reduced ? reducedContainer : colVariants}
                     className="flex flex-col"
                   >
-                    <p
-                      className={cn(
-                        "mb-3 text-[11px] font-medium uppercase tracking-wider",
-                        mutedTone,
-                      )}
-                    >
-                      {col.tagline}
-                    </p>
                     <h3 className="mb-3 flex items-center gap-2 font-display text-[15px] font-semibold">
                       <span
                         className="inline-block h-2 w-2 rounded-full"
