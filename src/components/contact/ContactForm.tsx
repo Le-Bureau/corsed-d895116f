@@ -1,5 +1,12 @@
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Link } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { ContactFormData } from "@/lib/contactSchema";
 import { REQUEST_TYPE_LABELS, REQUEST_TYPES } from "@/lib/contactSchema";
 
@@ -9,6 +16,7 @@ const inputBase =
 const ContactForm = () => {
   const {
     register,
+    control,
     formState: { errors, isSubmitted },
   } = useFormContext<ContactFormData>();
 
