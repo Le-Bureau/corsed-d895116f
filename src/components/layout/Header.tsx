@@ -8,6 +8,7 @@ import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
 
 const NAV = [
+  { label: "Accueil", to: "/", end: true },
   { label: "Partenaires", to: "/partenaires" },
   { label: "Contact", to: "/contact" },
 ];
