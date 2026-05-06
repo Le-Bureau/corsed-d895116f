@@ -1,5 +1,4 @@
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
-import PartnersVisual from "./partners/PartnersVisual";
 import PartnersContent from "./partners/PartnersContent";
 
 const PartnersSection = () => {
@@ -12,8 +11,7 @@ const PartnersSection = () => {
     >
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10">
         <FadeInWhenVisible>
-          <div className="rounded-3xl glass-light-strong p-6 lg:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-stretch">
-            <PartnersVisual />
+          <div className="rounded-3xl glass-light-strong p-8 lg:p-14">
             <PartnersContent />
           </div>
         </FadeInWhenVisible>
