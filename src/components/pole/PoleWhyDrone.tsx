@@ -7,15 +7,6 @@ function getIcon(name: string): LucideIcons.LucideIcon {
   return Icon || LucideIcons.Circle;
 }
 
-const cardClass =
-  "group relative overflow-hidden rounded-3xl p-8 border border-white/10 transition-[transform,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 motion-reduce:transform-none motion-reduce:hover:transform-none";
-
-const cardStyle: React.CSSProperties = {
-  background: "rgba(10,14,26,0.4)",
-  backdropFilter: "blur(28px) saturate(180%)",
-  WebkitBackdropFilter: "blur(28px) saturate(180%)",
-};
-
 interface Props {
   items: WhyDroneItem[];
 }
@@ -23,27 +14,24 @@ interface Props {
 const PoleWhyDrone = ({ items }: Props) => {
   return (
     <section
-      data-header-bg="dark"
       role="region"
       aria-labelledby="pole-why-title"
-      className="relative bg-surface-dark text-text-on-dark py-16 lg:py-28"
+      className="relative bg-surface-elevated py-24 lg:py-32"
     >
       <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
         <FadeInWhenVisible>
           <div className="max-w-[760px] mb-14">
-            <div className="inline-flex items-center gap-2 mb-5">
+            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-6">
               <span
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ background: "var(--pole-color)" }}
                 aria-hidden="true"
               />
-              <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-on-dark-muted">
-                Pourquoi le drone
-              </span>
-            </div>
+              Pourquoi le drone
+            </span>
             <h2
               id="pole-why-title"
-              className="font-display font-semibold tracking-[-0.03em] leading-[1.05] mb-5"
+              className="font-display font-semibold tracking-[-0.035em] leading-[1.05] text-text-primary"
               style={{ fontSize: "clamp(36px, 4.4vw, 64px)" }}
             >
               Une approche{" "}
@@ -57,41 +45,21 @@ const PoleWhyDrone = ({ items }: Props) => {
             const Icon = getIcon(item.iconName);
             return (
               <FadeInWhenVisible key={item.title}>
-                <article
-                  className={cardClass}
-                  style={{
-                    ...cardStyle,
-                    ["--hover-border" as string]: "rgba(var(--pole-color-rgb), 0.35)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(var(--pole-color-rgb), 0.35)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "";
-                  }}
-                >
+                <article className="group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none">
                   <div
-                    aria-hidden="true"
-                    className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6"
                     style={{
-                      background:
-                        "radial-gradient(circle, rgba(var(--pole-color-rgb),0.25) 0%, transparent 70%)",
-                    }}
-                  />
-                  <div
-                    className="relative inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6"
-                    style={{
-                      background: "rgba(var(--pole-color-rgb), 0.12)",
-                      border: "1px solid rgba(var(--pole-color-rgb), 0.25)",
+                      background: "rgba(var(--pole-color-rgb), 0.10)",
+                      border: "1px solid rgba(var(--pole-color-rgb), 0.30)",
                       color: "var(--pole-color)",
                     }}
                   >
-                    <Icon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
+                    <Icon className="w-[22px] h-[22px]" strokeWidth={1.75} aria-hidden="true" />
                   </div>
-                  <h3 className="relative font-display text-[22px] lg:text-[24px] font-semibold tracking-[-0.01em] mb-3">
+                  <h3 className="font-display text-xl lg:text-[22px] font-semibold tracking-[-0.01em] mb-3 text-text-primary">
                     {item.title}
                   </h3>
-                  <p className="relative text-[15px] leading-relaxed text-text-on-dark-muted">
+                  <p className="text-[15px] leading-relaxed text-text-secondary">
                     {item.description}
                   </p>
                 </article>

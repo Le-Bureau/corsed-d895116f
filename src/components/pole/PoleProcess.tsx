@@ -8,27 +8,24 @@ interface Props {
 const PoleProcess = ({ steps }: Props) => {
   return (
     <section
-      data-header-bg="dark"
       role="region"
       aria-labelledby="pole-process-title"
-      className="relative bg-surface-dark text-text-on-dark py-16 lg:py-28"
+      className="relative bg-surface-elevated py-24 lg:py-32"
     >
       <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
         <FadeInWhenVisible>
           <div className="max-w-[760px] mb-14">
-            <div className="inline-flex items-center gap-2 mb-5">
+            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-6">
               <span
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ background: "var(--pole-color)" }}
                 aria-hidden="true"
               />
-              <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-on-dark-muted">
-                Notre processus
-              </span>
-            </div>
+              Notre processus
+            </span>
             <h2
               id="pole-process-title"
-              className="font-display font-semibold tracking-[-0.03em] leading-[1.05] mb-5"
+              className="font-display font-semibold tracking-[-0.035em] leading-[1.05] text-text-primary"
               style={{ fontSize: "clamp(36px, 4.4vw, 64px)" }}
             >
               De l'étude{" "}
@@ -41,31 +38,18 @@ const PoleProcess = ({ steps }: Props) => {
           {steps.map((step) => (
             <li key={step.number}>
               <FadeInWhenVisible>
-                <div
-                  className="flex flex-col md:flex-row md:items-start gap-3 md:gap-8 p-6 lg:p-7 rounded-2xl border border-white/10 transition-colors duration-300"
-                  style={{
-                    background: "rgba(10,14,26,0.4)",
-                    backdropFilter: "blur(28px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(28px) saturate(180%)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(var(--pole-color-rgb), 0.3)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "";
-                  }}
-                >
+                <div className="flex flex-col md:flex-row md:items-start gap-3 md:gap-8 p-6 lg:p-7 rounded-2xl bg-surface-card border border-border-subtle shadow-soft-sm hover:shadow-soft-md transition-all duration-300">
                   <div
-                    className="font-mono text-[11px] tracking-[0.18em] uppercase md:w-24 flex-shrink-0 md:pt-1"
+                    className="font-mono text-[11px] tracking-[0.18em] uppercase font-semibold md:w-24 flex-shrink-0 md:pt-1"
                     style={{ color: "var(--pole-color)" }}
                   >
                     {step.number}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-display text-[20px] lg:text-[22px] font-semibold tracking-[-0.01em] mb-2">
+                    <h3 className="font-display text-[20px] lg:text-[22px] font-semibold tracking-[-0.01em] mb-2 text-text-primary">
                       {step.title}
                     </h3>
-                    <p className="text-[15px] leading-relaxed text-text-on-dark-muted">
+                    <p className="text-[15px] leading-relaxed text-text-secondary">
                       {step.description}
                     </p>
                   </div>
