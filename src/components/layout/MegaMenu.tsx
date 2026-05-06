@@ -76,13 +76,13 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
       className="fixed top-20 left-0 right-0 mx-auto z-[60]"
       style={{ width: "min(720px, calc(100vw - 2rem))", ...MENU_SURFACE_STYLE }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 items-stretch">
         {POLES.map((pole) => {
           const rgb = hexToRgb(pole.baseColorOnLight);
           return (
             <div
               key={pole.key}
-              className="group relative -m-1 p-3 rounded-2xl transition-colors duration-200 flex flex-col"
+              className="group relative -m-1 p-3 rounded-2xl transition-colors duration-200 flex flex-col h-full"
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = `rgba(${rgb}, 0.05)`;
               }}
@@ -149,7 +149,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
               <Link
                 to={`/pole/${pole.slug}`}
                 onClick={onClose}
-                className="inline-flex items-center gap-1 mt-3 pt-3 border-t border-black/5 text-[12.5px] font-semibold transition-all duration-200 rounded-sm focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15 self-start"
+                className="inline-flex items-center gap-1 mt-auto pt-3 border-t border-black/5 text-[12.5px] font-semibold transition-all duration-200 rounded-sm focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15 self-start"
                 style={{ color: pole.baseColorOnLight }}
               >
                 Voir tout le pôle
