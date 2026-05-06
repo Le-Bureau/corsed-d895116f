@@ -157,8 +157,7 @@ const PoleHero = ({ pole }: Props) => {
             key={`${pole.key}-title`}
             {...fadeIn(0.1)}
             id="pole-hero-title"
-            className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary"
-            style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
+            className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary text-[44px] sm:text-[56px] lg:text-[clamp(56px,8vw,112px)]"
           >
             {pole.label}
           </motion.h1>
