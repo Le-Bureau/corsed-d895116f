@@ -160,12 +160,13 @@ const ContactRecap = () => {
             type="submit"
             disabled={disabled}
             aria-busy={isSubmitting}
-            className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-logo-base text-surface-darker font-semibold text-[15px] px-6 py-3.5 transition-all hover:bg-logo-tint disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-logo-base/40 disabled:hover:bg-logo-base/40"
-            style={
-              reduceMotion
-                ? undefined
-                : { transition: "transform 0.4s var(--ease-out-expo), background-color 0.3s ease, opacity 0.3s ease" }
-            }
+            className="group w-full inline-flex items-center justify-center gap-2 rounded-full text-surface-darker font-semibold text-[15px] px-6 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: "var(--contact-accent, var(--logo-base))",
+              transition: reduceMotion
+                ? "background-color 600ms ease-out, opacity 0.3s ease"
+                : "transform 0.4s var(--ease-out-expo), background-color 600ms ease-out, opacity 0.3s ease",
+            }}
             onMouseEnter={(e) => {
               if (!reduceMotion && !disabled)
                 (e.currentTarget as HTMLButtonElement).style.transform =
