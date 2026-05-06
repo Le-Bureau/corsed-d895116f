@@ -132,17 +132,6 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
 
         {/* Content */}
         <div className="lg:[direction:ltr] relative">
-          {/* Giant index watermark */}
-          <div
-            aria-hidden
-            className={`hidden lg:block absolute top-1/2 -translate-y-1/2 font-display font-bold text-[clamp(220px,22vw,340px)] leading-none pointer-events-none select-none z-0 ${
-              isReversed ? "-right-4" : "-left-4"
-            }`}
-            style={{ color, opacity: 0.06 }}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </div>
-
           <motion.div
             variants={containerVariants}
             initial="hidden"
