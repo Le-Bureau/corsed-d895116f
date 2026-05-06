@@ -1,56 +1,39 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
-import FooterCtaBlock from "./FooterCtaBlock";
 import BrandLogo from "./BrandLogo";
 import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 
 const colTitle =
-  "text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-1";
+  "text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-1";
 
 const linkBase =
-  "text-sm font-medium text-text-on-dark opacity-80 hover:opacity-100 hover:text-logo-base hover:translate-x-0.5 transition-all duration-200";
+  "text-sm font-medium text-text-secondary hover:text-logo-base-deep hover:translate-x-0.5 transition-all duration-200";
 
 const contactLabel =
-  "text-[11px] tracking-[0.12em] uppercase font-semibold text-text-on-dark-muted";
+  "text-[11px] tracking-[0.18em] uppercase font-semibold text-text-muted";
 
 const contactValue =
-  "text-sm text-text-on-dark hover:text-logo-base transition-colors leading-snug font-medium";
+  "text-sm text-text-primary hover:text-logo-base-deep transition-colors leading-snug font-medium";
 
 const Footer = () => {
   return (
-    <footer
-      className="relative isolate overflow-hidden bg-surface-darker text-text-on-dark"
-      style={{ position: "relative" }}
-    >
-      {/* Radial accent top-right */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-[200px] -right-[200px] z-0 h-[800px] w-[800px]"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(80,130,172,0.12), transparent 60%)",
-        }}
-      />
-
+    <footer className="relative isolate overflow-hidden bg-surface-bg border-t border-border-subtle">
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 sm:px-10 pt-16 md:pt-24">
-        <FooterCtaBlock />
-
         {/* Main grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[4fr_2fr_2fr_3fr] gap-10 lg:gap-16 pb-16 md:pb-20">
           {/* COL 1 — BRAND */}
           <FadeInWhenVisible delay={0}>
             <div className="flex flex-col gap-6">
-              <BrandLogo variant="on-dark" />
+              <BrandLogo variant="on-light" />
 
-
-              <p className="text-sm leading-relaxed text-text-on-dark-muted max-w-[380px]">
+              <p className="text-sm leading-relaxed text-text-secondary max-w-[380px]">
                 La première solution globale de logistique et services par drone
                 en Corse. Innovation, rapidité, respect de l'environnement.
               </p>
 
-              <p className="text-xs leading-relaxed text-text-on-dark-muted">
+              <p className="text-xs leading-relaxed text-text-muted">
                 SAS Corse Drone Services
                 <br />
                 7 Cours Favale, 20200 Bastia
@@ -66,7 +49,7 @@ const Footer = () => {
                     key={label}
                     href="#"
                     aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.04] border border-white/[0.08] text-text-on-dark-muted transition-all duration-200 ease-out-expo hover:bg-white/[0.08] hover:border-white/[0.18] hover:text-text-on-dark hover:-translate-y-0.5"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-card border border-border-subtle text-text-muted shadow-soft-sm transition-all duration-200 ease-out hover:border-logo-base-deep hover:text-logo-base-deep hover:-translate-y-0.5"
                   >
                     <Icon size={16} />
                   </a>
@@ -85,11 +68,11 @@ const Footer = () => {
                     <Link to={`/pole/${p.slug}`} className={`flex items-center gap-2 ${linkBase}`}>
                       <span
                         className="h-1.5 w-1.5 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: p.baseColorOnDark }}
+                        style={{ backgroundColor: p.baseColorOnLight }}
                       />
                       <span>{p.label}</span>
                       {p.comingSoon && (
-                        <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-semibold ml-1">
+                        <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700 font-semibold ml-1">
                           Soon
                         </span>
                       )}
@@ -188,7 +171,7 @@ const Footer = () => {
 
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Couverture</span>
-                <span className="text-sm font-normal text-text-on-dark-muted leading-snug">
+                <span className="text-sm font-normal text-text-muted leading-snug">
                   Intervention dans toute la Corse
                 </span>
               </div>
@@ -198,15 +181,15 @@ const Footer = () => {
 
         {/* BOTTOM ROW */}
         <FadeInWhenVisible delay={0.4}>
-          <div className="flex flex-wrap justify-between items-center gap-6 py-6 md:py-8 border-t border-white/[0.08] text-xs text-text-on-dark-muted">
+          <div className="flex flex-wrap justify-between items-center gap-6 py-6 md:py-8 border-t border-border-subtle text-xs text-text-muted">
             <div className="flex flex-wrap items-center gap-6">
               <span>© 2026 Corse Drone Services</span>
               <span aria-hidden>·</span>
-              <Link to="/mentions-legales" className="hover:text-text-on-dark transition-colors">
+              <Link to="/mentions-legales" className="hover:text-text-primary transition-colors">
                 Mentions légales
               </Link>
               <span aria-hidden>·</span>
-              <a href="#" className="hover:text-text-on-dark transition-colors">
+              <a href="#" className="hover:text-text-primary transition-colors">
                 Confidentialité
               </a>
             </div>
@@ -215,10 +198,10 @@ const Footer = () => {
               href="https://lebureaubastia.fr"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-text-on-dark-muted hover:text-text-on-dark transition-colors"
+              className="group inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary transition-colors"
             >
               Site conçu par
-              <span className="w-4 h-4 rounded bg-text-on-dark-muted text-surface-darker inline-flex items-center justify-center font-display text-[9px] font-extrabold transition-colors group-hover:bg-text-on-dark">
+              <span className="w-4 h-4 rounded bg-text-muted text-white inline-flex items-center justify-center font-display text-[9px] font-extrabold transition-colors group-hover:bg-text-primary">
                 LB
               </span>
               L'Agence Le Bureau
