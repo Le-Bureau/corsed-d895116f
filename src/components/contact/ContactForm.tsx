@@ -29,7 +29,7 @@ const ContactForm = () => {
           aria-invalid={!!errors.fullName}
           {...register("fullName")}
           placeholder="Prénom Nom"
-          className={`${inputBase} w-[260px] max-w-full`}
+          className={`${inputBase} w-[220px] max-w-full`}
         />
         <span>et on peut me joindre par mail à</span>
         <input
@@ -38,7 +38,7 @@ const ContactForm = () => {
           aria-invalid={!!errors.email}
           {...register("email")}
           placeholder="vous@email.com"
-          className={`${inputBase} w-[280px] max-w-full`}
+          className={`${inputBase} w-[260px] max-w-full`}
         />
         <span>ou au téléphone</span>
         <input
@@ -47,7 +47,7 @@ const ContactForm = () => {
           aria-invalid={!!errors.phone}
           {...register("phone")}
           placeholder="06 XX XX XX XX"
-          className={`${inputBase} w-[200px] max-w-full`}
+          className={`${inputBase} w-[180px] max-w-full`}
         />
         <span>.</span>
       </p>
@@ -78,15 +78,15 @@ const ContactForm = () => {
         <span>.</span>
       </p>
 
-      <div className="mt-8">
+      <div className="mt-6">
         <p className="mb-3">Voici ce que j'ai en tête :</p>
         <textarea
           aria-label="Votre message"
           aria-invalid={!!errors.message}
           {...register("message")}
           placeholder="décrivez votre projet, le contexte, les délais..."
-          className="block w-full bg-transparent border-0 border-b-2 border-logo-base/30 text-text-on-dark focus:border-logo-base outline-none px-2 py-3 resize-y min-h-[140px] transition-colors font-display font-light placeholder:text-logo-base/40 placeholder:italic"
-          style={{ fontSize: "clamp(18px, 2vw, 22px)" }}
+          className="block w-full bg-transparent border-0 border-b-2 border-logo-base/30 text-text-on-dark focus:border-logo-base outline-none px-2 py-3 mt-4 resize-y min-h-[100px] transition-colors font-display font-light placeholder:text-logo-base/40 placeholder:italic"
+          style={{ fontSize: "clamp(15px, 1.4vw, 18px)" }}
         />
       </div>
 
