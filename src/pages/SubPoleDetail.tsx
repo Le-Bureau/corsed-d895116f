@@ -18,6 +18,8 @@ export default function SubPoleDetail() {
   const pole = POLES.find((p) => p.key === slug);
   if (!pole) return <Navigate to="/" replace />;
 
+  if (pole.isInDevelopment) return <Navigate to={`/pole/${slug}`} replace />;
+
   const content = SUB_POLE_CONTENT[slug || ""]?.[subSlug || ""];
   if (!content) return <Navigate to={`/pole/${slug}`} replace />;
 
