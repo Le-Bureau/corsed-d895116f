@@ -158,7 +158,7 @@ const Footer = () => {
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Adresse</span>
                 <a
-                  href="https://maps.google.com/?q=7+Cours+Favale+Bastia"
+                  href="https://www.google.com/maps/search/?api=1&query=7+Cours+Favale+Bastia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={contactValue}

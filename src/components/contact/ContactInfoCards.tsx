@@ -69,7 +69,7 @@ const ContactInfoCards = () => {
         label="Adresse"
         value="7 Cours Favale, Bastia"
         detail="Ouvrir dans Google Maps"
-        href="https://maps.google.com/?q=7+Cours+Favale+Bastia"
+        href="https://www.google.com/maps/search/?api=1&query=7+Cours+Favale+Bastia"
         external
       />
     </div>
