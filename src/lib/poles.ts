@@ -153,5 +153,6 @@ export const POLES: Pole[] = [
     subServices: [{ name: "Logistique de chantier isolé" }],
     heroImage: transportImg,
     showcaseImage: transportShowcase,
+    mobileImagePosition: "center 25%",
   },
 ];
