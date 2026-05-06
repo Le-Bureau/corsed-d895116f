@@ -31,6 +31,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <SmoothScrollProvider>
+          <ScrollToTop />
           <Routes>
             <Route element={<RootLayout />}>
               <Route path="/" element={<Index />} />
