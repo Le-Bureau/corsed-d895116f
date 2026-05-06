@@ -105,16 +105,13 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
             )}
           </motion.div>
 
-          {/* Title — strong horizontal rotation slide */}
-          <div className="relative overflow-hidden mb-8">
-            <motion.h1
-              custom={direction}
-              variants={titleContainerVariants}
-              className="font-display font-semibold text-[clamp(48px,7vw,96px)] leading-[1.02] tracking-[-0.035em] text-text-on-dark whitespace-nowrap"
-            >
-              {pole.label}
-            </motion.h1>
-          </div>
+          {/* Title rendered by HeroCarousel's continuous track. Reserve space. */}
+          <div
+            aria-hidden="true"
+            style={{ height: "clamp(120px, 16vw, 200px)" }}
+            className="mb-8"
+          />
+          <h1 className="sr-only">{pole.label}</h1>
 
           {/* Subtitle */}
           <motion.p

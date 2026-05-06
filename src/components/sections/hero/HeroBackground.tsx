@@ -81,7 +81,7 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Layer 0 — Pole photo (when available), with directional drift crossfade */}
-      <AnimatePresence mode="popLayout" custom={direction} initial={false}>
+      <AnimatePresence custom={direction} initial={false}>
         {heroImage && (
           <motion.img
             key={currentPole.key}
