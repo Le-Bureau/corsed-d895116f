@@ -37,12 +37,20 @@ const TabButton = ({ value, label }: TabButtonProps) => {
       }
       className={cn(
         "relative inline-flex items-center gap-2 px-4 py-3.5 border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap cursor-pointer rounded-t-lg transition-all duration-200",
-        isActive
-          ? "text-text-on-dark"
-          : "text-text-on-dark/55 hover:text-text-on-dark/85 hover:bg-white/[0.04]",
+        !isActive && "hover:bg-white/[0.04]",
       )}
       style={{
+        color: isActive ? "#FAFAFC" : "rgba(250, 250, 252, 0.75)",
         backgroundColor: isActive ? `rgba(${color.rgb}, 0.06)` : undefined,
+      }}
+      onMouseEnter={(e) => {
+        if (!isActive)
+          (e.currentTarget as HTMLButtonElement).style.color = "#FAFAFC";
+      }}
+      onMouseLeave={(e) => {
+        if (!isActive)
+          (e.currentTarget as HTMLButtonElement).style.color =
+            "rgba(250, 250, 252, 0.75)";
       }}
     >
       <span
