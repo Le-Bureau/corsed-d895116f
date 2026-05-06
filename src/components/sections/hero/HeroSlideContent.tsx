@@ -50,28 +50,23 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
   };
 
   const titleContainerVariants: Variants = {
-    enter: {},
+    enter: (dir: CarouselDirection) => ({
+      x: reduced ? 0 : dir === "next" ? "100%" : "-100%",
+      opacity: 0,
+    }),
     center: {
-      transition: {
-        staggerChildren: reduced ? 0 : 0.06,
-        delayChildren: reduced ? 0 : 0.08,
-      },
-    },
-    exit: {},
-  };
-
-  const wordVariants: Variants = {
-    enter: { y: reduced ? 0 : 30, opacity: 0 },
-    center: {
-      y: 0,
+      x: 0,
       opacity: 1,
       transition: { duration: 0.7, ease: EASE_OUT },
     },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
+    exit: (dir: CarouselDirection) => ({
+      x: reduced ? 0 : dir === "next" ? "-100%" : "100%",
+      opacity: 0,
+      transition: { duration: 0.5, ease: EASE_IN },
+    }),
   };
 
   const paddedIndex = String(index + 1).padStart(2, "0");
-  const words = pole.label.split(" ");
 
   return (
     <motion.div
@@ -110,21 +105,16 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
             )}
           </motion.div>
 
-          {/* Title */}
-          <motion.h1
-            variants={titleContainerVariants}
-            className="font-display font-semibold text-[clamp(48px,7vw,96px)] leading-[1.02] tracking-[-0.035em] mb-8 text-text-on-dark"
-          >
-            {words.map((word, i) => (
-              <motion.span
-                key={`${pole.key}-w-${i}`}
-                variants={wordVariants}
-                className="inline-block mr-[0.25em]"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.h1>
+          {/* Title — strong horizontal rotation slide */}
+          <div className="relative overflow-hidden mb-8">
+            <motion.h1
+              custom={direction}
+              variants={titleContainerVariants}
+              className="font-display font-semibold text-[clamp(48px,7vw,96px)] leading-[1.02] tracking-[-0.035em] text-text-on-dark whitespace-nowrap"
+            >
+              {pole.label}
+            </motion.h1>
+          </div>
 
           {/* Subtitle */}
           <motion.p
