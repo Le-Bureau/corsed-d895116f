@@ -4,36 +4,25 @@ import PartnersContent from "./partners/PartnersContent";
 const PartnersSection = () => {
   return (
     <section
-      data-header-bg="dark"
       role="region"
       aria-labelledby="partners-section-title"
-      className="relative bg-surface-dark text-text-on-dark overflow-hidden isolate py-24 lg:py-36"
+      className="relative bg-surface-elevated overflow-hidden isolate py-24 lg:py-32"
     >
-      {/* Ambient mesh */}
+      {/* Subtle ambient mesh */}
       <div
         aria-hidden="true"
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 50%, rgba(168,192,212,0.30) 0%, transparent 55%)," +
-            "radial-gradient(ellipse at 70% 50%, rgba(80,130,172,0.25) 0%, transparent 55%)",
-          opacity: 0.8,
-        }}
-      />
-      {/* Noise overlay */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 z-[1] pointer-events-none mix-blend-overlay opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, white 0 1px, transparent 1px 3px)," +
-            "repeating-linear-gradient(90deg, white 0 1px, transparent 1px 3px)",
+            "radial-gradient(ellipse at 30% 50%, rgba(168,192,212,0.18) 0%, transparent 55%)," +
+            "radial-gradient(ellipse at 70% 50%, rgba(80,130,172,0.10) 0%, transparent 55%)",
+          opacity: 0.7,
         }}
       />
 
-      <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10">
+      <div className="relative z-[5] max-w-[1080px] mx-auto px-5 sm:px-10">
         <FadeInWhenVisible>
-          <div className="rounded-3xl glass-light-strong p-8 lg:p-14">
+          <div className="rounded-3xl bg-surface-card border border-border-subtle shadow-soft-lg p-8 lg:p-14">
             <PartnersContent />
           </div>
         </FadeInWhenVisible>

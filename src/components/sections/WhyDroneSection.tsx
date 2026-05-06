@@ -1,17 +1,14 @@
 import { WHY_REASONS } from "@/lib/whyReasons";
-import WhyAmbient from "./why-drone/WhyAmbient";
 import WhyHeader from "./why-drone/WhyHeader";
 import WhyCard from "./why-drone/WhyCard";
 
 const WhyDroneSection = () => {
   return (
     <section
-      data-header-bg="dark"
       role="region"
       aria-labelledby="why-section-title"
-      className="relative bg-surface-darker text-text-on-dark overflow-hidden isolate py-[120px] lg:py-32"
+      className="relative bg-surface-elevated overflow-hidden isolate py-24 lg:py-32"
     >
-      <WhyAmbient />
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10">
         <WhyHeader />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-16 lg:mt-20">

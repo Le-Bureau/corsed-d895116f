@@ -3,6 +3,7 @@ import PolesAlternated from "@/components/sections/PolesAlternated";
 import WhyDroneSection from "@/components/sections/WhyDroneSection";
 import OtherExpertisesSection from "@/components/sections/OtherExpertisesSection";
 import PartnersSection from "@/components/sections/PartnersSection";
+import CTAFinalSection from "@/components/sections/CTAFinalSection";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <WhyDroneSection />
       <OtherExpertisesSection />
       <PartnersSection />
+      <CTAFinalSection />
     </div>
   );
 };
