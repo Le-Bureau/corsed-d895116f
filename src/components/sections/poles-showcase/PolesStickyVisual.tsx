@@ -21,8 +21,8 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
       }
     : {
         hidden: { opacity: 0, y: 12 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-        exit: { opacity: 0, y: -12, transition: { duration: 0.25, ease: EASE } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
+        exit: { opacity: 0, y: -12, transition: { duration: 0.2, ease: EASE } },
       };
 
   return (
@@ -46,7 +46,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: reduced ? 0 : 0.8, ease: EASE }}
+          transition={{ duration: reduced ? 0 : 0.4, ease: EASE }}
           className="absolute inset-0"
           style={{
             background:
@@ -66,7 +66,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
             initial={{ opacity: 0, scale: reduced ? 1 : 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: reduced ? 1 : 1.02 }}
-            transition={{ duration: reduced ? 0 : 0.9, ease: EASE }}
+            transition={{ duration: reduced ? 0 : 0.4, ease: EASE }}
             className="absolute inset-0 w-full h-full object-cover"
             style={{ willChange: "transform, opacity" }}
             loading="eager"

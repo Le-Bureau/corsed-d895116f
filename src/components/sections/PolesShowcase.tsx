@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { POLES } from "@/lib/poles";
 import { useActivePole } from "@/hooks/useActivePole";
 import PolesAmbient from "./poles-showcase/PolesAmbient";
@@ -8,6 +9,17 @@ import PolePanel from "./poles-showcase/PolePanel";
 const PolesShowcase = () => {
   const { activePoleKey, registerPanel } = useActivePole("nettoyage");
   const active = POLES.find((p) => p.key === activePoleKey) ?? POLES[0];
+
+  // Preload pole showcase images so the first crossfade has no pop-in.
+  useEffect(() => {
+    POLES.forEach((pole) => {
+      if (pole.showcaseImage) {
+        const img = new Image();
+        img.decoding = "async";
+        img.src = pole.showcaseImage;
+      }
+    });
+  }, []);
 
   return (
     <section
@@ -21,7 +33,7 @@ const PolesShowcase = () => {
           "--pole-base": active.baseColorOnDark,
           "--pole-deep": active.deepColor,
           transition:
-            "--pole-base 1500ms cubic-bezier(0.16,1,0.3,1), --pole-deep 1500ms cubic-bezier(0.16,1,0.3,1)",
+            "--pole-base 800ms cubic-bezier(0.16,1,0.3,1), --pole-deep 800ms cubic-bezier(0.16,1,0.3,1)",
         } as React.CSSProperties
       }
     >
