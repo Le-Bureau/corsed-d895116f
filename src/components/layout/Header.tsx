@@ -87,7 +87,7 @@ const Header = () => {
           <HeaderLogo headerState={headerState} />
 
           {/* Desktop nav */}
-          <nav className="relative hidden items-center gap-1 md:flex">
+          <nav className="relative hidden items-center gap-1 lg:flex">
             <button
               ref={servicesBtnRef}
               type="button"
@@ -156,7 +156,7 @@ const Header = () => {
                 to="/contact"
                 style={ctaBaseStyle}
                 className={cn(
-                  "group relative hidden items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold md:inline-flex",
+                  "group relative hidden items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-semibold lg:inline-flex",
                   "transition-[transform,background,border-color,box-shadow] duration-300 ease-out-expo",
                   "hover:-translate-y-px",
                   ctaGlassClass,
@@ -179,7 +179,7 @@ const Header = () => {
               aria-expanded={drawerOpen}
               onClick={() => setDrawerOpen(true)}
               className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full transition-colors md:hidden",
+                "flex h-10 w-10 items-center justify-center rounded-full transition-colors lg:hidden",
                 onLight ? "hover:bg-black/5" : "hover:bg-white/10",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
               )}
