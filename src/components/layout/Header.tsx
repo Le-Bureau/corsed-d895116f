@@ -136,7 +136,12 @@ const Header = () => {
             </div>
 
             {NAV.map((item) => (
-              <NavLink key={item.to} to={item.to} className={navItemClass}>
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.end}
+                className={navItemClass}
+              >
                 {item.label}
               </NavLink>
             ))}
