@@ -1,204 +1,249 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useReducedMotion } from "motion/react";
 import { Loader2, Send } from "lucide-react";
 import type { ContactFormData } from "@/lib/contactSchema";
-import { REQUEST_TYPE_LABELS, REQUEST_TYPES } from "@/lib/contactSchema";
+import { REQUEST_TYPE_LABELS, REQUEST_TYPES, type RequestType } from "@/lib/contactSchema";
 import { REQUEST_TYPE_COLORS } from "@/lib/contactColors";
 import { cn } from "@/lib/utils";
 
-const fieldBase =
-  "block w-full bg-transparent border-0 border-b-2 border-white/15 text-text-on-dark focus:border-logo-base outline-none px-0 py-2.5 transition-colors font-display font-light placeholder:text-text-on-dark-muted/40 placeholder:italic";
-
 const labelBase =
-  "block text-[10px] font-mono font-semibold uppercase tracking-[0.18em] text-text-on-dark-muted/70 mb-2";
+  "block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-on-dark-muted mb-2";
 
-interface FieldProps {
+const inputBase =
+  "w-full bg-transparent border-0 border-b-[1.5px] border-white/15 text-text-on-dark font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-white/25";
+
+interface TabButtonProps {
+  value: RequestType;
   label: string;
-  htmlFor: string;
-  required?: boolean;
-  helper?: string;
-  error?: string;
-  children: React.ReactNode;
 }
 
-const Field = ({ label, htmlFor, required, helper, error, children }: FieldProps) => (
-  <div>
-    <label htmlFor={htmlFor} className={labelBase}>
+const TabButton = ({ value, label }: TabButtonProps) => {
+  const { setValue } = useFormContext<ContactFormData>();
+  const currentValue = useWatch<ContactFormData>({ name: "requestType" });
+  const isActive = currentValue === value;
+  const color = REQUEST_TYPE_COLORS[value];
+
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={isActive}
+      onClick={() =>
+        setValue("requestType", value, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      }
+      className="relative inline-flex items-center gap-2 px-4 py-3.5 bg-transparent border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap transition-colors duration-300 hover:text-text-on-dark"
+      style={{
+        color: isActive
+          ? "hsl(var(--text-on-dark))"
+          : "rgba(250, 250, 252, 0.55)",
+      }}
+    >
+      <span
+        className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+        style={{
+          backgroundColor: isActive ? color.base : "rgba(250,250,252,0.25)",
+          boxShadow: isActive ? `0 0 10px ${color.base}` : "none",
+        }}
+      />
       {label}
-      {required && <span className="text-logo-base ml-1">*</span>}
-      {helper && !required && (
-        <span className="ml-2 normal-case tracking-normal font-sans font-normal text-text-on-dark-muted/50">
-          ({helper})
+      {isActive && (
+        <span
+          className="absolute left-3 right-3 -bottom-px h-[2px] rounded-full"
+          style={{
+            backgroundColor: color.base,
+            boxShadow: `0 0 12px ${color.base}`,
+          }}
+        />
+      )}
+    </button>
+  );
+};
+
+interface FieldProps {
+  name: keyof ContactFormData;
+  label: string;
+  type?: "text" | "email" | "tel" | "textarea";
+  placeholder?: string;
+  required?: boolean;
+  helper?: string;
+}
+
+const FieldGroup = ({
+  name,
+  label,
+  type = "text",
+  placeholder,
+  required,
+  helper,
+}: FieldProps) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<ContactFormData>();
+  const error = errors[name];
+
+  const handleFocus = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    if (!error)
+      e.currentTarget.style.borderBottomColor =
+        "var(--contact-accent, hsl(var(--logo-base)))";
+  };
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    if (!error) e.currentTarget.style.borderBottomColor = "";
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={name} className={labelBase}>
+        {label}
+        {required && (
+          <span
+            className="ml-1"
+            style={{ color: "var(--contact-accent, hsl(var(--logo-base)))" }}
+          >
+            *
+          </span>
+        )}
+      </label>
+
+      {type === "textarea" ? (
+        <textarea
+          id={name}
+          {...register(name)}
+          placeholder={placeholder}
+          rows={5}
+          aria-invalid={!!error}
+          className={cn(inputBase, "resize-y min-h-[140px] py-3")}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      ) : (
+        <input
+          id={name}
+          type={type}
+          {...register(name)}
+          placeholder={placeholder}
+          aria-invalid={!!error}
+          className={inputBase}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      )}
+
+      {helper && !error && (
+        <span className="text-xs text-white/40">{helper}</span>
+      )}
+      {error && (
+        <span className="text-xs text-red-300" role="alert">
+          {error.message?.toString()}
         </span>
       )}
-    </label>
-    {children}
-    {error && (
-      <p className="mt-2 text-[12px] text-red-300/80" role="alert">
-        {error}
-      </p>
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 const ContactForm = () => {
   const reduceMotion = useReducedMotion();
   const {
     register,
-    control,
     formState: { errors, isSubmitting, isValid },
   } = useFormContext<ContactFormData>();
 
   const disabled = !isValid || isSubmitting;
 
   return (
-    <div className="w-full">
-      <div className="flex items-center gap-3 mb-10 text-text-on-dark-muted">
-        <span
-          className="w-1.5 h-1.5 rounded-full"
+    <div
+      className="relative rounded-3xl overflow-hidden border border-white/[0.12]"
+      style={{
+        backgroundColor: "rgba(10, 14, 26, 0.4)",
+        backdropFilter: "blur(28px) saturate(180%)",
+        WebkitBackdropFilter: "blur(28px) saturate(180%)",
+      }}
+    >
+      {/* TAB BAR — top of card */}
+      <div className="relative border-b border-white/[0.08]">
+        <div className="overflow-x-auto md:overflow-x-visible scrollbar-hide">
+          <div
+            role="tablist"
+            aria-label="Sujet de votre demande"
+            className="flex items-center gap-1 px-4 md:px-6 min-w-max md:min-w-0 md:flex-wrap"
+          >
+            {REQUEST_TYPES.map((rt) => (
+              <TabButton
+                key={rt}
+                value={rt}
+                label={REQUEST_TYPE_LABELS[rt]}
+              />
+            ))}
+          </div>
+        </div>
+        {/* Mobile fade gradient */}
+        <div
+          aria-hidden="true"
+          className="absolute top-0 right-0 bottom-0 w-12 pointer-events-none md:hidden"
           style={{
-            backgroundColor: "var(--contact-accent, var(--logo-base))",
-            boxShadow: "0 0 10px var(--contact-accent, var(--logo-base))",
-            transition: "background-color 600ms ease-out, box-shadow 600ms ease-out",
+            background:
+              "linear-gradient(to left, rgba(10,14,26,0.95) 0%, transparent 100%)",
           }}
         />
-        <span className="text-[11px] font-mono font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted">
-          Parlons de votre projet
-        </span>
-      </div>
-
-      {/* Identity row: Name / Email / Phone */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 mb-10">
-        <Field
-          label="Nom complet"
-          htmlFor="fullName"
-          required
-          error={errors.fullName?.message}
-        >
-          <input
-            id="fullName"
-            type="text"
-            aria-invalid={!!errors.fullName}
-            placeholder="Prénom Nom"
-            {...register("fullName")}
-            className={fieldBase}
-          />
-        </Field>
-        <Field label="Email" htmlFor="email" required error={errors.email?.message}>
-          <input
-            id="email"
-            type="email"
-            aria-invalid={!!errors.email}
-            placeholder="vous@email.com"
-            {...register("email")}
-            className={fieldBase}
-          />
-        </Field>
-        <Field label="Téléphone" htmlFor="phone" helper="optionnel" error={errors.phone?.message}>
-          <input
-            id="phone"
-            type="tel"
-            aria-invalid={!!errors.phone}
-            placeholder="06 XX XX XX XX"
-            {...register("phone")}
-            className={fieldBase}
-          />
-        </Field>
-      </div>
-
-      {/* Subject tabs */}
-      <div className="mb-10">
-        <div className={labelBase}>
-          Sujet de votre demande<span className="text-logo-base ml-1">*</span>
-        </div>
-        <Controller
-          control={control}
-          name="requestType"
-          render={({ field }) => (
-            <div
-              role="tablist"
-              aria-label="Sujet"
-              className="relative -mx-5 sm:mx-0"
-            >
-              <div className="overflow-x-auto md:overflow-x-visible scrollbar-hide px-5 sm:px-0">
-                <div className="flex gap-1.5 min-w-max md:min-w-0 md:flex-wrap">
-                  {REQUEST_TYPES.map((rt) => {
-                    const active = field.value === rt;
-                    const color = REQUEST_TYPE_COLORS[rt];
-                    return (
-                      <button
-                        key={rt}
-                        type="button"
-                        role="tab"
-                        aria-selected={active}
-                        onClick={() => field.onChange(rt)}
-                        className={cn(
-                          "whitespace-nowrap rounded-full border px-4 py-2 text-[13px] font-medium transition-all duration-200",
-                          active
-                            ? "text-text-on-dark"
-                            : "text-text-on-dark-muted border-white/10 bg-white/[0.02] hover:text-text-on-dark hover:border-white/20 hover:bg-white/[0.04]",
-                        )}
-                        style={
-                          active
-                            ? {
-                                borderColor: `rgba(${color.rgb}, 0.55)`,
-                                backgroundColor: `rgba(${color.rgb}, 0.14)`,
-                                boxShadow: `0 0 0 1px rgba(${color.rgb}, 0.25), 0 6px 18px -6px rgba(${color.rgb}, 0.45)`,
-                              }
-                            : undefined
-                        }
-                      >
-                        {REQUEST_TYPE_LABELS[rt]}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-              <div
-                className="absolute top-0 right-0 bottom-0 w-10 pointer-events-none md:hidden"
-                style={{
-                  background:
-                    "linear-gradient(to left, rgba(10,14,26,0.9) 0%, transparent 100%)",
-                }}
-                aria-hidden="true"
-              />
-            </div>
-          )}
-        />
         {errors.requestType?.message && (
-          <p className="mt-3 text-[12px] text-red-300/80" role="alert">
+          <p className="px-6 pb-3 text-[12px] text-red-300/80" role="alert">
             {errors.requestType.message}
           </p>
         )}
       </div>
 
-      {/* Message */}
-      <div className="mb-10">
-        <Field
-          label="Votre message"
-          htmlFor="message"
-          required
-          error={errors.message?.message}
-        >
-          <textarea
-            id="message"
-            aria-invalid={!!errors.message}
-            placeholder="Décrivez votre projet, le contexte, les délais…"
-            {...register("message")}
-            className={cn(fieldBase, "resize-y min-h-[140px] py-3")}
+      {/* FORM BODY */}
+      <div className="p-6 md:p-10 space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8">
+          <FieldGroup
+            name="fullName"
+            label="Nom complet"
+            placeholder="Prénom Nom"
+            required
           />
-        </Field>
+          <FieldGroup
+            name="email"
+            label="Email"
+            type="email"
+            placeholder="vous@email.com"
+            required
+          />
+          <FieldGroup
+            name="phone"
+            label="Téléphone"
+            type="tel"
+            placeholder="06 XX XX XX XX"
+            helper="Optionnel"
+          />
+        </div>
+
+        <FieldGroup
+          name="message"
+          label="Votre message"
+          type="textarea"
+          placeholder="Décrivez votre projet, le contexte, les délais…"
+          required
+        />
       </div>
 
-      {/* RGPD + submit */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-6 border-t border-white/[0.08]">
+      {/* FOOTER */}
+      <div className="px-6 md:px-10 py-6 border-t border-white/[0.08] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <label className="flex items-start gap-3 text-[12px] leading-relaxed text-text-on-dark-muted cursor-pointer max-w-xl">
           <input
             type="checkbox"
             {...register("rgpdConsent")}
-            className="w-4 h-4 mt-0.5 accent-logo-base flex-shrink-0 cursor-pointer"
-            style={{ accentColor: "var(--contact-accent, var(--logo-base))" }}
+            className="w-4 h-4 mt-0.5 flex-shrink-0 cursor-pointer"
+            style={{
+              accentColor: "var(--contact-accent, hsl(var(--logo-base)))",
+            }}
           />
           <span>
             J'accepte que mes données soient traitées dans le cadre de cette
@@ -207,7 +252,7 @@ const ContactForm = () => {
               to="/mentions-legales"
               className="underline hover:text-text-on-dark transition-colors"
               style={{
-                color: "var(--contact-accent, var(--logo-base))",
+                color: "var(--contact-accent, hsl(var(--logo-base)))",
                 transition: "color 600ms ease-out",
               }}
             >
@@ -255,7 +300,7 @@ const ContactForm = () => {
               <Send
                 className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
                 style={{
-                  color: "var(--contact-accent, var(--logo-base))",
+                  color: "var(--contact-accent, hsl(var(--logo-base)))",
                   transition: "color 600ms ease-out, transform 0.3s ease",
                 }}
               />
