@@ -75,7 +75,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
       aria-label="Pôles d'expertise"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="fixed top-20 left-0 right-0 mx-auto z-[60]"
+      className={`fixed left-0 right-0 mx-auto z-[60] ${hasBanner ? "top-[108px]" : "top-20"}`}
       style={{ width: "min(720px, calc(100vw - 2rem))", ...MENU_SURFACE_STYLE }}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 items-stretch">
