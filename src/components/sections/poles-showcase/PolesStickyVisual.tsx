@@ -26,7 +26,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
       };
 
   return (
-    <div className="relative h-[280px] mb-6 md:mb-0 md:h-[calc(100vh-100px)] md:max-h-[720px] rounded-3xl overflow-hidden border border-white/10">
+    <div className="relative h-[280px] mb-6 lg:mb-0 lg:h-[calc(100vh-100px)] lg:max-h-[720px] rounded-3xl overflow-hidden border border-white/10">
       {/* Mesh fill — colors transition via CSS vars on parent */}
       <div
         className="absolute inset-0"
@@ -121,7 +121,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
       {/* Stat card */}
       <div
         aria-live="polite"
-        className="absolute bottom-6 left-6 right-6 z-10 rounded-[18px] px-4 py-3 md:px-7 md:py-5 border border-white/[0.14] flex justify-between items-center gap-6"
+        className="absolute bottom-6 left-6 right-6 z-10 rounded-[18px] px-4 py-3 lg:px-7 lg:py-5 border border-white/[0.14] flex justify-between items-center gap-6"
         style={{
           background: "rgba(10, 14, 26, 0.55)",
           backdropFilter: "blur(32px) saturate(200%)",
@@ -141,7 +141,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
               {active.statLabel}
             </span>
             <span
-              className="font-display text-2xl md:text-[40px] font-semibold leading-none"
+              className="font-display text-2xl lg:text-[40px] font-semibold leading-none"
               style={{ color: "var(--pole-base)" }}
             >
               {active.statValue}
@@ -155,7 +155,7 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="hidden md:block text-xs text-text-on-dark-muted leading-relaxed max-w-[200px] text-right"
+            className="hidden lg:block text-xs text-text-on-dark-muted leading-relaxed max-w-[200px] text-right"
           >
             {active.statDetail}
           </motion.span>
