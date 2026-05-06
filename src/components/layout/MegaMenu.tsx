@@ -14,7 +14,9 @@ interface Props {
 
 const MENU_SURFACE_STYLE: React.CSSProperties = {
   background:
-    "linear-gradient(180deg, rgba(242, 248, 252, 0.96) 0%, rgba(216, 229, 239, 0.92) 100%)",
+    "linear-gradient(180deg, rgba(242, 248, 252, 0.7) 0%, rgba(216, 229, 239, 0.6) 100%)",
+  backdropFilter: "blur(24px) saturate(180%)",
+  WebkitBackdropFilter: "blur(24px) saturate(180%)",
   border: "1px solid transparent",
   borderRadius: 24,
   padding: 24,
