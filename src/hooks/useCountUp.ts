@@ -8,12 +8,21 @@ interface UseCountUpOptions {
   threshold?: number;
 }
 
+function computeAdaptiveDuration(end: number): number {
+  const abs = Math.abs(end);
+  if (abs < 50) return 1200;
+  if (abs < 500) return 1500;
+  if (abs < 5000) return 1700;
+  return 1900;
+}
+
 export function useCountUp({
   end,
-  duration = 1500,
+  duration,
   decimals = 0,
   threshold = 0.4,
 }: UseCountUpOptions) {
+  const computedDuration = duration ?? computeAdaptiveDuration(end);
   const [value, setValue] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
@@ -43,14 +52,14 @@ export function useCountUp({
     const startTime = performance.now();
     let raf = 0;
     const animate = (now: number) => {
-      const progress = Math.min((now - startTime) / duration, 1);
+      const progress = Math.min((now - startTime) / computedDuration, 1);
       const eased = 1 - Math.pow(1 - progress, 4);
       setValue(end * eased);
       if (progress < 1) raf = requestAnimationFrame(animate);
     };
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [hasStarted, end, duration, prefersReducedMotion]);
+  }, [hasStarted, end, computedDuration, prefersReducedMotion]);
 
   const formatted =
     decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
