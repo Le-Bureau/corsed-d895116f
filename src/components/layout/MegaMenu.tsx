@@ -12,18 +12,17 @@ interface Props {
   onMouseLeave?: () => void;
 }
 
-const GLASS_STYLE: React.CSSProperties = {
-  background: "rgba(255, 255, 255, 0.65)",
-  backdropFilter: "blur(20px) saturate(160%)",
-  WebkitBackdropFilter: "blur(20px) saturate(160%)",
-  border: "1px solid rgba(255, 255, 255, 0.55)",
+const MENU_SURFACE_STYLE: React.CSSProperties = {
+  background:
+    "linear-gradient(180deg, rgba(242, 248, 252, 0.96) 0%, rgba(216, 229, 239, 0.92) 100%)",
+  border: "1px solid transparent",
   borderRadius: 24,
   padding: 24,
   boxShadow: [
-    "inset 0 1px 0 rgba(255, 255, 255, 0.85)",
+    "inset 0 1px 0 rgba(255, 255, 255, 0.9)",
     "0 1px 2px rgba(10, 10, 15, 0.04)",
-    "0 8px 24px rgba(10, 10, 15, 0.06)",
-    "0 24px 48px rgba(10, 10, 15, 0.04)",
+    "0 12px 32px rgba(10, 10, 15, 0.08)",
+    "0 24px 48px rgba(10, 10, 15, 0.06)",
   ].join(", "),
 };
 
@@ -72,7 +71,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className="fixed top-20 left-0 right-0 mx-auto z-[60]"
-      style={{ width: "min(720px, calc(100vw - 2rem))", ...GLASS_STYLE }}
+      style={{ width: "min(720px, calc(100vw - 2rem))", ...MENU_SURFACE_STYLE }}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {POLES.map((pole) => (
