@@ -182,7 +182,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Nettoyage professionnel de vos panneaux photovoltaïques par drone. Eau osmosée pure, basse pression, sans risque pour les cellules. Intervention partout en Corse, de la villa à la centrale.",
       heroImageAlt: "Drone nettoyant des panneaux photovoltaïques",
       stats: [
-        { value: "+30%", unit: "", prefix: "jusqu'à", labelStrong: "de rendement restauré", labelMuted: "sur des installations encrassées" },
+        { value: "+30%", unit: "", labelStrong: "de rendement restauré", labelMuted: "sur des installations encrassées" },
         { value: "500", unit: "panneaux/h", labelStrong: "cadence moyenne", labelMuted: "contre 50 en nettoyage manuel" },
         { value: "0", unit: "risque", labelStrong: "humain & matériel", labelMuted: "intervention sans contact, sans échelle" },
       ],
