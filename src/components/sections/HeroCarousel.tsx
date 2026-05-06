@@ -60,7 +60,7 @@ const HeroCarousel = () => {
     const update = () =>
       setViewport({
         width: window.innerWidth,
-        isMobile: window.innerWidth <= 768,
+        isMobile: window.innerWidth < 768,
       });
     update();
     window.addEventListener("resize", update);
