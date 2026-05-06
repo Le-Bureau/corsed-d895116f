@@ -138,7 +138,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       stats: [
         { value: "100", unit: "m", labelStrong: "Hauteur max", labelMuted: "traitable sans nacelle élévatrice" },
         { value: "3000", unit: "m²/jour", labelStrong: "cadence moyenne", labelMuted: "sans montage ni démontage" },
-        { prefix: "jusqu'à -50", value: "%", unit: "", labelStrong: "de coût", labelMuted: "vs. méthode traditionnelle" },
+        { value: "-50%", unit: "", prefix: "jusqu'à", labelStrong: "de coût", labelMuted: "vs. méthode traditionnelle" },
       ],
       whyEyebrow: "Pourquoi traiter sa façade",
       whyTitle: "Une façade sale, c'est déjà une dégradation qui commence.",
@@ -182,7 +182,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Nettoyage professionnel de vos panneaux photovoltaïques par drone. Eau osmosée pure, basse pression, sans risque pour les cellules. Intervention partout en Corse, de la villa à la centrale.",
       heroImageAlt: "Drone nettoyant des panneaux photovoltaïques",
       stats: [
-        { prefix: "jusqu'à +30", value: "%", unit: "", labelStrong: "de rendement restauré", labelMuted: "sur des installations encrassées" },
+        { value: "+30%", unit: "", prefix: "jusqu'à", labelStrong: "de rendement restauré", labelMuted: "sur des installations encrassées" },
         { value: "500", unit: "panneaux/h", labelStrong: "cadence moyenne", labelMuted: "contre 50 en nettoyage manuel" },
         { value: "0", unit: "risque", labelStrong: "humain & matériel", labelMuted: "intervention sans contact, sans échelle" },
       ],
@@ -230,7 +230,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Identifiez déperditions de chaleur, défauts d'isolation et pannes de panneaux photovoltaïques depuis les airs. Rapport technique exploitable, partout en Corse.",
       heroImageAlt: "Drone effectuant un diagnostic thermique",
       stats: [
-        { prefix: "-85", value: "%", unit: "", labelStrong: "de coût", labelMuted: "vs. échafaudage traditionnel" },
+        { value: "-85%", unit: "", labelStrong: "de coût", labelMuted: "vs. échafaudage traditionnel" },
         { value: "2-3", unit: "h", labelStrong: "SUR SITE", labelMuted: "contre plusieurs jours habituellement" },
         { value: "0", unit: "", labelStrong: "NUISANCE CHANTIER", labelMuted: "sans arrêt d'activité ni accès bloqué" },
       ],
@@ -305,7 +305,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Inspection visuelle par drone haute définition des bâtiments difficiles d'accès. Toitures, façades, infrastructures industrielles et patrimoine : un rapport précis, livré en 48h, sans nacelle ni cordistes.",
       heroImageAlt: "Drone effectuant une inspection visuelle",
       stats: [
-        { prefix: "120+", value: "m", unit: "", labelStrong: "hauteur inspectable", labelMuted: "avant demande via dossier" },
+        { value: "120+", unit: "m", labelStrong: "hauteur inspectable", labelMuted: "avant demande via dossier" },
         { value: "5 000", unit: "m²/jour", labelStrong: "Surface couverte", labelMuted: "inspection complète en une mission" },
         { value: "48", unit: "h", labelStrong: "Délai de livraison moyen", labelMuted: "du rapport technique détaillé" },
       ],
