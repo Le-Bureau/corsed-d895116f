@@ -42,12 +42,8 @@ const PolesShowcase = () => {
       <PolesAmbient />
       <PolesIntro />
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10 pb-24 lg:pb-32">
-        {/* Mobile: visual inline before panels */}
-        <div className="md:hidden">
-          <PolesStickyVisual activePoleKey={activePoleKey} />
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-[60px] items-start">
-          <div className="hidden md:sticky md:top-[calc((100vh-720px)/2)] md:block">
+          <div className="sticky top-[80px] md:top-[calc((100vh-720px)/2)] self-start">
             <PolesStickyVisual activePoleKey={activePoleKey} />
           </div>
           <div className="flex flex-col">
