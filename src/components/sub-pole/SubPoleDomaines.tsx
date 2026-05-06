@@ -40,7 +40,7 @@ const SubPoleDomaines = ({ content }: Props) => {
             const Icon = getIcon(d.iconName);
             return (
               <FadeInWhenVisible key={d.title}>
-                <div className="flex flex-col h-full rounded-2xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 p-7">
+                <div className="hover-border-card flex flex-col h-full rounded-2xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 p-7" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
                   <div
                     className="w-11 h-11 rounded-xl border flex items-center justify-center mb-5"
                     style={{
