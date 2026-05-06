@@ -12,6 +12,32 @@ export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 export interface PoleSubService {
   name: string;
   slug?: string;
+  description?: string;
+}
+
+export interface WhyDroneItem {
+  iconName: string;
+  title: string;
+  description: string;
+}
+
+export interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export interface UseCase {
+  image?: string;
+  imageAlt: string;
+  title: string;
+  description: string;
+  advantage: string;
+}
+
+export interface PoleFAQItem {
+  question: string;
+  answer: string;
 }
 
 export interface Pole {
@@ -28,6 +54,18 @@ export interface Pole {
   statValue: string;
   statDetail: string;
   comingSoon: boolean;
+  isInDevelopment?: boolean;
+  heroImage?: string;
+  heroImageAlt?: string;
+  heroPoleNumber?: string;
+  heroPitch?: string;
+  whyDroneItems?: WhyDroneItem[];
+  processSteps?: ProcessStep[];
+  useCases?: UseCase[];
+  poleFAQ?: PoleFAQItem[];
+  finalCTATitle?: string;
+  finalCTASubtitle?: string;
+  finalCTAButtonLabel?: string;
   pitch: string;
   description: string;
   highlights: string[];
