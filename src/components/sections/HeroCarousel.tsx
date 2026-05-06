@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useHeroCarousel } from "@/hooks/useHeroCarousel";
 import { POLES } from "@/lib/poles";
 import HeroBackground from "./hero/HeroBackground";
@@ -7,6 +7,8 @@ import HeroPagination from "./hero/HeroPagination";
 import HeroNavButtons from "./hero/HeroNavButtons";
 import HeroStatCard from "./hero/HeroStatCard";
 import HeroProgressBar from "./hero/HeroProgressBar";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const HeroCarousel = () => {
   const {
@@ -17,8 +19,12 @@ const HeroCarousel = () => {
     goToPrev,
     goToIndex,
   } = useHeroCarousel();
+  const reduced = useReducedMotion();
 
-  const nextPole = POLES[(currentIndex + 1) % POLES.length];
+  // Continuous horizontal title track: each slot = 70% of container,
+  // active slot left-aligned to content (no centering shift).
+  const slotPct = 70; // % of container width per slot
+  const trackOffsetPct = -currentIndex * slotPct;
 
   return (
     <div
@@ -36,26 +42,50 @@ const HeroCarousel = () => {
     >
       <HeroBackground currentIndex={currentIndex} direction={direction} />
 
-      {/* Ghost of next pole — peeks from the right edge */}
-      <div className="hidden lg:flex absolute inset-0 z-[5] items-center justify-end pr-0 pointer-events-none overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={nextPole.key}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.18 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-display font-semibold tracking-[-0.04em] leading-[0.95] whitespace-nowrap select-none text-text-on-dark"
-            style={{
-              fontSize: "clamp(80px, 11vw, 180px)",
-              transform: "translateX(18%)",
-              textShadow: "0 2px 18px rgba(0,0,0,0.45)",
-            }}
-            aria-hidden="true"
+      {/* Persistent horizontal title TRACK (carousel rotation feel) */}
+      <div
+        className="absolute inset-x-0 z-[8] pointer-events-none flex items-center"
+        style={{
+          top: "50%",
+          transform: "translateY(-50%)",
+          height: "clamp(120px, 16vw, 200px)",
+        }}
+        aria-hidden="true"
+      >
+        <div className="relative w-full h-full overflow-hidden">
+          <motion.div
+            className="absolute top-0 left-0 h-full flex items-center"
+            style={{ width: `${POLES.length * slotPct}%` }}
+            animate={{ x: reduced ? 0 : `${trackOffsetPct}%` }}
+            transition={{ duration: 0.9, ease: EASE }}
           >
-            {nextPole.label}
-          </motion.span>
-        </AnimatePresence>
+            {POLES.map((pole, i) => {
+              const isActive = i === currentIndex;
+              return (
+                <div
+                  key={pole.key}
+                  className="flex-shrink-0 h-full flex items-center px-5 md:px-10"
+                  style={{ width: `${100 / POLES.length}%` }}
+                >
+                  <span
+                    className={`font-display font-semibold tracking-[-0.035em] leading-[0.95] whitespace-nowrap text-text-on-dark text-[clamp(56px,8vw,128px)] transition-opacity duration-700 ease-out ${
+                      isActive
+                        ? "opacity-100"
+                        : "opacity-0 lg:opacity-[0.18]"
+                    }`}
+                    style={{
+                      textShadow: isActive
+                        ? "none"
+                        : "0 2px 18px rgba(0,0,0,0.45)",
+                    }}
+                  >
+                    {pole.label}
+                  </span>
+                </div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
 
       <AnimatePresence mode="wait" custom={direction} initial={false}>
