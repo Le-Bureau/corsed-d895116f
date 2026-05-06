@@ -1,93 +1,79 @@
-# Corse Drone — Foundation Setup
+# Phase 3A — Light theme migration of pole detail pages
 
-Set up the design system, layout shell, routing, and reusable motion primitives. No styled UI sections yet — those come in later prompts.
+## Current state
 
-## 1. Dependencies & Fonts
+The dynamic route `/pole/:slug` and the 8 sub-components already exist (Phase 1 work), but they are **fully dark-themed** (`bg-surface-darker`, `text-text-on-dark`, `rgba(10,14,26,…)` glass cards, `border-white/10`, `glass-light` buttons, dark gradient overlays on hero, etc.).
 
-- Install `motion` (Framer Motion v11+ package).
-- Install `@fontsource/geist-sans` (full weights) and `@fontsource/inter` (full weights).
-- Import font CSS in `src/main.tsx`.
+The data structure in `src/lib/poles.ts` already matches the spec (whyDroneItems / processSteps / useCases / poleFAQ / finalCTA fields all present, NETTOYAGE content is final). No data work needed except:
+- Use `baseColorOnLight` (not `OnDark`) for `--pole-color`
+- Set Agriculture & Transport `whyDroneItems / processSteps / useCases / poleFAQ` to `undefined` so those sections don't render (currently they reuse Nettoyage placeholders)
+- Replace Diagnostic's `whyDroneItems / processSteps / useCases / poleFAQ` (currently Nettoyage placeholders) with the spec content
 
-## 2. Design Tokens (`src/index.css`)
+Also: 4 placeholder pages (`PoleNettoyage / PoleDiagnostic / PoleAgriculture / PoleTransport`) — **need to verify** they still exist; route in `App.tsx` already uses `<PoleDetail />` only, no imports of those 4 placeholders. Quick check: `src/pages/Pole*.tsx` files weren't listed in the codebase index → already deleted. `App.tsx` is already clean. Nothing to remove there.
 
-Add all CSS variables under `:root`:
-- Surfaces, text, borders, logo identity
-- Brand primary + 4 pole token sets (nettoyage, diagnostic, agriculture, transport — each with base/deep/tint variants, including on-light/on-dark variants for diag and agri)
-- Easing curves (`--ease-out-expo`, `--ease-in-out-expo`)
+## Scope
 
-Add the 4 glass utility classes (`.glass-light`, `.glass-light-strong`, `.glass-dark`, `.glass-white`) with `@supports not (backdrop-filter)` fallbacks.
+Convert 8 components + 1 page wrapper from dark to light, swap data var, fill Diagnostic content, blank-out Agri/Transport mid-sections.
 
-Set body default font to Inter, add `.font-display` utility for Geist, set `tracking-tight` defaults on `h1–h6`.
+## Files to modify
 
-## 3. Tailwind Config (`tailwind.config.ts`)
+### Data (1 file)
+- `src/lib/poles.ts`
+  - Add `DIAGNOSTIC_WHY / DIAGNOSTIC_PROCESS / DIAGNOSTIC_USE_CASES / DIAGNOSTIC_FAQ` from spec, wire into `diagnostic` pole
+  - Set agriculture & transport `whyDroneItems / processSteps / useCases / poleFAQ` to `undefined`
+  - Update Diagnostic `finalCTASubtitle` → "Devis gratuit, intervention sous 10 jours, rapport sous 72h."
+  - Update Diagnostic `finalCTAButtonLabel` → "Demander un devis"
+  - Update Agri/Transport `finalCTATitle` → "Service en préparation."
 
-Wire tokens so utility classes resolve:
-- `colors`: `background`, `surface.tint/dark/darker`, `text.primary/secondary/on-dark/on-dark-muted`, `border`, `border-on-dark`, `logo.base/deep/tint`, `primary`, `pole-nettoyage-{base,deep,tint,light}`, `pole-diag-{base-onlight,base-ondark,deep,tint}`, `pole-agri-{...}`, `pole-transport-{...}`
-- `fontFamily`: `display: ['Geist', ...]`, `sans: ['Inter', ...]`
-- `transitionTimingFunction`: `out-expo`, `in-out-expo`
-- `container`: max-width 1280px, padding `px-5` mobile / `px-10` lg+
+### Utils (1 file)
+- `src/lib/utils.ts` — add `hexToRgb` export (currently inlined in PoleDetail, move it for cleanliness)
 
-## 4. Routing (`src/App.tsx`)
+### Page (1 file)
+- `src/pages/PoleDetail.tsx`
+  - Swap `--pole-color` source: `pole.baseColorOnLight` (not `OnDark`)
+  - Wrapper: `bg-surface-bg` (not `bg-surface-darker text-text-on-dark`), drop `text-text-on-dark`
+  - Import `hexToRgb` from `@/lib/utils`
 
-Replace current routes with all 14 routes wrapped in `<RootLayout>`:
+### Components (8 files) — all converted to light pattern
 
-```text
-/                              -> Home
-/pole/nettoyage                -> Nettoyage
-/pole/nettoyage/toitures       -> Toitures
-/pole/nettoyage/facades        -> Facades
-/pole/nettoyage/panneaux-solaires
-/pole/diagnostic               -> Diagnostic
-/pole/diagnostic/thermique
-/pole/diagnostic/visuel
-/pole/agriculture
-/pole/transport
-/expertises
-/partenaires
-/contact
-/mentions-legales
-*                              -> NotFound (existing)
+| Component | Key changes |
+|---|---|
+| `PoleHero.tsx` | Drop `data-header-bg="dark"` and dark bg/overlay layers. New: `bg-surface-bg`, subtle radial mesh `rgba(var(--pole-color-rgb),0.08)`, optional hero image with **light** linear-gradient overlay (surface-bg → transparent), eyebrow = white pill `bg-white shadow-soft-sm border border-border-subtle`, H1 `text-text-primary`, pitch in `var(--pole-color)`, long pitch `text-text-secondary`, primary CTA `bg-white text-text-primary` border + pole-color glow, secondary CTA outline `border border-border-default text-text-primary` (replaces `glass-light`) |
+| `PoleWhyDrone.tsx` | `bg-surface-elevated`, eyebrow white pill, cards `bg-surface-card border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1`, drop backdrop-blur and dark glass, icon tile `bg-{pole-color}/10 border-{pole-color}/30 text-{pole-color}`, title `text-text-primary`, desc `text-text-secondary`. Keep `getIcon()` resolver. |
+| `PoleSubServices.tsx` | `bg-surface-bg`, white pill eyebrow, cards `bg-surface-card border-border-subtle shadow-soft-md` + lift hover, counter & title in light tones, "Découvrir →" link in `var(--pole-color)` |
+| `PoleProcess.tsx` | `bg-surface-elevated`, eyebrow + H2 light, step cards `bg-surface-card border-border-subtle shadow-soft-sm rounded-2xl p-6`, number col mono `var(--pole-color)`, title `text-text-primary`, desc `text-text-secondary` |
+| `PoleUseCases.tsx` | `bg-surface-bg`, carousel container `bg-surface-card border-border-subtle shadow-soft-md` (drop `border-white/10`), content panel `bg-surface-elevated` (drop `rgba(10,14,26,0.6)`), title `text-text-primary`, desc `text-text-secondary`, advantage box keeps `rgba(var(--pole-color-rgb),0.08/0.25)` (works on light too — verify contrast), arrows = white circle `bg-surface-card border-border-subtle shadow-soft-sm` (replaces `glass-light`), inactive dots `rgba(0,0,0,0.15)` |
+| `PoleFAQ.tsx` | `bg-surface-elevated`, eyebrow + H2 light, items `bg-surface-card border-border-subtle shadow-soft-sm rounded-xl`, hover `bg-white`, `[open]` border `var(--pole-color)/30`, question `text-text-primary`, answer `text-text-secondary`, chevron `var(--pole-color)` |
+| `PoleFinalCTA.tsx` | `bg-surface-bg` + radial pole-color glow, centered card `bg-surface-card border-border-subtle shadow-soft-lg rounded-3xl p-12 lg:p-16`, title `text-text-primary`, subtitle `text-text-secondary`, **single CTA** `bg-{pole-color} text-white` with pole-color glow shadow (was white bg before) |
+| `DevBanner.tsx` | Light variant: `bg rgba(var(--pole-color-rgb),0.10)`, `border-bottom rgba(var(--pole-color-rgb),0.30)`, dot `var(--pole-color)`, text `text-text-primary` (strong) + `text-text-muted` (subtitle), link in `var(--pole-color)` underline. Keep pulse animation + `motion-reduce:animate-none`. |
+
+## Routing
+
+Already correct in `App.tsx`:
 ```
-
-Each page is a placeholder component rendering `Page: <route>` centered.
-
-## 5. Layout Shell (`src/components/layout/`)
-
-- `Header.tsx` — placeholder div with text "Header"
-- `Footer.tsx` — placeholder div with text "Footer"
-- `RootLayout.tsx` — Header + `<Outlet />` (in `<main>`) + Footer
-
-## 6. Animation Primitives (`src/components/animations/`)
-
-All accept `className`, respect `useReducedMotion` (opacity-only when reduced), default ease `--ease-out-expo`.
-
-- **`FadeInWhenVisible.tsx`** — `whileInView` fade + slide-up (y: 24 → 0), `viewport={{ once: true, margin: '-100px' }}`, duration 0.6s.
-- **`StaggerChildren.tsx`** — parent with `staggerChildren` (configurable, default 0.08s), children use a shared `fadeUpItem` variant exported from the file.
-- **`ParallaxY.tsx`** — wraps content; uses `useScroll` on a ref + `useTransform` to translate Y. Configurable distance prop (default 80px).
-
-## 7. Constants (`src/lib/poles.ts`)
-
-Export `Pole` TypeScript type and typed `POLES` array with the 4 entries (nettoyage, diagnostic, agriculture, transport — agri & transport flagged `comingSoon: true`) exactly as specified, including all color variants, titles, subtitles, and stats.
-
-## 8. SEO Base (`index.html`)
-
-- `<title>`: `Corse Drone | Solutions par drone en Corse`
-- `<meta name="description">`: tagline about premium drone services in Corsica (cleaning, diagnostic, agriculture, transport).
-- Set `<html lang="fr">`.
-
-## Folder Structure After This Prompt
-
-```text
-src/
-  components/
-    animations/   FadeInWhenVisible, StaggerChildren, ParallaxY
-    layout/       Header, Footer, RootLayout
-    sections/     (empty, ready for next prompts)
-    ui/           (shadcn, unchanged)
-  lib/            utils.ts, poles.ts
-  pages/          Home + 13 placeholder pages + NotFound
+<Route path="/pole/:slug" element={<PoleDetail />} />
 ```
+The 5 sub-page routes (`/pole/nettoyage/toitures` etc.) already exist and stay (Phase 3B will refactor them). No changes to `App.tsx`.
 
-## Out of Scope (explicit)
+## Pattern cheat-sheet (consistency)
 
-No hero, no styled sections, no header/footer content, no forms, no images. Only placeholders, tokens, primitives, and the shell.
+- Section padding: `py-24 lg:py-32` (matches Phase 2 sections)
+- Eyebrow pill: `inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted` + dot in `var(--pole-color)`
+- Cards: `bg-surface-card border border-border-subtle shadow-soft-md rounded-2xl/3xl` + hover `hover:-translate-y-1 hover:shadow-soft-lg transition-all duration-300`
+- No `backdrop-blur` anywhere
+- No `border-white/N`, no `rgba(10,14,26,…)`, no `text-text-on-dark*`
+- Animations: `FadeInWhenVisible` already wired everywhere — keep as-is
+
+## Verification
+
+- `/pole/nettoyage` → Hero + 4 WhyDrone + 3 SubServices + 5 Process + 3 UseCases + 5 FAQ + FinalCTA. Blue accents.
+- `/pole/diagnostic` → Hero + 4 WhyDrone + 2 SubServices + 3 Process + 3 UseCases + 4 FAQ + FinalCTA. Red accents.
+- `/pole/agriculture` → DevBanner (light) + Hero + 3 SubServices (`subServices` is non-empty in data) + FinalCTA. Green accents. **Note:** spec says "DevBanner + Hero + FinalCTA only" but data has 3 subServices listed — they will render. If you want to skip them too, say so and I'll also blank out `subServices` for agri/transport.
+- `/pole/transport` → Same shape as agri (1 subService). Orange accents.
+- `/pole/invalid` → redirect to `/`.
+- Header pill stays correct (light pages use light header automatically since we drop `data-header-bg="dark"`).
+- Sub-service links → `/pole/{key}/{slug}` resolve to existing nettoyage/diagnostic sub-pages (still dark — Phase 3B). Expected.
+
+## Open question (please confirm before I proceed)
+
+**Agriculture & Transport `subServices`:** keep them rendering (current data has them) or also blank them out so the page is truly Hero + FinalCTA only as spec implies? My recommendation: **keep them rendering** — gives the dev-stage page useful content and the SubServices cards work fine in light theme.

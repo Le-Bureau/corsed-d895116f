@@ -27,27 +27,24 @@ const PoleUseCases = ({ cases }: Props) => {
 
   return (
     <section
-      data-header-bg="dark"
       role="region"
       aria-labelledby="pole-cases-title"
-      className="relative bg-surface-darker text-text-on-dark py-16 lg:py-28"
+      className="relative bg-surface-bg py-24 lg:py-32"
     >
       <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
         <FadeInWhenVisible>
           <div className="max-w-[760px] mb-14">
-            <div className="inline-flex items-center gap-2 mb-5">
+            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-6">
               <span
                 className="w-1.5 h-1.5 rounded-full"
                 style={{ background: "var(--pole-color)" }}
                 aria-hidden="true"
               />
-              <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-on-dark-muted">
-                Cas d'usage
-              </span>
-            </div>
+              Cas d'usage
+            </span>
             <h2
               id="pole-cases-title"
-              className="font-display font-semibold tracking-[-0.03em] leading-[1.05] mb-5"
+              className="font-display font-semibold tracking-[-0.035em] leading-[1.05] text-text-primary"
               style={{ fontSize: "clamp(36px, 4.4vw, 64px)" }}
             >
               Ils nous ont{" "}
@@ -57,7 +54,7 @@ const PoleUseCases = ({ cases }: Props) => {
         </FadeInWhenVisible>
 
         <div
-          className="relative overflow-hidden rounded-3xl border border-white/10"
+          className="relative overflow-hidden rounded-3xl bg-surface-card border border-border-subtle shadow-soft-md"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onFocus={() => setIsPaused(true)}
@@ -81,40 +78,40 @@ const PoleUseCases = ({ cases }: Props) => {
                     className="relative min-h-[280px] lg:min-h-[480px]"
                     style={{
                       background: c.image
-                        ? `linear-gradient(135deg, rgba(10,14,26,0.4), rgba(10,14,26,0.7)), url(${c.image}) center/cover no-repeat`
-                        : `linear-gradient(135deg, rgba(var(--pole-color-rgb), 0.4), rgba(10,14,26,0.85))`,
+                        ? `url(${c.image}) center/cover no-repeat`
+                        : `linear-gradient(135deg, rgba(var(--pole-color-rgb), 0.25), rgba(var(--pole-color-rgb), 0.08))`,
                     }}
                     role="img"
                     aria-label={c.imageAlt}
                   />
                   {/* Content */}
-                  <div
-                    className="p-8 lg:p-10 flex flex-col justify-center"
-                    style={{ background: "rgba(10,14,26,0.6)" }}
-                  >
-                    <div className="font-mono text-[11px] tracking-[0.18em] uppercase mb-5 text-text-on-dark-muted">
+                  <div className="p-8 lg:p-10 flex flex-col justify-center bg-surface-elevated">
+                    <div className="font-mono text-[11px] tracking-[0.18em] uppercase mb-5 text-text-muted">
                       <span style={{ color: "var(--pole-color)" }}>{num}</span> / {totalStr}
                     </div>
-                    <h3 className="font-display text-[24px] lg:text-[30px] font-semibold tracking-[-0.01em] mb-4">
+                    <h3 className="font-display text-[24px] lg:text-[30px] font-semibold tracking-[-0.01em] mb-4 text-text-primary">
                       {c.title}
                     </h3>
-                    <p className="text-[15px] leading-relaxed text-text-on-dark-muted mb-6">
+                    <p className="text-[15px] leading-relaxed text-text-secondary mb-6">
                       {c.description}
                     </p>
                     <div
-                      className="rounded-2xl p-5 border"
+                      className="rounded-xl p-4 border"
                       style={{
-                        background: "rgba(var(--pole-color-rgb), 0.08)",
-                        borderColor: "rgba(var(--pole-color-rgb), 0.25)",
+                        background: "rgba(var(--pole-color-rgb), 0.10)",
+                        borderColor: "rgba(var(--pole-color-rgb), 0.30)",
                       }}
                     >
                       <div
-                        className="font-mono text-[10px] tracking-[0.18em] uppercase mb-2"
+                        className="font-mono text-[10px] tracking-[0.18em] uppercase mb-2 font-semibold"
                         style={{ color: "var(--pole-color)" }}
                       >
                         Avantage
                       </div>
-                      <div className="text-[14px] leading-relaxed text-text-on-dark">
+                      <div
+                        className="text-[14px] leading-relaxed font-medium"
+                        style={{ color: "var(--pole-color)" }}
+                      >
                         {c.advantage}
                       </div>
                     </div>
@@ -127,7 +124,11 @@ const PoleUseCases = ({ cases }: Props) => {
 
         {/* Dots + arrows */}
         <div className="mt-8 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2" role="tablist" aria-label="Sélection du cas">
+          <div
+            className="flex items-center gap-2"
+            role="tablist"
+            aria-label="Sélection du cas"
+          >
             {cases.map((_, i) => {
               const active = i === currentIndex;
               return (
@@ -141,8 +142,10 @@ const PoleUseCases = ({ cases }: Props) => {
                   className="h-1.5 rounded-full transition-all duration-300"
                   style={{
                     width: active ? 40 : 28,
-                    background: active ? "var(--pole-color)" : "rgba(255,255,255,0.2)",
-                    boxShadow: active ? "0 0 12px rgba(var(--pole-color-rgb), 0.6)" : "none",
+                    background: active ? "var(--pole-color)" : "rgba(0,0,0,0.15)",
+                    boxShadow: active
+                      ? "0 0 12px rgba(var(--pole-color-rgb), 0.5)"
+                      : "none",
                   }}
                 />
               );
@@ -153,7 +156,7 @@ const PoleUseCases = ({ cases }: Props) => {
               type="button"
               onClick={goPrev}
               aria-label="Cas précédent"
-              className="w-10 h-10 rounded-full glass-light flex items-center justify-center text-text-on-dark hover:-translate-y-0.5 transition-transform duration-300 motion-reduce:hover:transform-none"
+              className="w-10 h-10 rounded-full bg-surface-card border border-border-subtle shadow-soft-sm flex items-center justify-center text-text-primary hover:-translate-y-0.5 hover:shadow-soft-md transition-all duration-300 motion-reduce:hover:transform-none"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
@@ -161,7 +164,7 @@ const PoleUseCases = ({ cases }: Props) => {
               type="button"
               onClick={goNext}
               aria-label="Cas suivant"
-              className="w-10 h-10 rounded-full glass-light flex items-center justify-center text-text-on-dark hover:-translate-y-0.5 transition-transform duration-300 motion-reduce:hover:transform-none"
+              className="w-10 h-10 rounded-full bg-surface-card border border-border-subtle shadow-soft-sm flex items-center justify-center text-text-primary hover:-translate-y-0.5 hover:shadow-soft-md transition-all duration-300 motion-reduce:hover:transform-none"
             >
               <ArrowRight className="w-4 h-4" />
             </button>

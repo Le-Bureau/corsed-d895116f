@@ -1,5 +1,6 @@
 import { useParams, Navigate } from "react-router-dom";
 import { POLES } from "@/lib/poles";
+import { hexToRgb } from "@/lib/utils";
 import DevBanner from "@/components/pole/DevBanner";
 import PoleHero from "@/components/pole/PoleHero";
 import PoleWhyDrone from "@/components/pole/PoleWhyDrone";
@@ -9,13 +10,6 @@ import PoleUseCases from "@/components/pole/PoleUseCases";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
 
-function hexToRgb(hex: string): string {
-  const m = hex.replace("#", "").match(/.{1,2}/g);
-  if (!m || m.length < 3) return "168, 192, 212";
-  const [r, g, b] = m.map((h) => parseInt(h, 16));
-  return `${r}, ${g}, ${b}`;
-}
-
 export default function PoleDetail() {
   const { slug } = useParams<{ slug: string }>();
   const pole = POLES.find((p) => p.key === slug);
@@ -23,13 +17,13 @@ export default function PoleDetail() {
   if (!pole) return <Navigate to="/" replace />;
 
   const styleVars = {
-    "--pole-color": pole.baseColorOnDark,
-    "--pole-color-rgb": hexToRgb(pole.baseColorOnDark),
+    "--pole-color": pole.baseColorOnLight,
+    "--pole-color-rgb": hexToRgb(pole.baseColorOnLight),
   } as React.CSSProperties;
 
   return (
     <main
-      className={`bg-surface-darker text-text-on-dark ${pole.isInDevelopment ? "pt-8" : ""}`}
+      className={`min-h-screen bg-surface-bg ${pole.isInDevelopment ? "pt-8" : ""}`}
       style={styleVars}
     >
       {pole.isInDevelopment && <DevBanner />}
