@@ -1,6 +1,6 @@
 const PartenairesFormPlaceholder = () => {
   return (
-    <section
+    <section data-header-bg="dark"
       id="candidature"
       role="region"
       aria-label="Formulaire de candidature"

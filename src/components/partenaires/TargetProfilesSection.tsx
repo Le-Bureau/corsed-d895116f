@@ -9,7 +9,7 @@ const cardStyle: React.CSSProperties = {
 
 const TargetProfilesSection = () => {
   return (
-    <section
+    <section data-header-bg="dark"
       role="region"
       aria-labelledby="target-profiles-title"
       className="relative bg-surface-dark text-text-on-dark py-16 lg:py-28"

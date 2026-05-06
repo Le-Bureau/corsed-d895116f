@@ -10,7 +10,7 @@ const itemStyle: React.CSSProperties = {
 
 const PartenairesFAQ = () => {
   return (
-    <section
+    <section data-header-bg="dark"
       role="region"
       aria-labelledby="faq-title"
       className="relative bg-surface-darker text-text-on-dark py-16 lg:py-28"

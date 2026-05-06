@@ -7,7 +7,7 @@ import PartenairesFormPlaceholder from "@/components/partenaires/PartenairesForm
 
 const Partenaires = () => {
   return (
-    <div data-header-bg="dark" className="bg-surface-darker text-text-on-dark">
+    <div className="bg-surface-darker text-text-on-dark">
       <PartenairesHero />
       <WhyJoinSection />
       <HowItWorksSection />

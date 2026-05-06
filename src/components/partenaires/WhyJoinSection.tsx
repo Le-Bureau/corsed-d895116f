@@ -12,7 +12,7 @@ const cardStyle: React.CSSProperties = {
 
 const WhyJoinSection = () => {
   return (
-    <section
+    <section data-header-bg="dark"
       role="region"
       aria-labelledby="why-join-title"
       className="relative bg-surface-dark text-text-on-dark py-16 lg:py-28"
