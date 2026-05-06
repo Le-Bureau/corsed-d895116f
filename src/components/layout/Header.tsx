@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown, Menu } from "lucide-react";
 
 import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
+import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -85,12 +86,10 @@ const Header = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-baseline gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
             aria-label="Corse Drone — Accueil"
           >
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
-              M.C.G
-            </span>
+            <img src={logoMark} alt="" aria-hidden className="h-6 w-auto" />
             <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-logo-base-deep">
               CORSE DRONE
             </span>
