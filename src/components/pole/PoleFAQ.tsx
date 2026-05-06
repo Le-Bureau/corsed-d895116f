@@ -1,4 +1,5 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import type { PoleFAQItem } from "@/lib/poles";
 
@@ -14,32 +15,59 @@ const PoleFAQ = ({ items }: Props) => {
       className="relative bg-surface-elevated py-24 lg:py-32"
     >
       <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
-        <FadeInWhenVisible>
-          <div className="max-w-[760px] mb-14">
-            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-6">
-              <span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ background: "var(--pole-color)" }}
-                aria-hidden="true"
-              />
-              Questions fréquentes
-            </span>
-            <h2
-              id="pole-faq-title"
-              className="font-display font-semibold tracking-[-0.035em] leading-[1.05] text-text-primary"
-              style={{ fontSize: "clamp(36px, 4.4vw, 64px)" }}
-            >
-              Vos questions,{" "}
-              <span style={{ color: "var(--pole-color)" }}>nos réponses.</span>
-            </h2>
-          </div>
-        </FadeInWhenVisible>
+        <div className="grid lg:grid-cols-[400px_1fr] xl:grid-cols-[440px_1fr] gap-12 lg:gap-20 items-start">
+          {/* Left column - sticky */}
+          <FadeInWhenVisible>
+            <div className="lg:sticky lg:top-32">
+              <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-6">
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ background: "var(--pole-color)" }}
+                  aria-hidden="true"
+                />
+                Questions fréquentes
+              </span>
+              <h2
+                id="pole-faq-title"
+                className="font-display font-semibold tracking-[-0.035em] leading-[1.05] text-text-primary mb-5"
+                style={{ fontSize: "clamp(36px, 4vw, 52px)" }}
+              >
+                Vos questions,{" "}
+                <span style={{ color: "var(--pole-color)" }}>
+                  nos réponses.
+                </span>
+              </h2>
+              <p className="text-[16px] leading-[1.6] text-text-muted mb-8">
+                Tout ce qu'il faut savoir avant de lancer un projet. Si votre
+                question n'est pas listée, on en parle directement par
+                téléphone.
+              </p>
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-md"
+                style={
+                  {
+                    color: "var(--pole-color)",
+                    "--tw-ring-color": "rgba(var(--pole-color-rgb), 0.40)",
+                  } as React.CSSProperties
+                }
+              >
+                <span>Une autre question ?</span>
+                <ArrowRight
+                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                  strokeWidth={2.5}
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
+          </FadeInWhenVisible>
 
-        <ul className="max-w-[880px] mx-auto space-y-3 list-none p-0">
-          {items.map(({ question, answer }) => (
-            <li key={question}>
+          {/* Right column - accordions */}
+          <div className="flex flex-col gap-3">
+            {items.map(({ question, answer }) => (
               <details
-                className="group rounded-xl bg-surface-card border border-border-subtle shadow-soft-sm hover:bg-white transition-all duration-300"
+                key={question}
+                className="group/accordion bg-surface-card border border-border-subtle rounded-2xl shadow-soft-sm overflow-hidden transition-all duration-200 hover:shadow-soft-md"
                 onToggle={(e) => {
                   const el = e.currentTarget as HTMLDetailsElement;
                   el.style.borderColor = el.open
@@ -47,23 +75,24 @@ const PoleFAQ = ({ items }: Props) => {
                     : "";
                 }}
               >
-                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 [&::-webkit-details-marker]:hidden">
-                  <span className="font-display text-[16px] lg:text-[18px] font-medium tracking-[-0.01em] text-text-primary">
-                    {question}
-                  </span>
+                <summary className="cursor-pointer list-none flex items-center justify-between gap-4 px-6 py-5 font-display text-[16px] font-semibold text-text-primary tracking-[-0.01em] transition-colors duration-200 [&::-webkit-details-marker]:hidden">
+                  <span>{question}</span>
                   <ChevronDown
-                    className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open:rotate-180"
+                    className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open/accordion:rotate-180"
+                    strokeWidth={2}
                     style={{ color: "var(--pole-color)" }}
                     aria-hidden="true"
                   />
                 </summary>
-                <div className="px-6 pb-6 -mt-1 text-[15px] leading-relaxed text-text-secondary">
-                  {answer}
+                <div className="px-6 pb-5 pt-1">
+                  <p className="text-[15px] leading-[1.65] text-text-secondary">
+                    {answer}
+                  </p>
                 </div>
               </details>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
