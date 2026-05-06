@@ -6,7 +6,7 @@ import PartnersSection from "@/components/sections/PartnersSection";
 
 const Index = () => {
   return (
-    <div className="pt-20">
+    <div>
       <section data-header-bg="dark">
         <HeroCarousel />
       </section>
