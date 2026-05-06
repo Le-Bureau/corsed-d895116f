@@ -1,5 +1,5 @@
 import HeroCarousel from "@/components/sections/HeroCarousel";
-import PolesShowcase from "@/components/sections/PolesShowcase";
+import PolesAlternated from "@/components/sections/PolesAlternated";
 import WhyDroneSection from "@/components/sections/WhyDroneSection";
 import OtherExpertisesSection from "@/components/sections/OtherExpertisesSection";
 import PartnersSection from "@/components/sections/PartnersSection";
@@ -10,7 +10,7 @@ const Index = () => {
       <section data-header-bg="dark">
         <HeroCarousel />
       </section>
-      <PolesShowcase />
+      <PolesAlternated />
       <WhyDroneSection />
       <OtherExpertisesSection />
       <PartnersSection />

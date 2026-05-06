@@ -79,6 +79,7 @@ export interface Pole {
   heroImage?: string;
   showcaseImage?: string;
   mobileImagePosition?: string;
+  stat?: PoleStat;
 }
 
 const NETTOYAGE_WHY: WhyDroneItem[] = [
