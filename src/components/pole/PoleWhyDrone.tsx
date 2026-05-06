@@ -45,7 +45,7 @@ const PoleWhyDrone = ({ items }: Props) => {
             const Icon = getIcon(item.iconName);
             return (
               <FadeInWhenVisible key={item.title}>
-                <article className="group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none">
+                <article className="hover-border-card group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
                   <div
                     className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6"
                     style={{
