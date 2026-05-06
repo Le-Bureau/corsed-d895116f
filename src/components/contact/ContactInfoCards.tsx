@@ -21,38 +21,25 @@ const InfoCard = ({
     href={href}
     target={external ? "_blank" : undefined}
     rel={external ? "noreferrer noopener" : undefined}
-    className="group relative block overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-logo-base/30 hover:bg-white/[0.04] hover:shadow-[0_18px_48px_-20px_rgba(168,192,212,0.35)]"
+    className="group relative block overflow-hidden rounded-2xl border border-border-subtle bg-surface-card shadow-soft-md p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg hover:border-logo-base/40"
   >
-    {/* Accent gradient on hover */}
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-      style={{
-        background:
-          "radial-gradient(ellipse 280px 200px at 100% 0%, rgba(168,192,212,0.18) 0%, transparent 70%)",
-      }}
-    />
-
     <div className="relative">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-logo-base/20 bg-logo-base/[0.08] transition-all duration-300 group-hover:scale-105 group-hover:border-logo-base/40 group-hover:bg-logo-base/[0.15]">
-        <Icon className="h-[18px] w-[18px] text-logo-base" strokeWidth={2} />
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-logo-base/25 bg-logo-base/10 transition-all duration-300 group-hover:scale-105">
+        <Icon className="h-[18px] w-[18px] text-logo-base-deep" strokeWidth={2} />
       </div>
 
-      <div
-        className="mb-2 text-[11px] font-mono font-semibold uppercase tracking-[0.22em]"
-        style={{ color: "rgba(250, 250, 252, 0.65)" }}
-      >
+      <div className="mb-2 text-[11px] font-mono font-semibold uppercase tracking-[0.22em] text-text-muted">
         {label}
       </div>
 
-      <div className="mb-2 break-words font-display text-lg font-medium text-text-on-dark">
+      <div className="mb-2 break-words font-display text-lg font-medium text-text-primary">
         {value}
       </div>
 
-      <div className="flex items-center gap-1.5 text-[13px] text-text-on-dark-muted">
+      <div className="flex items-center gap-1.5 text-[13px] text-text-muted">
         <span>{detail}</span>
         <ArrowUpRight
-          className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 text-logo-base"
+          className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 text-logo-base-deep"
           strokeWidth={2.2}
         />
       </div>
