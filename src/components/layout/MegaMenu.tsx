@@ -18,13 +18,11 @@ interface Props {
   triggerRef: React.RefObject<HTMLButtonElement>;
 }
 
-type SubItem = { label: string; to: string; soon?: boolean };
 type Column = {
   key: string;
-  tagline: string;
   title: string;
+  to: string;
   accentColor: string;
-  items: SubItem[];
 };
 
 const poleByKey = Object.fromEntries(POLES.map((p) => [p.key, p]));
@@ -32,52 +30,33 @@ const poleByKey = Object.fromEntries(POLES.map((p) => [p.key, p]));
 const COLUMNS: Column[] = [
   {
     key: "nettoyage",
-    tagline: "Pôle 01",
     title: poleByKey.nettoyage.label,
+    to: "/pole/nettoyage",
     accentColor: poleByKey.nettoyage.baseColorOnDark,
-    items: [
-      { label: "Nettoyage de toitures", to: "/pole/nettoyage/toitures" },
-      { label: "Nettoyage de façades", to: "/pole/nettoyage/facades" },
-      { label: "Panneaux solaires", to: "/pole/nettoyage/panneaux-solaires" },
-    ],
   },
   {
     key: "diagnostic",
-    tagline: "Pôle 02",
     title: poleByKey.diagnostic.label,
+    to: "/pole/diagnostic",
     accentColor: poleByKey.diagnostic.baseColorOnDark,
-    items: [
-      { label: "Diagnostic thermique", to: "/pole/diagnostic/thermique" },
-      { label: "Inspection visuelle", to: "/pole/diagnostic/visuel" },
-    ],
   },
   {
     key: "agriculture",
-    tagline: "Pôle 03",
     title: poleByKey.agriculture.label,
+    to: "/pole/agriculture",
     accentColor: poleByKey.agriculture.baseColorOnDark,
-    items: [
-      { label: "Épandage ciblé", to: "/pole/agriculture", soon: true },
-      { label: "Traitement phytosanitaire", to: "/pole/agriculture", soon: true },
-      { label: "Analyses multispectrales", to: "/pole/agriculture", soon: true },
-    ],
   },
   {
     key: "transport",
-    tagline: "Pôle 04",
     title: poleByKey.transport.label,
+    to: "/pole/transport",
     accentColor: poleByKey.transport.baseColorOnDark,
-    items: [{ label: "Logistique aérienne", to: "/pole/transport", soon: true }],
   },
   {
     key: "expertises",
-    tagline: "Expertises",
     title: "Autres expertises",
+    to: "/expertises",
     accentColor: "var(--logo-base)",
-    items: EXPERTISES.map((e) => ({
-      label: e.label,
-      to: `/expertises#${e.slug}`,
-    })),
   },
 ];
 
@@ -194,62 +173,37 @@ const MegaMenu = ({
               exit="exit"
               className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 lg:gap-7"
             >
-              {COLUMNS.map((col) => {
-                return (
-                  <motion.div
-                    key={col.key}
-                    variants={reduced ? reducedContainer : colVariants}
-                    className="flex flex-col"
+              {COLUMNS.map((col) => (
+                <motion.div
+                  key={col.key}
+                  variants={reduced ? reducedContainer : colVariants}
+                  className="flex flex-col"
+                >
+                  <Link
+                    role="menuitem"
+                    to={col.to}
+                    onClick={onClose}
+                    className={cn(
+                      "group flex items-center gap-2 rounded-lg px-2.5 py-2 font-display text-[15px] font-semibold transition-colors",
+                      hoverBg,
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                    )}
                   >
-                    <p
-                      className={cn(
-                        "mb-3 text-[11px] font-medium uppercase tracking-wider",
-                        mutedTone,
-                      )}
-                    >
-                      {col.tagline}
-                    </p>
-                    <h3 className="mb-3 flex items-center gap-2 font-display text-[15px] font-semibold">
-                      <span
-                        className="inline-block h-2 w-2 rounded-full"
-                        style={{
-                          backgroundColor: col.accentColor,
-                          boxShadow: `0 0 10px ${col.accentColor}`,
-                        }}
-                      />
-                      {col.title}
-                    </h3>
-                    <ul className="flex flex-col gap-0.5">
-                      {col.items.map((item) => (
-                        <li key={item.label}>
-                          <Link
-                            role="menuitem"
-                            to={item.to}
-                            onClick={onClose}
-                            className={cn(
-                              "group flex items-center justify-between rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors",
-                              hoverBg,
-                              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                            )}
-                          >
-                            <span>{item.label}</span>
-                            {item.soon ? (
-                              <span className="rounded-full bg-amber-500/[0.18] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-300">
-                                Soon
-                              </span>
-                            ) : (
-                              <ArrowRight
-                                size={14}
-                                className="-translate-x-1 opacity-0 transition-all duration-200 ease-out-expo group-hover:translate-x-0 group-hover:opacity-100"
-                              />
-                            )}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                );
-              })}
+                    <span
+                      className="inline-block h-2 w-2 rounded-full flex-shrink-0"
+                      style={{
+                        backgroundColor: col.accentColor,
+                        boxShadow: `0 0 10px ${col.accentColor}`,
+                      }}
+                    />
+                    <span>{col.title}</span>
+                    <ArrowRight
+                      size={14}
+                      className="ml-auto -translate-x-1 opacity-0 transition-all duration-200 ease-out-expo group-hover:translate-x-0 group-hover:opacity-100"
+                    />
+                  </Link>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </div>
