@@ -8,10 +8,10 @@ import { REQUEST_TYPE_COLORS } from "@/lib/contactColors";
 import { cn } from "@/lib/utils";
 
 const labelBase =
-  "block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-on-dark-muted mb-2";
+  "block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-muted mb-2";
 
 const inputBase =
-  "w-full bg-transparent border-0 border-b-[1.5px] border-white/15 text-text-on-dark font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-white/25";
+  "w-full bg-transparent border-0 border-b-[1.5px] border-border-default text-text-primary font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-text-muted/50";
 
 interface TabButtonProps {
   value: RequestType;
@@ -37,26 +37,17 @@ const TabButton = ({ value, label }: TabButtonProps) => {
       }
       className={cn(
         "relative inline-flex items-center gap-2 px-4 py-3.5 border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap cursor-pointer rounded-t-lg transition-all duration-200",
-        !isActive && "hover:bg-white/[0.04]",
+        !isActive && "hover:bg-surface-bg",
       )}
       style={{
-        color: isActive ? "#FAFAFC" : "rgba(250, 250, 252, 0.75)",
+        color: isActive ? color.base : "var(--text-muted)",
         backgroundColor: isActive ? `rgba(${color.rgb}, 0.06)` : undefined,
-      }}
-      onMouseEnter={(e) => {
-        if (!isActive)
-          (e.currentTarget as HTMLButtonElement).style.color = "#FAFAFC";
-      }}
-      onMouseLeave={(e) => {
-        if (!isActive)
-          (e.currentTarget as HTMLButtonElement).style.color =
-            "rgba(250, 250, 252, 0.75)";
       }}
     >
       <span
         className="w-1.5 h-1.5 rounded-full transition-all duration-300"
         style={{
-          backgroundColor: isActive ? color.base : "rgba(255, 255, 255, 0.25)",
+          backgroundColor: isActive ? color.base : "var(--border-default)",
           boxShadow: isActive ? `0 0 12px ${color.base}` : "none",
         }}
       />
@@ -67,7 +58,7 @@ const TabButton = ({ value, label }: TabButtonProps) => {
           className="absolute left-3 right-3 -bottom-px h-[2px] rounded-t-full"
           style={{
             backgroundColor: color.base,
-            boxShadow: `0 0 16px ${color.base}`,
+            boxShadow: `0 0 16px ${color.base}40`,
           }}
         />
       )}
@@ -103,7 +94,7 @@ const FieldGroup = ({
   ) => {
     if (!error)
       e.currentTarget.style.borderBottomColor =
-        "var(--contact-accent, hsl(var(--logo-base)))";
+        "var(--contact-accent, var(--logo-base-deep))";
   };
   const handleBlur = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -118,7 +109,7 @@ const FieldGroup = ({
         {required && (
           <span
             className="ml-1"
-            style={{ color: "var(--contact-accent, hsl(var(--logo-base)))" }}
+            style={{ color: "var(--contact-accent, var(--logo-base-deep))" }}
           >
             *
           </span>
@@ -132,7 +123,7 @@ const FieldGroup = ({
           placeholder={placeholder}
           rows={5}
           aria-invalid={!!error}
-          className={cn(inputBase, "resize-y min-h-[140px] py-3")}
+          className={cn(inputBase, "resize-y min-h-[140px] py-3", error && "border-red-500")}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
@@ -143,17 +134,17 @@ const FieldGroup = ({
           {...register(name)}
           placeholder={placeholder}
           aria-invalid={!!error}
-          className={inputBase}
+          className={cn(inputBase, error && "border-red-500")}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
       )}
 
       {helper && !error && (
-        <span className="text-xs text-white/40">{helper}</span>
+        <span className="text-xs text-text-muted">{helper}</span>
       )}
       {error && (
-        <span className="text-xs text-red-300" role="alert">
+        <span className="text-xs text-red-600" role="alert">
           {error.message?.toString()}
         </span>
       )}
@@ -171,16 +162,9 @@ const ContactForm = () => {
   const disabled = !isValid || isSubmitting;
 
   return (
-    <div
-      className="relative rounded-3xl overflow-hidden border border-white/[0.12]"
-      style={{
-        backgroundColor: "rgba(10, 14, 26, 0.4)",
-        backdropFilter: "blur(28px) saturate(180%)",
-        WebkitBackdropFilter: "blur(28px) saturate(180%)",
-      }}
-    >
-      {/* TAB BAR — top of card */}
-      <div className="relative border-b border-white/[0.08]">
+    <div className="relative rounded-3xl overflow-hidden bg-surface-card border border-border-subtle shadow-soft-lg">
+      {/* TAB BAR */}
+      <div className="relative border-b border-border-subtle">
         <div className="overflow-x-auto md:overflow-x-visible scrollbar-hide">
           <div
             role="tablist"
@@ -202,11 +186,11 @@ const ContactForm = () => {
           className="absolute top-0 right-0 bottom-0 w-12 pointer-events-none md:hidden"
           style={{
             background:
-              "linear-gradient(to left, rgba(10,14,26,0.95) 0%, transparent 100%)",
+              "linear-gradient(to left, var(--surface-card) 0%, transparent 100%)",
           }}
         />
         {errors.requestType?.message && (
-          <p className="px-6 pb-3 text-[12px] text-red-300/80" role="alert">
+          <p className="px-6 pb-3 text-[12px] text-red-600" role="alert">
             {errors.requestType.message}
           </p>
         )}
@@ -247,14 +231,14 @@ const ContactForm = () => {
       </div>
 
       {/* FOOTER */}
-      <div className="px-6 md:px-10 py-6 border-t border-white/[0.08] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <label className="flex items-start gap-3 text-[12px] leading-relaxed text-text-on-dark-muted cursor-pointer max-w-xl">
+      <div className="px-6 md:px-10 py-6 border-t border-border-subtle bg-surface-elevated/40 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <label className="flex items-start gap-3 text-[12px] leading-relaxed text-text-muted cursor-pointer max-w-xl">
           <input
             type="checkbox"
             {...register("rgpdConsent")}
             className="w-4 h-4 mt-0.5 flex-shrink-0 cursor-pointer"
             style={{
-              accentColor: "var(--contact-accent, hsl(var(--logo-base)))",
+              accentColor: "var(--contact-accent, var(--logo-base-deep))",
             }}
           />
           <span>
@@ -262,9 +246,9 @@ const ContactForm = () => {
             demande conformément à la{" "}
             <Link
               to="/mentions-legales"
-              className="underline hover:text-text-on-dark transition-colors"
+              className="underline hover:opacity-80 transition-opacity"
               style={{
-                color: "var(--contact-accent, hsl(var(--logo-base)))",
+                color: "var(--contact-accent, var(--logo-base-deep))",
                 transition: "color 600ms ease-out",
               }}
             >
@@ -272,7 +256,7 @@ const ContactForm = () => {
             </Link>
             .
             {errors.rgpdConsent?.message && (
-              <span className="block mt-1 text-red-300/80">
+              <span className="block mt-1 text-red-600">
                 {errors.rgpdConsent.message}
               </span>
             )}
@@ -283,13 +267,14 @@ const ContactForm = () => {
           type="submit"
           disabled={disabled}
           aria-busy={isSubmitting}
-          className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-surface-darker font-semibold text-[15px] px-7 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none whitespace-nowrap"
+          className="group relative inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none whitespace-nowrap"
           style={{
+            backgroundColor: "var(--contact-accent, var(--logo-base-deep))",
             boxShadow:
-              "0 0 0 1px rgba(var(--contact-accent-rgb, 168,192,212), 0.4), 0 0 24px rgba(var(--contact-accent-rgb, 168,192,212), 0.35), 0 8px 24px rgba(var(--contact-accent-rgb, 168,192,212), 0.25)",
+              "0 0 0 1px rgba(var(--contact-accent-rgb, 79,111,142), 0.4), 0 8px 28px rgba(var(--contact-accent-rgb, 79,111,142), 0.30)",
             transition: reduceMotion
-              ? "box-shadow 600ms ease-out, opacity 0.3s ease"
-              : "box-shadow 600ms ease-out, transform 0.3s var(--ease-out-expo), opacity 0.3s ease",
+              ? "background-color 600ms ease-out, box-shadow 600ms ease-out, opacity 0.3s ease"
+              : "background-color 600ms ease-out, box-shadow 600ms ease-out, transform 0.3s var(--ease-out-expo), opacity 0.3s ease",
           }}
           onMouseEnter={(e) => {
             if (!reduceMotion && !disabled)
@@ -309,13 +294,7 @@ const ContactForm = () => {
           ) : (
             <>
               Envoyer ma demande
-              <Send
-                className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
-                style={{
-                  color: "var(--contact-accent, hsl(var(--logo-base)))",
-                  transition: "color 600ms ease-out, transform 0.3s ease",
-                }}
-              />
+              <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
             </>
           )}
         </button>

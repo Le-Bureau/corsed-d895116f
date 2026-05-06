@@ -97,8 +97,7 @@ const ContactSection = ({
 
   return (
     <section
-      data-header-bg="dark"
-      className="relative min-h-screen pt-20 bg-surface-darker overflow-hidden"
+      className="relative min-h-screen pt-20 bg-surface-bg overflow-hidden"
       style={
         {
           "--contact-accent": accent.base,
@@ -106,32 +105,14 @@ const ContactSection = ({
         } as React.CSSProperties
       }
     >
-      {/* Base ambient mesh (always logo-tinted, full page with soft fade) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 700px at 15% 10%, rgba(168,192,212,0.14) 0%, transparent 60%), radial-gradient(ellipse 900px 600px at 85% 70%, rgba(80,130,172,0.10) 0%, transparent 65%)",
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
-        }}
-      />
-
-      {/* Accent ambient mesh — full page, soft edges, transitions on pole change */}
+      {/* Subtle ambient mesh */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 70% 25%, rgba(var(--contact-accent-rgb), 0.10) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 25% 60%, rgba(var(--contact-accent-rgb), 0.06) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 75% 85%, rgba(var(--contact-accent-rgb), 0.04) 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 60% at 70% 25%, rgba(var(--contact-accent-rgb), 0.05) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 25% 60%, rgba(var(--contact-accent-rgb), 0.04) 0%, transparent 70%)",
           transition: "background 800ms ease-out",
-          maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
         }}
       />
 
@@ -153,11 +134,8 @@ const ContactSection = ({
 
         <div className="mt-20 lg:mt-28">
           <div className="mb-8 flex items-center gap-2.5">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-logo-base"
-              style={{ boxShadow: "0 0 10px var(--logo-base)" }}
-            />
-            <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted">
+            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted">
+              <span className="w-1.5 h-1.5 rounded-full bg-logo-base shadow-[0_0_12px_rgba(168,192,212,0.5)]" />
               Autres moyens de nous joindre
             </span>
           </div>
