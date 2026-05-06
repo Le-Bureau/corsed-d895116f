@@ -285,6 +285,8 @@ export const POLES: Pole[] = [
     finalCTAButtonLabel: "Être prévenu du lancement",
     stat: { value: "-90", unit: "%", labelStrong: "d'eau utilisée", labelMuted: "vs. pulvérisation au tracteur, précision parcelle" },
   },
+  {
+    key: "transport",
     label: "Transport",
     slug: "transport",
     baseColorOnDark: "#F4A60C",
