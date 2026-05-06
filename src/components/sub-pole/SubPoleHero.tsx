@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import { useLenis } from "@/components/SmoothScrollProvider";
 import type { Pole } from "@/lib/poles";
 import type { SubPoleContent } from "@/lib/sub-poles";
 
@@ -10,7 +11,20 @@ interface Props {
 }
 
 const SubPoleHero = ({ content, pole }: Props) => {
+  const lenis = useLenis();
   const showProcessAnchor = !!content.processSteps && content.processSteps.length > 0;
+
+  const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+    if (lenis) {
+      lenis.scrollTo(target, { duration: 1.6, offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    history.replaceState(null, "", `#${id}`);
+  };
 
   return (
     <section
