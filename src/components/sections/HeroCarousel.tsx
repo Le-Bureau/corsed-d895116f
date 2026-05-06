@@ -1,4 +1,4 @@
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useHeroCarousel } from "@/hooks/useHeroCarousel";
 import { POLES } from "@/lib/poles";
 import HeroBackground from "./hero/HeroBackground";
