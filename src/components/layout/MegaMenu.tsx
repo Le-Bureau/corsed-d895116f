@@ -23,9 +23,7 @@ type Column = {
   key: string;
   tagline: string;
   title: string;
-  subtitle?: string;
-  Icon: LucideIcon;
-  iconColor: string;
+  accentColor: string;
   items: SubItem[];
 };
 
@@ -36,9 +34,7 @@ const COLUMNS: Column[] = [
     key: "nettoyage",
     tagline: "Pôle 01",
     title: poleByKey.nettoyage.label,
-    subtitle: "Façades, toitures, panneaux",
-    Icon: SprayCan,
-    iconColor: poleByKey.nettoyage.baseColorOnDark,
+    accentColor: poleByKey.nettoyage.baseColorOnDark,
     items: [
       { label: "Nettoyage de toitures", to: "/pole/nettoyage/toitures" },
       { label: "Nettoyage de façades", to: "/pole/nettoyage/facades" },
@@ -49,9 +45,7 @@ const COLUMNS: Column[] = [
     key: "diagnostic",
     tagline: "Pôle 02",
     title: poleByKey.diagnostic.label,
-    subtitle: "Inspections aériennes",
-    Icon: ScanEye,
-    iconColor: poleByKey.diagnostic.baseColorOnDark,
+    accentColor: poleByKey.diagnostic.baseColorOnDark,
     items: [
       { label: "Diagnostic thermique", to: "/pole/diagnostic/thermique" },
       { label: "Inspection visuelle", to: "/pole/diagnostic/visuel" },
@@ -61,9 +55,7 @@ const COLUMNS: Column[] = [
     key: "agriculture",
     tagline: "Pôle 03",
     title: poleByKey.agriculture.label,
-    subtitle: "Précision agricole",
-    Icon: Sprout,
-    iconColor: poleByKey.agriculture.baseColorOnDark,
+    accentColor: poleByKey.agriculture.baseColorOnDark,
     items: [
       { label: "Épandage ciblé", to: "/pole/agriculture", soon: true },
       { label: "Traitement phytosanitaire", to: "/pole/agriculture", soon: true },
@@ -74,18 +66,14 @@ const COLUMNS: Column[] = [
     key: "transport",
     tagline: "Pôle 04",
     title: poleByKey.transport.label,
-    subtitle: "Logistique aérienne",
-    Icon: Package,
-    iconColor: poleByKey.transport.baseColorOnDark,
+    accentColor: poleByKey.transport.baseColorOnDark,
     items: [{ label: "Logistique aérienne", to: "/pole/transport", soon: true }],
   },
   {
     key: "expertises",
     tagline: "Expertises",
     title: "Autres expertises",
-    subtitle: "Services complémentaires",
-    Icon: Layers,
-    iconColor: "var(--logo-base)",
+    accentColor: "var(--logo-base)",
     items: EXPERTISES.map((e) => ({
       label: e.label,
       to: `/expertises#${e.slug}`,
