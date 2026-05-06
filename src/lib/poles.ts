@@ -146,16 +146,30 @@ const NETTOYAGE_FAQ: PoleFAQItem[] = [
   { question: "Quel produit utilisez-vous ?", answer: "Selon la surface : eau pure pour les panneaux solaires, eau adoucie ou produit anti-mousse pour les façades, biodégradable certifié pour les bâtiments classés. Toujours adapté au support et conforme aux réglementations locales." },
 ];
 
-const PLACEHOLDER_USE_CASES: UseCase[] = [
-  { imageAlt: "Cas d'usage à venir", title: "Cas d'usage 1", description: "Description détaillée à venir. Nous documenterons ici un cas réel d'intervention type pour ce pôle.", advantage: "Bénéfice mesurable à venir" },
-  { imageAlt: "Cas d'usage à venir", title: "Cas d'usage 2", description: "Description détaillée à venir. Nous documenterons ici un cas réel d'intervention type pour ce pôle.", advantage: "Bénéfice mesurable à venir" },
-  { imageAlt: "Cas d'usage à venir", title: "Cas d'usage 3", description: "Description détaillée à venir. Nous documenterons ici un cas réel d'intervention type pour ce pôle.", advantage: "Bénéfice mesurable à venir" },
+const DIAGNOSTIC_WHY: WhyDroneItem[] = [
+  { iconName: "Eye", title: "Voir l'invisible", description: "Caméra thermique radiométrique et zoom optique 10× : déperditions, microfissures, hotspots détectés depuis le sol." },
+  { iconName: "ShieldCheck", title: "Zéro risque humain", description: "Aucun personnel en hauteur. Pas de cordistes, pas de nacelle. Risque de chute éliminé." },
+  { iconName: "FileText", title: "Rapport opposable", description: "Document PDF géoréférencé et horodaté, exploitable en assemblée générale, par votre assureur ou pour des subventions." },
+  { iconName: "Clock", title: "Délai 48-72h", description: "Vol terrain en 2-3 heures, livraison du rapport en moins de trois jours. Là où une expertise classique prend 1 à 2 semaines." },
 ];
 
-const PLACEHOLDER_FAQ: PoleFAQItem[] = [
-  { question: "Comment se déroule une intervention ?", answer: "Le détail complet du processus d'intervention pour ce pôle sera précisé ici prochainement." },
-  { question: "Quel est le délai moyen ?", answer: "Les délais types seront communiqués ici prochainement, en fonction du type de mission." },
-  { question: "Intervenez-vous dans toute la Corse ?", answer: "Oui, nous couvrons l'ensemble du territoire corse, Haute-Corse et Corse-du-Sud incluses." },
+const DIAGNOSTIC_PROCESS: ProcessStep[] = [
+  { number: "ÉTAPE 01", title: "Vol d'inspection", description: "Captation par drone DJI Matrice 4T équipé de caméra radiométrique haute résolution. 2 à 3 heures sur site." },
+  { number: "ÉTAPE 02", title: "Analyse des anomalies", description: "Traitement des données, identification et localisation précise des défauts. Chaque anomalie isolée, géoréférencée et annotée." },
+  { number: "ÉTAPE 03", title: "Rapport exploitable", description: "Document PDF de 15 à 40 pages avec images annotées, préconisations priorisées et recommandations claires." },
+];
+
+const DIAGNOSTIC_USE_CASES: UseCase[] = [
+  { imageAlt: "Copropriété R+5", title: "Copropriété R+5 à Bastia", description: "4 bâtiments inspectés en une journée, 5 000 m² de façades couvertes. Rapport exploitable en assemblée générale.", advantage: "1 journée vs 5-7 jours en méthode cordiste, 60% d'économies" },
+  { imageAlt: "Centrale photovoltaïque", title: "Centrale photovoltaïque agricole", description: "Inspection thermique de 500 panneaux. 12 hotspots identifiés, 3 cellules défaillantes localisées.", advantage: "ROI dès la première correction, production restaurée" },
+  { imageAlt: "Église romane", title: "Église romane à Calvi", description: "Diagnostic visuel d'une église classée. Inspection complète de la toiture sans échafaudage ni accès patrimonial sensible.", advantage: "Zone ABF compatible, rapport pour subventions DRAC" },
+];
+
+const DIAGNOSTIC_FAQ: PoleFAQItem[] = [
+  { question: "Quand réaliser un diagnostic thermique ?", answer: "Idéalement en période froide, entre octobre et avril en Corse, pour un écart de température suffisant. Pour les inspections photovoltaïques, en plein soleil entre 11h et 15h avec irradiance > 600 W/m²." },
+  { question: "Faut-il des conditions météo particulières ?", answer: "Oui : ΔT > 10°C pour l'isolation, vent < 30 km/h, ciel dégagé depuis 2h, absence de pluie dans les 12h. Si non réunies, mission reportée sans frais." },
+  { question: "Que contient le rapport final ?", answer: "PDF de 15 à 40 pages : cartographie thermique, zoom détaillé sur chaque anomalie avec image visuelle ET thermique, températures mesurées, interprétation technique, préconisations priorisées." },
+  { question: "Vos certifications STS couvrent-elles ma mission ?", answer: "Corse Drone opère avec STS-01 et STS-02 délivrées par la DGAC, couvrant la quasi-totalité du territoire corse. Drone DJI Matrice 4T classé C2 (vol jusqu'à 5m des personnes)." },
 ];
 
 export const POLES: Pole[] = [
@@ -233,13 +247,13 @@ export const POLES: Pole[] = [
     heroPoleNumber: "PÔLE 02",
     heroPitch:
       "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
-    whyDroneItems: NETTOYAGE_WHY,
-    processSteps: NETTOYAGE_PROCESS,
-    useCases: PLACEHOLDER_USE_CASES,
-    poleFAQ: PLACEHOLDER_FAQ,
+    whyDroneItems: DIAGNOSTIC_WHY,
+    processSteps: DIAGNOSTIC_PROCESS,
+    useCases: DIAGNOSTIC_USE_CASES,
+    poleFAQ: DIAGNOSTIC_FAQ,
     finalCTATitle: "Une inspection à programmer ?",
-    finalCTASubtitle: "Visite technique et devis gratuit.",
-    finalCTAButtonLabel: "Demander un devis gratuit",
+    finalCTASubtitle: "Devis gratuit, intervention sous 10 jours, rapport sous 72h.",
+    finalCTAButtonLabel: "Demander un devis",
     stat: { value: "48", unit: "h", labelStrong: "délai moyen de livraison", labelMuted: "du rapport d'inspection détaillé" },
   },
   {
@@ -276,10 +290,10 @@ export const POLES: Pole[] = [
     heroPoleNumber: "PÔLE 03",
     heroPitch:
       "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
-    whyDroneItems: NETTOYAGE_WHY,
-    processSteps: NETTOYAGE_PROCESS,
-    useCases: PLACEHOLDER_USE_CASES,
-    poleFAQ: PLACEHOLDER_FAQ,
+    whyDroneItems: undefined,
+    processSteps: undefined,
+    useCases: undefined,
+    poleFAQ: undefined,
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
@@ -316,10 +330,10 @@ export const POLES: Pole[] = [
     heroPoleNumber: "PÔLE 04",
     heroPitch:
       "Une nouvelle approche de la logistique aérienne. Nos drones assurent le transport de matériel vers les zones difficiles d'accès, en complément ou alternative à l'hélicoptère.",
-    whyDroneItems: NETTOYAGE_WHY,
-    processSteps: NETTOYAGE_PROCESS,
-    useCases: PLACEHOLDER_USE_CASES,
-    poleFAQ: PLACEHOLDER_FAQ,
+    whyDroneItems: undefined,
+    processSteps: undefined,
+    useCases: undefined,
+    poleFAQ: undefined,
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
