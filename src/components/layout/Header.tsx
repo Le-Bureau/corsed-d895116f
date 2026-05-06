@@ -7,7 +7,8 @@ import MobileDrawer from "./MobileDrawer";
 import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
 
-const NAV = [
+const NAV_BEFORE = [{ label: "Accueil", to: "/", end: true }];
+const NAV_AFTER = [
   { label: "Partenaires", to: "/partenaires" },
   { label: "Contact", to: "/contact" },
 ];
@@ -97,6 +98,17 @@ const Header = () => {
 
           {/* Desktop nav (centered) */}
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
+            {NAV_BEFORE.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.end}
+                className={navItemClass}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+
             <div
               className="relative"
               onMouseEnter={() => {
@@ -134,7 +146,7 @@ const Header = () => {
               </button>
             </div>
 
-            {NAV.map((item) => (
+            {NAV_AFTER.map((item) => (
               <NavLink key={item.to} to={item.to} className={navItemClass}>
                 {item.label}
               </NavLink>
