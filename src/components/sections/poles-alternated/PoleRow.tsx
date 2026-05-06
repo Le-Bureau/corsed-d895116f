@@ -9,6 +9,7 @@ import {
   type Variants,
 } from "motion/react";
 import { Pole } from "@/lib/poles";
+import AnimatedStatValue from "@/components/animations/AnimatedStatValue";
 
 interface Props {
   pole: Pole;
