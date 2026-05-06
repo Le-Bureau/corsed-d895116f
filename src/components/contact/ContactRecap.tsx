@@ -70,9 +70,10 @@ function RecapRow({ label, value, skeleton, truncate }: RecapRowProps) {
 
 const ContactRecap = () => {
   const reduceMotion = useReducedMotion();
-  const { control, formState } = useFormContext<ContactFormData>();
+  const { control, register, formState } = useFormContext<ContactFormData>();
   const values = useWatch({ control });
-  const { isSubmitting } = formState;
+  const { isSubmitting, isValid } = formState;
+  const disabled = !isValid || isSubmitting;
 
   const requestTypeLabel =
     values.requestType && values.requestType in REQUEST_TYPE_LABELS
