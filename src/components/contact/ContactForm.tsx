@@ -169,7 +169,7 @@ const ContactForm = () => {
           <div
             role="tablist"
             aria-label="Sujet de votre demande"
-            className="flex items-center gap-1 px-4 md:px-6 min-w-max md:min-w-0 md:flex-wrap"
+            className="flex items-center gap-1 px-4 md:px-6 pt-[5px] min-w-max md:min-w-0 md:flex-wrap"
           >
             {REQUEST_TYPES.map((rt) => (
               <TabButton
