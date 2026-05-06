@@ -7,7 +7,7 @@ import PartenairesForm from "@/components/partenaires/PartenairesForm";
 
 const Partenaires = () => {
   return (
-    <div className="pt-20 bg-surface-darker text-text-on-dark">
+    <div className="pt-20 bg-surface-bg text-text-primary">
       <PartenairesHero />
       <WhyJoinSection />
       <HowItWorksSection />

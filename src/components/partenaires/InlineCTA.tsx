@@ -9,30 +9,33 @@ interface InlineCTAProps {
 
 const InlineCTA = ({ title, subtitle, ctaLabel, ctaHref }: InlineCTAProps) => {
   return (
-    <div
-      className="rounded-3xl border border-white/10 p-8 lg:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-      style={{
-        background: "rgba(10,14,26,0.4)",
-        backdropFilter: "blur(28px) saturate(180%)",
-        WebkitBackdropFilter: "blur(28px) saturate(180%)",
-      }}
-    >
-      <div className="max-w-[640px]">
-        <h3 className="font-display text-[24px] lg:text-[28px] font-semibold tracking-[-0.02em] text-text-on-dark mb-2">
+    <div className="relative overflow-hidden rounded-3xl bg-surface-card border border-border-subtle shadow-soft-md p-8 lg:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      {/* Subtle accent mesh */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse 400px 200px at 0% 50%, rgba(168,192,212,0.15) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="relative max-w-[640px]">
+        <h3 className="font-display text-[24px] lg:text-[28px] font-semibold tracking-[-0.02em] text-text-primary mb-2">
           {title}
         </h3>
-        <p className="text-[15px] leading-relaxed text-text-on-dark-muted">{subtitle}</p>
+        <p className="text-[15px] leading-relaxed text-text-secondary">{subtitle}</p>
       </div>
       <a
         href={ctaHref}
-        className="group inline-flex items-center justify-center gap-2 rounded-full bg-white text-surface-darker font-semibold text-[15px] px-7 py-3.5 self-start md:self-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 whitespace-nowrap"
+        className="relative group inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 self-start md:self-auto transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
         style={{
           boxShadow:
-            "0 0 0 1px rgba(168,192,212,0.4), 0 0 24px rgba(168,192,212,0.35), 0 8px 24px rgba(168,192,212,0.25)",
+            "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)",
         }}
       >
         {ctaLabel}
-        <ArrowRight className="w-4 h-4 text-logo-deep transition-transform duration-300 group-hover:translate-x-0.5" />
+        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
       </a>
     </div>
   );
