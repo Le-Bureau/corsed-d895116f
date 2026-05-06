@@ -85,128 +85,122 @@ const HeroCarousel = () => {
     >
       <HeroBackground currentIndex={currentIndex} direction={direction} />
 
-      {/* Title rotation track — all titles mounted, animated together */}
-      <div
-        className="absolute inset-x-0 z-[8] px-5 md:px-10"
-        style={{
-          top: "50%",
-          transform: "translateY(-50%)",
-          height: "clamp(70px, 14vw, 180px)",
-        }}
-      >
-        <div className="relative w-full h-full max-w-[1280px] mx-auto">
-          {POLES.map((pole, i) => {
-            const { x, opacity, scale, isGhost } = getTitleProps(
-              i,
-              currentIndex,
-              viewport.width,
-              viewport.isMobile,
-            );
-            const isActive = i === currentIndex;
-            return (
-              <motion.div
-                key={pole.key}
-                role={isGhost ? "button" : undefined}
-                tabIndex={isGhost ? 0 : -1}
-                aria-hidden={!isActive ? "true" : undefined}
-                aria-label={isGhost ? `Aller au pôle ${pole.label}` : undefined}
-                onClick={isGhost ? () => goToIndex(i) : undefined}
-                onKeyDown={
-                  isGhost
-                    ? (e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          goToIndex(i);
-                        }
-                      }
-                    : undefined
-                }
-                onMouseEnter={(e) => {
-                  if (!isGhost) return;
-                  e.currentTarget.style.setProperty("--ghost-underline", "100%");
-                  e.currentTarget.style.setProperty("--ghost-arrow-opacity", "0.9");
-                  e.currentTarget.style.setProperty("--ghost-arrow-x", "0px");
-                }}
-                onMouseLeave={(e) => {
-                  if (!isGhost) return;
-                  e.currentTarget.style.setProperty("--ghost-underline", "0%");
-                  e.currentTarget.style.setProperty("--ghost-arrow-opacity", "0");
-                  e.currentTarget.style.setProperty("--ghost-arrow-x", "-12px");
-                }}
-                className={`absolute top-1/2 left-0 whitespace-nowrap font-display font-semibold text-text-on-dark ${
-                  isGhost
-                    ? "cursor-pointer pointer-events-auto"
-                    : "pointer-events-none"
-                }`}
-                style={{
-                  fontSize: "clamp(42px, 8vw, 120px)",
-                  letterSpacing: "-0.035em",
-                  lineHeight: 1,
-                  transformOrigin: "left center",
-                  textShadow:
-                    "0 2px 20px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.4)",
-                  y: "-50%",
-                }}
-                animate={{
-                  x: reduced ? 0 : x,
-                  opacity,
-                  scale: reduced ? 1 : scale,
-                }}
-                transition={{ duration, ease: EASE }}
-              >
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.25em",
-                    position: "relative",
-                  }}
-                >
-                  <span style={{ position: "relative", display: "inline-block" }}>
-                    {pole.label}
-                    {isGhost && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute left-0 bg-text-on-dark"
-                        style={{
-                          bottom: "0.08em",
-                          height: "2px",
-                          width: "var(--ghost-underline, 0%)",
-                          transition:
-                            "width 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
-                        }}
-                      />
-                    )}
-                  </span>
-                  {isGhost && (
-                    <span
-                      aria-hidden="true"
-                      style={{
-                        fontSize: "0.4em",
-                        fontWeight: 400,
-                        opacity: "var(--ghost-arrow-opacity, 0)",
-                        transform:
-                          "translateX(var(--ghost-arrow-x, -12px))",
-                        transition:
-                          "opacity 0.35s ease, transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
-                      }}
-                    >
-                      →
-                    </span>
-                  )}
-                </span>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-
       <AnimatePresence mode="wait" custom={direction} initial={false}>
         <HeroSlideContent
           key={currentPole.key}
           pole={currentPole}
           index={currentIndex}
           direction={direction}
+          renderTitleTrack={() => (
+            <div
+              className="relative w-full"
+              style={{ height: "clamp(70px, 14vw, 180px)" }}
+            >
+              {POLES.map((pole, i) => {
+                const { x, opacity, scale, isGhost } = getTitleProps(
+                  i,
+                  currentIndex,
+                  viewport.width,
+                  viewport.isMobile,
+                );
+                const isActive = i === currentIndex;
+                return (
+                  <motion.div
+                    key={pole.key}
+                    role={isGhost ? "button" : undefined}
+                    tabIndex={isGhost ? 0 : -1}
+                    aria-hidden={!isActive ? "true" : undefined}
+                    aria-label={isGhost ? `Aller au pôle ${pole.label}` : undefined}
+                    onClick={isGhost ? () => goToIndex(i) : undefined}
+                    onKeyDown={
+                      isGhost
+                        ? (e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              goToIndex(i);
+                            }
+                          }
+                        : undefined
+                    }
+                    onMouseEnter={(e) => {
+                      if (!isGhost) return;
+                      e.currentTarget.style.setProperty("--ghost-underline", "100%");
+                      e.currentTarget.style.setProperty("--ghost-arrow-opacity", "0.9");
+                      e.currentTarget.style.setProperty("--ghost-arrow-x", "0px");
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isGhost) return;
+                      e.currentTarget.style.setProperty("--ghost-underline", "0%");
+                      e.currentTarget.style.setProperty("--ghost-arrow-opacity", "0");
+                      e.currentTarget.style.setProperty("--ghost-arrow-x", "-12px");
+                    }}
+                    className={`absolute top-1/2 left-0 whitespace-nowrap font-display font-semibold text-text-on-dark ${
+                      isGhost
+                        ? "cursor-pointer pointer-events-auto"
+                        : "pointer-events-none"
+                    }`}
+                    style={{
+                      fontSize: "clamp(42px, 8vw, 120px)",
+                      letterSpacing: "-0.035em",
+                      lineHeight: 1,
+                      transformOrigin: "left center",
+                      textShadow:
+                        "0 2px 20px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.4)",
+                      y: "-50%",
+                    }}
+                    animate={{
+                      x: reduced ? 0 : x,
+                      opacity,
+                      scale: reduced ? 1 : scale,
+                    }}
+                    transition={{ duration, ease: EASE }}
+                  >
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.25em",
+                        position: "relative",
+                      }}
+                    >
+                      <span style={{ position: "relative", display: "inline-block" }}>
+                        {pole.label}
+                        {isGhost && (
+                          <span
+                            aria-hidden="true"
+                            className="absolute left-0 bg-text-on-dark"
+                            style={{
+                              bottom: "0.08em",
+                              height: "2px",
+                              width: "var(--ghost-underline, 0%)",
+                              transition:
+                                "width 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
+                            }}
+                          />
+                        )}
+                      </span>
+                      {isGhost && (
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            fontSize: "0.4em",
+                            fontWeight: 400,
+                            opacity: "var(--ghost-arrow-opacity, 0)",
+                            transform:
+                              "translateX(var(--ghost-arrow-x, -12px))",
+                            transition:
+                              "opacity 0.35s ease, transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
+                          }}
+                        >
+                          →
+                        </span>
+                      )}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         />
       </AnimatePresence>
 
