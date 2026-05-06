@@ -220,6 +220,17 @@ export const POLES: Pole[] = [
     ],
     heroImage: diagnosticImg,
     showcaseImage: diagnosticShowcase,
+    isInDevelopment: false,
+    heroPoleNumber: "PÔLE 02",
+    heroPitch:
+      "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: PLACEHOLDER_USE_CASES,
+    poleFAQ: PLACEHOLDER_FAQ,
+    finalCTATitle: "Une inspection à programmer ?",
+    finalCTASubtitle: "Visite technique et devis gratuit.",
+    finalCTAButtonLabel: "Demander un devis gratuit",
   },
   {
     key: "agriculture",
