@@ -128,6 +128,7 @@ const PoleHero = ({ pole }: Props) => {
           {pole.subServices && pole.subServices.length > 0 && (
             <a
               href="#sous-services"
+              onClick={(e) => handleAnchor(e, "sous-services")}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-surface-card motion-reduce:hover:transform-none whitespace-nowrap"
             >
               Voir les sous-services
