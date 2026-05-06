@@ -47,11 +47,11 @@ const PoleHero = ({ pole }: Props) => {
     history.replaceState(null, "", `#${id}`);
   };
 
-  const initialX = reduced ? 0 : 100;
+  const initialX = reduced ? 0 : 200;
   const fadeIn = (delay: number) => ({
     initial: { opacity: 0, x: initialX },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, delay, ease: EASE },
+    transition: { duration: 0.9, delay: 0.3 + delay, ease: EASE },
   });
 
   const prevColor = prevPole.baseColorOnLight;
