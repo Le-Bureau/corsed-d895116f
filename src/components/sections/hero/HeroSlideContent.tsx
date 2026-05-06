@@ -106,12 +106,17 @@ const HeroSlideContent = ({ pole, index, direction, renderTitleTrack }: HeroSlid
             )}
           </motion.div>
 
-          {/* Title rendered by HeroCarousel's continuous track. Reserve space. */}
-          <div
-            aria-hidden="true"
-            style={{ height: "clamp(120px, 16vw, 200px)" }}
-            className="mb-8"
-          />
+          {/* Title track injected by HeroCarousel (all 4 titles, animated together) */}
+          <div className="mb-8">
+            {renderTitleTrack ? (
+              renderTitleTrack()
+            ) : (
+              <div
+                aria-hidden="true"
+                style={{ height: "clamp(70px, 14vw, 180px)" }}
+              />
+            )}
+          </div>
           <h1 className="sr-only">{pole.label}</h1>
 
           {/* Subtitle */}
