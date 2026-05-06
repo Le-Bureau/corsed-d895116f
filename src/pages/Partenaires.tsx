@@ -3,7 +3,7 @@ import WhyJoinSection from "@/components/partenaires/WhyJoinSection";
 import HowItWorksSection from "@/components/partenaires/HowItWorksSection";
 import TargetProfilesSection from "@/components/partenaires/TargetProfilesSection";
 import PartenairesFAQ from "@/components/partenaires/PartenairesFAQ";
-import PartenairesFormPlaceholder from "@/components/partenaires/PartenairesFormPlaceholder";
+import PartenairesForm from "@/components/partenaires/PartenairesForm";
 
 const Partenaires = () => {
   return (
@@ -13,7 +13,7 @@ const Partenaires = () => {
       <HowItWorksSection />
       <TargetProfilesSection />
       <PartenairesFAQ />
-      <PartenairesFormPlaceholder />
+      <PartenairesForm />
     </div>
   );
 };

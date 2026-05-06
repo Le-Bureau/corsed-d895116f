@@ -53,6 +53,45 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_applications: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
+          metadata: Json
+          phone: string
+          profession: string
+          rgpd_consent: boolean
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
+          metadata?: Json
+          phone: string
+          profession: string
+          rgpd_consent?: boolean
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
+          metadata?: Json
+          phone?: string
+          profession?: string
+          rgpd_consent?: boolean
+          source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
