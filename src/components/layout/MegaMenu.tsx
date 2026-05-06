@@ -78,7 +78,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
       className={`fixed left-0 right-0 mx-auto z-[60] ${hasBanner ? "top-[108px]" : "top-20"}`}
       style={{ width: "min(1100px, calc(100vw - 4rem))", ...MENU_SURFACE_STYLE }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 items-stretch">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 items-stretch">
         {POLES.map((pole) => {
           const rgb = hexToRgb(pole.baseColorOnLight);
           return (
