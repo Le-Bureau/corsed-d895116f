@@ -97,15 +97,26 @@ const ContactRecap = () => {
           className="absolute top-0 left-0 right-0 h-[200px] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 0%, rgba(168,192,212,0.15) 0%, transparent 70%)",
+              "radial-gradient(ellipse at 50% 0%, rgba(var(--contact-accent-rgb, 168,192,212), 0.22) 0%, transparent 70%)",
+            transition: "background 600ms ease-out",
           }}
           aria-hidden="true"
         />
 
-        <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-white/[0.08] relative z-10">
+        <div
+          className="flex items-center gap-2.5 mb-5 pb-4 relative z-10"
+          style={{
+            borderBottom: "1px solid rgba(var(--contact-accent-rgb, 255,255,255), 0.12)",
+            transition: "border-color 600ms ease-out",
+          }}
+        >
           <span
-            className="w-1.5 h-1.5 rounded-full bg-logo-base"
-            style={{ boxShadow: "0 0 10px var(--logo-base)" }}
+            className="w-1.5 h-1.5 rounded-full"
+            style={{
+              backgroundColor: "var(--contact-accent, var(--logo-base))",
+              boxShadow: "0 0 10px var(--contact-accent, var(--logo-base))",
+              transition: "background-color 600ms ease-out, box-shadow 600ms ease-out",
+            }}
           />
           <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted">
             Récap de votre demande
@@ -149,12 +160,13 @@ const ContactRecap = () => {
             type="submit"
             disabled={disabled}
             aria-busy={isSubmitting}
-            className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-logo-base text-surface-darker font-semibold text-[15px] px-6 py-3.5 transition-all hover:bg-logo-tint disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-logo-base/40 disabled:hover:bg-logo-base/40"
-            style={
-              reduceMotion
-                ? undefined
-                : { transition: "transform 0.4s var(--ease-out-expo), background-color 0.3s ease, opacity 0.3s ease" }
-            }
+            className="group w-full inline-flex items-center justify-center gap-2 rounded-full text-surface-darker font-semibold text-[15px] px-6 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: "var(--contact-accent, var(--logo-base))",
+              transition: reduceMotion
+                ? "background-color 600ms ease-out, opacity 0.3s ease"
+                : "transform 0.4s var(--ease-out-expo), background-color 600ms ease-out, opacity 0.3s ease",
+            }}
             onMouseEnter={(e) => {
               if (!reduceMotion && !disabled)
                 (e.currentTarget as HTMLButtonElement).style.transform =
