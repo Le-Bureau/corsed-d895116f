@@ -11,10 +11,9 @@ interface HeroSlideContentProps {
   pole: Pole;
   index: number;
   direction: CarouselDirection;
-  renderTitleTrack?: () => React.ReactNode;
 }
 
-const HeroSlideContent = ({ pole, index, direction, renderTitleTrack }: HeroSlideContentProps) => {
+const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => {
   const reduced = useReducedMotion();
 
   const slideVariants: Variants = {
