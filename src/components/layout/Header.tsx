@@ -17,10 +17,14 @@ const PILL_STYLE: React.CSSProperties = {
   background: "rgba(255, 255, 255, 0.65)",
   backdropFilter: "blur(8px) saturate(140%)",
   WebkitBackdropFilter: "blur(8px) saturate(140%)",
-  border: "1px solid rgba(255, 255, 255, 0.55)",
+  // No border — uniform white border becomes a visible seam on dark backgrounds.
+  // We simulate the glass edge with shadows only.
+  border: "1px solid transparent",
   boxShadow: [
     "inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-    "inset 0 -1px 0 rgba(10, 10, 15, 0.04)",
+    "inset 1px 0 0 rgba(255, 255, 255, 0.35)",
+    "inset -1px 0 0 rgba(255, 255, 255, 0.35)",
+    "inset 0 -1px 0 rgba(10, 10, 15, 0.06)",
     "0 1px 2px rgba(10, 10, 15, 0.04)",
     "0 8px 24px rgba(10, 10, 15, 0.06)",
     "0 24px 48px rgba(10, 10, 15, 0.04)",
