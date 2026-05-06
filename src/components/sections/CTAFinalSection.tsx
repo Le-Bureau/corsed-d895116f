@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import { motion } from "motion/react";
+import StaggerChildren, { fadeUpItem } from "@/components/animations/StaggerChildren";
 
 const CTAFinalSection = () => {
   return (
@@ -33,47 +34,55 @@ const CTAFinalSection = () => {
         }}
       />
 
-      <div className="relative z-[5] max-w-[900px] mx-auto px-5 sm:px-10 text-center">
-        <FadeInWhenVisible>
-          <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.12] backdrop-blur-md font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-logo-base shadow-[0_0_12px_rgba(168,192,212,0.8)]" />
-            Passons à l'action
-          </span>
+      <StaggerChildren staggerDelay={0.08} className="relative z-[5] max-w-[900px] mx-auto px-5 sm:px-10 text-center">
+        <motion.span
+          variants={fadeUpItem}
+          className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.06] border border-white/[0.12] backdrop-blur-md font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-8"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-logo-base shadow-[0_0_12px_rgba(168,192,212,0.8)]" />
+          Passons à l'action
+        </motion.span>
 
-          <h2
-            id="cta-final-title"
-            className="font-display font-semibold text-text-on-dark text-[clamp(44px,6vw,76px)] leading-[1.05] tracking-[-0.035em] mb-6"
+        <motion.h2
+          variants={fadeUpItem}
+          id="cta-final-title"
+          className="font-display font-semibold text-text-on-dark text-[clamp(44px,6vw,76px)] leading-[1.05] tracking-[-0.035em] mb-6"
+        >
+          Prêt à prendre{" "}
+          <span className="text-logo-base">de la hauteur ?</span>
+        </motion.h2>
+
+        <motion.p
+          variants={fadeUpItem}
+          className="text-lg leading-relaxed text-text-on-dark-muted max-w-[600px] mx-auto mb-10"
+        >
+          Que vous soyez particulier ou professionnel, nous avons une
+          solution drone adaptée à vos besoins.
+        </motion.p>
+
+        <motion.div
+          variants={fadeUpItem}
+          className="flex flex-wrap items-center justify-center gap-3"
+        >
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-white text-surface-darker text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
+            style={{
+              boxShadow:
+                "0 0 0 1px rgba(168,192,212,0.4), 0 0 32px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.25)",
+            }}
           >
-            Prêt à prendre{" "}
-            <span className="text-logo-base">de la hauteur ?</span>
-          </h2>
-
-          <p className="text-lg leading-relaxed text-text-on-dark-muted max-w-[600px] mx-auto mb-10">
-            Que vous soyez particulier ou professionnel, nous avons une
-            solution drone adaptée à vos besoins.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-white text-surface-darker text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
-              style={{
-                boxShadow:
-                  "0 0 0 1px rgba(168,192,212,0.4), 0 0 32px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.25)",
-              }}
-            >
-              Demander un devis gratuit
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/partenaires"
-              className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-white/[0.05] border border-white/[0.16] text-text-on-dark text-sm font-medium backdrop-blur-md hover:bg-white/[0.12] transition-all duration-300"
-            >
-              Devenir partenaire
-            </Link>
-          </div>
-        </FadeInWhenVisible>
-      </div>
+            Demander un devis gratuit
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            to="/partenaires"
+            className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-white/[0.05] border border-white/[0.16] text-text-on-dark text-sm font-medium backdrop-blur-md hover:bg-white/[0.12] transition-all duration-300"
+          >
+            Devenir partenaire
+          </Link>
+        </motion.div>
+      </StaggerChildren>
     </section>
   );
 };
