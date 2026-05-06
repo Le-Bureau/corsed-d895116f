@@ -77,7 +77,7 @@ const PoleHero = ({ pole }: Props) => {
             className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to bottom, transparent 0%, hsl(var(--surface-bg)) 100%)",
+                "linear-gradient(to bottom, transparent 0%, var(--surface-bg) 100%)",
             }}
           />
         </div>
