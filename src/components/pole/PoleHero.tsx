@@ -225,7 +225,7 @@ const PoleHero = ({ pole }: Props) => {
           key={`${pole.key}-nav`}
           {...fadeIn(0.4)}
           aria-label="Navigation entre pôles"
-          className="mt-16 lg:mt-24 pt-8 border-t border-border-subtle flex items-center justify-between gap-4"
+          className="hidden lg:flex mt-16 lg:mt-24 pt-8 border-t border-border-subtle items-center justify-between gap-4"
         >
           <Link
             to={`/pole/${prevPole.key}`}
