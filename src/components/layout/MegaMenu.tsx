@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
+import { useUIBanner } from "@/contexts/UIBannerContext";
 
 interface Props {
   open: boolean;
