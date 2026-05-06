@@ -2,8 +2,8 @@ import nettoyageImg from "@/assets/hero/nettoyage.png";
 import diagnosticImg from "@/assets/hero/diagnostic.png";
 import agricultureImg from "@/assets/hero/agriculture.png";
 import transportImg from "@/assets/hero/transport.png";
-import nettoyageShowcase from "@/assets/poles/nettoyage.png";
-import diagnosticShowcase from "@/assets/poles/diagnostic.png";
+import nettoyageShowcase from "@/assets/poles/nettoyage.webp";
+import diagnosticShowcase from "@/assets/poles/diagnostic.webp";
 
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
