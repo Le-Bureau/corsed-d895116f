@@ -80,7 +80,7 @@ const ContactForm = () => {
               <SelectTrigger
                 aria-label="Sujet de votre demande"
                 aria-invalid={!!errors.requestType}
-                className="inline-flex w-auto h-auto bg-transparent border-0 border-b-2 focus:ring-0 focus:ring-offset-0 rounded-none px-2 pr-2 py-1 font-display text-[inherit] leading-tight tracking-[inherit] gap-2 [&>svg]:opacity-70 [&[data-placeholder]]:italic [&[data-placeholder]]:opacity-60"
+                className="inline-flex w-auto h-auto items-baseline bg-transparent border-0 border-b-2 focus:ring-0 focus:ring-offset-0 rounded-none px-2 pr-2 py-1 font-display font-normal text-[clamp(17px,1.6vw,22px)] leading-[1.6] tracking-[-0.025em] gap-2 [&>svg]:opacity-70 [&>svg]:w-4 [&>svg]:h-4 [&[data-placeholder]]:italic [&[data-placeholder]]:opacity-60"
                 style={{
                   color: "var(--contact-accent, var(--logo-base))",
                   borderBottomColor:

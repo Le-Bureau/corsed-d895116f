@@ -160,12 +160,13 @@ const ContactRecap = () => {
             type="submit"
             disabled={disabled}
             aria-busy={isSubmitting}
-            className="group w-full inline-flex items-center justify-center gap-2 rounded-full text-surface-darker font-semibold text-[15px] px-6 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative w-full inline-flex items-center justify-center gap-2 rounded-full bg-white text-surface-darker font-semibold text-[15px] px-6 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none overflow-visible"
             style={{
-              backgroundColor: "var(--contact-accent, var(--logo-base))",
+              boxShadow:
+                "0 0 0 1px rgba(var(--contact-accent-rgb, 168,192,212), 0.4), 0 0 24px rgba(var(--contact-accent-rgb, 168,192,212), 0.35), 0 8px 24px rgba(var(--contact-accent-rgb, 168,192,212), 0.25)",
               transition: reduceMotion
-                ? "background-color 600ms ease-out, opacity 0.3s ease"
-                : "transform 0.4s var(--ease-out-expo), background-color 600ms ease-out, opacity 0.3s ease",
+                ? "box-shadow 600ms ease-out, opacity 0.3s ease"
+                : "box-shadow 600ms ease-out, transform 0.3s var(--ease-out-expo), opacity 0.3s ease",
             }}
             onMouseEnter={(e) => {
               if (!reduceMotion && !disabled)
@@ -185,7 +186,13 @@ const ContactRecap = () => {
             ) : (
               <>
                 Envoyer ma demande
-                <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                <Send
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  style={{
+                    color: "var(--contact-accent, var(--logo-base))",
+                    transition: "color 600ms ease-out, transform 0.3s ease",
+                  }}
+                />
               </>
             )}
           </button>
