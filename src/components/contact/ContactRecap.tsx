@@ -1,4 +1,5 @@
 import { useFormContext, useWatch } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { Loader2, Send } from "lucide-react";
 import type { ContactFormData } from "@/lib/contactSchema";
@@ -69,9 +70,10 @@ function RecapRow({ label, value, skeleton, truncate }: RecapRowProps) {
 
 const ContactRecap = () => {
   const reduceMotion = useReducedMotion();
-  const { control, formState } = useFormContext<ContactFormData>();
+  const { control, register, formState } = useFormContext<ContactFormData>();
   const values = useWatch({ control });
-  const { isSubmitting } = formState;
+  const { isSubmitting, isValid } = formState;
+  const disabled = !isValid || isSubmitting;
 
   const requestTypeLabel =
     values.requestType && values.requestType in REQUEST_TYPE_LABELS
@@ -124,18 +126,37 @@ const ContactRecap = () => {
         </div>
 
         <div className="mt-6 pt-6 border-t border-white/[0.08] relative z-10">
+          <label className="flex items-start gap-3 mb-5 text-[12px] leading-relaxed text-text-on-dark-muted cursor-pointer">
+            <input
+              type="checkbox"
+              {...register("rgpdConsent")}
+              className="w-4 h-4 mt-0.5 accent-logo-base flex-shrink-0 cursor-pointer"
+            />
+            <span>
+              J'accepte que mes données soient traitées dans le cadre de cette
+              demande conformément à la{" "}
+              <Link
+                to="/mentions-legales"
+                className="text-logo-base underline hover:text-text-on-dark transition-colors"
+              >
+                politique de confidentialité
+              </Link>
+              .
+            </span>
+          </label>
+
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={disabled}
             aria-busy={isSubmitting}
-            className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-logo-base text-surface-darker font-semibold text-[15px] px-6 py-3.5 transition-all hover:bg-logo-tint disabled:opacity-60 disabled:cursor-not-allowed"
+            className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-logo-base text-surface-darker font-semibold text-[15px] px-6 py-3.5 transition-all hover:bg-logo-tint disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-logo-base/40 disabled:hover:bg-logo-base/40"
             style={
               reduceMotion
                 ? undefined
-                : { transition: "transform 0.4s var(--ease-out-expo), background-color 0.3s ease" }
+                : { transition: "transform 0.4s var(--ease-out-expo), background-color 0.3s ease, opacity 0.3s ease" }
             }
             onMouseEnter={(e) => {
-              if (!reduceMotion && !isSubmitting)
+              if (!reduceMotion && !disabled)
                 (e.currentTarget as HTMLButtonElement).style.transform =
                   "translateY(-2px)";
             }}
