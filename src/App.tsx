@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import RootLayout from "@/components/layout/RootLayout";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import PoleNettoyage from "./pages/PoleNettoyage";
 import NettoyageToitures from "./pages/NettoyageToitures";
@@ -30,6 +31,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <SmoothScrollProvider>
+          <ScrollToTop />
           <Routes>
             <Route element={<RootLayout />}>
               <Route path="/" element={<Index />} />
