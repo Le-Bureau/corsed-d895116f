@@ -324,7 +324,11 @@ export const POLES: Pole[] = [
       "Zones inaccessibles",
       "Coût divisé vs hélicoptère",
     ],
-    subServices: [{ name: "Logistique de chantier isolé" }],
+    subServices: [
+      { name: "Zone non accessible", slug: "zone-non-accessible" },
+      { name: "Levage sur chantier", slug: "levage-chantier" },
+      { name: "Ravitaillement chantier", slug: "ravitaillement-chantier" },
+    ],
     heroImage: transportImg,
     showcaseImage: transportShowcase,
     mobileImagePosition: "center 25%",
