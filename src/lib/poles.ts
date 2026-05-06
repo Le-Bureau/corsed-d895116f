@@ -206,7 +206,7 @@ export const POLES: Pole[] = [
     heroPitch:
       "Notre flotte pulvérise avec précision façades, toitures et panneaux photovoltaïques, sans immobilisation de votre site.",
     whyDroneItems: NETTOYAGE_WHY,
-    processSteps: NETTOYAGE_PROCESS,
+    processSteps: undefined,
     useCases: NETTOYAGE_USE_CASES,
     poleFAQ: NETTOYAGE_FAQ,
     finalCTATitle: "Un projet de nettoyage en tête ?",
