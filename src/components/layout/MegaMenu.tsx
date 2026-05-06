@@ -21,7 +21,6 @@ const GLASS_STYLE: React.CSSProperties = {
   padding: 24,
   boxShadow: [
     "inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-    "inset 0 -1px 0 rgba(10, 10, 15, 0.04)",
     "0 1px 2px rgba(10, 10, 15, 0.04)",
     "0 8px 24px rgba(10, 10, 15, 0.06)",
     "0 24px 48px rgba(10, 10, 15, 0.04)",
@@ -75,7 +74,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
       className="fixed top-20 left-0 right-0 mx-auto z-[60]"
       style={{ width: "min(720px, calc(100vw - 2rem))", ...GLASS_STYLE }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {POLES.map((pole) => (
           <div key={pole.key} className="flex flex-col gap-2">
             <div className="flex items-center gap-2 mb-1">
@@ -100,10 +99,8 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
               onMouseLeave={(e) => (e.currentTarget.style.color = "")}
             >
               {pole.label}
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-text-secondary" />
             </Link>
-
-            <div className="h-px bg-black/10 mt-1 mb-1" />
 
             {pole.subServices && pole.subServices.length > 0 ? (
               pole.subServices.map((sub) =>
