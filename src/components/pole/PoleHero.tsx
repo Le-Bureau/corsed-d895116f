@@ -8,10 +8,23 @@ interface Props {
 }
 
 const PoleHero = ({ pole }: Props) => {
+  const lenis = useLenis();
   const ctaHref = pole.isInDevelopment
     ? `/contact?type=alerte-lancement&pole=${pole.key}`
     : `/contact?expertise=${pole.key}`;
   const ctaLabel = pole.isInDevelopment ? "Être prévenu du lancement" : "Demander un devis";
+
+  const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+    if (lenis) {
+      lenis.scrollTo(target, { duration: 1.6, offset: -80 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    history.replaceState(null, "", `#${id}`);
+  };
 
   return (
     <section
