@@ -123,7 +123,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                 />
               </Link>
 
-              <div className="flex flex-col gap-1.5 mt-1">
+              <div className="flex flex-col gap-0.5 mt-1">
                 {pole.subServices && pole.subServices.length > 0
                   ? pole.subServices.map((sub) =>
                       sub.slug ? (
@@ -132,17 +132,50 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                           role="menuitem"
                           to={`/pole/${pole.slug}/${sub.slug}`}
                           onClick={onClose}
-                          className="text-[12.5px] text-text-secondary hover:text-text-primary transition-colors rounded-sm focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                          className="group/sublink flex items-center gap-2.5 py-2 px-2 -mx-2 rounded-lg text-[13px] text-text-secondary hover:bg-black/[0.02] transition-all duration-150 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = "var(--text-primary)";
+                            const arrow = e.currentTarget.querySelector("[data-arrow]");
+                            if (arrow) {
+                              (arrow as HTMLElement).style.opacity = "1";
+                              (arrow as HTMLElement).style.transform = "translateX(2px)";
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = "";
+                            const arrow = e.currentTarget.querySelector("[data-arrow]");
+                            if (arrow) {
+                              (arrow as HTMLElement).style.opacity = "0";
+                              (arrow as HTMLElement).style.transform = "translateX(0)";
+                            }
+                          }}
                         >
-                          {sub.name}
+                          <span
+                            className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                            style={{ background: pole.baseColorOnLight }}
+                            aria-hidden="true"
+                          />
+                          <span className="flex-1">{sub.name}</span>
+                          <ArrowRight
+                            data-arrow
+                            className="w-3.5 h-3.5 flex-shrink-0 opacity-0 transition-all duration-200"
+                            style={{ color: pole.baseColorOnLight }}
+                            strokeWidth={2.5}
+                            aria-hidden="true"
+                          />
                         </Link>
                       ) : (
-                        <span
+                        <div
                           key={sub.name}
-                          className="text-[12.5px] text-black/50"
+                          className="flex items-center gap-2.5 py-2 px-2 -mx-2 text-[13px] text-black/50"
                         >
-                          {sub.name}
-                        </span>
+                          <span
+                            className="w-1.5 h-1.5 rounded-full flex-shrink-0 opacity-60"
+                            style={{ background: pole.baseColorOnLight }}
+                            aria-hidden="true"
+                          />
+                          <span className="flex-1">{sub.name}</span>
+                        </div>
                       ),
                     )
                   : null}
