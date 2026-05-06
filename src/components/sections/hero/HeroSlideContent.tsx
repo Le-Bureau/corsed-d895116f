@@ -71,7 +71,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
   };
 
   const paddedIndex = String(index + 1).padStart(2, "0");
-  const words = pole.title.split(" ");
+  const words = pole.label.split(" ");
 
   return (
     <motion.div
