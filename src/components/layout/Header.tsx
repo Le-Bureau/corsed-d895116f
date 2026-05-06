@@ -53,11 +53,6 @@ const Header = () => {
   const polesBtnRef = useRef<HTMLButtonElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const closeTimerRef = useRef<number | null>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const [magnet, setMagnet] = useState({ x: 0, y: 0 });
-  const [magnetActive, setMagnetActive] = useState(false);
-  const reduced = useReducedMotion();
-
   const polesActive = pathname.startsWith("/pole/");
   const showCta = pathname !== "/contact";
 
