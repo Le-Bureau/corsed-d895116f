@@ -7,8 +7,8 @@ import MobileDrawer from "./MobileDrawer";
 import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
 
-const NAV = [
-  { label: "Accueil", to: "/", end: true },
+const NAV_BEFORE = [{ label: "Accueil", to: "/", end: true }];
+const NAV_AFTER = [
   { label: "Partenaires", to: "/partenaires" },
   { label: "Contact", to: "/contact" },
 ];
