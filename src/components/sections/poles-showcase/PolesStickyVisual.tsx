@@ -56,24 +56,22 @@ const PolesStickyVisual = ({ activePoleKey }: Props) => {
         />
       </AnimatePresence>
 
-      {/* Solid neutral base — masks the colored mesh during the photo crossfade gap */}
-      <div className="absolute inset-0 bg-surface-darker" aria-hidden="true" />
 
-      {/* Showcase photo crossfade */}
-      <AnimatePresence mode="wait">
+      {/* Showcase photo simultaneous crossfade — both images coexist and cover each other, so no mesh shows through */}
+      <AnimatePresence>
         {active.showcaseImage && (
           <motion.img
             key={`img-${activePoleKey}`}
             src={active.showcaseImage}
             alt={active.label}
-            initial={{ opacity: 0, scale: reduced ? 1 : 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: reduced ? 1 : 1.02 }}
-            transition={{ duration: reduced ? 0 : 0.4, ease: EASE }}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ willChange: "transform, opacity" }}
             loading="eager"
             decoding="async"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduced ? 0 : 0.3, ease: EASE }}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ willChange: "opacity" }}
           />
         )}
       </AnimatePresence>
