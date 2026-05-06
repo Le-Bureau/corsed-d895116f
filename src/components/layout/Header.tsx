@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown, Menu } from "lucide-react";
 
 import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
+import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
 
 const NAV = [
