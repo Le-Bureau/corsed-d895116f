@@ -280,6 +280,38 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                 Prochainement
               </motion.div>
             ) : null}
+
+            <motion.div variants={itemVariants}>
+              <Link
+                to={`/pole/${pole.key}`}
+                className="group/cta inline-flex items-center gap-2 mt-8 px-6 py-3.5 rounded-full transition-all duration-300 text-sm font-semibold text-white outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                style={
+                  {
+                    background: color,
+                    boxShadow: `0 4px 14px rgba(${colorRgb}, 0.30)`,
+                    ["--tw-ring-color" as string]: `rgba(${colorRgb}, 0.40)`,
+                  } as React.CSSProperties
+                }
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = `0 8px 24px rgba(${colorRgb}, 0.40)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "";
+                  e.currentTarget.style.boxShadow = `0 4px 14px rgba(${colorRgb}, 0.30)`;
+                }}
+              >
+                <span>
+                  {pole.isInDevelopment
+                    ? `En savoir plus sur Corse Drone ${pole.label}`
+                    : `Découvrir Corse Drone ${pole.label}`}
+                </span>
+                <ArrowRight
+                  className="w-4 h-4 transition-transform duration-300 group-hover/cta:translate-x-0.5"
+                  strokeWidth={2.5}
+                />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </div>
