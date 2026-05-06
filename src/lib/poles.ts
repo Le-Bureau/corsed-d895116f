@@ -4,6 +4,8 @@ import agricultureImg from "@/assets/hero/agriculture.png";
 import transportImg from "@/assets/hero/transport.png";
 import nettoyageShowcase from "@/assets/poles/nettoyage.webp";
 import diagnosticShowcase from "@/assets/poles/diagnostic.webp";
+import agricultureShowcase from "@/assets/poles/agriculture.webp";
+import transportShowcase from "@/assets/poles/transport.webp";
 
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
@@ -121,6 +123,7 @@ export const POLES: Pole[] = [
       { name: "Analyses multispectrales" },
     ],
     heroImage: agricultureImg,
+    showcaseImage: agricultureShowcase,
   },
   {
     key: "transport",
@@ -147,5 +150,6 @@ export const POLES: Pole[] = [
     ],
     subServices: [{ name: "Logistique de chantier isolé" }],
     heroImage: transportImg,
+    showcaseImage: transportShowcase,
   },
 ];
