@@ -1,4 +1,5 @@
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import AnimatedStatValue from "@/components/animations/AnimatedStatValue";
 import type { SubPoleStat } from "@/lib/sub-poles";
 
 interface Props {
