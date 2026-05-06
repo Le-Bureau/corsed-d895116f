@@ -34,8 +34,17 @@ const SubPoleHero = ({ content, pole }: Props) => {
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background: content.heroImage
-            ? "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.85) 60%, hsl(var(--surface-bg)) 100%)"
+            ? "linear-gradient(135deg, rgba(245,247,250,0.95) 0%, rgba(245,247,250,0.80) 45%, rgba(245,247,250,0.55) 100%)"
             : "radial-gradient(ellipse at 30% 20%, rgba(var(--pole-color-rgb), 0.10) 0%, transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(var(--pole-color-rgb), 0.08) 0%, transparent 60%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 20% 30%, rgba(var(--pole-color-rgb), 0.10) 0%, transparent 55%)," +
+            "radial-gradient(ellipse at 80% 70%, rgba(var(--pole-color-rgb), 0.06) 0%, transparent 55%)",
         }}
       />
 
