@@ -52,14 +52,14 @@ export function useCountUp({
     const startTime = performance.now();
     let raf = 0;
     const animate = (now: number) => {
-      const progress = Math.min((now - startTime) / duration, 1);
+      const progress = Math.min((now - startTime) / computedDuration, 1);
       const eased = 1 - Math.pow(1 - progress, 4);
       setValue(end * eased);
       if (progress < 1) raf = requestAnimationFrame(animate);
     };
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [hasStarted, end, duration, prefersReducedMotion]);
+  }, [hasStarted, end, computedDuration, prefersReducedMotion]);
 
   const formatted =
     decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
