@@ -55,7 +55,6 @@ export interface Pole {
   statDetail: string;
   comingSoon: boolean;
   isInDevelopment?: boolean;
-  heroImage?: string;
   heroImageAlt?: string;
   heroPoleNumber?: string;
   heroPitch?: string;
