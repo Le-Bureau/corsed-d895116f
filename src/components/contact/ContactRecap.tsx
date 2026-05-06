@@ -111,26 +111,14 @@ const ContactRecap = () => {
         </div>
 
         <div className="relative z-10">
-          <RecapRow label="De" value={values.fullName} placeholder="Votre nom" />
-          <RecapRow
-            label="Email"
-            value={values.email}
-            placeholder="votre@email.com"
-          />
-          <RecapRow
-            label="Téléphone"
-            value={values.phone}
-            placeholder="optionnel"
-          />
-          <RecapRow
-            label="Sujet"
-            value={requestTypeLabel}
-            placeholder="à choisir"
-          />
+          <RecapRow label="De" value={values.fullName} skeleton="medium" />
+          <RecapRow label="Email" value={values.email} skeleton="long" />
+          <RecapRow label="Téléphone" value={values.phone} skeleton="short" />
+          <RecapRow label="Sujet" value={requestTypeLabel} skeleton="medium" />
           <RecapRow
             label="Message"
             value={values.message}
-            placeholder="quelques mots sur votre projet..."
+            skeleton="message"
             truncate={80}
           />
         </div>
