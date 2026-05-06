@@ -191,11 +191,11 @@ const PoleHero = ({ pole }: Props) => {
         <motion.div
           key={`${pole.key}-ctas`}
           {...fadeIn(0.3)}
-          className="flex flex-wrap items-center gap-3"
+          className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3"
         >
           <Link
             to={ctaHref}
-            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap"
+            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
             style={{
               boxShadow:
                 "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
@@ -212,7 +212,8 @@ const PoleHero = ({ pole }: Props) => {
             <a
               href="#sous-services"
               onClick={(e) => handleAnchor(e, "sous-services")}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-surface-card motion-reduce:hover:transform-none whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-2 rounded-full sm:border sm:border-border-default text-text-primary font-medium text-[14px] sm:text-[15px] px-7 py-2 sm:py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 sm:hover:bg-surface-card motion-reduce:hover:transform-none whitespace-nowrap"
+              style={{ color: "var(--pole-color)" }}
             >
               Voir les sous-services
             </a>
