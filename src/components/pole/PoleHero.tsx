@@ -61,11 +61,31 @@ const PoleHero = ({ pole }: Props) => {
     <section
       role="region"
       aria-labelledby="pole-hero-title"
-      className="relative isolate overflow-hidden bg-surface-bg pt-40 pb-24 lg:pt-48 lg:pb-32"
+      className="relative isolate overflow-hidden bg-surface-bg pt-28 pb-16 lg:pt-48 lg:pb-32"
     >
-      {/* Layer 1: full-bleed bg image */}
+      {/* MOBILE-ONLY: image zone on top */}
       {pole.heroImage && (
-        <div className="absolute inset-0 z-0" aria-hidden="true">
+        <div className="lg:hidden relative w-full aspect-[4/3] overflow-hidden -mt-28 mb-8">
+          <img
+            src={pole.heroImage}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: pole.mobileImagePosition || "center" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 0%, var(--surface-bg) 100%)",
+            }}
+          />
+        </div>
+      )}
+
+      {/* DESKTOP-ONLY: full-bleed bg image */}
+      {pole.heroImage && (
+        <div className="hidden lg:block absolute inset-0 z-0" aria-hidden="true">
           <img
             src={pole.heroImage}
             alt=""
@@ -75,17 +95,17 @@ const PoleHero = ({ pole }: Props) => {
         </div>
       )}
 
-      {/* Layer 2: diagonal light gradient for legibility */}
+      {/* DESKTOP-ONLY: diagonal light gradient for legibility */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 z-[1] pointer-events-none"
+        className="hidden lg:block absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
             "linear-gradient(135deg, rgba(245,247,250,0.95) 0%, rgba(245,247,250,0.80) 45%, rgba(245,247,250,0.55) 100%)",
         }}
       />
 
-      {/* Layer 3: subtle pole-color mesh */}
+      {/* Pole-color mesh (both layouts) */}
       <div
         aria-hidden="true"
         className="absolute inset-0 z-[2] pointer-events-none"
@@ -137,8 +157,7 @@ const PoleHero = ({ pole }: Props) => {
             key={`${pole.key}-title`}
             {...fadeIn(0.1)}
             id="pole-hero-title"
-            className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary"
-            style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
+            className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary text-[44px] sm:text-[56px] lg:text-[clamp(56px,8vw,112px)]"
           >
             {pole.label}
           </motion.h1>
@@ -172,11 +191,11 @@ const PoleHero = ({ pole }: Props) => {
         <motion.div
           key={`${pole.key}-ctas`}
           {...fadeIn(0.3)}
-          className="flex flex-wrap items-center gap-3"
+          className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3"
         >
           <Link
             to={ctaHref}
-            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap"
+            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
             style={{
               boxShadow:
                 "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
@@ -193,7 +212,8 @@ const PoleHero = ({ pole }: Props) => {
             <a
               href="#sous-services"
               onClick={(e) => handleAnchor(e, "sous-services")}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-surface-card motion-reduce:hover:transform-none whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-2 rounded-full sm:border sm:border-border-default text-text-primary font-medium text-[14px] sm:text-[15px] px-7 py-2 sm:py-3.5 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 sm:hover:bg-surface-card motion-reduce:hover:transform-none whitespace-nowrap"
+              style={{ color: "var(--pole-color)" }}
             >
               Voir les sous-services
             </a>
@@ -205,7 +225,7 @@ const PoleHero = ({ pole }: Props) => {
           key={`${pole.key}-nav`}
           {...fadeIn(0.4)}
           aria-label="Navigation entre pôles"
-          className="mt-16 lg:mt-24 pt-8 border-t border-border-subtle flex items-center justify-between gap-4"
+          className="hidden lg:flex mt-16 lg:mt-24 pt-8 border-t border-border-subtle items-center justify-between gap-4"
         >
           <Link
             to={`/pole/${prevPole.key}`}
