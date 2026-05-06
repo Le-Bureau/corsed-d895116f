@@ -1,5 +1,4 @@
 import { Controller, useFormContext } from "react-hook-form";
-import { Link } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -29,6 +28,14 @@ const ContactForm = () => {
       className="text-text-on-dark font-display font-light tracking-tight leading-[1.6]"
       style={{ fontSize: "clamp(17px, 1.6vw, 22px)" }}
     >
+      <div className="flex items-center gap-3 mb-8 text-text-on-dark-muted">
+        <div className="w-8 h-px bg-text-on-dark-muted/40" />
+        <span className="text-[11px] font-mono tracking-[0.18em] uppercase">
+          Complétez la phrase, le récap se compose
+          <span className="hidden lg:inline"> à droite</span>
+          <span className="lg:hidden"> en dessous</span>
+        </span>
+      </div>
       <p className="flex flex-wrap items-baseline gap-x-2 gap-y-3">
         <span>Bonjour, je suis</span>
         <input
