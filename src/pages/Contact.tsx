@@ -60,7 +60,7 @@ const Contact = () => {
   const handleReset = () => {
     setSubmitted(false);
     setSubmissionData(null);
-    methods.reset(defaultValues);
+    methods.reset(defaultValues as unknown as Partial<ContactFormData>);
   };
 
   return (
