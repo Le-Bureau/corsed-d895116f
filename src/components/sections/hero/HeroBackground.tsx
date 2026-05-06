@@ -138,68 +138,6 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
         }}
       />
 
-      {/* Layer 4 — SVG flight paths */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg
-          viewBox="0 0 1920 1080"
-          preserveAspectRatio="xMidYMid slice"
-          className="w-full h-full"
-        >
-          <motion.path
-            key={`p1-${currentIndex}`}
-            d="M -100 700 Q 480 200, 960 480 T 2020 380"
-            stroke="white"
-            strokeOpacity={0.4}
-            strokeWidth={1.2}
-            strokeLinecap="round"
-            fill="none"
-            initial={{ pathLength: reduced ? 1 : 0 }}
-            animate={{ pathLength: 1 }}
-            transition={pathTransition}
-          />
-          <motion.path
-            d="M 1920 100 Q 1440 600, 800 700 T -100 950"
-            stroke="white"
-            strokeOpacity={0.5}
-            strokeWidth={1.2}
-            strokeLinecap="round"
-            strokeDasharray="4 8"
-            fill="none"
-            initial={{ opacity: 0 }}
-            animate={
-              reduced
-                ? { opacity: 1 }
-                : { opacity: 1, strokeDashoffset: [0, -200] }
-            }
-            transition={
-              reduced
-                ? { duration: 0 }
-                : {
-                    opacity: { duration: 1, ease: EASE },
-                    strokeDashoffset: {
-                      duration: 30,
-                      ease: "linear",
-                      repeat: Infinity,
-                    },
-                  }
-            }
-          />
-          <motion.path
-            key={`p3-${currentIndex}`}
-            d="M 200 950 Q 600 880, 900 920 T 1500 880"
-            stroke="white"
-            strokeOpacity={0.25}
-            strokeWidth={1.2}
-            strokeLinecap="round"
-            fill="none"
-            initial={{ pathLength: reduced ? 1 : 0 }}
-            animate={{ pathLength: 1 }}
-            transition={pathTransition}
-          />
-          <circle cx={960} cy={480} r={3} fill="white" opacity={0.9} />
-          <circle cx={800} cy={700} r={2} fill="white" opacity={0.5} />
-        </svg>
-      </div>
     </div>
   );
 };
