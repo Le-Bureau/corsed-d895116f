@@ -252,3 +252,14 @@ html.lenis body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
+
+@keyframes eyebrowGlow {
+  0%, 100% { box-shadow: 0 0 8px currentColor; opacity: 1; }
+  50% { box-shadow: 0 0 16px currentColor; opacity: 0.85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-eyebrow-glow {
+    animation: none !important;
+  }
+}
