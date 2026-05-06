@@ -132,7 +132,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
             exit="exit"
             className={cn(
               "fixed inset-y-0 right-0 z-50 flex w-full max-w-[420px] flex-col p-6",
-              "bg-surface-card text-text-primary border-l border-border-subtle shadow-soft-xl",
+              "bg-white/70 backdrop-blur-2xl backdrop-saturate-150 text-text-primary border-l border-white/40 shadow-soft-xl",
             )}
           >
             {/* Top bar */}
