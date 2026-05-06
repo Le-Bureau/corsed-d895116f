@@ -1,5 +1,6 @@
 import HeroCarousel from "@/components/sections/HeroCarousel";
 import PolesShowcase from "@/components/sections/PolesShowcase";
+import WhyDroneSection from "@/components/sections/WhyDroneSection";
 
 const Index = () => {
   return (
@@ -8,6 +9,7 @@ const Index = () => {
         <HeroCarousel />
       </section>
       <PolesShowcase />
+      <WhyDroneSection />
     </>
   );
 };
