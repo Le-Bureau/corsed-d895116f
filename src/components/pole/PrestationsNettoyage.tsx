@@ -152,7 +152,7 @@ const PrestationsNettoyage = () => {
                 Sur demande uniquement
               </div>
               <h3 className="font-display text-lg lg:text-xl font-semibold text-text-primary mb-3">
-                Vous êtes pressé ? Parlons-nous d'abord du nettoyage choc.
+                Besoin d'un résultat immédiat ? Parlons d'abord du nettoyage choc.
               </h3>
               <p className="text-text-secondary text-[15px] leading-relaxed">
                 Pour les cas urgents, nous pouvons appliquer une méthode plus agressive
