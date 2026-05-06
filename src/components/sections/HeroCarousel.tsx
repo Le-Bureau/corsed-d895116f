@@ -134,7 +134,7 @@ const HeroCarousel = () => {
                   e.currentTarget.style.setProperty("--ghost-arrow-opacity", "0");
                   e.currentTarget.style.setProperty("--ghost-arrow-x", "-12px");
                 }}
-                className={`absolute top-1/2 left-0 whitespace-nowrap font-display font-semibold text-text-on-dark ${
+                className={`absolute inset-0 flex items-center left-0 whitespace-nowrap font-display font-semibold text-text-on-dark ${
                   isGhost
                     ? "cursor-pointer pointer-events-auto"
                     : "pointer-events-none"
@@ -146,7 +146,6 @@ const HeroCarousel = () => {
                   transformOrigin: "left center",
                   textShadow:
                     "0 2px 20px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.4)",
-                  y: "-50%",
                 }}
                 animate={{
                   x: reduced ? 0 : x,
