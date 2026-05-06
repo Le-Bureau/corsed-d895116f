@@ -69,6 +69,16 @@ const Contact = () => {
       data-header-bg="dark"
       className="relative min-h-screen bg-surface-darker overflow-hidden"
     >
+      {/* Base ambient mesh (always logo-tinted) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse 1100px 700px at 15% 10%, rgba(168,192,212,0.14) 0%, transparent 60%), radial-gradient(ellipse 900px 600px at 85% 70%, rgba(80,130,172,0.10) 0%, transparent 65%)",
+        }}
+      />
+
       <ContactHero />
 
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10 pb-24 lg:pb-32">
