@@ -18,29 +18,29 @@ const PoleHero = ({ pole }: Props) => {
       aria-labelledby="pole-hero-title"
       className="relative isolate overflow-hidden bg-surface-bg pt-40 pb-24 lg:pt-48 lg:pb-32"
     >
-      {/* Optional hero image with light overlay */}
+      {/* Layer 1: full-bleed bg image */}
       {pole.heroImage && (
-        <>
-          <div className="absolute inset-0 z-0" aria-hidden="true">
-            <img
-              src={pole.heroImage}
-              alt=""
-              className="w-full h-full object-cover opacity-25"
-              style={{ objectPosition: pole.mobileImagePosition || "center" }}
-            />
-          </div>
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 z-[1] pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, var(--surface-bg) 0%, rgba(255,255,255,0.6) 40%, var(--surface-bg) 100%)",
-            }}
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+          <img
+            src={pole.heroImage}
+            alt=""
+            className="w-full h-full object-cover"
+            style={{ objectPosition: pole.mobileImagePosition || "center" }}
           />
-        </>
+        </div>
       )}
 
-      {/* Subtle pole-color mesh */}
+      {/* Layer 2: diagonal light gradient for legibility */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(245,247,250,0.95) 0%, rgba(245,247,250,0.80) 45%, rgba(245,247,250,0.55) 100%)",
+        }}
+      />
+
+      {/* Layer 3: subtle pole-color mesh */}
       <div
         aria-hidden="true"
         className="absolute inset-0 z-[2] pointer-events-none"

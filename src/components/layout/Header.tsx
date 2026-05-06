@@ -6,6 +6,7 @@ import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
 import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
+import { useUIBanner } from "@/contexts/UIBannerContext";
 
 const NAV_BEFORE = [{ label: "Accueil", to: "/", end: true }];
 const NAV_AFTER = [
@@ -51,6 +52,7 @@ const navItemClass = ({ isActive }: { isActive: boolean }) =>
 
 const Header = () => {
   const { pathname } = useLocation();
+  const { hasBanner } = useUIBanner();
   const [polesOpen, setPolesOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const polesBtnRef = useRef<HTMLButtonElement>(null);
@@ -77,7 +79,12 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-4 left-4 right-4 z-50 pointer-events-none">
+      <header
+        className={cn(
+          "fixed left-4 right-4 z-50 pointer-events-none transition-[top] duration-300",
+          hasBanner ? "top-[44px]" : "top-4",
+        )}
+      >
         <div
           className="pointer-events-auto mx-auto flex items-center justify-between rounded-full pl-5 pr-2 py-2"
           style={{
