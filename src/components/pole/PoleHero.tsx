@@ -34,7 +34,7 @@ const PoleHero = ({ pole }: Props) => {
             className="absolute inset-0 z-[1] pointer-events-none"
             style={{
               background:
-                "linear-gradient(180deg, hsl(var(--surface-bg)) 0%, rgba(255,255,255,0.6) 40%, hsl(var(--surface-bg)) 100%)",
+                "linear-gradient(180deg, var(--surface-bg) 0%, rgba(255,255,255,0.6) 40%, var(--surface-bg) 100%)",
             }}
           />
         </>
