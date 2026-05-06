@@ -56,7 +56,7 @@ const PolePanel = ({ pole, isActive, registerPanel }: Props) => {
       >
         {/* Mobile-only image at top of card */}
         {pole.showcaseImage && (
-          <div className="md:hidden -mx-8 -mt-8 mb-6 h-[320px] relative">
+          <div className="lg:hidden -mx-8 -mt-8 mb-6 h-[320px] relative">
             <img
               src={pole.showcaseImage}
               alt={pole.label}
