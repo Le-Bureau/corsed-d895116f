@@ -198,9 +198,8 @@ export const POLES: Pole[] = [
     finalCTATitle: "Un projet de nettoyage en tête ?",
     finalCTASubtitle: "Visite technique et devis gratuit. Nous revenons vers vous sous 24h ouvrées.",
     finalCTAButtonLabel: "Demander un devis gratuit",
+    stat: { value: "30", unit: "%", labelStrong: "d'économies en moyenne", labelMuted: "comparé aux méthodes traditionnelles" },
   },
-  {
-    key: "diagnostic",
     label: "Diagnostic",
     slug: "diagnostic",
     baseColorOnDark: "#A33333",
