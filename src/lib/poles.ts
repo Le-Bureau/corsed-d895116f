@@ -40,6 +40,13 @@ export interface PoleFAQItem {
   answer: string;
 }
 
+export interface PoleStat {
+  value: string;
+  unit: string;
+  labelStrong: string;
+  labelMuted: string;
+}
+
 export interface Pole {
   key: PoleKey;
   label: string;
