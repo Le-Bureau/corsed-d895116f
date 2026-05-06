@@ -262,6 +262,17 @@ export const POLES: Pole[] = [
     ],
     heroImage: agricultureImg,
     showcaseImage: agricultureShowcase,
+    isInDevelopment: true,
+    heroPoleNumber: "PÔLE 03",
+    heroPitch:
+      "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
+    whyDroneItems: NETTOYAGE_WHY,
+    processSteps: NETTOYAGE_PROCESS,
+    useCases: PLACEHOLDER_USE_CASES,
+    poleFAQ: PLACEHOLDER_FAQ,
+    finalCTATitle: "Service en préparation.",
+    finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
+    finalCTAButtonLabel: "Être prévenu du lancement",
   },
   {
     key: "transport",
