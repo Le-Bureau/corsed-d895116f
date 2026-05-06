@@ -12,7 +12,6 @@ import {
 import { DEFAULT_COLOR, REQUEST_TYPE_COLORS } from "@/lib/contactColors";
 import ContactHero from "@/components/contact/ContactHero";
 import ContactForm from "@/components/contact/ContactForm";
-import ContactRecap from "@/components/contact/ContactRecap";
 import ContactInfoCards from "@/components/contact/ContactInfoCards";
 import ContactSuccess from "@/components/contact/ContactSuccess";
 
@@ -146,12 +145,9 @@ const ContactSection = ({
             onSubmit={onSubmit}
             aria-label="Formulaire de contact"
             noValidate
-            className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-14"
+            className="relative z-10"
           >
-            <div>
-              <ContactForm />
-            </div>
-            <ContactRecap />
+            <ContactForm />
           </form>
         )}
 
