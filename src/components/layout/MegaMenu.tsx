@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
-import { ArrowRight, Layers, Package, ScanEye, SprayCan, Sprout } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 import { cn } from "@/lib/utils";
@@ -24,9 +23,7 @@ type Column = {
   key: string;
   tagline: string;
   title: string;
-  subtitle?: string;
-  Icon: LucideIcon;
-  iconColor: string;
+  accentColor: string;
   items: SubItem[];
 };
 
@@ -37,9 +34,7 @@ const COLUMNS: Column[] = [
     key: "nettoyage",
     tagline: "Pôle 01",
     title: poleByKey.nettoyage.label,
-    subtitle: "Façades, toitures, panneaux",
-    Icon: SprayCan,
-    iconColor: poleByKey.nettoyage.baseColorOnDark,
+    accentColor: poleByKey.nettoyage.baseColorOnDark,
     items: [
       { label: "Nettoyage de toitures", to: "/pole/nettoyage/toitures" },
       { label: "Nettoyage de façades", to: "/pole/nettoyage/facades" },
@@ -50,9 +45,7 @@ const COLUMNS: Column[] = [
     key: "diagnostic",
     tagline: "Pôle 02",
     title: poleByKey.diagnostic.label,
-    subtitle: "Inspections aériennes",
-    Icon: ScanEye,
-    iconColor: poleByKey.diagnostic.baseColorOnDark,
+    accentColor: poleByKey.diagnostic.baseColorOnDark,
     items: [
       { label: "Diagnostic thermique", to: "/pole/diagnostic/thermique" },
       { label: "Inspection visuelle", to: "/pole/diagnostic/visuel" },
@@ -62,9 +55,7 @@ const COLUMNS: Column[] = [
     key: "agriculture",
     tagline: "Pôle 03",
     title: poleByKey.agriculture.label,
-    subtitle: "Précision agricole",
-    Icon: Sprout,
-    iconColor: poleByKey.agriculture.baseColorOnDark,
+    accentColor: poleByKey.agriculture.baseColorOnDark,
     items: [
       { label: "Épandage ciblé", to: "/pole/agriculture", soon: true },
       { label: "Traitement phytosanitaire", to: "/pole/agriculture", soon: true },
@@ -75,18 +66,14 @@ const COLUMNS: Column[] = [
     key: "transport",
     tagline: "Pôle 04",
     title: poleByKey.transport.label,
-    subtitle: "Logistique aérienne",
-    Icon: Package,
-    iconColor: poleByKey.transport.baseColorOnDark,
+    accentColor: poleByKey.transport.baseColorOnDark,
     items: [{ label: "Logistique aérienne", to: "/pole/transport", soon: true }],
   },
   {
     key: "expertises",
     tagline: "Expertises",
     title: "Autres expertises",
-    subtitle: "Services complémentaires",
-    Icon: Layers,
-    iconColor: "var(--logo-base)",
+    accentColor: "var(--logo-base)",
     items: EXPERTISES.map((e) => ({
       label: e.label,
       to: `/expertises#${e.slug}`,
@@ -208,37 +195,30 @@ const MegaMenu = ({
               className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 lg:gap-7"
             >
               {COLUMNS.map((col) => {
-                const Icon = col.Icon;
                 return (
                   <motion.div
                     key={col.key}
                     variants={reduced ? reducedContainer : colVariants}
                     className="flex flex-col"
                   >
-                    <div
-                      className="flex h-9 w-9 items-center justify-center rounded-[10px] border"
-                      style={{
-                        backgroundColor: `color-mix(in srgb, ${col.iconColor} 18%, transparent)`,
-                        borderColor: `color-mix(in srgb, ${col.iconColor} 30%, transparent)`,
-                        color: col.iconColor,
-                      }}
-                    >
-                      <Icon size={18} strokeWidth={2} />
-                    </div>
                     <p
                       className={cn(
-                        "mb-3.5 mt-3 text-[11px] font-medium uppercase tracking-wider",
+                        "mb-3 text-[11px] font-medium uppercase tracking-wider",
                         mutedTone,
                       )}
                     >
                       {col.tagline}
                     </p>
-                    <h3 className="mb-1 font-display text-[15px] font-semibold">
+                    <h3 className="mb-3 flex items-center gap-2 font-display text-[15px] font-semibold">
+                      <span
+                        className="inline-block h-2 w-2 rounded-full"
+                        style={{
+                          backgroundColor: col.accentColor,
+                          boxShadow: `0 0 10px ${col.accentColor}`,
+                        }}
+                      />
                       {col.title}
                     </h3>
-                    {col.subtitle && (
-                      <p className={cn("mb-3 text-[12px]", mutedTone)}>{col.subtitle}</p>
-                    )}
                     <ul className="flex flex-col gap-0.5">
                       {col.items.map((item) => (
                         <li key={item.label}>
