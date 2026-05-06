@@ -35,27 +35,31 @@ const TabButton = ({ value, label }: TabButtonProps) => {
           shouldDirty: true,
         })
       }
-      className="relative inline-flex items-center gap-2 px-4 py-3.5 bg-transparent border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap transition-colors duration-300 hover:text-text-on-dark"
+      className={cn(
+        "relative inline-flex items-center gap-2 px-4 py-3.5 border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap cursor-pointer rounded-t-lg transition-all duration-200",
+        isActive
+          ? "text-text-on-dark"
+          : "text-text-on-dark/55 hover:text-text-on-dark/85 hover:bg-white/[0.04]",
+      )}
       style={{
-        color: isActive
-          ? "hsl(var(--text-on-dark))"
-          : "rgba(250, 250, 252, 0.55)",
+        backgroundColor: isActive ? `rgba(${color.rgb}, 0.06)` : undefined,
       }}
     >
       <span
         className="w-1.5 h-1.5 rounded-full transition-all duration-300"
         style={{
-          backgroundColor: isActive ? color.base : "rgba(250,250,252,0.25)",
-          boxShadow: isActive ? `0 0 10px ${color.base}` : "none",
+          backgroundColor: isActive ? color.base : "rgba(255, 255, 255, 0.25)",
+          boxShadow: isActive ? `0 0 12px ${color.base}` : "none",
         }}
       />
-      {label}
+      <span className="relative z-10">{label}</span>
       {isActive && (
         <span
-          className="absolute left-3 right-3 -bottom-px h-[2px] rounded-full"
+          aria-hidden="true"
+          className="absolute left-3 right-3 -bottom-px h-[2px] rounded-t-full"
           style={{
             backgroundColor: color.base,
-            boxShadow: `0 0 12px ${color.base}`,
+            boxShadow: `0 0 16px ${color.base}`,
           }}
         />
       )}
