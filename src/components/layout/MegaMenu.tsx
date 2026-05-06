@@ -162,7 +162,7 @@ const MegaMenu = ({
   const lightSurface = headerState === "scrolled-light";
   const panelClass = lightSurface ? "glass-white" : "glass-light-strong";
   const textTone = lightSurface ? "text-text-primary" : "text-text-on-dark";
-  const mutedTone = lightSurface ? "text-text-secondary" : "text-text-on-dark-muted";
+  
   const hoverBg = lightSurface ? "hover:bg-black/5" : "hover:bg-white/5";
 
   return (
@@ -201,14 +201,6 @@ const MegaMenu = ({
                     variants={reduced ? reducedContainer : colVariants}
                     className="flex flex-col"
                   >
-                    <p
-                      className={cn(
-                        "mb-3 text-[11px] font-medium uppercase tracking-wider",
-                        mutedTone,
-                      )}
-                    >
-                      {col.tagline}
-                    </p>
                     <h3 className="mb-3 flex items-center gap-2 font-display text-[15px] font-semibold">
                       <span
                         className="inline-block h-2 w-2 rounded-full"
