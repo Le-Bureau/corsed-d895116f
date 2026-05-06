@@ -69,13 +69,17 @@ const Contact = () => {
       data-header-bg="dark"
       className="relative min-h-screen bg-surface-darker overflow-hidden"
     >
-      {/* Base ambient mesh (always logo-tinted) */}
+      {/* Base ambient mesh (always logo-tinted, full page with soft fade) */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
           background:
             "radial-gradient(ellipse 1100px 700px at 15% 10%, rgba(168,192,212,0.14) 0%, transparent 60%), radial-gradient(ellipse 900px 600px at 85% 70%, rgba(80,130,172,0.10) 0%, transparent 65%)",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
         }}
       />
 
