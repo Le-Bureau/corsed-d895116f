@@ -16,7 +16,7 @@ const WhyCard = ({ reason, delay = 0 }: Props) => {
       <motion.article
         whileHover={reduced ? undefined : { y: -4 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="group relative p-7 lg:p-10 rounded-3xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg transition-all duration-300 ease-out h-full overflow-hidden"
+        className="hover-border-card group relative p-7 lg:p-10 rounded-3xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg transition-all duration-300 ease-out h-full overflow-hidden"
       >
         {/* Index */}
         <span className="absolute top-6 right-7 font-mono text-[11px] font-medium tracking-[0.1em] text-text-muted/60">
