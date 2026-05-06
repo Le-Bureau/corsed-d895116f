@@ -10,7 +10,7 @@ const cardStyle: React.CSSProperties = {
 
 const HowItWorksSection = () => {
   return (
-    <section
+    <section data-header-bg="dark"
       id="fonctionnement"
       role="region"
       aria-labelledby="how-it-works-title"

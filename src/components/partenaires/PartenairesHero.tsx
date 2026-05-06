@@ -9,7 +9,7 @@ const STATS = [
 
 const PartenairesHero = () => {
   return (
-    <section
+    <section data-header-bg="dark"
       role="region"
       aria-labelledby="partenaires-hero-title"
       className="relative isolate overflow-hidden bg-surface-darker text-text-on-dark pt-40 pb-24 lg:pt-48 lg:pb-32"
