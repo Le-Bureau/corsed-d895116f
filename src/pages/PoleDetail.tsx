@@ -6,6 +6,7 @@ import PoleHero from "@/components/pole/PoleHero";
 import PoleWhyDrone from "@/components/pole/PoleWhyDrone";
 import PoleSubServices from "@/components/pole/PoleSubServices";
 import PoleProcess from "@/components/pole/PoleProcess";
+import PrestationsNettoyage from "@/components/pole/PrestationsNettoyage";
 import PoleUseCases from "@/components/pole/PoleUseCases";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
@@ -34,8 +35,12 @@ export default function PoleDetail() {
       {pole.subServices && pole.subServices.length > 0 && (
         <PoleSubServices pole={pole} />
       )}
-      {pole.processSteps && pole.processSteps.length > 0 && (
-        <PoleProcess steps={pole.processSteps} />
+      {pole.key === "nettoyage" ? (
+        <PrestationsNettoyage />
+      ) : (
+        pole.processSteps && pole.processSteps.length > 0 && (
+          <PoleProcess steps={pole.processSteps} />
+        )
       )}
       {pole.useCases && pole.useCases.length > 0 && (
         <PoleUseCases cases={pole.useCases} />
