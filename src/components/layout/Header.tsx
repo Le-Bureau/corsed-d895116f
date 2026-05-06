@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ArrowRight, ChevronDown, Menu } from "lucide-react";
-import { useReducedMotion } from "motion/react";
+
 import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
 import { cn } from "@/lib/utils";
