@@ -130,9 +130,9 @@ const Header = () => {
                 onClick={() => setPolesOpen((v) => !v)}
                 className={cn(
                   "flex items-center gap-1 px-3.5 py-[3.5px] rounded-full text-[13px] font-medium transition-colors duration-300",
-                  "text-black/70 hover:text-black hover:bg-black/[0.05]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                  (polesOpen || polesActive) && "text-black bg-black/[0.05]",
+                  "text-black/70 hover:text-black",
+                  "focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15",
+                  (polesOpen || polesActive) && "text-black",
                 )}
               >
                 Pôles
