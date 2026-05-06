@@ -28,10 +28,8 @@ const Contact = () => {
   );
 
   const methods = useForm<ContactFormData>({
-    // @ts-expect-error - empty string default for requestType is intentional pre-selection state
     resolver: zodResolver(contactSchema),
-    // @ts-expect-error - same: defaults intentionally include "" until user picks
-    defaultValues,
+    defaultValues: defaultValues as unknown as Partial<ContactFormData>,
     mode: "onSubmit",
     reValidateMode: "onChange",
   });
