@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ArrowRight, ChevronDown, Menu } from "lucide-react";
-import { useReducedMotion } from "motion/react";
+
 import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
 import { cn } from "@/lib/utils";
@@ -53,11 +53,6 @@ const Header = () => {
   const polesBtnRef = useRef<HTMLButtonElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const closeTimerRef = useRef<number | null>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const [magnet, setMagnet] = useState({ x: 0, y: 0 });
-  const [magnetActive, setMagnetActive] = useState(false);
-  const reduced = useReducedMotion();
-
   const polesActive = pathname.startsWith("/pole/");
   const showCta = pathname !== "/contact";
 
@@ -76,22 +71,6 @@ const Header = () => {
     closeTimerRef.current = window.setTimeout(() => setPolesOpen(false), 120);
   };
 
-  const isTouch =
-    typeof window !== "undefined" && "ontouchstart" in window;
-  const magnetDisabled = isTouch || !!reduced;
-
-  const handleCtaMove = (e: React.MouseEvent) => {
-    if (magnetDisabled || !ctaRef.current) return;
-    const rect = ctaRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    setMagnetActive(true);
-    setMagnet({ x: (e.clientX - cx) * 0.25, y: (e.clientY - cy) * 0.25 });
-  };
-  const handleCtaLeave = () => {
-    setMagnetActive(false);
-    setMagnet({ x: 0, y: 0 });
-  };
 
   return (
     <>
@@ -166,21 +145,12 @@ const Header = () => {
           {/* CTA */}
           {showCta ? (
             <Link
-              ref={ctaRef}
               to="/contact"
-              onMouseMove={handleCtaMove}
-              onMouseLeave={handleCtaLeave}
               className={cn(
                 "group hidden lg:inline-flex items-center pl-4 pr-1.5 py-1.5 rounded-full",
-                "text-text-primary text-[13px] font-medium gap-2.5",
+                "text-text-primary text-[13px] font-medium gap-2.5 transition-colors duration-300",
               )}
-              style={{
-                ...CTA_GLASS_STYLE,
-                transform: `translate(${magnet.x}px, ${magnet.y}px)`,
-                transition: magnetActive
-                  ? "transform 100ms ease-out"
-                  : "transform 400ms cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
+              style={CTA_GLASS_STYLE}
             >
               <span>Demander un devis</span>
               <span className="w-6 h-6 rounded-full bg-text-primary flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5">
