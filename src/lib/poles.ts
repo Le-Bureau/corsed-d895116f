@@ -34,6 +34,7 @@ export interface Pole {
   subServices: PoleSubService[];
   heroImage?: string;
   showcaseImage?: string;
+  mobileImagePosition?: string;
 }
 
 export const POLES: Pole[] = [
@@ -63,6 +64,7 @@ export const POLES: Pole[] = [
     ],
     heroImage: nettoyageImg,
     showcaseImage: nettoyageShowcase,
+    mobileImagePosition: "center 25%",
   },
   {
     key: "diagnostic",
