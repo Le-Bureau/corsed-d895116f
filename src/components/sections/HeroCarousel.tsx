@@ -94,7 +94,7 @@ const HeroCarousel = () => {
           Mirrors HeroSlideContent's full layout (eyebrow + title + mb-8 + pitch + mb-12 + CTAs)
           with invisible spacers so flex items-center aligns the title slot
           exactly with HeroSlideContent's title slot. */}
-      <div className="absolute inset-0 z-[8] flex items-center pointer-events-none">
+      <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
         <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)]">
           <div className="w-full max-w-[780px]">
             {/* Spacer matches eyebrow: text-[13px] line-height ~1.2 + py-2 (1rem) + mb-7 (1.75rem) */}
