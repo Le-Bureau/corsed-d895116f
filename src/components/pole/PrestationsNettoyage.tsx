@@ -7,7 +7,7 @@ const prestations = [
     title: "Nettoyage rapide",
     target: "Panneaux solaires · Vitrages",
     description:
-      "Pulvérisation à l'eau chaude ou à l'eau osmosée pure, basse pression. Idéal quand vous avez besoin d'un résultat immédiat sans traitement de fond — pour restaurer la production d'une centrale photovoltaïque ou nettoyer des surfaces vitrées encrassées.",
+      "Pulvérisation à l'eau chaude ou à l'eau osmosée pure, basse pression. Idéal quand vous avez besoin d'un résultat immédiat sans traitement de fond, pour restaurer la production d'une centrale photovoltaïque ou nettoyer des surfaces vitrées encrassées.",
     specs: [
       "Eau chaude ou osmosée selon le support",
       "Sans produit chimique",

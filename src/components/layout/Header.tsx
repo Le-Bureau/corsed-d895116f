@@ -96,7 +96,7 @@ const Header = () => {
           <Link
             to="/"
             className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-            aria-label="Corse Drone — Accueil"
+            aria-label="Corse Drone, Accueil"
           >
             <img
               src={logoMark}

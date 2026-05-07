@@ -96,7 +96,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
               }}
             />
             <span>
-              Pôle {paddedIndex} sur 04 — {pole.label}
+              Pôle {paddedIndex} sur 04 · {pole.label}
             </span>
             {pole.comingSoon && (
               <span className="ml-2 px-2.5 py-0.5 rounded-full bg-amber-500/[0.2] text-amber-300 text-[11px] font-semibold tracking-wider">
