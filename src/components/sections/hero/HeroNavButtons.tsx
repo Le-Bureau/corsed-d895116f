@@ -9,7 +9,7 @@ const baseBtn =
   "w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-darker";
 
 const HeroNavButtons = ({ onPrev, onNext }: HeroNavButtonsProps) => (
-  <div className="absolute bottom-8 right-6 lg:bottom-12 lg:right-10 z-20 hidden md:flex flex-col gap-3">
+  <div className="absolute right-6 lg:right-10 top-[calc(50%+clamp(70px,14vw,180px)/2+1rem)] z-20 hidden md:flex flex-row gap-2">
     <button
       type="button"
       onClick={onPrev}
