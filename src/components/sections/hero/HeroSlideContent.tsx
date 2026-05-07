@@ -107,7 +107,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
           <div
             aria-hidden="true"
             style={{ height: "clamp(70px, 14vw, 180px)" }}
-            className="mb-8"
+            className="mb-12 md:mb-8"
           />
           <h1 className="sr-only">{pole.label}</h1>
 
@@ -136,7 +136,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
             </Link>
             <Link
               to={`/pole/${pole.slug}`}
-              className="group inline-flex items-center justify-center sm:justify-start gap-2 text-[14px] sm:text-[15px] font-medium text-text-on-dark py-2 sm:py-4 sm:px-8 sm:rounded-full sm:glass-light sm:hover:bg-white/[0.14] transition-all duration-200 sm:hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center sm:justify-start gap-2 text-[14px] sm:text-[15px] font-medium text-text-on-dark py-3 px-6 rounded-full border border-white/40 sm:border-0 sm:py-4 sm:px-8 sm:glass-light sm:hover:bg-white/[0.14] transition-all duration-200 sm:hover:-translate-y-0.5"
               style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
             >
               Découvrir le pôle
