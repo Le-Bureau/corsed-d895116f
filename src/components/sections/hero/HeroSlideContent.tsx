@@ -122,11 +122,11 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
           {/* CTAs */}
           <motion.div
             variants={childVariants}
-            className="flex gap-4 flex-wrap"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:flex-wrap items-stretch sm:items-center"
           >
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-text-on-dark px-8 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-text-on-dark px-8 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5 w-full sm:w-auto"
             >
               Demander un devis
               <ArrowRight
@@ -136,7 +136,8 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
             </Link>
             <Link
               to={`/pole/${pole.slug}`}
-              className="group glass-light hover:bg-white/[0.14] inline-flex items-center gap-2 rounded-full px-8 py-4 text-[15px] font-medium text-text-on-dark transition-all duration-200 hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center sm:justify-start gap-2 text-[14px] sm:text-[15px] font-medium text-text-on-dark py-2 sm:py-4 sm:px-8 sm:rounded-full sm:glass-light sm:hover:bg-white/[0.14] transition-all duration-200 sm:hover:-translate-y-0.5"
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
             >
               Découvrir le pôle
               <ArrowRight
