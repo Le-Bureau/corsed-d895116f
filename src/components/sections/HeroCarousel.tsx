@@ -128,6 +128,7 @@ const HeroCarousel = () => {
             {/* Spacer matches eyebrow: text-[13px] line-height ~1.2 + py-2 (1rem) + mb-7 (1.75rem) */}
             <div aria-hidden="true" style={{ height: "calc(13px * 1.2 + 1rem + 1.75rem)" }} />
             <div
+              ref={trackRef}
               className="relative w-full"
               style={{ height: "clamp(70px, 14vw, 180px)" }}
             >
@@ -137,11 +138,13 @@ const HeroCarousel = () => {
               currentIndex,
               viewport.width,
               viewport.isMobile,
+              ghostShifts[i] ?? 0,
             );
             const isActive = i === currentIndex;
             return (
               <motion.div
                 key={pole.key}
+                ref={(el) => (titleRefs.current[i] = el)}
                 role={isGhost ? "button" : undefined}
                 tabIndex={isGhost ? 0 : -1}
                 aria-hidden={!isActive ? "true" : undefined}
