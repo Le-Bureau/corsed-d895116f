@@ -23,7 +23,7 @@ function getTitleProps(
   if (diff > TOTAL / 2) diff -= TOTAL;
   if (diff < -TOTAL / 2) diff += TOTAL;
 
-  const shiftRight = isMobile ? viewportWidth * 2 : viewportWidth * 0.78;
+  const shiftRight = isMobile ? viewportWidth * 2 : viewportWidth * 0.42;
   const shiftLeftOut = viewportWidth * 0.6;
   const ghostScale = isMobile ? 0.5 : 0.55;
 
