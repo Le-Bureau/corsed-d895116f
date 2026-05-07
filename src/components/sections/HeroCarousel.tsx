@@ -150,7 +150,7 @@ const HeroCarousel = () => {
                   fontSize: "clamp(42px, 7vw, 110px)",
                   letterSpacing: "-0.035em",
                   lineHeight: 1,
-                  transformOrigin: "left center",
+                  transformOrigin: isGhost ? "left bottom" : "left center",
                   textShadow:
                     "0 2px 20px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.4)",
                 }}
