@@ -57,6 +57,9 @@ const HeroCarousel = () => {
   const reduced = useReducedMotion();
 
   const [viewport, setViewport] = useState({ width: 1200, isMobile: false });
+  const trackRef = useRef<HTMLDivElement>(null);
+  const titleRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [ghostShifts, setGhostShifts] = useState<number[]>([]);
 
   useEffect(() => {
     const update = () =>
@@ -68,6 +71,30 @@ const HeroCarousel = () => {
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
+
+  // Compute per-pole ghost x so the (scaled) ghost ends at the same right padding
+  // as the active title's left padding inside the track wrapper.
+  useEffect(() => {
+    const compute = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      const trackWidth = track.getBoundingClientRect().width;
+      const ghostScale = viewport.isMobile ? 0.5 : 0.55;
+      const next = POLES.map((_, i) => {
+        const el = titleRefs.current[i];
+        if (!el) return 0;
+        const labelWidth = el.scrollWidth;
+        // Ghost is anchored left:0 inside track; after scale (origin left bottom),
+        // its visual right edge sits at labelWidth * scale.
+        // We want right edge = trackWidth, so x = trackWidth - labelWidth * scale.
+        return Math.max(0, trackWidth - labelWidth * ghostScale);
+      });
+      setGhostShifts(next);
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, [viewport]);
 
   const duration = reduced ? 0.3 : 1.2;
 
