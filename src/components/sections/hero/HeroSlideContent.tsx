@@ -95,9 +95,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
                   "background-color 1500ms cubic-bezier(0.16,1,0.3,1), box-shadow 1500ms cubic-bezier(0.16,1,0.3,1)",
               }}
             />
-            <span>
-              Pôle {paddedIndex} sur 04 · {pole.label}
-            </span>
+            <span>{pole.label}</span>
             {pole.comingSoon && (
               <span className="ml-2 px-2.5 py-0.5 rounded-full bg-amber-500/[0.2] text-amber-300 text-[11px] font-semibold tracking-wider">
                 Prochainement
