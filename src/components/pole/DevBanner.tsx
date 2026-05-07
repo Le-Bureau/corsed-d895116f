@@ -31,7 +31,7 @@ const DevBanner = () => {
       <span className="font-mono uppercase tracking-[0.18em] font-semibold text-text-primary">
         Développement en cours
       </span>
-      <span className="text-text-muted hidden sm:inline">—</span>
+      <span className="text-text-muted hidden sm:inline">·</span>
       <span className="text-text-muted hidden sm:inline font-mono uppercase tracking-[0.18em]">
         Service en préparation,{" "}
         <Link

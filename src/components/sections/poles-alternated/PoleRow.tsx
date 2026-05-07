@@ -126,7 +126,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                 border: `1px solid ${color}40`,
               }}
             >
-              CORSE DRONE — {pole.label.toUpperCase()}
+              CORSE DRONE · {pole.label.toUpperCase()}
             </span>
           </div>
         </div>

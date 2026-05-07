@@ -82,7 +82,7 @@ const PoleHero = ({ pole }: Props) => {
             aria-hidden="true"
           />
           {pole.heroPoleNumber || "PÔLE"}
-          {" — "}
+          {" · "}
           <span style={{ color: "var(--pole-color)" }}>
             {pole.isInDevelopment ? "DÉVELOPPEMENT EN COURS" : "DISPONIBLE"}
           </span>
