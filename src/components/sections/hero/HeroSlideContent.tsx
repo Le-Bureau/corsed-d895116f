@@ -107,7 +107,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
           <div
             aria-hidden="true"
             style={{ height: "clamp(70px, 14vw, 180px)" }}
-            className="mb-12 md:mb-8"
+            className="mb-14 md:mb-8"
           />
           <h1 className="sr-only">{pole.label}</h1>
 
