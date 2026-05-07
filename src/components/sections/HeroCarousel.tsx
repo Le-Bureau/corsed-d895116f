@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useHeroCarousel } from "@/hooks/useHeroCarousel";
 import { POLES } from "@/lib/poles";
@@ -18,21 +18,22 @@ function getTitleProps(
   currentIndex: number,
   viewportWidth: number,
   isMobile: boolean,
+  ghostShiftPx: number,
 ) {
   let diff = index - currentIndex;
   if (diff > TOTAL / 2) diff -= TOTAL;
   if (diff < -TOTAL / 2) diff += TOTAL;
 
-  const shiftRight = isMobile ? viewportWidth * 2 : viewportWidth * 0.42;
   const shiftLeftOut = viewportWidth * 0.6;
   const ghostScale = isMobile ? 0.5 : 0.55;
+  const fallbackShift = isMobile ? viewportWidth * 2 : viewportWidth * 0.42;
 
   if (diff === 0) {
     return { x: 0, opacity: 1, scale: 1, isGhost: false };
   }
   if (diff === 1) {
     return {
-      x: shiftRight,
+      x: isMobile ? viewportWidth * 2 : ghostShiftPx || fallbackShift,
       opacity: isMobile ? 0 : 0.28,
       scale: ghostScale,
       isGhost: !isMobile,
@@ -41,7 +42,7 @@ function getTitleProps(
   if (diff === -1) {
     return { x: -shiftLeftOut, opacity: 0, scale: 0.9, isGhost: false };
   }
-  return { x: shiftRight * 1.5, opacity: 0, scale: ghostScale, isGhost: false };
+  return { x: fallbackShift * 1.5, opacity: 0, scale: ghostScale, isGhost: false };
 }
 
 const HeroCarousel = () => {
@@ -56,6 +57,9 @@ const HeroCarousel = () => {
   const reduced = useReducedMotion();
 
   const [viewport, setViewport] = useState({ width: 1200, isMobile: false });
+  const trackRef = useRef<HTMLDivElement>(null);
+  const titleRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [ghostShifts, setGhostShifts] = useState<number[]>([]);
 
   useEffect(() => {
     const update = () =>
@@ -67,6 +71,30 @@ const HeroCarousel = () => {
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
+
+  // Compute per-pole ghost x so the (scaled) ghost ends at the same right padding
+  // as the active title's left padding inside the track wrapper.
+  useEffect(() => {
+    const compute = () => {
+      const track = trackRef.current;
+      if (!track) return;
+      const trackWidth = track.getBoundingClientRect().width;
+      const ghostScale = viewport.isMobile ? 0.5 : 0.55;
+      const next = POLES.map((_, i) => {
+        const el = titleRefs.current[i];
+        if (!el) return 0;
+        const labelWidth = el.scrollWidth;
+        // Ghost is anchored left:0 inside track; after scale (origin left bottom),
+        // its visual right edge sits at labelWidth * scale.
+        // We want right edge = trackWidth, so x = trackWidth - labelWidth * scale.
+        return Math.max(0, trackWidth - labelWidth * ghostScale);
+      });
+      setGhostShifts(next);
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, [viewport]);
 
   const duration = reduced ? 0.3 : 1.2;
 
@@ -100,6 +128,7 @@ const HeroCarousel = () => {
             {/* Spacer matches eyebrow: text-[13px] line-height ~1.2 + py-2 (1rem) + mb-7 (1.75rem) */}
             <div aria-hidden="true" style={{ height: "calc(13px * 1.2 + 1rem + 1.75rem)" }} />
             <div
+              ref={trackRef}
               className="relative w-full"
               style={{ height: "clamp(70px, 14vw, 180px)" }}
             >
@@ -109,11 +138,13 @@ const HeroCarousel = () => {
               currentIndex,
               viewport.width,
               viewport.isMobile,
+              ghostShifts[i] ?? 0,
             );
             const isActive = i === currentIndex;
             return (
               <motion.div
                 key={pole.key}
+                ref={(el) => (titleRefs.current[i] = el)}
                 role={isGhost ? "button" : undefined}
                 tabIndex={isGhost ? 0 : -1}
                 aria-hidden={!isActive ? "true" : undefined}
