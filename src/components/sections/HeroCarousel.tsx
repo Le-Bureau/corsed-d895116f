@@ -18,21 +18,22 @@ function getTitleProps(
   currentIndex: number,
   viewportWidth: number,
   isMobile: boolean,
+  ghostShiftPx: number,
 ) {
   let diff = index - currentIndex;
   if (diff > TOTAL / 2) diff -= TOTAL;
   if (diff < -TOTAL / 2) diff += TOTAL;
 
-  const shiftRight = isMobile ? viewportWidth * 2 : viewportWidth * 0.42;
   const shiftLeftOut = viewportWidth * 0.6;
   const ghostScale = isMobile ? 0.5 : 0.55;
+  const fallbackShift = isMobile ? viewportWidth * 2 : viewportWidth * 0.42;
 
   if (diff === 0) {
     return { x: 0, opacity: 1, scale: 1, isGhost: false };
   }
   if (diff === 1) {
     return {
-      x: shiftRight,
+      x: isMobile ? viewportWidth * 2 : ghostShiftPx || fallbackShift,
       opacity: isMobile ? 0 : 0.28,
       scale: ghostScale,
       isGhost: !isMobile,
@@ -41,7 +42,7 @@ function getTitleProps(
   if (diff === -1) {
     return { x: -shiftLeftOut, opacity: 0, scale: 0.9, isGhost: false };
   }
-  return { x: shiftRight * 1.5, opacity: 0, scale: ghostScale, isGhost: false };
+  return { x: fallbackShift * 1.5, opacity: 0, scale: ghostScale, isGhost: false };
 }
 
 const HeroCarousel = () => {
