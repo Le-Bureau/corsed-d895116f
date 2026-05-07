@@ -191,6 +191,10 @@ const HeroCarousel = () => {
             );
           })}
             </div>
+            {/* Spacers below title to mirror HeroSlideContent's flex centering:
+                mb-8 (2rem) + subtitle (~3 lines text-lg leading-relaxed ≈ 5.25rem) + mb-12 (3rem)
+                + CTAs (py-4 + 15px text ≈ 3.125rem) */}
+            <div aria-hidden="true" style={{ height: "calc(2rem + 5.25rem + 3rem + 3.125rem)" }} />
           </div>
         </div>
       </div>
