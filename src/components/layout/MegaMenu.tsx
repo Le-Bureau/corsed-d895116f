@@ -92,20 +92,6 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                 e.currentTarget.style.backgroundColor = "";
               }}
             >
-              <div className="flex items-center gap-2 mb-2.5">
-                <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ background: pole.baseColorOnLight }}
-                  aria-hidden
-                />
-                <span
-                  className="font-mono text-[10px] uppercase tracking-[0.18em] font-bold"
-                  style={{ color: pole.baseColorOnLight }}
-                >
-                  {pole.heroPoleNumber}
-                </span>
-              </div>
-
               <Link
                 role="menuitem"
                 to={`/pole/${pole.slug}`}
