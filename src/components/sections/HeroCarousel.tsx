@@ -86,12 +86,14 @@ const HeroCarousel = () => {
       <HeroBackground currentIndex={currentIndex} direction={direction} />
 
       {/* Title rotation track — all titles always mounted, animated together.
-          Mirrors HeroSlideContent's layout so the track sits exactly in the title slot. */}
+          Mirrors HeroSlideContent's full layout (eyebrow + title + mb-8 + pitch + mb-12 + CTAs)
+          with invisible spacers so flex items-center aligns the title slot
+          exactly with HeroSlideContent's title slot. */}
       <div className="absolute inset-0 z-[8] flex items-center pointer-events-none">
         <div className="w-full px-5 md:px-10">
           <div className="w-full max-w-[780px]">
-            {/* Spacer matches eyebrow height + mb-7 */}
-            <div aria-hidden="true" style={{ height: "calc(1.5rem + 1.75rem)" }} />
+            {/* Spacer matches eyebrow: text-[13px] line-height ~1.2 + py-2 (1rem) + mb-7 (1.75rem) */}
+            <div aria-hidden="true" style={{ height: "calc(13px * 1.2 + 1rem + 1.75rem)" }} />
             <div
               className="relative w-full"
               style={{ height: "clamp(70px, 14vw, 180px)" }}
@@ -189,6 +191,10 @@ const HeroCarousel = () => {
             );
           })}
             </div>
+            {/* Spacers below title to mirror HeroSlideContent's flex centering:
+                mb-8 (2rem) + subtitle (~3 lines text-lg leading-relaxed ≈ 5.25rem) + mb-12 (3rem)
+                + CTAs (py-4 + 15px text ≈ 3.125rem) */}
+            <div aria-hidden="true" style={{ height: "calc(2rem + 5.25rem + 3rem + 3.125rem)" }} />
           </div>
         </div>
       </div>
