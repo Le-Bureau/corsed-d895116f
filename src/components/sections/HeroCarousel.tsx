@@ -8,6 +8,7 @@ import HeroPagination from "./hero/HeroPagination";
 import HeroNavButtons from "./hero/HeroNavButtons";
 import HeroStatCard from "./hero/HeroStatCard";
 import HeroProgressBar from "./hero/HeroProgressBar";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 const EASE = [0.65, 0, 0.35, 1] as const;
 const TOTAL = POLES.length;
@@ -84,6 +85,10 @@ const HeroCarousel = () => {
       }
     >
       <HeroBackground currentIndex={currentIndex} direction={direction} />
+
+      <div className="absolute top-4 left-5 md:left-10 z-20 pointer-events-none">
+        <BrandLogo className="h-16 md:h-20 w-auto -ml-0" />
+      </div>
 
       {/* Title rotation track — all titles always mounted, animated together.
           Mirrors HeroSlideContent's full layout (eyebrow + title + mb-8 + pitch + mb-12 + CTAs)
