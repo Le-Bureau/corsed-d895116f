@@ -217,7 +217,7 @@ const HeroCarousel = () => {
         <HeroStatCard key={currentPole.key} pole={currentPole} direction={direction} />
       </AnimatePresence>
 
-      <HeroNavButtons onPrev={goToPrev} onNext={goToNext} />
+      <HeroNavButtons currentIndex={currentIndex} onPrev={goToPrev} onNext={goToNext} />
       <HeroPagination currentIndex={currentIndex} onSelect={goToIndex} />
       <HeroProgressBar currentIndex={currentIndex} total={POLES.length} />
     </div>
