@@ -156,7 +156,7 @@ const PartenairesForm = () => {
       id="candidature"
       role="region"
       aria-labelledby="candidature-title"
-      className="relative bg-surface-elevated py-20 lg:py-28 scroll-mt-24"
+      className="relative bg-surface-bg py-20 lg:py-28 scroll-mt-24"
     >
       {/* Subtle ambient mesh */}
       <div
