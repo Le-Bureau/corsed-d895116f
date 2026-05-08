@@ -12,10 +12,11 @@ const WhyHeader = () => {
           id="why-section-title"
           className="font-display font-semibold text-text-primary text-[clamp(40px,5.2vw,68px)] leading-[1.05] tracking-[-0.035em] mb-6"
         >
-          L'aérien, pour faire mieux que le sol.
+          Moins de matériel,{" "}
+          <span className="italic text-logo-base-deep">plus de résultat.</span>
         </h2>
         <p className="text-lg leading-relaxed text-text-muted max-w-[620px]">
-          Quatre raisons concrètes pour lesquelles le drone professionnel
+          Trois raisons concrètes pour lesquelles le drone professionnel
           transforme l'approche des chantiers, des inspections et de
           l'agriculture en Corse.
         </p>
