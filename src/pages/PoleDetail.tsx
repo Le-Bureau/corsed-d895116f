@@ -39,6 +39,33 @@ export default function PoleDetail() {
       className={`min-h-screen bg-surface-bg ${pole.isInDevelopment ? "pt-8" : ""}`}
       style={styleVars}
     >
+      <SEO
+        title={`${pole.label} par drone en Corse`}
+        description={
+          POLE_META[pole.key] ||
+          (pole.heroPitch || pole.pitch || "").slice(0, 160)
+        }
+        canonicalPath={`/pole/${pole.key}`}
+        ogImage={
+          pole.showcaseImage
+            ? `https://corse-drone.com${pole.showcaseImage}`
+            : undefined
+        }
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: pole.label,
+          name: `${pole.label} par drone — Corse Drone`,
+          description: pole.heroPitch || pole.pitch,
+          provider: {
+            "@type": "LocalBusiness",
+            name: "Corse Drone",
+            url: "https://corse-drone.com",
+          },
+          areaServed: { "@type": "AdministrativeArea", name: "Corse" },
+          url: `https://corse-drone.com/pole/${pole.key}`,
+        }}
+      />
       {pole.isInDevelopment && <DevBanner />}
       <PoleHero pole={pole} />
       {pole.whyDroneItems && pole.whyDroneItems.length > 0 && (
