@@ -40,6 +40,11 @@ export default function MentionsLegales() {
 
   return (
     <main className="min-h-screen bg-surface-bg">
+      <SEO
+        title="Mentions légales"
+        description="Mentions légales de Corse Drone : éditeur, hébergeur, protection des données personnelles, propriété intellectuelle."
+        canonicalPath="/mentions-legales"
+      />
       {/* Page header */}
       <section className="pt-32 pb-12 lg:pt-40 lg:pb-16 border-b border-border-subtle">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
