@@ -75,35 +75,57 @@ const PoleFinalCTA = ({ pole }: Props) => {
               <p className="text-[18px] leading-[1.55] text-text-muted mb-10 max-w-[600px] mx-auto">
                 {subtitle}
               </p>
-              <Link
-                to={href}
-                className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-[15px] font-semibold text-white transition-all duration-300 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                style={
-                  {
-                    background: "var(--pole-color)",
-                    boxShadow:
-                      "0 4px 14px rgba(var(--pole-color-rgb), 0.30), 0 12px 32px rgba(var(--pole-color-rgb), 0.20)",
-                    "--tw-ring-color": "rgba(var(--pole-color-rgb), 0.40)",
-                  } as React.CSSProperties
-                }
-                onMouseEnter={(e) => {
+              {(() => {
+                const sharedClass = "group inline-flex items-center gap-2 px-8 py-4 rounded-full text-[15px] font-semibold text-white transition-all duration-300 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+                const sharedStyle = {
+                  background: "var(--pole-color)",
+                  boxShadow:
+                    "0 4px 14px rgba(var(--pole-color-rgb), 0.30), 0 12px 32px rgba(var(--pole-color-rgb), 0.20)",
+                  "--tw-ring-color": "rgba(var(--pole-color-rgb), 0.40)",
+                } as React.CSSProperties;
+                const onEnter = (e: React.MouseEvent<HTMLElement>) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
                   e.currentTarget.style.boxShadow =
                     "0 8px 24px rgba(var(--pole-color-rgb), 0.40), 0 20px 48px rgba(var(--pole-color-rgb), 0.25)";
-                }}
-                onMouseLeave={(e) => {
+                };
+                const onLeave = (e: React.MouseEvent<HTMLElement>) => {
                   e.currentTarget.style.transform = "";
                   e.currentTarget.style.boxShadow =
                     "0 4px 14px rgba(var(--pole-color-rgb), 0.30), 0 12px 32px rgba(var(--pole-color-rgb), 0.20)";
-                }}
-              >
-                <span>{label}</span>
-                <ArrowRight
-                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                  strokeWidth={2.5}
-                  aria-hidden="true"
-                />
-              </Link>
+                };
+                const inner = (
+                  <>
+                    <span>{label}</span>
+                    <ArrowRight
+                      className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    />
+                  </>
+                );
+                return pole.isInDevelopment ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsAlertOpen(true)}
+                    className={sharedClass}
+                    style={sharedStyle}
+                    onMouseEnter={onEnter}
+                    onMouseLeave={onLeave}
+                  >
+                    {inner}
+                  </button>
+                ) : (
+                  <Link
+                    to={href}
+                    className={sharedClass}
+                    style={sharedStyle}
+                    onMouseEnter={onEnter}
+                    onMouseLeave={onLeave}
+                  >
+                    {inner}
+                  </Link>
+                );
+              })()}
               <p className="text-xs text-text-muted mt-6">
                 Réponse sous 24h ouvrées. Visite et devis offerts.
               </p>
@@ -111,6 +133,11 @@ const PoleFinalCTA = ({ pole }: Props) => {
           </div>
         </FadeInWhenVisible>
       </div>
+      <LaunchAlertPopup
+        isOpen={isAlertOpen}
+        onClose={() => setIsAlertOpen(false)}
+        poleKey={pole.key}
+      />
     </section>
   );
 };
