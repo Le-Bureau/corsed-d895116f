@@ -21,7 +21,7 @@ const HeaderLogo = ({ className, tone = "on-light", onClick }: Props) => {
       )}
       aria-label="Corse Drone, Accueil"
     >
-      <img src={src} alt="Corse Drone" className="h-full w-auto" />
+      <img src={src} alt="Corse Drone — drone professionnel en Corse" decoding="async" className="h-full w-auto" />
     </Link>
   );
 };
