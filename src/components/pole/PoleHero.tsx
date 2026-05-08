@@ -164,6 +164,11 @@ const PoleHero = ({ pole }: Props) => {
           )}
         </div>
       </div>
+      <LaunchAlertPopup
+        isOpen={isAlertOpen}
+        onClose={() => setIsAlertOpen(false)}
+        poleKey={pole.key}
+      />
     </section>
   );
 };
