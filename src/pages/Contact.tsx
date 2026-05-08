@@ -14,6 +14,7 @@ import ContactHero from "@/components/contact/ContactHero";
 import ContactForm from "@/components/contact/ContactForm";
 import ContactInfoCards from "@/components/contact/ContactInfoCards";
 import ContactSuccess from "@/components/contact/ContactSuccess";
+import { SEO } from "@/components/seo/SEO";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
