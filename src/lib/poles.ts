@@ -13,6 +13,8 @@ export interface PoleSubService {
   name: string;
   slug?: string;
   description?: string;
+  category?: string;
+  iconName?: string;
 }
 
 export interface WhyDroneItem {
