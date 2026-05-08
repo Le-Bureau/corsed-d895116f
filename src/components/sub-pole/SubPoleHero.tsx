@@ -33,15 +33,17 @@ const SubPoleHero = ({ content, pole }: Props) => {
       className="relative overflow-hidden isolate bg-surface-bg pt-32 pb-24 lg:pt-40 lg:pb-32"
     >
       {content.heroImage && (
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${content.heroImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img
+            src={content.heroImage}
+            alt={`${content.heroTitle} par drone — Corse Drone`}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "center" }}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </div>
       )}
       <div
         aria-hidden="true"
