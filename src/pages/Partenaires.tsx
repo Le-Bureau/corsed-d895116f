@@ -9,6 +9,11 @@ import PartenairesForm from "@/components/partenaires/PartenairesForm";
 const Partenaires = () => {
   return (
     <div className="pt-20 bg-surface-bg text-text-primary">
+      <SEO
+        title="Devenir partenaire de Corse Drone"
+        description="Rejoignez le réseau de partenaires Corse Drone. Programme dédié aux professionnels du BTP, de l'industrie et de l'agriculture corses."
+        canonicalPath="/partenaires"
+      />
       <PartenairesHero />
       <WhyJoinSection />
       <HowItWorksSection />
