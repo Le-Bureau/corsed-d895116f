@@ -1,6 +1,7 @@
 import { useParams, Navigate } from "react-router-dom";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
+import { SEO } from "@/components/seo/SEO";
 import DevBanner from "@/components/pole/DevBanner";
 import PoleHero from "@/components/pole/PoleHero";
 import PoleWhyDrone from "@/components/pole/PoleWhyDrone";
@@ -10,6 +11,17 @@ import PrestationsNettoyage from "@/components/pole/PrestationsNettoyage";
 import PoleUseCases from "@/components/pole/PoleUseCases";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
+
+const POLE_META: Record<string, string> = {
+  nettoyage:
+    "Nettoyage par drone en Corse : façades, toitures, panneaux photovoltaïques. Intervention rapide, sans échafaudage ni nacelle, sans immobilisation de site.",
+  diagnostic:
+    "Diagnostic et inspection par drone en Corse : relevés thermiques et visuels haute précision. Rapports exploitables sous 48h pour assurances et études techniques.",
+  agriculture:
+    "Agriculture de précision par drone en Corse : épandage ciblé, traitement phytosanitaire, analyses multispectrales. Optimisez vos rendements parcelle par parcelle.",
+  transport:
+    "Transport par drone en Corse : acheminement de matériel jusqu'à 100kg dans les zones difficiles d'accès. Alternative à l'hélicoptère pour vos chantiers isolés.",
+};
 
 export default function PoleDetail() {
   const { slug } = useParams<{ slug: string }>();
