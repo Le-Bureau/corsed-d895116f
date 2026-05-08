@@ -203,9 +203,9 @@ const Footer = () => {
                 Mentions légales
               </Link>
               <span aria-hidden>·</span>
-              <a href="#" className="hover:text-text-on-dark transition-colors">
+              <Link to="/politique-confidentialite" className="hover:text-text-on-dark transition-colors">
                 Confidentialité
-              </a>
+              </Link>
             </div>
 
             <a
