@@ -90,7 +90,9 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
             {reduced ? (
               <img
                 src={pole.showcaseImage}
-                alt={pole.label}
+                alt={`${pole.label} par drone — illustration Corse Drone`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 style={
                   pole.mobileImagePosition
@@ -101,7 +103,9 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
             ) : (
               <motion.img
                 src={pole.showcaseImage}
-                alt={pole.label}
+                alt={`${pole.label} par drone — illustration Corse Drone`}
+                loading="lazy"
+                decoding="async"
                 style={{
                   y: imageY,
                   scale: 1.1,
