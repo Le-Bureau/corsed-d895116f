@@ -66,6 +66,11 @@ const Contact = () => {
 
   return (
     <FormProvider {...methods}>
+      <SEO
+        title="Contact — Demander un devis"
+        description="Contactez Corse Drone pour un devis de prestation drone en Corse. Réponse sous 24h ouvrées. Nettoyage, diagnostic, agriculture, transport."
+        canonicalPath="/contact"
+      />
       <ContactSection
         submitted={submitted}
         submissionData={submissionData}
