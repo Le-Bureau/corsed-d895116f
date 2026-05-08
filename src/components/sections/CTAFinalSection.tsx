@@ -11,16 +11,14 @@ const CTAFinalSection = () => {
       aria-labelledby="cta-final-title"
       className="relative bg-surface-darker text-text-on-dark overflow-hidden isolate py-28 lg:py-36"
     >
-      {/* Mesh ambient — 4 pole colors */}
+      {/* Mesh ambient — single logo-base tone */}
       <div
         aria-hidden="true"
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 15% 30%, rgba(80,130,172,0.30) 0%, transparent 55%)," +
-            "radial-gradient(ellipse at 85% 25%, rgba(244,166,12,0.20) 0%, transparent 55%)," +
-            "radial-gradient(ellipse at 80% 80%, rgba(163,51,51,0.22) 0%, transparent 55%)," +
-            "radial-gradient(ellipse at 20% 85%, rgba(63,122,56,0.22) 0%, transparent 55%)",
+            "radial-gradient(ellipse 60% 50% at 25% 30%, rgba(168,192,212,0.10) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 50% 40% at 80% 70%, rgba(168,192,212,0.06) 0%, transparent 60%)",
         }}
       />
       {/* Noise overlay */}
