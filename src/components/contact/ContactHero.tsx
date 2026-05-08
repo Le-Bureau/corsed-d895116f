@@ -11,7 +11,7 @@ const ContactHero = () => {
         <h1 className="font-display font-semibold text-text-primary text-[clamp(40px,5.2vw,76px)] leading-[1.05] tracking-[-0.035em] max-w-[880px] mb-6">
           Discutons de votre
           <br />
-          <span className="text-logo-base-deep">projet aérien.</span>
+          <span className="text-logo-base-deep">projet.</span>
         </h1>
         <p className="text-lg leading-relaxed text-text-muted max-w-[580px]">
           Quelques mots suffisent. Nous revenons vers vous sous 24h ouvrées
