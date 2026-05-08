@@ -6,7 +6,7 @@ const PartnersSection = () => {
     <section
       role="region"
       aria-labelledby="partners-section-title"
-      className="relative bg-surface-elevated overflow-hidden isolate py-24 lg:py-32"
+      className="relative bg-surface-bg overflow-hidden isolate py-24 lg:py-32"
     >
       {/* Subtle ambient mesh */}
       <div
