@@ -31,4 +31,8 @@ POLES.forEach((pole, index) => {
   document.head.appendChild(link);
 });
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <HelmetProvider>
+    <App />
+  </HelmetProvider>,
+);
