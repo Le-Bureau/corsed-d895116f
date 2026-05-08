@@ -1,4 +1,5 @@
 import { useState, useEffect, type ReactNode } from "react";
+import { SEO } from "@/components/seo/SEO";
 
 const SECTIONS = [
   { id: "editeur", label: "Éditeur du site" },
