@@ -69,6 +69,7 @@ export default function PoleDetail() {
       />
       {pole.isInDevelopment && <DevBanner />}
       <PoleHero pole={pole} />
+      {pole.key === "nettoyage" && <KeyStatsBand />}
       {pole.whyDroneItems && pole.whyDroneItems.length > 0 && (
         <PoleWhyDrone items={pole.whyDroneItems} />
       )}
