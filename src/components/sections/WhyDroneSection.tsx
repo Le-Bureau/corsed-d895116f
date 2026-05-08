@@ -11,7 +11,7 @@ const WhyDroneSection = () => {
     >
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10">
         <WhyHeader />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-16 lg:mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 lg:mt-20">
           {WHY_REASONS.map((reason, i) => (
             <WhyCard key={reason.key} reason={reason} delay={i * 0.08} />
           ))}
