@@ -142,9 +142,9 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <a href="#" className={`block ${linkBase}`}>
+                  <Link to="/politique-confidentialite" className={`block ${linkBase}`}>
                     Politique de confidentialité
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
