@@ -20,7 +20,7 @@ const Index = () => {
           image: "https://corse-drone.com/og-default.jpg",
           "@id": "https://corse-drone.com",
           url: "https://corse-drone.com",
-          telephone: "+33 7 69 97 77 00",
+          telephone: "+33769977700",
           address: {
             "@type": "PostalAddress",
             streetAddress: "Marine d'Albo, 44 Strada di a Torra",
@@ -31,8 +31,8 @@ const Index = () => {
           },
           geo: {
             "@type": "GeoCoordinates",
-            latitude: 42.7,
-            longitude: 9.35,
+            latitude: 42.7028,
+            longitude: 9.4503,
           },
           areaServed: {
             "@type": "AdministrativeArea",

@@ -62,10 +62,10 @@ const FooterCtaBlock = () => {
             <ArrowRight size={16} />
           </Link>
           <a
-            href="tel:0604501120"
+            href="tel:+33769977700"
             className="glass-light hover:bg-white/[0.14] inline-flex items-center rounded-full px-7 py-4 text-[15px] font-medium text-text-on-dark transition-all duration-200 hover:-translate-y-0.5"
           >
-            06 04 50 11 20
+            07 69 97 77 00
           </a>
         </motion.div>
       </motion.div>
