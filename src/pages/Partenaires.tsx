@@ -1,3 +1,4 @@
+import { SEO } from "@/components/seo/SEO";
 import PartenairesHero from "@/components/partenaires/PartenairesHero";
 import WhyJoinSection from "@/components/partenaires/WhyJoinSection";
 import HowItWorksSection from "@/components/partenaires/HowItWorksSection";
