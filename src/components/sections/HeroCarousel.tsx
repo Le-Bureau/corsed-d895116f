@@ -33,7 +33,7 @@ function getTitleProps(
   }
   if (diff === 1) {
     return {
-      x: isMobile ? viewportWidth * 2 : ghostShiftPx || fallbackShift,
+      x: isMobile ? viewportWidth * 2 : fallbackShift,
       opacity: isMobile ? 0 : 0.28,
       scale: ghostScale,
       isGhost: !isMobile,
