@@ -26,7 +26,7 @@ function getTitleProps(
 
   const shiftLeftOut = viewportWidth * 0.6;
   const ghostScale = isMobile ? 0.5 : 0.55;
-  const fallbackShift = isMobile ? viewportWidth * 2 : viewportWidth * 0.42;
+  const fallbackShift = isMobile ? viewportWidth * 2 : viewportWidth * 0.55;
 
   if (diff === 0) {
     return { x: 0, opacity: 1, scale: 1, isGhost: false };
