@@ -38,6 +38,35 @@ export default function SubPoleDetail() {
 
   return (
     <main className="min-h-screen bg-surface-bg" style={styleVars}>
+      <SEO
+        title={`${content.heroTitle} par drone`}
+        description={(content.heroPitch || "").slice(0, 160)}
+        canonicalPath={`/pole/${slug}/${subSlug}`}
+        ogImage={
+          content.heroImage
+            ? `https://corse-drone.com${content.heroImage}`
+            : undefined
+        }
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: content.heroTitle,
+          name: content.heroTitle,
+          description: content.heroPitch,
+          provider: {
+            "@type": "LocalBusiness",
+            name: "Corse Drone",
+            url: "https://corse-drone.com",
+          },
+          areaServed: { "@type": "AdministrativeArea", name: "Corse" },
+          url: `https://corse-drone.com/pole/${slug}/${subSlug}`,
+          parentService: {
+            "@type": "Service",
+            name: pole.label,
+            url: `https://corse-drone.com/pole/${slug}`,
+          },
+        }}
+      />
       <SubPoleHero content={content} pole={pole} />
       <SubPoleStats stats={content.stats} />
       <SubPoleWhyTraiter content={content} />
