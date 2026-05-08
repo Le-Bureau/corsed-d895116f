@@ -92,6 +92,36 @@ export type Database = {
         }
         Relationships: []
       }
+      pole_launch_alerts: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          name: string
+          pole: string
+          status: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          pole: string
+          status?: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          pole?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

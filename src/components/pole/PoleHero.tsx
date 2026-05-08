@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLenis } from "@/components/SmoothScrollProvider";
 import { type Pole } from "@/lib/poles";
+import { LaunchAlertPopup } from "@/components/popups/LaunchAlertPopup";
 
 interface Props {
   pole: Pole;
@@ -9,8 +11,9 @@ interface Props {
 
 const PoleHero = ({ pole }: Props) => {
   const lenis = useLenis();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const ctaHref = pole.isInDevelopment
-    ? `/contact?type=alerte-lancement&pole=${pole.key}`
+    ? `#`
     : `/contact?expertise=${pole.key}`;
   const ctaLabel = pole.isInDevelopment ? "Être prévenu du lancement" : "Demander un devis";
 
@@ -116,20 +119,38 @@ const PoleHero = ({ pole }: Props) => {
         )}
 
         <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
-          <Link
-            to={ctaHref}
-            className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
-            style={{
-              boxShadow:
-                "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
-            }}
-          >
-            {ctaLabel}
-            <ArrowRight
-              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
-              style={{ color: "var(--pole-color)" }}
-            />
-          </Link>
+          {pole.isInDevelopment ? (
+            <button
+              type="button"
+              onClick={() => setIsAlertOpen(true)}
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
+              style={{
+                boxShadow:
+                  "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
+              }}
+            >
+              {ctaLabel}
+              <ArrowRight
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                style={{ color: "var(--pole-color)" }}
+              />
+            </button>
+          ) : (
+            <Link
+              to={ctaHref}
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
+              style={{
+                boxShadow:
+                  "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
+              }}
+            >
+              {ctaLabel}
+              <ArrowRight
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                style={{ color: "var(--pole-color)" }}
+              />
+            </Link>
+          )}
 
           {pole.subServices && pole.subServices.length > 0 && (
             <a
@@ -143,6 +164,11 @@ const PoleHero = ({ pole }: Props) => {
           )}
         </div>
       </div>
+      <LaunchAlertPopup
+        isOpen={isAlertOpen}
+        onClose={() => setIsAlertOpen(false)}
+        poleKey={pole.key}
+      />
     </section>
   );
 };
