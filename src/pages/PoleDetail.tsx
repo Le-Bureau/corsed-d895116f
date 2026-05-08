@@ -4,6 +4,7 @@ import { hexToRgb } from "@/lib/utils";
 import { SEO } from "@/components/seo/SEO";
 import DevBanner from "@/components/pole/DevBanner";
 import PoleHero from "@/components/pole/PoleHero";
+import KeyStatsBand from "@/components/pole/KeyStatsBand";
 import PoleWhyDrone from "@/components/pole/PoleWhyDrone";
 import PoleSubServices from "@/components/pole/PoleSubServices";
 import PoleProcess from "@/components/pole/PoleProcess";
@@ -68,6 +69,7 @@ export default function PoleDetail() {
       />
       {pole.isInDevelopment && <DevBanner />}
       <PoleHero pole={pole} />
+      {pole.key === "nettoyage" && <KeyStatsBand />}
       {pole.whyDroneItems && pole.whyDroneItems.length > 0 && (
         <PoleWhyDrone items={pole.whyDroneItems} />
       )}
