@@ -108,20 +108,24 @@ export default function MentionsLegales() {
                 </p>
                 <p>
                   <strong>SAS Corse Drone</strong>, Société par Actions
-                  Simplifiée au capital de [À COMPLÉTER : capital] euros,
-                  inscrite au Registre du Commerce et des Sociétés de Bastia
-                  sous le numéro RCS Bastia [À COMPLÉTER : numéro RCS], dont le
-                  siège social est situé au Marine d'Albo, 44 Strada di a
-                  Torra, 20217 Ogliastro.
+                  Simplifiée au capital de 3&nbsp;000,00&nbsp;euros, inscrite
+                  au Registre du Commerce et des Sociétés de Bastia sous le
+                  numéro RCS Bastia 102&nbsp;589&nbsp;231 (immatriculée le 19
+                  mars 2026), dont le siège social est situé au Marine d'Albo,
+                  44 Strada di a Torra, 20217 Ogliastro.
                 </p>
                 <ul>
-                  <li>SIRET : [À COMPLÉTER : SIRET Corse Drone]</li>
-                  <li>Code APE : [À COMPLÉTER : code APE]</li>
-                  <li>TVA intracommunautaire : [À COMPLÉTER : numéro TVA]</li>
+                  <li>SIREN : 102 589 231</li>
+                  <li>SIRET (siège) : 102 589 231 00012</li>
+                  <li>Code APE / NAF : 74.20Z (Activités photographiques)</li>
+                  <li>Forme juridique : SAS, société par actions simplifiée</li>
+                  <li>TVA intracommunautaire : FR91102589231</li>
+                  <li>Date de création : 18/01/2026</li>
                 </ul>
                 <p>
-                  <strong>Représentant légal et Président :</strong>{" "}
-                  Pierre-François Morganti
+                  <strong>Représentants légaux :</strong> Pierre-François
+                  Morganti (Président) et Joan Perrin-Cacciari (Directeur
+                  Général).
                 </p>
                 <p>
                   <strong>Contact :</strong>{" "}
