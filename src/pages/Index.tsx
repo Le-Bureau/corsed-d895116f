@@ -45,8 +45,8 @@ const Index = () => {
       <section data-header-bg="dark">
         <HeroCarousel />
       </section>
-      <PolesAlternated />
       <WhyDroneSection />
+      <PolesAlternated />
       <OtherExpertisesSection />
       <PartnersSection />
       <CTAFinalSection />
