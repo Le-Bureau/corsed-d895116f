@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 interface Stat {
   number: string;
