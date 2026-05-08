@@ -1,4 +1,5 @@
 import { useState, useEffect, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { SEO } from "@/components/seo/SEO";
 
 const SECTIONS = [
@@ -191,75 +192,29 @@ export default function MentionsLegales() {
               <Section id="rgpd" title="Protection des données personnelles">
                 <p>
                   Conformément au Règlement Général sur la Protection des
-                  Données (RGPD – Règlement UE 2016/679) et à la loi n° 78-17
-                  du 6 janvier 1978 relative à l'informatique, aux fichiers et
-                  aux libertés, Corse Drone s'engage à assurer la protection
-                  et la confidentialité des données personnelles collectées
-                  via le présent Site.
+                  Données (RGPD – Règlement UE 2016/679) et à la loi française
+                  du 6 janvier 1978 modifiée, Corse Drone s'engage à assurer
+                  la protection et la confidentialité des données
+                  personnelles collectées via le présent Site.
                 </p>
-                <h3>Responsable du traitement</h3>
                 <p>
-                  SAS Corse Drone, représentée par Pierre-François Morganti,
-                  Président.
-                  <br />
-                  Adresse : Marine d'Albo, 44 Strada di a Torra, 20217
-                  Ogliastro
-                  <br />
-                  Email :{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>
+                  Le responsable du traitement est{" "}
+                  <strong>SAS Corse Drone</strong>, représentée par
+                  Pierre-François Morganti.
                 </p>
-                <h3>Données collectées et finalité</h3>
                 <p>
-                  Les données personnelles collectées sur le Site le sont via
-                  les formulaires de contact et d'alerte de lancement. Les
-                  données collectées peuvent comprendre : nom, adresse e-mail,
-                  entreprise, et message. Ces données sont collectées dans le
-                  seul but de répondre aux demandes des utilisateurs ou de les
-                  notifier du lancement de nouveaux services. Elles ne font
-                  l'objet d'aucune cession à des tiers.
-                </p>
-                <h3>Base légale du traitement</h3>
-                <p>
-                  Le traitement des données personnelles repose sur le
-                  consentement de l'utilisateur (article 6.1.a du RGPD),
-                  matérialisé par l'envoi volontaire des formulaires.
-                </p>
-                <h3>Durée de conservation</h3>
-                <p>
-                  Les données personnelles collectées sont conservées pour une
-                  durée maximale de trente-six (36) mois à compter du dernier
-                  contact avec l'utilisateur. À l'expiration de ce délai, les
-                  données sont supprimées.
-                </p>
-                <h3>Droits des utilisateurs</h3>
-                <p>
-                  Conformément aux articles 15 à 22 du RGPD, tout utilisateur
-                  dispose d'un droit d'accès, de rectification, d'effacement,
-                  de limitation du traitement, de portabilité et d'opposition
-                  concernant ses données personnelles. Ces droits peuvent être
-                  exercés à tout moment en adressant une demande à :{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>
+                  Pour le détail complet sur les données collectées, leurs
+                  finalités, leur durée de conservation, vos droits et
+                  comment les exercer, consultez notre{" "}
+                  <Link to="/politique-confidentialite">
+                    politique de confidentialité
+                  </Link>
                   .
                 </p>
                 <p>
-                  Corse Drone s'engage à répondre à toute demande dans un
-                  délai d'un (1) mois à compter de sa réception.
-                </p>
-                <p>
-                  En cas de litige relatif au traitement de vos données
-                  personnelles, vous disposez du droit d'introduire une
-                  réclamation auprès de la Commission Nationale de
-                  l'Informatique et des Libertés (CNIL) :{" "}
-                  <a
-                    href="https://www.cnil.fr"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    www.cnil.fr
+                  Pour toute question relative à vos données personnelles :{" "}
+                  <a href="mailto:contact@corse-drone.com">
+                    contact@corse-drone.com
                   </a>
                   .
                 </p>
