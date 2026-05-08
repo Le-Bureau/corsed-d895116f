@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
 interface Stat {
