@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLenis } from "@/components/SmoothScrollProvider";
 import { type Pole } from "@/lib/poles";
+import { LaunchAlertPopup } from "@/components/popups/LaunchAlertPopup";
 
 interface Props {
   pole: Pole;
@@ -9,8 +11,9 @@ interface Props {
 
 const PoleHero = ({ pole }: Props) => {
   const lenis = useLenis();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const ctaHref = pole.isInDevelopment
-    ? `/contact?type=alerte-lancement&pole=${pole.key}`
+    ? `#`
     : `/contact?expertise=${pole.key}`;
   const ctaLabel = pole.isInDevelopment ? "Être prévenu du lancement" : "Demander un devis";
 
