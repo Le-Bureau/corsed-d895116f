@@ -1,6 +1,7 @@
 import { useParams, Navigate } from "react-router-dom";
 import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
+import { SEO } from "@/components/seo/SEO";
 import { hexToRgb } from "@/lib/utils";
 import SubPoleHero from "@/components/sub-pole/SubPoleHero";
 import SubPoleStats from "@/components/sub-pole/SubPoleStats";
