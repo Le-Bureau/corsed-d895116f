@@ -282,11 +282,54 @@ export const POLES: Pole[] = [
       "Bilan carbone réduit",
     ],
     subServices: [
-      { name: "Épandage ciblé", slug: "epandage" },
-      { name: "Traitement phytosanitaire", slug: "traitement-phytosanitaire" },
-      { name: "Analyses multispectrales", slug: "analyses-multispectrales" },
-      { name: "Blanchissement de serres", slug: "blanchissement-serres" },
-      { name: "Semis anti-incendie", slug: "semis-anti-incendie" },
+      {
+        name: "Cartographie multispectrale",
+        slug: "cartographie-multispectrale",
+        category: "Diagnostic / Aide à la décision",
+        description:
+          "Survol et analyse NDVI de vos parcelles. Détection précoce du stress hydrique, des carences en azote et des hétérogénéités de vigueur. Rapports et cartes shapefile exportables vers vos outils d'agriculture de précision.",
+        iconName: "Satellite",
+      },
+      {
+        name: "Épandage de précision",
+        slug: "epandage-precision",
+        category: "Action / Réduction des intrants",
+        description:
+          "Engrais granulés, fertilisants, amendements minéraux. Application à dose variable selon vos cartes de prescription. Réservoir 150L, débit jusqu'à 400 kg/min.",
+        iconName: "Droplets",
+      },
+      {
+        name: "Semis aériens",
+        slug: "semis-aeriens",
+        category: "Action / Reverdissement",
+        description:
+          "Couverts végétaux, prairies, espèces couvre-sol. Idéal pour terrains pentus, zones difficiles d'accès et parcelles humides où le tracteur ne passe pas.",
+        iconName: "Sprout",
+      },
+      {
+        name: "Semis anti-incendie (DFCI)",
+        slug: "semis-anti-incendie",
+        category: "Prévention / Collectivités",
+        description:
+          "Revégétalisation post-incendie, semis d'espèces peu combustibles sur zones de coupures, prévention de l'érosion sur sols dénudés. Service dédié aux collectivités, ONF et conservatoires.",
+        iconName: "Shield",
+      },
+      {
+        name: "Blanchiment de serre",
+        slug: "blanchiment-serre",
+        category: "Régulation thermique",
+        description:
+          "Application de produits de blanchiment ou déblanchiment pour réguler la luminosité et la température. Amélioration du climat et de la productivité sous serre.",
+        iconName: "Sun",
+      },
+      {
+        name: "Transport & levage agricole",
+        slug: "transport-levage-agricole",
+        category: "Logistique zones isolées",
+        description:
+          "Acheminement de matériel jusqu'à 100 kg vers exploitations isolées, parcelles en montagne, refuges et bergeries. Câble de levage 10-15m, dépose précise sans atterrissage.",
+        iconName: "Package",
+      },
     ],
     heroImage: agricultureImg,
     showcaseImage: agricultureShowcase,
