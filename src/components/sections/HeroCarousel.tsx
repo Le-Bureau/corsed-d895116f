@@ -185,6 +185,11 @@ const HeroCarousel = () => {
                   textShadow:
                     "0 2px 20px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.4)",
                 }}
+                initial={{
+                  x: reduced ? 0 : x,
+                  opacity,
+                  scale: reduced ? 1 : scale,
+                }}
                 animate={{
                   x: reduced ? 0 : x,
                   opacity,
