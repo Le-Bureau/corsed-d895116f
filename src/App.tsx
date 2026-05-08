@@ -14,6 +14,7 @@ import Expertises from "./pages/Expertises";
 import Partenaires from "./pages/Partenaires";
 import Contact from "./pages/Contact";
 import MentionsLegales from "./pages/MentionsLegales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
