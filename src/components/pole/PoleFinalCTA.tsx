@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import type { Pole } from "@/lib/poles";
+import { LaunchAlertPopup } from "@/components/popups/LaunchAlertPopup";
 
 interface Props {
   pole: Pole;
 }
 
 const PoleFinalCTA = ({ pole }: Props) => {
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const href = pole.isInDevelopment
-    ? `/contact?type=alerte-lancement&pole=${pole.key}`
+    ? `#`
     : `/contact?expertise=${pole.key}`;
   const label = pole.finalCTAButtonLabel || "Demander un devis";
   const title = pole.finalCTATitle || "Un projet en tête ?";
