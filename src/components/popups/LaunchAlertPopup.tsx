@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { X, ArrowRight, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -89,7 +90,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
     }, 2500);
   }
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -254,6 +255,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
