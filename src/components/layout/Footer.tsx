@@ -171,8 +171,8 @@ const Footer = () => {
 
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Téléphone</span>
-                <a href="tel:0604501120" className={contactValue}>
-                  06 04 50 11 20
+                <a href="tel:+33769977700" className={contactValue}>
+                  07 69 97 77 00
                 </a>
               </div>
 
