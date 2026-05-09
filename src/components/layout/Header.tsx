@@ -4,7 +4,6 @@ import { ArrowRight, ChevronDown, Menu } from "lucide-react";
 
 import MegaMenu from "./MegaMenu";
 import MobileDrawer from "./MobileDrawer";
-import logoMark from "@/assets/logo-mcg-mark.svg";
 import { cn } from "@/lib/utils";
 import { useUIBanner } from "@/contexts/UIBannerContext";
 
@@ -95,17 +94,9 @@ const Header = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
             aria-label="Corse Drone, Accueil"
           >
-            <img
-              src={logoMark}
-              alt=""
-              aria-hidden
-              decoding="async"
-              className="h-6 w-auto"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
             <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-primary drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
               CORSE DRONE · MCG
             </span>
