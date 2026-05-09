@@ -251,10 +251,12 @@ const HeroCarousel = () => {
             );
           })}
             </div>
-            {/* Spacers below title to mirror HeroSlideContent's flex centering:
-                subtitle (~3 lines text-lg leading-relaxed ≈ 5.25rem) + mb-12 (3rem)
-                + CTAs (py-4 + 15px text ≈ 3.125rem) */}
-            <div aria-hidden="true" style={{ height: "calc(5.25rem + 3rem + 3.125rem)" }} />
+            {/* Spacers below title to mirror HeroSlideContent's flex centering.
+                Mobile: subtitle (~5 lines × 28px ≈ 8.75rem) + mt-4 (1rem) + mb-12 (3rem)
+                + CTAs stacked (2 × ~3.4rem + gap 0.75rem ≈ 7.5rem).
+                md+: subtitle (~3 lines ≈ 5.25rem) + mb-12 (3rem) + CTAs row (≈ 3.125rem). */}
+            <div aria-hidden="true" className="md:hidden" style={{ height: "calc(8.75rem + 1rem + 3rem + 7.5rem)" }} />
+            <div aria-hidden="true" className="hidden md:block" style={{ height: "calc(5.25rem + 3rem + 3.125rem)" }} />
           </div>
         </div>
       </div>
