@@ -117,8 +117,8 @@ const HeroCarousel = () => {
     >
       <HeroBackground currentIndex={currentIndex} direction={direction} />
 
-      <div className="absolute top-24 md:top-28 left-1/2 -translate-x-1/2 xl:left-[clamp(24px,4vw,56px)] xl:translate-x-0 xl:top-24 z-20 pointer-events-none hidden md:block leading-none">
-        <BrandLogo className="h-32 md:h-44 lg:h-32 xl:h-36 w-auto ml-0 block" />
+      <div className="absolute top-24 md:top-28 left-1/2 -translate-x-1/2 xl:left-[clamp(24px,4vw,56px)] xl:translate-x-0 xl:top-24 z-20 pointer-events-none leading-none">
+        <BrandLogo className="h-20 md:h-44 lg:h-32 xl:h-36 w-auto ml-0 block" />
       </div>
 
       {/* Title rotation track — all titles always mounted, animated together.
