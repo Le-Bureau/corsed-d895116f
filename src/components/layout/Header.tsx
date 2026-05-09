@@ -106,8 +106,8 @@ const Header = () => {
               className="h-6 w-auto"
               style={{ filter: "brightness(0) invert(1)" }}
             />
-            <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
-              CORSE DRONE
+            <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-primary drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
+              CORSE DRONE · MCG
             </span>
           </Link>
 
