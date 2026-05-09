@@ -190,9 +190,9 @@ Deno.serve(async (req) => {
     else built = buildLaunchAlert(parsed.data.payload);
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY_1") ?? Deno.env.get("RESEND_API_KEY");
     if (!LOVABLE_API_KEY || !RESEND_API_KEY) {
-      console.error("notify-lead: missing API keys (LOVABLE_API_KEY or RESEND_API_KEY)");
+      console.error("notify-lead: missing API keys (LOVABLE_API_KEY or RESEND_API_KEY_1)");
       return ok({ skipped: "missing_keys" });
     }
 
