@@ -81,27 +81,12 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
     >
       <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)]">
         <div className="w-full max-w-[780px]">
-          {/* Eyebrow */}
-          <motion.div
-            variants={childVariants}
-            className="hidden md:inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.05] backdrop-blur-md border border-white/10 text-[13px] font-medium uppercase tracking-[0.18em] text-text-on-dark-muted mb-7"
-          >
-            <span
-              className="h-1.5 w-1.5 rounded-full"
-              style={{
-                backgroundColor: "var(--pole-base)",
-                boxShadow: "0 0 12px var(--pole-base)",
-                transition:
-                  "background-color 1500ms cubic-bezier(0.16,1,0.3,1), box-shadow 1500ms cubic-bezier(0.16,1,0.3,1)",
-              }}
-            />
-            <span>{pole.label}</span>
-            {pole.comingSoon && (
-              <span className="ml-2 px-2.5 py-0.5 rounded-full bg-amber-500/[0.2] text-amber-300 text-[11px] font-semibold tracking-wider">
-                Prochainement
-              </span>
-            )}
-          </motion.div>
+          {/* Compensating spacer for eyebrow moved to title track (md+ only) */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block"
+            style={{ height: "calc(13px * 1.2 + 1rem + 0.75rem)" }}
+          />
 
           {/* Title rendered by HeroCarousel's persistent track. Reserve space. */}
           <div
