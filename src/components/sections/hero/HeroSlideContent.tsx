@@ -99,7 +99,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
           {/* Subtitle */}
           <motion.p
             variants={childVariants}
-            className="text-lg leading-relaxed text-text-on-dark-muted max-w-[580px] mb-12"
+            className="text-lg leading-relaxed text-text-on-dark-muted max-w-[580px] mt-4 md:mt-0 mb-12"
           >
             {pole.subtitle}
           </motion.p>
