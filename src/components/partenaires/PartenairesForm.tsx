@@ -128,6 +128,21 @@ const PartenairesForm = () => {
 
       if (error) throw error;
 
+      supabase.functions
+        .invoke("notify-lead", {
+          body: {
+            type: "partner",
+            payload: {
+              fullName: data.fullName,
+              email: data.email,
+              phone: data.phone,
+              profession: data.profession,
+              message: data.message,
+            },
+          },
+        })
+        .catch((e) => console.error("notify-lead invoke failed:", e));
+
       setSubmissionData(data);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });

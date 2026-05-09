@@ -76,6 +76,20 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
       return;
     }
 
+    supabase.functions
+      .invoke("notify-lead", {
+        body: {
+          type: "launch-alert",
+          payload: {
+            email: trimmedEmail,
+            name: trimmedName,
+            company: trimmedCompany || null,
+            pole: poleKey,
+          },
+        },
+      })
+      .catch((e) => console.error("notify-lead invoke failed:", e));
+
     setSuccess(true);
     setIsSubmitting(false);
 
