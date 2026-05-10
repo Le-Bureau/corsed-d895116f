@@ -93,7 +93,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
             aria-hidden="true"
             style={{ height: "clamp(70px, 14vw, 180px)" }}
           />
-          <h1 className="sr-only">{pole.label}</h1>
+          <span className="sr-only">{pole.label}</span>
 
           {/* Subtitle */}
           <motion.p
