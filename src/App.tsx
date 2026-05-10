@@ -43,13 +43,41 @@ const App = () => (
             <Routes>
               <Route element={<RootLayout />}>
                 <Route path="/" element={<Index />} />
-                <Route path="/pole/:slug/:subSlug" element={<SubPoleDetail />} />
+                <Route
+                  path="/pole/:slug/:subSlug"
+                  element={
+                    <Suspense fallback={<RouteFallback />}>
+                      <SubPoleDetail />
+                    </Suspense>
+                  }
+                />
                 <Route path="/pole/:slug" element={<PoleDetail />} />
                 <Route path="/expertises" element={<Expertises />} />
-                <Route path="/partenaires" element={<Partenaires />} />
+                <Route
+                  path="/partenaires"
+                  element={
+                    <Suspense fallback={<RouteFallback />}>
+                      <Partenaires />
+                    </Suspense>
+                  }
+                />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/mentions-legales" element={<MentionsLegales />} />
-                <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+                <Route
+                  path="/mentions-legales"
+                  element={
+                    <Suspense fallback={<RouteFallback />}>
+                      <MentionsLegales />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/politique-confidentialite"
+                  element={
+                    <Suspense fallback={<RouteFallback />}>
+                      <PolitiqueConfidentialite />
+                    </Suspense>
+                  }
+                />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Route>
