@@ -17,17 +17,26 @@ import App from "./App.tsx";
 import "./index.css";
 import { POLES } from "./lib/poles";
 
-// Inject <link rel="preload"> for pole showcase images so the browser
-// fetches them in parallel with the JS bundle, well before the user
-// reaches the showcase section. The first pole gets fetchpriority="high".
-POLES.forEach((pole, index) => {
+// Preload the first hero image (LCP candidate) with highest priority,
+// then preload the remaining showcase + hero images in the background.
+const firstPole = POLES[0];
+if (firstPole?.heroImage) {
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "image";
+  link.href = firstPole.heroImage;
+  link.type = "image/webp";
+  link.setAttribute("fetchpriority", "high");
+  document.head.appendChild(link);
+}
+
+POLES.forEach((pole) => {
   if (!pole.showcaseImage) return;
   const link = document.createElement("link");
   link.rel = "preload";
   link.as = "image";
   link.href = pole.showcaseImage;
   link.type = "image/webp";
-  if (index === 0) link.setAttribute("fetchpriority", "high");
   document.head.appendChild(link);
 });
 
