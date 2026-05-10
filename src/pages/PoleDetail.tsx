@@ -12,6 +12,7 @@ import PrestationsNettoyage from "@/components/pole/PrestationsNettoyage";
 import PoleUseCases from "@/components/pole/PoleUseCases";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
+import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 const POLE_META: Record<string, string> = {
   nettoyage:
