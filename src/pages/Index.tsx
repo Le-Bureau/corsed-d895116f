@@ -5,10 +5,11 @@ import OtherExpertisesSection from "@/components/sections/OtherExpertisesSection
 import PartnersSection from "@/components/sections/PartnersSection";
 import CTAFinalSection from "@/components/sections/CTAFinalSection";
 import { SEO } from "@/components/seo/SEO";
+import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 const Index = () => {
   return (
-    <div>
+    <main>
       <SEO
         title="Corse Drone — Drone professionnel en Corse"
         description="Nettoyage, diagnostic, agriculture, transport : 4 expertises drone pour les professionnels en Corse. Sans nacelle, sans échafaudage, sans immobilisation de site."
@@ -16,9 +17,9 @@ const Index = () => {
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
+          "@id": LOCAL_BUSINESS_ID,
           name: "Corse Drone",
           image: "https://corse-drone.com/og-default.jpg",
-          "@id": "https://corse-drone.com",
           url: "https://corse-drone.com",
           telephone: "+33769977700",
           address: {
@@ -38,10 +39,27 @@ const Index = () => {
             "@type": "AdministrativeArea",
             name: "Corse",
           },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+              ],
+              opens: "09:00",
+              closes: "19:00",
+            },
+          ],
           priceRange: "€€",
-          sameAs: [],
+          sameAs: ["https://www.instagram.com/corsedrone/"],
         }}
       />
+      <h1 className="sr-only">
+        Corse Drone, services drones professionnels en Corse
+      </h1>
       <section data-header-bg="dark">
         <HeroCarousel />
       </section>
@@ -50,8 +68,9 @@ const Index = () => {
       <OtherExpertisesSection />
       <PartnersSection />
       <CTAFinalSection />
-    </div>
+    </main>
   );
 };
 
 export default Index;
+
