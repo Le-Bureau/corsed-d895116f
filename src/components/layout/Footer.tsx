@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { Instagram } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import BrandLogo from "./BrandLogo";
 import { POLES } from "@/lib/poles";
@@ -54,20 +54,15 @@ const Footer = () => {
               </p>
 
               <div className="flex gap-2 mt-2">
-                {[
-                  { Icon: Instagram, label: "Instagram" },
-                  { Icon: Linkedin, label: "LinkedIn" },
-                  { Icon: Facebook, label: "Facebook" },
-                ].map(({ Icon, label }) => (
-                  <a
-                    key={label}
-                    href="#"
-                    aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.05] border border-white/[0.12] text-text-on-dark-muted backdrop-blur-md transition-all duration-200 ease-out hover:border-logo-base hover:text-logo-base hover:-translate-y-0.5"
-                  >
-                    <Icon size={16} />
-                  </a>
-                ))}
+                <a
+                  href="https://www.instagram.com/corsedrone/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.05] border border-white/[0.12] text-text-on-dark-muted backdrop-blur-md transition-all duration-200 ease-out hover:border-logo-base hover:text-logo-base hover:-translate-y-0.5"
+                >
+                  <Instagram size={16} />
+                </a>
               </div>
             </div>
           </FadeInWhenVisible>
@@ -115,11 +110,6 @@ const Footer = () => {
             <div className="flex flex-col gap-4">
               <h3 className={colTitle}>Société</h3>
               <ul className="flex flex-col gap-3">
-                <li>
-                  <Link to="/#about" className={`block ${linkBase}`}>
-                    À propos
-                  </Link>
-                </li>
                 <li>
                   <Link to="/partenaires" className={`block ${linkBase}`}>
                     Programme partenaires
