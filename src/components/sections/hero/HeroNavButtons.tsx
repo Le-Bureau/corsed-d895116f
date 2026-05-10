@@ -19,7 +19,7 @@ const HeroNavButtons = ({ currentIndex, onPrev, onNext }: HeroNavButtonsProps) =
       <button
         type="button"
         onClick={onPrev}
-        aria-label={`Pôle précédent : ${prevPole.label}`}
+        aria-label={`Précédent : ${prevPole.label}`}
         className="group absolute left-6 lg:left-10 top-[calc(50%+30px)] -translate-y-1/2 z-30 hidden lg:flex flex-row items-center gap-3 px-3 py-5 -mx-3 -my-5 opacity-70 hover:opacity-100 transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded"
       >
         <span
@@ -46,7 +46,7 @@ const HeroNavButtons = ({ currentIndex, onPrev, onNext }: HeroNavButtonsProps) =
       <button
         type="button"
         onClick={onNext}
-        aria-label={`Pôle suivant : ${nextPole.label}`}
+        aria-label={`Suivant : ${nextPole.label}`}
         className="group absolute right-6 lg:right-10 top-[calc(50%+30px)] -translate-y-1/2 z-30 hidden lg:flex flex-row-reverse items-center gap-3 px-3 py-5 -mx-3 -my-5 opacity-70 hover:opacity-100 transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded"
       >
         <span

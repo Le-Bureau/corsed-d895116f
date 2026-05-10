@@ -14,7 +14,7 @@ const ExpertiseItem = ({ expertise }: Props) => {
     <li className="border-b border-border-subtle transition-colors duration-300 ease-out hover:bg-surface-card group">
       <Link
         to={`/contact?expertise=${expertise.slug}`}
-        aria-label={`Demander un devis pour ${expertise.title}`}
+        aria-label={`${expertise.index} ${expertise.title} — Demander un devis`}
         className={`grid items-center gap-4 py-6 lg:gap-8 lg:py-8
                     grid-cols-[50px_1fr_40px] grid-rows-[auto_auto]
                     lg:grid-cols-[80px_1fr_1fr_60px] lg:grid-rows-1
