@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -9,13 +10,24 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { UIBannerProvider } from "@/contexts/UIBannerContext";
 import Index from "./pages/Index";
 import PoleDetail from "./pages/PoleDetail";
-import SubPoleDetail from "./pages/SubPoleDetail";
 import Expertises from "./pages/Expertises";
-import Partenaires from "./pages/Partenaires";
 import Contact from "./pages/Contact";
-import MentionsLegales from "./pages/MentionsLegales";
-import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import NotFound from "./pages/NotFound";
+
+const SubPoleDetail = lazy(() => import("./pages/SubPoleDetail"));
+const Partenaires = lazy(() => import("./pages/Partenaires"));
+const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
+const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
+
+const RouteFallback = () => (
+  <div className="min-h-[60vh] w-full flex items-center justify-center bg-background">
+    <div
+      className="h-8 w-8 rounded-full border-2 border-muted border-t-primary animate-spin"
+      role="status"
+      aria-label="Chargement"
+    />
+  </div>
+);
 
 const queryClient = new QueryClient();
 
