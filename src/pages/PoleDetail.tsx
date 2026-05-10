@@ -12,6 +12,7 @@ import PrestationsNettoyage from "@/components/pole/PrestationsNettoyage";
 import PoleUseCases from "@/components/pole/PoleUseCases";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
+import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 const POLE_META: Record<string, string> = {
   nettoyage:
@@ -58,11 +59,7 @@ export default function PoleDetail() {
           serviceType: pole.label,
           name: `${pole.label} par drone — Corse Drone`,
           description: pole.heroPitch || pole.pitch,
-          provider: {
-            "@type": "LocalBusiness",
-            name: "Corse Drone",
-            url: "https://corse-drone.com",
-          },
+          provider: { "@id": LOCAL_BUSINESS_ID },
           areaServed: { "@type": "AdministrativeArea", name: "Corse" },
           url: `https://corse-drone.com/pole/${pole.key}`,
         }}
