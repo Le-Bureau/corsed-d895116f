@@ -9,7 +9,7 @@ const ExpertisesList = () => {
       <ul className="list-none border-t border-border-subtle">
         {OTHER_EXPERTISES.map((expertise) => (
           <motion.li key={expertise.key} variants={fadeUpItem} className="list-none">
-            <ExpertiseItem expertise={expertise} asListItem={false} />
+            <ExpertiseItem expertise={expertise} />
           </motion.li>
         ))}
       </ul>
