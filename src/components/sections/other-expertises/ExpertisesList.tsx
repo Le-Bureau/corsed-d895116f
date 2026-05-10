@@ -8,9 +8,9 @@ const ExpertisesList = () => {
     <StaggerChildren staggerDelay={0.06}>
       <ul className="list-none border-t border-border-subtle">
         {OTHER_EXPERTISES.map((expertise) => (
-          <motion.div key={expertise.key} variants={fadeUpItem}>
+          <motion.li key={expertise.key} variants={fadeUpItem} className="list-none">
             <ExpertiseItem expertise={expertise} />
-          </motion.div>
+          </motion.li>
         ))}
       </ul>
     </StaggerChildren>
