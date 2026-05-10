@@ -116,11 +116,6 @@ const Footer = () => {
               <h3 className={colTitle}>Société</h3>
               <ul className="flex flex-col gap-3">
                 <li>
-                  <Link to="/#about" className={`block ${linkBase}`}>
-                    À propos
-                  </Link>
-                </li>
-                <li>
                   <Link to="/partenaires" className={`block ${linkBase}`}>
                     Programme partenaires
                   </Link>
