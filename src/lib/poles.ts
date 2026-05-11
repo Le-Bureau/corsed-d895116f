@@ -190,9 +190,9 @@ export const POLES: Pole[] = [
     statValue: "30%",
     statDetail: "vs méthodes traditionnelles",
     comingSoon: false,
-    pitch: "Une alternative sécurisée et économique aux échafaudages.",
+    pitch: "Une alternative sécurisée et économique aux échafaudages. Notre flotte pulvérise avec précision façades, toitures et panneaux photovoltaïques, sans immobilisation de votre site.\n\n",
     description:
-      "Pulvérisation précise sur façades, toitures et panneaux photovoltaïques, sans immobilisation de site. L'opérateur reste au sol, l'intervention se fait en quelques heures, et le rendu est immédiat.",
+      "Notre flotte pulvérise avec précision façades, toitures et panneaux photovoltaïques, sans immobilisation de votre site. L'opérateur reste au sol, l'intervention se fait en quelques heures, et le rendu est immédiat.",
     highlights: ["Aucun échafaudage", "Site non immobilisé", "Économie d'eau"],
     subServices: [
       { name: "Nettoyage de toitures", slug: "toitures" },
