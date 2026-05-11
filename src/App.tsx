@@ -30,6 +30,11 @@ const RouteFallback = () => (
   </div>
 );
 
+const PlausibleTracker = () => {
+  usePlausibleTracking();
+  return null;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
