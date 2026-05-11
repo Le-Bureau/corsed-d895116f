@@ -344,7 +344,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
-    stat: { value: "-90", unit: "%", labelStrong: "d'eau utilisée", labelMuted: "vs. pulvérisation au tracteur, précision parcelle" },
+    stat: { value: "2", unit: "cm", labelStrong: "précision RTK-GPS, ", labelMuted: "application zone par zone" },
   },
   {
     key: "transport",
