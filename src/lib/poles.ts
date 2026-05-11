@@ -231,7 +231,7 @@ export const POLES: Pole[] = [
     statValue: "48h",
     statDetail: "de livraison du rapport détaillé",
     comingSoon: false,
-    pitch: "L'œil aérien qui voit l'invisible.",
+    pitch: "Inspection aérienne et thermique haute précision de vos bâtiments et installations. Identification rapide des défauts, rapports exploitables pour vos décisions techniques et vos assurances.",
     description:
       "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
     highlights: [
