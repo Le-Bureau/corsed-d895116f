@@ -273,7 +273,7 @@ export const POLES: Pole[] = [
     statValue: "−90%",
     statDetail: "vs pulvérisation au tracteur",
     comingSoon: true,
-    pitch: "La précision au mètre carré, parcelle par parcelle.",
+    pitch: "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
     description:
       "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Une approche adaptée au terroir corse qui optimise vos rendements tout en allégeant votre charge de travail et votre empreinte écologique.",
     highlights: [
