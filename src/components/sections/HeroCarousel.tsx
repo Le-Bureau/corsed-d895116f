@@ -206,11 +206,13 @@ const HeroCarousel = () => {
                 }}
                 initial={{
                   x: reduced ? 0 : x,
+                  y: isGhost ? -16 : 0,
                   opacity,
                   scale: reduced ? 1 : scale,
                 }}
                 animate={{
                   x: reduced ? 0 : x,
+                  y: isGhost ? -16 : 0,
                   opacity,
                   scale: reduced ? 1 : scale,
                 }}
