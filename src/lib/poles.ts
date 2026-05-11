@@ -270,8 +270,8 @@ export const POLES: Pole[] = [
     subtitle:
       "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Optimisez vos rendements et allégez votre charge de travail, parcelle par parcelle.",
     statLabel: "Eau utilisée",
-    statValue: "−90%",
-    statDetail: "vs pulvérisation au tracteur",
+    statValue: "2",
+    statDetail: "précision RTK-GPS,\napplication zone par zone",
     comingSoon: true,
     pitch: "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
     description:
