@@ -361,7 +361,7 @@ export const POLES: Pole[] = [
     statValue: "100kg",
     statDetail: "par rotation de drone cargo",
     comingSoon: true,
-    pitch: "La logistique aérienne nouvelle génération.",
+    pitch: "Une nouvelle approche de la logistique aérienne. Nos drones assurent le transport de matériel vers les zones difficiles d'accès, en complément ou alternative à l'hélicoptère.",
     description:
       "Acheminement de matériel vers les zones difficiles d'accès. Une alternative à l'hélicoptère, plus rapide, plus précise, moins coûteuse pour vos chantiers isolés en moyenne montagne ou sur sites côtiers escarpés.",
     highlights: [
