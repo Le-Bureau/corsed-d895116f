@@ -44,6 +44,7 @@ const App = () => (
       <Sonner />
       <UIBannerProvider>
         <BrowserRouter>
+          <PlausibleTracker />
           <SmoothScrollProvider>
             <ScrollToTop />
             <Routes>
