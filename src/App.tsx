@@ -8,6 +8,7 @@ import RootLayout from "@/components/layout/RootLayout";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { UIBannerProvider } from "@/contexts/UIBannerContext";
+import { usePlausibleTracking } from "@/hooks/usePlausibleTracking";
 import Index from "./pages/Index";
 import PoleDetail from "./pages/PoleDetail";
 import Expertises from "./pages/Expertises";
