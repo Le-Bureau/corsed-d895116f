@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     let mounted = true;
-    let initialDone = false;
 
     const applySession = async (next: Session | null) => {
       if (!mounted) return;
@@ -44,34 +43,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(next?.user ?? null);
 
       const uid = next?.user?.id ?? null;
-      if (uid !== lastCheckedUserIdRef.current) {
-        lastCheckedUserIdRef.current = uid;
-        if (uid) {
-          // Block route guards from rendering with stale isAdmin while checking
-          setIsLoading(true);
-          const admin = await checkIsAdmin(uid);
-          if (!mounted) return;
-          if (lastCheckedUserIdRef.current === uid) {
-            setIsAdmin(admin);
-          }
-        } else {
-          setIsAdmin(false);
-        }
+      lastCheckedUserIdRef.current = uid;
+
+      if (uid) {
+        const admin = await checkIsAdmin(uid);
+        if (!mounted) return;
+        if (lastCheckedUserIdRef.current !== uid) return; // stale
+        setIsAdmin(admin);
+      } else {
+        setIsAdmin(false);
       }
 
-      initialDone = true;
       if (mounted) setIsLoading(false);
     };
 
+    // onAuthStateChange fires INITIAL_SESSION on subscribe, so we don't need
+    // a separate getSession() call (which would race with this callback).
     const { data: sub } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      // Defer Supabase calls outside the callback to avoid deadlocks
       setTimeout(() => {
         void applySession(nextSession);
       }, 0);
-    });
-
-    supabase.auth.getSession().then(({ data }) => {
-      void applySession(data.session);
     });
 
     return () => {
