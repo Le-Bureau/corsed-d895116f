@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import type { BlogPost } from "@/data/mockBlogData";
-import { getCategory } from "@/data/mockBlogData";
+import type { BlogPost } from "@/types/blog";
 import BlogCategoryPill from "./BlogCategoryPill";
 import BlogAuthorMeta from "./BlogAuthorMeta";
 
 const BlogFeaturedCard = ({ post }: { post: BlogPost }) => {
-  const cat = getCategory(post.categoryId);
+  const catColor = post.category?.color ?? "#5082AC";
   return (
     <Link
       to={`/blog/${post.slug}`}
       className="featured"
-      style={{ ["--current-cat" as string]: cat.color }}
+      style={{ ["--current-cat" as string]: catColor }}
       aria-label={`À la une : ${post.title}`}
     >
       <div className="featured__cover">
@@ -20,15 +19,15 @@ const BlogFeaturedCard = ({ post }: { post: BlogPost }) => {
           </svg>
           À la une
         </div>
-        <img src={post.coverImageUrl} alt={post.title} />
+        {post.coverImageUrl && <img src={post.coverImageUrl} alt={post.title} />}
       </div>
       <div className="featured__content">
-        <BlogCategoryPill categoryId={post.categoryId} size="md" />
+        <BlogCategoryPill category={post.category} size="md" />
         <h2 className="featured__title">{post.title}</h2>
         <p className="featured__excerpt">{post.excerpt}</p>
         <div className="featured__meta">
           <BlogAuthorMeta
-            authorId={post.authorId}
+            author={post.author}
             publishedAt={post.publishedAt}
             readingTimeMinutes={post.readingTimeMinutes}
             size="md"

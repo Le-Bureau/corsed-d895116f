@@ -1,16 +1,16 @@
-import { getAuthor } from "@/data/mockBlogData";
+import type { BlogAuthor } from "@/types/blog";
 
-const BlogAuthorBio = ({ authorId }: { authorId: string }) => {
-  const a = getAuthor(authorId);
+const BlogAuthorBio = ({ author }: { author: BlogAuthor | null }) => {
+  if (!author) return null;
   return (
     <div className="author-bio">
-      <div className={`meta-avatar author-${a.initials}`} aria-hidden>
-        {a.initials}
+      <div className={`meta-avatar author-${author.initials}`} aria-hidden>
+        {author.initials}
       </div>
       <div className="author-bio__content">
-        <div className="author-bio__name">{a.name}</div>
-        <div className="author-bio__role">{a.role} · Corse Drone</div>
-        <p className="author-bio__text">{a.bio}</p>
+        <div className="author-bio__name">{author.name}</div>
+        <div className="author-bio__role">{author.role} · Corse Drone</div>
+        {author.bio && <p className="author-bio__text">{author.bio}</p>}
       </div>
     </div>
   );

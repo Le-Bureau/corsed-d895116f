@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
-import type { BlogPost } from "@/data/mockBlogData";
 import BlogCard from "./BlogCard";
+import { useBlogPosts } from "@/hooks/blog/useBlogPosts";
 
 interface Props {
-  posts: BlogPost[];
+  currentPostId: string;
+  categoryId: string | null;
 }
 
-const BlogRelatedPosts = ({ posts }: Props) => {
-  if (posts.length === 0) return null;
+const BlogRelatedPosts = ({ currentPostId, categoryId }: Props) => {
+  const { data: posts } = useBlogPosts();
+  const related = (posts ?? [])
+    .filter((p) => p.id !== currentPostId && p.category?.id === categoryId)
+    .slice(0, 3);
+
+  if (related.length === 0) return null;
   return (
     <section className="related" aria-label="Articles similaires">
       <div className="related__heading">
@@ -21,7 +27,7 @@ const BlogRelatedPosts = ({ posts }: Props) => {
         </Link>
       </div>
       <div className="blog-grid-related">
-        {posts.map((p) => (
+        {related.map((p) => (
           <BlogCard key={p.id} post={p} variant="related" />
         ))}
       </div>

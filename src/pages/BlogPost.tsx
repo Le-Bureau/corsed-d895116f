@@ -6,29 +6,18 @@ import BlogContent, { extractToc } from "@/components/blog/BlogContent";
 import BlogAuthorBio from "@/components/blog/BlogAuthorBio";
 import BlogArticleCTA from "@/components/blog/BlogArticleCTA";
 import BlogRelatedPosts from "@/components/blog/BlogRelatedPosts";
-import {
-  BLOG_POSTS,
-  getAuthor,
-  getCategory,
-  getPostBySlug,
-} from "@/data/mockBlogData";
-import { formatBlogDate, getRelatedPosts } from "@/lib/blogHelpers";
+import BlogPostSkeleton from "@/components/blog/skeletons/BlogPostSkeleton";
+import { useBlogPost } from "@/hooks/blog/useBlogPost";
+import { formatBlogDate } from "@/lib/blogHelpers";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  // Phase 1: always render the same mocked article regardless of slug,
-  // unless the slug matches one we have, in which case render that one.
-  const post = useMemo(
-    () =>
-      (slug && getPostBySlug(slug)) ??
-      getPostBySlug("diagnostic-toiture-drone-bastia") ??
-      BLOG_POSTS[0],
-    [slug],
+  const { data: post, isLoading, isError } = useBlogPost(slug);
+
+  const tocItems = useMemo(
+    () => (post ? extractToc(post.contentMd) : []),
+    [post],
   );
-  const cat = getCategory(post.categoryId);
-  const author = getAuthor(post.authorId);
-  const related = useMemo(() => getRelatedPosts(post, BLOG_POSTS, 3), [post]);
-  const tocItems = useMemo(() => extractToc(post.contentMd), [post]);
 
   const [copied, setCopied] = useState(false);
   useEffect(() => {
@@ -38,6 +27,28 @@ const BlogPost = () => {
     }
   }, [copied]);
 
+  if (isLoading) return <BlogPostSkeleton />;
+
+  if (isError || !post) {
+    return (
+      <div className="blog-scope">
+        <SEO title="Article introuvable | Corse Drone" canonicalPath={`/blog/${slug ?? ""}`} />
+        <div style={{ maxWidth: 640, margin: "120px auto", padding: "0 24px", textAlign: "center" }}>
+          <h1 style={{ fontSize: 32, marginBottom: 16 }}>Article introuvable</h1>
+          <p style={{ color: "var(--blog-text-muted)", marginBottom: 24 }}>
+            Cet article n'existe pas ou n'est plus publié.
+          </p>
+          <Link to="/blog" style={{ textDecoration: "underline" }}>
+            Voir le blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const cat = post.category;
+  const author = post.author;
+
   const handleCopy = () => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(window.location.href);
@@ -46,12 +57,15 @@ const BlogPost = () => {
   };
 
   return (
-    <div className="blog-scope" style={{ ["--current-cat" as string]: cat.color }}>
+    <div
+      className="blog-scope"
+      style={{ ["--current-cat" as string]: cat?.color ?? "#5082AC" }}
+    >
       <SEO
         title={`${post.title} | Corse Drone`}
         description={post.excerpt}
         canonicalPath={`/blog/${post.slug}`}
-        ogImage={post.coverImageUrl}
+        ogImage={post.coverImageUrl ?? undefined}
         ogType="article"
       />
 
@@ -59,25 +73,35 @@ const BlogPost = () => {
         <Link to="/">Accueil</Link>
         <span className="breadcrumb-sep">/</span>
         <Link to="/blog">Blog</Link>
-        <span className="breadcrumb-sep">/</span>
-        <Link to="/blog">{cat.name}</Link>
+        {cat && (
+          <>
+            <span className="breadcrumb-sep">/</span>
+            <Link to={`/blog?cat=${cat.slug}`}>{cat.name}</Link>
+          </>
+        )}
         <span className="breadcrumb-sep">/</span>
         <span className="breadcrumb-current">{post.title}</span>
       </nav>
 
       <header className="article-hero">
-        <span className="article-hero__pill">{cat.name}</span>
+        {cat && <span className="article-hero__pill">{cat.name}</span>}
         <h1 className="article-hero__title">{post.title}</h1>
         <p className="article-hero__excerpt">{post.excerpt}</p>
         <div className="article-hero__meta">
-          <div className="meta-author-block">
-            <div className={`meta-avatar author-${author.initials}`} aria-hidden>
-              {author.initials}
+          {author && (
+            <div className="meta-author-block">
+              <div className={`meta-avatar author-${author.initials}`} aria-hidden>
+                {author.initials}
+              </div>
+              <span>{author.name}</span>
             </div>
-            <span>{author.name}</span>
-          </div>
-          <span className="meta-sep" />
-          <span>{formatBlogDate(post.publishedAt)}</span>
+          )}
+          {post.publishedAt && (
+            <>
+              <span className="meta-sep" />
+              <span>{formatBlogDate(post.publishedAt)}</span>
+            </>
+          )}
           <span className="meta-sep" />
           <span>{post.readingTimeMinutes} min de lecture</span>
           <div className="share-row">
@@ -126,11 +150,13 @@ const BlogPost = () => {
         </div>
       </header>
 
-      <div className="article-cover">
-        <div className="article-cover__inner">
-          <img src={post.coverImageUrl} alt={post.title} />
+      {post.coverImageUrl && (
+        <div className="article-cover">
+          <div className="article-cover__inner">
+            <img src={post.coverImageUrl} alt={post.title} />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="article-body-layout">
         <BlogTOC items={tocItems} />
@@ -140,12 +166,12 @@ const BlogPost = () => {
       <div className="article-body-layout">
         <div />
         <div className="article-footer">
-          <BlogAuthorBio authorId={post.authorId} />
+          <BlogAuthorBio author={author} />
         </div>
       </div>
 
       <BlogArticleCTA />
-      <BlogRelatedPosts posts={related} />
+      <BlogRelatedPosts currentPostId={post.id} categoryId={cat?.id ?? null} />
     </div>
   );
 };

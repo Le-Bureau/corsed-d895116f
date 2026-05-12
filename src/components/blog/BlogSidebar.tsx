@@ -1,17 +1,18 @@
-import { useState, useMemo } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
-import { BLOG_CATEGORIES, getCategoryCounts, BLOG_POSTS } from "@/data/mockBlogData";
+import type { BlogCategory } from "@/types/blog";
 
 interface Props {
-  activeCategoryId: string | null;
-  onCategoryChange: (id: string | null) => void;
+  categories: BlogCategory[];
+  counts: Record<string, number>;
+  total: number;
   search: string;
   onSearchChange: (s: string) => void;
 }
 
-const BlogSidebar = ({ activeCategoryId, onCategoryChange, search, onSearchChange }: Props) => {
-  const counts = useMemo(() => getCategoryCounts(), []);
-  const total = BLOG_POSTS.length;
+const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Props) => {
+  const [params] = useSearchParams();
+  const activeSlug = params.get("cat");
 
   return (
     <aside className="blog-sidebar">
@@ -32,30 +33,28 @@ const BlogSidebar = ({ activeCategoryId, onCategoryChange, search, onSearchChang
       <div className="sidebar-section">
         <div className="sidebar-heading">Catégories</div>
         <div className="category-list" role="list">
-          <button
-            type="button"
-            className={`category-item ${activeCategoryId === null ? "active" : ""}`}
-            onClick={() => onCategoryChange(null)}
+          <Link
+            to="/blog"
+            className={`category-item ${activeSlug === null ? "active" : ""}`}
           >
             <span className="category-label">
               <span className="category-dot" style={{ background: "var(--blog-text)" }} />
               <span>Tous les articles</span>
             </span>
             <span className="category-count">{total}</span>
-          </button>
-          {BLOG_CATEGORIES.map((c) => (
-            <button
-              type="button"
+          </Link>
+          {categories.map((c) => (
+            <Link
               key={c.id}
-              className={`category-item ${activeCategoryId === c.id ? "active" : ""}`}
-              onClick={() => onCategoryChange(c.id)}
+              to={`/blog?cat=${c.slug}`}
+              className={`category-item ${activeSlug === c.slug ? "active" : ""}`}
             >
               <span className="category-label">
                 <span className="category-dot" style={{ background: c.color }} />
                 <span>{c.name}</span>
               </span>
-              <span className="category-count">{counts[c.id] ?? 0}</span>
-            </button>
+              <span className="category-count">{counts[c.slug] ?? 0}</span>
+            </Link>
           ))}
         </div>
       </div>
@@ -81,6 +80,4 @@ const BlogSidebar = ({ activeCategoryId, onCategoryChange, search, onSearchChang
   );
 };
 
-// silence unused
-void useState;
 export default BlogSidebar;
