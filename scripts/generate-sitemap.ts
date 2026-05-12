@@ -12,7 +12,10 @@ const SITE_URL = "https://corse-drone.com";
 
 const SUPABASE_URL =
   process.env.VITE_SUPABASE_URL ?? "https://jqiilolffxtjruvivnhf.supabase.co";
+// Prefer the service role key when available (build environment) so RLS does
+// not block the read; fall back to the publishable anon key otherwise.
 const SUPABASE_KEY =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ??
   process.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxaWlsb2xmZnh0anJ1dml2bmhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwNDE0MTMsImV4cCI6MjA5MzYxNzQxM30.FJzQu36Pdj7Na_Y8TrlQKAfW2aktQcJcM24ynFzbvLs";
 
