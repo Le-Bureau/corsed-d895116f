@@ -68,6 +68,7 @@ const Index = () => {
       <PolesAlternated />
       <OtherExpertisesSection />
       <PartnersSection />
+      <LatestArticlesSection />
       <CTAFinalSection />
     </main>
   );
