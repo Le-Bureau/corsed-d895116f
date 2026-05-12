@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, EyeOff, Loader2, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, Eye, Loader2, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import {
   Accordion,
   AccordionContent,
@@ -36,7 +36,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import BlogContent from "@/components/blog/BlogContent";
+import ArticlePreviewModal from "@/components/admin/ArticlePreviewModal";
 import ImageUploader from "@/components/admin/ImageUploader";
 import MarkdownToolbar from "@/components/admin/MarkdownToolbar";
 import MarkdownSyntaxHelp from "@/components/admin/MarkdownSyntaxHelp";
@@ -85,7 +85,7 @@ const AdminBlogEditor = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const slugManuallyEditedRef = useRef(false);
   const [topError, setTopError] = useState<string | null>(null);
-  const [previewVisible, setPreviewVisible] = useState(true);
+  const [previewModalOpen, setPreviewModalOpen] = useState(false);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
@@ -301,118 +301,51 @@ const AdminBlogEditor = () => {
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               <Label>Contenu</Label>
-              <MarkdownSyntaxHelp />
+              <div className="flex items-center gap-3">
+                <MarkdownSyntaxHelp />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setPreviewModalOpen(true)}
+                >
+                  <Eye className="h-4 w-4" />
+                  Aperçu de l'article
+                </Button>
+              </div>
             </div>
 
-            {/* Mobile: tabs. Desktop: split. */}
-            <div className="lg:hidden">
-              <Controller
-                control={control}
-                name="content_md"
-                render={({ field }) => (
-                  <Tabs defaultValue="edit">
-                    <TabsList>
-                      <TabsTrigger value="edit">Éditer</TabsTrigger>
-                      <TabsTrigger value="preview">Aperçu</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="edit" className="space-y-0">
-                      <MarkdownToolbar
-                        textareaRef={textareaRef}
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                      <Textarea
-                        ref={(el) => {
-                          textareaRef.current = el;
-                          field.ref(el);
-                        }}
-                        value={field.value}
-                        onChange={field.onChange}
-                        onBlur={field.onBlur}
-                        className="min-h-[400px] font-mono text-sm rounded-t-none"
-                      />
-                    </TabsContent>
-                    <TabsContent value="preview">
-                      <div className="rounded-md border border-border/60 bg-white p-4 min-h-[400px]">
-                        <BlogContent markdown={field.value} />
-                      </div>
-                    </TabsContent>
-                  </Tabs>
-                )}
-              />
-            </div>
-
-            <div
-              className={cn(
-                "hidden lg:grid lg:gap-6",
-                previewVisible ? "lg:grid-cols-[3fr_2fr]" : "lg:grid-cols-1",
+            <Controller
+              control={control}
+              name="content_md"
+              render={({ field }) => (
+                <div className="min-w-0">
+                  <MarkdownToolbar
+                    textareaRef={textareaRef}
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                  <Textarea
+                    ref={(el) => {
+                      textareaRef.current = el;
+                      field.ref(el);
+                    }}
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    onKeyDown={(e) => {
+                      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "p") {
+                        e.preventDefault();
+                        setPreviewModalOpen(true);
+                      }
+                    }}
+                    className="min-h-[500px] font-mono text-sm rounded-t-none w-full"
+                  />
+                </div>
               )}
-            >
-              <Controller
-                control={control}
-                name="content_md"
-                render={({ field }) => (
-                  <>
-                    <div className="min-w-0">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
-                          <Pencil className="h-3.5 w-3.5" />
-                          Éditer
-                        </span>
-                        {!previewVisible && (
-                          <button
-                            type="button"
-                            onClick={() => setPreviewVisible(true)}
-                            className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            <Eye className="h-3.5 w-3.5" />
-                            Afficher l'aperçu
-                          </button>
-                        )}
-                      </div>
-                      <MarkdownToolbar
-                        textareaRef={textareaRef}
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                      <Textarea
-                        ref={(el) => {
-                          textareaRef.current = el;
-                          field.ref(el);
-                        }}
-                        value={field.value}
-                        onChange={field.onChange}
-                        onBlur={field.onBlur}
-                        className="min-h-[500px] font-mono text-sm rounded-t-none"
-                      />
-                    </div>
-                    {previewVisible && (
-                      <div className="min-w-0">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
-                            <Eye className="h-3.5 w-3.5" />
-                            Aperçu en direct
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => setPreviewVisible(false)}
-                            className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            <EyeOff className="h-3.5 w-3.5" />
-                            Masquer l'aperçu
-                          </button>
-                        </div>
-                        <div className="rounded-md border border-border/60 bg-white p-4 min-h-[500px] overflow-y-auto max-h-[calc(100vh-240px)] sticky top-20">
-                          <BlogContent markdown={field.value} />
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-              />
-            </div>
+            />
           </div>
         </div>
 
@@ -650,6 +583,14 @@ const AdminBlogEditor = () => {
           </div>
         </div>
       </div>
+
+      <ArticlePreviewModal
+        open={previewModalOpen}
+        onOpenChange={setPreviewModalOpen}
+        formValues={form.getValues()}
+        authors={authors ?? []}
+        categories={categories ?? []}
+      />
     </form>
   );
 };
