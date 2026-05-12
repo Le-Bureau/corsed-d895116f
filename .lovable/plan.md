@@ -1,117 +1,106 @@
-## Phase 4 — Wire blog frontend to Supabase
+# Phase 5 — Admin Authentication & Shell
 
-Replace all reads from `mockBlogData.ts` with React Query + Supabase. Read-only, public, published posts only. No auth, no admin, no writes.
+Build the admin auth foundation: grant PF the admin role, create an AuthContext, a login page, a route guard, an admin layout, and a dashboard placeholder. No public-site changes, no signup UI, no schema changes beyond seeding 2 rows.
 
----
+## 1. Database migration (1 call to supabase--migration)
 
-### 1. New canonical types (`src/types/blog.ts`)
+Two statements in one migration:
 
-`BlogAuthor`, `BlogCategory`, `BlogPost` exactly as specified, with embedded `author` and `category` objects on `BlogPost` (camelCase).
+```sql
+INSERT INTO user_roles (user_id, role)
+VALUES ('8e00f50e-24db-4f31-85bc-bb50938117d6', 'admin')
+ON CONFLICT (user_id, role) DO NOTHING;
 
-### 2. New hooks (`src/hooks/blog/`)
+UPDATE blog_authors
+SET user_id = '8e00f50e-24db-4f31-85bc-bb50938117d6'
+WHERE initials = 'PF' AND user_id IS NULL;
+```
 
-All use `@tanstack/react-query` (already wired in `App.tsx`). Each hook owns its row→camelCase mapper.
+Then verify with the spec's SELECT join — must return one row, role=`admin`, author_name=`Pierre-François Morganti`.
 
-- `useBlogCategories.ts` — `staleTime: Infinity`, ordered by `sort_order`.
-- `useBlogAuthors.ts` — same pattern.
-- `useBlogPosts.ts` — accepts `{ categorySlug? }`. Single query fetches all published posts joined with author + category (`*, author:blog_authors(*), category:blog_categories(*)`), ordered by `published_at desc`. Filtering by `categorySlug` is done **client-side** on the returned list (simpler, low volume, lets `useBlogCategoryCounts` reuse the same cache).
-- `useBlogPost.ts` — fetches by `slug` + `status='published'`, joined; returns `BlogPost | null` (treat PGRST116 / empty as null, not error).
-- `useHomeBlogSelection.ts` — reuses `useBlogPosts()` cache, derives `{ featured, secondary }` (featured = `featuredOnHome` or first; secondary = next 2 excluding featured).
-- `useBlogCategoryCounts.ts` — derives `Record<slug, number>` from `useBlogPosts()` via `useMemo`.
+Note: technically these are data ops (insert/update), but they're permanent seed/link operations tied to a one-off bootstrap. Will use `supabase--insert` to respect the "migration = schema only" rule, then run the verification with `supabase--read_query`.
 
-### 3. Mock data + helpers cleanup
+## 2. Files to create
 
-- **Delete** `src/data/mockBlogData.ts`.
-- In `src/lib/blogHelpers.ts`: keep `formatBlogDate`, `getReadingTime`, `slugify`. Remove `getLatestPosts`, `getRelatedPosts`, `getHomeBlogSelection`, `HomeBlogSelection`.
+```text
+src/contexts/AuthContext.tsx        AuthProvider + context, session+admin+isLoading
+src/hooks/useAuth.ts                useContext wrapper, throws if outside provider
+src/pages/admin/AdminLogin.tsx      /admin/login page
+src/components/admin/AdminRoute.tsx Guard wrapper
+src/components/admin/AdminLayout.tsx Shell with top bar + Outlet
+src/pages/admin/AdminDashboard.tsx  /admin index page
+```
 
-### 4. Presentational components — switch from ID lookups to embedded objects
+## 3. Files to modify
 
-The cards currently pass `categoryId` / `authorId` to subcomponents that called `getCategory` / `getAuthor` from the mock module. With the new shape, the joined `category` and `author` are already on the post — pass them directly. Visual design unchanged.
+- `src/App.tsx`: wrap with `<AuthProvider>` (inside QueryClientProvider, outside BrowserRouter); add lazy-loaded routes `/admin/login`, `/admin/*` with nested `index → AdminDashboard`.
 
-- `BlogCategoryPill.tsx` — accept `category: BlogCategory` instead of `categoryId`.
-- `BlogAuthorMeta.tsx` — accept `author: BlogAuthor` instead of `authorId`; drop `getCategory` no-op import.
-- `BlogCard.tsx`, `BlogFeaturedCard.tsx`, `HomeFeaturedCard.tsx` — read `post.category` / `post.author` directly, forward to the subcomponents. Update the `BlogPost` import to `@/types/blog`.
-- `BlogAuthorBio.tsx` (used by `BlogPost.tsx`) — accept `author: BlogAuthor` directly instead of `authorId`.
+## 4. Technical details
 
-### 5. Skeletons (`src/components/blog/skeletons/`)
+**AuthContext**
+- State: `user`, `session`, `isAdmin`, `isLoading`.
+- On mount: subscribe to `onAuthStateChange` FIRST, then call `getSession()` (Supabase recommended order to avoid missed events).
+- Whenever session.user changes: query `user_roles` filtered by `user_id` and `role='admin'` with `.maybeSingle()`. Set `isAdmin = !!data`.
+- `isLoading` flips to false only after initial session check + (if user) admin check resolved.
+- `signIn`: just calls `signInWithPassword`, returns `{ error }` immediately — does NOT await admin check (race-condition note from spec).
+- `signOut`: `supabase.auth.signOut()`.
+- Cleanup: unsubscribe in useEffect return.
 
-Use `@/components/ui/skeleton` (already present), `animate-pulse`, same outer dimensions as loaded state to avoid CLS.
+**AdminLogin**
+- Standalone page (no site Header). Top: small wordmark linking `/`.
+- Centered Card max-w-md with Fraunces title, Geist body.
+- Email + password (with show/hide eye toggle) + submit button.
+- Loading state on button while submitting.
+- Translates `Invalid login credentials` → `Identifiants incorrects`; default to raw `error.message` otherwise.
+- If already `user && isAdmin`, immediate `<Navigate to={redirect ?? '/admin'} replace />`.
+- Uses `useSearchParams` to read `?redirect=`.
 
-- `BlogCardSkeleton.tsx`
-- `BlogFeaturedSkeleton.tsx`
-- `HomeFeaturedSkeleton.tsx`
-- `BlogPostSkeleton.tsx`
+**AdminRoute**
+- `isLoading` → centered spinner ("Chargement…").
+- `!user` → `<Navigate to={'/admin/login?redirect=' + encodeURIComponent(location.pathname)} replace />`.
+- `user && !isAdmin` → toast `Vous n'avez pas accès à cette zone` + `<Navigate to="/" replace />`.
+- Else render children.
 
-### 6. Page wiring
+**AdminLayout**
+- Top bar: cream bg `#FCFAF7`, `border-b`, max-w-7xl wrapper.
+- Left: Corse Drone wordmark + small `ADMIN` pill (primary color, uppercase, tracking-wide).
+- Center: nav links (`Tableau de bord` → `/admin`, `Blog` → `/admin/blog`) with active state via `NavLink` (underline + primary color).
+- Right: Avatar circle (PF initials, gradient from blog_authors data when available, fallback to email initial) → DropdownMenu: "Voir le site" (target=_blank), "Se déconnecter" (calls signOut → navigate `/`).
+- Body: `<Outlet />` inside `max-w-7xl py-12 px-6`.
 
-**`src/pages/Index.tsx` → `LatestArticlesSection.tsx`**
-Move data fetch into the section component (cleaner). Use `useHomeBlogSelection()`.
-- Loading → render `HomeFeaturedSkeleton` + 2 `BlogCardSkeleton`.
-- Error or empty (`!featured`) → return `null` (silent on home).
+**AdminDashboard**
+- Fetch logged-in author via small inline query on `blog_authors` by `user_id` for the first name (fallback: email username).
+- Title `Bonjour, {firstName}` (Fraunces) + muted subtitle.
+- Grid `md:grid-cols-2 lg:grid-cols-3`.
+- Card "Articles du blog": book icon, title, description, count from `useBlogPosts()` (`{count} articles publiés`), CTA `<Link to="/admin/blog">Gérer le blog →</Link>`.
+- One disabled placeholder card "Bientôt : Réalisations" (muted, no hover).
 
-**`src/pages/Blog.tsx`**
-- Replace local `useState` for `activeCategory` with `useSearchParams()` (`?cat=<slug>`).
-- `useBlogCategories()`, `useBlogPosts({ categorySlug })`, `useBlogCategoryCounts()`.
-- Featured = `posts.find(p => p.featuredOnHome)` only when no `cat` param and no search.
-- Loading → featured skeleton + 6 grid skeletons.
-- Empty filtered → "Aucun article dans cette catégorie pour le moment." + link `/blog`.
-- Empty/error global → "Le blog est en cours de mise en route." + link `/`.
+**Routing in App.tsx**
 
-**`src/components/blog/BlogSidebar.tsx`**
-- Categories become `<Link to="/blog?cat=...">`, "Tous les articles" → `<Link to="/blog">`.
-- Active determined by current `?cat=` (via `useSearchParams` or prop).
-- `counts` and `categories` come from props (passed by `Blog.tsx`).
-- Search input stays inert (kept controlled, no filtering wired yet — explicit comment).
+```tsx
+<AuthProvider>
+  <BrowserRouter>
+    ...
+    <Route path="/admin/login" element={<Suspense ...><AdminLogin /></Suspense>} />
+    <Route path="/admin/*" element={<Suspense ...><AdminRoute><AdminLayout /></AdminRoute></Suspense>}>
+      <Route index element={<AdminDashboard />} />
+    </Route>
+  </BrowserRouter>
+</AuthProvider>
+```
 
-**`src/pages/BlogPost.tsx`**
-- `useBlogPost(slug)`. Loading → `BlogPostSkeleton`. `null` → "Article introuvable" page (message + `<Link to="/blog">Voir le blog</Link>`).
-- Related posts: drop the prop-based dataset, let `BlogRelatedPosts` fetch internally.
+`AdminLogin`, `AdminLayout`, `AdminDashboard` all behind `React.lazy`.
 
-**`src/components/blog/BlogRelatedPosts.tsx`**
-- Accept `currentPostId` + `categoryId`. Internally call `useBlogPosts()`, filter same category excluding current, take 3. Hide if none.
+## 5. Supabase signup setting
 
-### 7. Verification
+Lovable Cloud exposes `disable_signup` via `configure_auth`. I'll set `disable_signup: true` (keep `auto_confirm_email: false`, `password_hibp_enabled: true`, `external_anonymous_users_enabled: false`) so no random user can self-register. Will note this clearly in the final output.
 
-- `tsc --noEmit` clean.
-- Manually walk the 10-item testing checklist (home, /blog, category filter, deep article, 404 slug, network 200, draft toggle, console clean).
+## 6. Verification
 
----
+- `supabase--read_query` join confirming role + author link.
+- `tsc --noEmit` (handled by harness).
+- Walk the 9-item testing checklist — note any item requiring manual browser test.
 
-### Files
+## 7. Out of scope (untouched)
 
-**Create**
-- `src/types/blog.ts`
-- `src/hooks/blog/useBlogCategories.ts`
-- `src/hooks/blog/useBlogAuthors.ts`
-- `src/hooks/blog/useBlogPosts.ts`
-- `src/hooks/blog/useBlogPost.ts`
-- `src/hooks/blog/useHomeBlogSelection.ts`
-- `src/hooks/blog/useBlogCategoryCounts.ts`
-- `src/hooks/blog/mappers.ts` (shared row→camelCase mappers)
-- `src/components/blog/skeletons/BlogCardSkeleton.tsx`
-- `src/components/blog/skeletons/BlogFeaturedSkeleton.tsx`
-- `src/components/blog/skeletons/HomeFeaturedSkeleton.tsx`
-- `src/components/blog/skeletons/BlogPostSkeleton.tsx`
-
-**Modify**
-- `src/lib/blogHelpers.ts` (trim)
-- `src/components/blog/BlogCategoryPill.tsx`
-- `src/components/blog/BlogAuthorMeta.tsx`
-- `src/components/blog/BlogAuthorBio.tsx`
-- `src/components/blog/BlogCard.tsx`
-- `src/components/blog/BlogFeaturedCard.tsx`
-- `src/components/blog/HomeFeaturedCard.tsx`
-- `src/components/blog/BlogRelatedPosts.tsx`
-- `src/components/blog/BlogSidebar.tsx`
-- `src/components/sections/LatestArticlesSection.tsx`
-- `src/pages/Blog.tsx`
-- `src/pages/BlogPost.tsx`
-
-**Delete**
-- `src/data/mockBlogData.ts`
-
-### Open decisions baked in (FYI, will proceed unless you object)
-
-1. **Filter by category client-side**, not via `.eq('category.slug', …)` — keeps a single shared cache reused by counts and home selection.
-2. **Data fetch lives in `LatestArticlesSection`**, not `Index.tsx` — section becomes self-contained and silently null-renders on error.
-3. **Subcomponents (`BlogCategoryPill`, `BlogAuthorMeta`, `BlogAuthorBio`) switch from ID props to object props.** Visual output unchanged, but it removes the last dependency on the mock lookup helpers and keeps mapping centralized in hooks.
+Public site, blog frontend (phase 4), schema (phase 3), Resend, Plausible, SEO assets.
