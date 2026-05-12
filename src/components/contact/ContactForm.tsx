@@ -157,34 +157,32 @@ const ContactForm = () => {
 
   return (
     <div className="relative rounded-3xl overflow-hidden bg-surface-card border border-border-subtle shadow-soft-lg">
-      {/* TAB BAR */}
-      <div className="relative border-b border-border-subtle">
-        <div className="overflow-x-auto md:overflow-x-visible scrollbar-hide">
-          <div
-            role="tablist"
-            aria-label="Sujet de votre demande"
-            className="flex items-center gap-1 px-4 md:px-6 pt-[5px] min-w-max md:min-w-0 md:flex-wrap"
+      {/* SUJET — grille de cartes */}
+      <div className="px-6 md:px-10 pt-8 pb-2">
+        <span className="block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-muted mb-3">
+          Sujet de votre demande
+          <span
+            className="ml-1"
+            style={{ color: "var(--contact-accent, var(--logo-base-deep))" }}
           >
-            {REQUEST_TYPES.map((rt) => (
-              <TabButton
-                key={rt}
-                value={rt}
-                label={REQUEST_TYPE_LABELS[rt]}
-              />
-            ))}
-          </div>
-        </div>
-        {/* Mobile fade gradient */}
+            *
+          </span>
+        </span>
         <div
-          aria-hidden="true"
-          className="absolute top-0 right-0 bottom-0 w-12 pointer-events-none md:hidden"
-          style={{
-            background:
-              "linear-gradient(to left, var(--surface-card) 0%, transparent 100%)",
-          }}
-        />
+          role="radiogroup"
+          aria-label="Sujet de votre demande"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5"
+        >
+          {REQUEST_TYPES.map((rt) => (
+            <RequestCard
+              key={rt}
+              value={rt}
+              label={REQUEST_TYPE_LABELS[rt]}
+            />
+          ))}
+        </div>
         {errors.requestType?.message && (
-          <p className="px-6 pb-3 text-[12px] text-red-600" role="alert">
+          <p className="mt-3 text-[12px] text-red-600" role="alert">
             {errors.requestType.message}
           </p>
         )}
