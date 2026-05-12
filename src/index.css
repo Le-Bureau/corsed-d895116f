@@ -371,7 +371,7 @@ html.lenis body {
 .blog-scope .blog-layout {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 48px 32px 96px;
+  padding: 140px 32px 96px;
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 56px;
@@ -1249,7 +1249,7 @@ html.lenis body {
   .blog-scope .blog-grid-related { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .blog-scope .blog-layout { grid-template-columns: 1fr; padding: 32px 20px 64px; gap: 32px; }
+  .blog-scope .blog-layout { grid-template-columns: 1fr; padding: 120px 20px 64px; gap: 32px; }
   .blog-scope .blog-sidebar { display: none; }
   .blog-scope .blog-grid { grid-template-columns: 1fr; gap: 24px; }
   .blog-scope .blog-grid-related { grid-template-columns: 1fr; }
