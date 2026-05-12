@@ -46,77 +46,101 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <UIBannerProvider>
-        <BrowserRouter>
-          <PlausibleTracker />
-          <SmoothScrollProvider>
-            <ScrollToTop />
-            <Routes>
-              <Route element={<RootLayout />}>
-                <Route path="/" element={<Index />} />
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <UIBannerProvider>
+          <BrowserRouter>
+            <PlausibleTracker />
+            <SmoothScrollProvider>
+              <ScrollToTop />
+              <Routes>
                 <Route
-                  path="/pole/:slug/:subSlug"
+                  path="/admin/login"
                   element={
                     <Suspense fallback={<RouteFallback />}>
-                      <SubPoleDetail />
-                    </Suspense>
-                  }
-                />
-                <Route path="/pole/:slug" element={<PoleDetail />} />
-                <Route path="/expertises" element={<Expertises />} />
-                <Route
-                  path="/partenaires"
-                  element={
-                    <Suspense fallback={<RouteFallback />}>
-                      <Partenaires />
-                    </Suspense>
-                  }
-                />
-                <Route path="/contact" element={<Contact />} />
-                <Route
-                  path="/mentions-legales"
-                  element={
-                    <Suspense fallback={<RouteFallback />}>
-                      <MentionsLegales />
+                      <AdminLogin />
                     </Suspense>
                   }
                 />
                 <Route
-                  path="/politique-confidentialite"
+                  path="/admin"
                   element={
                     <Suspense fallback={<RouteFallback />}>
-                      <PolitiqueConfidentialite />
+                      <AdminRoute>
+                        <AdminLayout />
+                      </AdminRoute>
                     </Suspense>
                   }
-                />
-                <Route
-                  path="/blog"
-                  element={
-                    <Suspense fallback={<RouteFallback />}>
-                      <Blog />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="/blog/:slug"
-                  element={
-                    <Suspense fallback={<RouteFallback />}>
-                      <BlogPost />
-                    </Suspense>
-                  }
-                />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </SmoothScrollProvider>
-        </BrowserRouter>
-      </UIBannerProvider>
-    </TooltipProvider>
+                >
+                  <Route index element={<AdminDashboard />} />
+                </Route>
+
+                <Route element={<RootLayout />}>
+                  <Route path="/" element={<Index />} />
+                  <Route
+                    path="/pole/:slug/:subSlug"
+                    element={
+                      <Suspense fallback={<RouteFallback />}>
+                        <SubPoleDetail />
+                      </Suspense>
+                    }
+                  />
+                  <Route path="/pole/:slug" element={<PoleDetail />} />
+                  <Route path="/expertises" element={<Expertises />} />
+                  <Route
+                    path="/partenaires"
+                    element={
+                      <Suspense fallback={<RouteFallback />}>
+                        <Partenaires />
+                      </Suspense>
+                    }
+                  />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route
+                    path="/mentions-legales"
+                    element={
+                      <Suspense fallback={<RouteFallback />}>
+                        <MentionsLegales />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/politique-confidentialite"
+                    element={
+                      <Suspense fallback={<RouteFallback />}>
+                        <PolitiqueConfidentialite />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/blog"
+                    element={
+                      <Suspense fallback={<RouteFallback />}>
+                        <Blog />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/blog/:slug"
+                    element={
+                      <Suspense fallback={<RouteFallback />}>
+                        <BlogPost />
+                      </Suspense>
+                    }
+                  />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+            </SmoothScrollProvider>
+          </BrowserRouter>
+        </UIBannerProvider>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
 export default App;
+
