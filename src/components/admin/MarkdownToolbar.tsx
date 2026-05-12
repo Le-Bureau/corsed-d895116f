@@ -60,12 +60,11 @@ const MarkdownToolbar = ({ textareaRef, value, onChange }: Props) => {
   return (
     <div className="flex flex-wrap items-center gap-1 px-2 py-1.5 border border-border/60 border-b-0 rounded-t-md bg-muted/40">
       {tools.map(({ kind, label, Icon }, idx) => (
-        <>
+        <Fragment key={kind}>
           {(idx === 4 || idx === 8) && (
-            <span key={`sep-${idx}`} className="w-px h-5 bg-border/60 mx-1" aria-hidden />
+            <span className="w-px h-5 bg-border/60 mx-1" aria-hidden />
           )}
           <button
-            key={kind}
             type="button"
             onClick={() => handle(kind)}
             title={label}
@@ -77,7 +76,7 @@ const MarkdownToolbar = ({ textareaRef, value, onChange }: Props) => {
           >
             <Icon className="h-4 w-4" />
           </button>
-        </>
+        </Fragment>
       ))}
     </div>
   );
