@@ -68,8 +68,8 @@ const Index = () => {
       <PolesAlternated />
       <OtherExpertisesSection />
       <PartnersSection />
-      <LatestArticlesSection />
       <CTAFinalSection />
+      <LatestArticlesSection />
     </main>
   );
 };
