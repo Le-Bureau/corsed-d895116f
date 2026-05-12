@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       // Defer Supabase calls outside the callback to avoid deadlocks
       setTimeout(() => {
-        void applySession(nextSession, false);
+        void applySession(nextSession);
       }, 0);
     });
 
