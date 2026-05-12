@@ -33,6 +33,7 @@ export interface BlogPost {
   readingTimeMinutes: number;
   metaTitle: string | null;
   metaDescription: string | null;
+  updatedAt: string | null;
   author: BlogAuthor | null;
   category: BlogCategory | null;
 }
