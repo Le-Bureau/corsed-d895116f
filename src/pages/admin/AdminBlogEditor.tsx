@@ -583,6 +583,14 @@ const AdminBlogEditor = () => {
           </div>
         </div>
       </div>
+
+      <ArticlePreviewModal
+        open={previewModalOpen}
+        onOpenChange={setPreviewModalOpen}
+        formValues={form.getValues()}
+        authors={authors ?? []}
+        categories={categories ?? []}
+      />
     </form>
   );
 };
