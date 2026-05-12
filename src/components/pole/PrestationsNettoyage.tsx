@@ -10,7 +10,7 @@ const prestations = [
       "Pulvérisation à l'eau chaude ou à l'eau osmosée pure, basse pression. Idéal quand vous avez besoin d'un résultat immédiat sans traitement de fond, pour restaurer la production d'une centrale photovoltaïque ou nettoyer des surfaces vitrées encrassées.",
     specs: [
       "Eau chaude ou osmosée selon le support",
-      "Sans produit chimique",
+      "Avec ou sans produit chimique",
       "Effet ponctuel, à renouveler selon exposition",
       "Idéal panneaux PV (12-18 mois) et vitrages",
     ],
