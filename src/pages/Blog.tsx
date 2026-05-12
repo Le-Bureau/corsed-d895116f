@@ -41,10 +41,10 @@ const Blog = () => {
 
   return (
     <div className="blog-scope">
-      <SEO
-        title="Le blog | Corse Drone"
-        description="Expertise drone en Corse, retours de chantiers et actualités du secteur — par l'équipe Corse Drone à Bastia."
-        canonicalPath="/blog"
+      <BlogIndexSEO
+        activeCategory={
+          catSlug ? categories.find((c) => c.slug === catSlug) ?? null : null
+        }
       />
 
       <div className="blog-layout">
