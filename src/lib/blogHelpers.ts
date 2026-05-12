@@ -28,6 +28,20 @@ export const getLatestPosts = (allPosts: BlogPost[], n: number = 3): BlogPost[] 
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     .slice(0, n);
 
+export interface HomeBlogSelection {
+  featured: BlogPost;
+  secondary: BlogPost[];
+}
+
+export function getHomeBlogSelection(allPosts: BlogPost[]): HomeBlogSelection {
+  const sorted = [...allPosts].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+  const featured = sorted.find((p) => p.featured) ?? sorted[0];
+  const secondary = sorted.filter((p) => p.id !== featured.id).slice(0, 2);
+  return { featured, secondary };
+}
+
 export const slugify = (text: string): string =>
   text
     .toLowerCase()
