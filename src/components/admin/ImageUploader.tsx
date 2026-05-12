@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 interface Props {
   value: string | null | undefined;
   onChange: (url: string | null) => void;
-  folder: "covers" | "heroes";
+  folder: "covers" | "heroes" | "inline-images";
   postId?: string;
   helperText?: string;
 }
