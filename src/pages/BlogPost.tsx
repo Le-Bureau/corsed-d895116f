@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SEO from "@/components/seo/SEO";
+import BlogPostSEO from "@/components/seo/BlogPostSEO";
 import BlogTOC from "@/components/blog/BlogTOC";
 import BlogContent, { extractToc } from "@/components/blog/BlogContent";
 import BlogAuthorBio from "@/components/blog/BlogAuthorBio";
