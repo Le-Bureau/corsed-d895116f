@@ -1,106 +1,165 @@
-# Phase 5 — Admin Authentication & Shell
+# Phase 6 — Admin Blog CRUD
 
-Build the admin auth foundation: grant PF the admin role, create an AuthContext, a login page, a route guard, an admin layout, and a dashboard placeholder. No public-site changes, no signup UI, no schema changes beyond seeding 2 rows.
+Build the back-office UI for blog posts at `/admin/blog`, `/admin/blog/new`, `/admin/blog/:id/edit`, with image upload, markdown editor + live preview, and full create/update/delete flows. RLS already permits admins; auth shell from phase 5 wraps everything.
 
-## 1. Database migration (1 call to supabase--migration)
+## Routes (added to `App.tsx` under existing `<AdminRoute><AdminLayout/>`)
 
-Two statements in one migration:
-
-```sql
-INSERT INTO user_roles (user_id, role)
-VALUES ('8e00f50e-24db-4f31-85bc-bb50938117d6', 'admin')
-ON CONFLICT (user_id, role) DO NOTHING;
-
-UPDATE blog_authors
-SET user_id = '8e00f50e-24db-4f31-85bc-bb50938117d6'
-WHERE initials = 'PF' AND user_id IS NULL;
+```
+/admin/blog            → AdminBlogList
+/admin/blog/new        → AdminBlogEditor (mode=create)
+/admin/blog/:id/edit   → AdminBlogEditor (mode=edit)
 ```
 
-Then verify with the spec's SELECT join — must return one row, role=`admin`, author_name=`Pierre-François Morganti`.
+All lazy-loaded.
 
-Note: technically these are data ops (insert/update), but they're permanent seed/link operations tied to a one-off bootstrap. Will use `supabase--insert` to respect the "migration = schema only" rule, then run the verification with `supabase--read_query`.
-
-## 2. Files to create
+## Files to create
 
 ```text
-src/contexts/AuthContext.tsx        AuthProvider + context, session+admin+isLoading
-src/hooks/useAuth.ts                useContext wrapper, throws if outside provider
-src/pages/admin/AdminLogin.tsx      /admin/login page
-src/components/admin/AdminRoute.tsx Guard wrapper
-src/components/admin/AdminLayout.tsx Shell with top bar + Outlet
-src/pages/admin/AdminDashboard.tsx  /admin index page
+src/hooks/admin/useAdminBlogPosts.ts       all posts (drafts + published)
+src/hooks/admin/useAdminBlogPost.ts        single post by id
+src/hooks/admin/useCreateBlogPost.ts       insert mutation
+src/hooks/admin/useUpdateBlogPost.ts       update mutation
+src/hooks/admin/useDeleteBlogPost.ts       delete mutation
+src/hooks/admin/useSlugExists.ts           soft uniqueness check
+src/hooks/admin/useImageUpload.ts          storage upload helper
+
+src/lib/admin/blogPostSchema.ts            zod schema + types
+src/lib/admin/markdownSnippets.ts          snippet templates + insert helper
+
+src/components/admin/ImageUploader.tsx     drag-drop + preview + replace/remove
+src/components/admin/MarkdownToolbar.tsx   buttons that insert into <textarea>
+src/components/admin/MarkdownSyntaxHelp.tsx Sheet documenting custom HTML syntax
+src/components/admin/SeoPreview.tsx         Google-style mockup
+src/components/admin/UnsavedChangesPrompt.tsx beforeunload + nav guard
+
+src/components/admin/blog-list/BlogPostsTable.tsx
+src/components/admin/blog-list/BlogPostRow.tsx
+src/components/admin/blog-list/BlogListFilters.tsx
+
+src/pages/admin/AdminBlogList.tsx
+src/pages/admin/AdminBlogEditor.tsx
 ```
 
-## 3. Files to modify
+## Files to modify
 
-- `src/App.tsx`: wrap with `<AuthProvider>` (inside QueryClientProvider, outside BrowserRouter); add lazy-loaded routes `/admin/login`, `/admin/*` with nested `index → AdminDashboard`.
+- `src/App.tsx` — add 3 admin routes, lazy-loaded.
+- `src/pages/admin/AdminDashboard.tsx` — real `{drafts}` / `{published}` counts on the Blog card; new "Articles récents" list (5 most recent updated posts → link to editor).
+- `src/components/admin/AdminLayout.tsx` — already uses NavLink without `end` for `/admin/blog`, so it stays active for `/admin/blog/*`. Verify and adjust if needed.
 
-## 4. Technical details
+## Listing page (`AdminBlogList`)
 
-**AuthContext**
-- State: `user`, `session`, `isAdmin`, `isLoading`.
-- On mount: subscribe to `onAuthStateChange` FIRST, then call `getSession()` (Supabase recommended order to avoid missed events).
-- Whenever session.user changes: query `user_roles` filtered by `user_id` and `role='admin'` with `.maybeSingle()`. Set `isAdmin = !!data`.
-- `isLoading` flips to false only after initial session check + (if user) admin check resolved.
-- `signIn`: just calls `signInWithPassword`, returns `{ error }` immediately — does NOT await admin check (race-condition note from spec).
-- `signOut`: `supabase.auth.signOut()`.
-- Cleanup: unsubscribe in useEffect return.
+- Header: `Articles du blog` (Fraunces) + `{n} brouillons · {m} publiés`.
+- Sticky action bar: search (debounced 200 ms via small `useDebounce` inline), status segmented `[Tous|Brouillons|Publiés]`, category select, author select, primary `Nouvel article` button (Plus icon) → `/admin/blog/new`.
+- Table built with shadcn `Table`: thumbnail (or gradient fallback from `author.gradient_*`) · title (Star icon if `featured_on_home`) + slug muted · status pill · `BlogCategoryPill` · author initials avatar · `formatBlogDate(updated_at)` · actions `DropdownMenu` (Modifier, Voir si publié → `/blog/{slug}` new tab, Supprimer → AlertDialog).
+- Empty states: "Aucun article" with primary CTA when zero total; "Aucun article ne correspond aux filtres" otherwise.
+- Filters applied client-side over `useAdminBlogPosts()`.
 
-**AdminLogin**
-- Standalone page (no site Header). Top: small wordmark linking `/`.
-- Centered Card max-w-md with Fraunces title, Geist body.
-- Email + password (with show/hide eye toggle) + submit button.
-- Loading state on button while submitting.
-- Translates `Invalid login credentials` → `Identifiants incorrects`; default to raw `error.message` otherwise.
-- If already `user && isAdmin`, immediate `<Navigate to={redirect ?? '/admin'} replace />`.
-- Uses `useSearchParams` to read `?redirect=`.
+## Editor page (`AdminBlogEditor`)
 
-**AdminRoute**
-- `isLoading` → centered spinner ("Chargement…").
-- `!user` → `<Navigate to={'/admin/login?redirect=' + encodeURIComponent(location.pathname)} replace />`.
-- `user && !isAdmin` → toast `Vous n'avez pas accès à cette zone` + `<Navigate to="/" replace />`.
-- Else render children.
+- One component for create + edit, behavior switched by presence of `:id`.
+- `react-hook-form` + `zodResolver(blogPostSchema)`.
+- Form initial values: empty defaults (status=`draft`, featured_on_home=`false`, author_id=current user's author if available else first author) for create; loaded post for edit.
+- Layout: `grid lg:grid-cols-[1fr_360px] gap-8`. Single column on `<lg`.
 
-**AdminLayout**
-- Top bar: cream bg `#FCFAF7`, `border-b`, max-w-7xl wrapper.
-- Left: Corse Drone wordmark + small `ADMIN` pill (primary color, uppercase, tracking-wide).
-- Center: nav links (`Tableau de bord` → `/admin`, `Blog` → `/admin/blog`) with active state via `NavLink` (underline + primary color).
-- Right: Avatar circle (PF initials, gradient from blog_authors data when available, fallback to email initial) → DropdownMenu: "Voir le site" (target=_blank), "Se déconnecter" (calls signOut → navigate `/`).
-- Body: `<Outlet />` inside `max-w-7xl py-12 px-6`.
+**Left column**
+- Title input.
+- Slug input + helper. Auto-sync logic: a `useRef<boolean>` `slugManuallyEdited`; `useEffect` watches `title` and updates slug only while ref is false; `onChange` of slug sets ref to true.
+- Excerpt textarea + live `{n}/220` counter (red beyond limit).
+- Content area: `Tabs [Éditer | Aperçu]` on `<lg`, side-by-side on `lg+` (custom layout — `Tabs` defaultValue Edit; on lg, render both panels visible). `MarkdownToolbar` above editor; textarea (Geist Mono, `min-h-[500px]`); preview pane uses `<BlogContent markdown={contentValue} />` directly. "Légende de la syntaxe" link → opens `MarkdownSyntaxHelp` Sheet.
 
-**AdminDashboard**
-- Fetch logged-in author via small inline query on `blog_authors` by `user_id` for the first name (fallback: email username).
-- Title `Bonjour, {firstName}` (Fraunces) + muted subtitle.
-- Grid `md:grid-cols-2 lg:grid-cols-3`.
-- Card "Articles du blog": book icon, title, description, count from `useBlogPosts()` (`{count} articles publiés`), CTA `<Link to="/admin/blog">Gérer le blog →</Link>`.
-- One disabled placeholder card "Bientôt : Réalisations" (muted, no hover).
+**Right column (sticky `lg:sticky lg:top-20`)**
+- Status segmented control.
+- `featured_on_home` Switch + helper text.
+- Author Select (3 options, dot using `gradient_from`).
+- Category Select (7 options, colored dot via `category.color`).
+- `ImageUploader` for cover (folder=`covers`).
+- `ImageUploader` for hero (folder=`heroes`) + helper text.
+- SEO `Accordion` (collapsed) → meta_title input + counter, meta_description textarea + counter, `SeoPreview` live mockup.
 
-**Routing in App.tsx**
+**Bottom action bar (sticky bottom)**
+- Cancel link (with `UnsavedChangesPrompt` when dirty).
+- Create mode: `Enregistrer en brouillon` (secondary, sets status=draft) + `Publier` (primary, sets status=published).
+- Edit mode: `Supprimer` (destructive, far left, AlertDialog) + `Mettre à jour` (primary, keeps current status).
 
-```tsx
-<AuthProvider>
-  <BrowserRouter>
-    ...
-    <Route path="/admin/login" element={<Suspense ...><AdminLogin /></Suspense>} />
-    <Route path="/admin/*" element={<Suspense ...><AdminRoute><AdminLayout /></AdminRoute></Suspense>}>
-      <Route index element={<AdminDashboard />} />
-    </Route>
-  </BrowserRouter>
-</AuthProvider>
+**Submit pipeline**
+1. `slugExists(slug, excludeId)` via `useSlugExists`. If taken → form error on `slug`, abort.
+2. If editing a `published` post and slug changed → `confirm()` dialog with the warning text. Abort on cancel.
+3. Mutate (create or update). Toast success ("Article créé" / "Modifications enregistrées" / "Article publié" / "Article remis en brouillon" depending on transition). Navigate to `/admin/blog` (create) or stay (edit).
+4. On error: top-of-form alert + sonner toast.
+
+## Image upload
+
+`useImageUpload({ folder, postId? })`:
+- Validate `file.type.startsWith('image/')` and `file.size <= 5 MB` (5_242_880).
+- Path: `${folder}/${postId ?? 'unassigned'}/${crypto.randomUUID()}.${ext}`.
+- `supabase.storage.from('blog-covers').upload(path, file, { contentType: file.type, upsert: false })`.
+- Return public URL via `getPublicUrl(path).data.publicUrl`.
+- Comment in file noting orphaned-files trade-off (no cleanup in V1).
+
+`ImageUploader`: controlled by `value`/`onChange`. Empty state = dashed border drop zone (drag visual feedback via `dragActive` state). Filled state = thumbnail + Remplacer (re-opens file picker) + Supprimer (sets value to null; storage file stays). Inline error under zone for validation failures.
+
+RLS for the bucket: bucket `blog-covers` is already public for SELECT (phase 3). Uploads need INSERT policies. Need to verify policies allow authenticated admins. If missing, add a migration with:
+```sql
+CREATE POLICY "admins upload blog covers" ON storage.objects
+  FOR INSERT TO authenticated
+  WITH CHECK (bucket_id = 'blog-covers' AND public.has_role(auth.uid(), 'admin'));
+CREATE POLICY "admins update blog covers" ON storage.objects
+  FOR UPDATE TO authenticated
+  USING (bucket_id = 'blog-covers' AND public.has_role(auth.uid(), 'admin'));
+CREATE POLICY "admins delete blog covers" ON storage.objects
+  FOR DELETE TO authenticated
+  USING (bucket_id = 'blog-covers' AND public.has_role(auth.uid(), 'admin'));
+```
+Will check existing storage policies first and only add what's missing.
+
+## Markdown toolbar
+
+`MarkdownToolbar` accepts a `textareaRef` and a `setValue` callback. Each button has an `inline` (wrap selection) or `block` (insert at line start / new block) behavior. After insert, restore focus and selection.
+
+**Important deviation from spec**: the spec proposes `![Alt|wide]` and `> [!info]` syntax, but `BlogContent` uses `rehype-raw` and the seed posts use **raw HTML** (`<figure>`, `<figure class="wide">`, `<div class="image-grid">`, `<div class="callout">`). To stay consistent with what the public renderer actually supports, the toolbar will insert HTML snippets that match the existing conventions:
+
+```
+<figure>
+  <img src="URL" alt="Alt" />
+  <figcaption>Légende</figcaption>
+</figure>
+
+<figure class="wide">…</figure>
+
+<div class="image-grid">
+  <figure>…</figure>
+  <figure>…</figure>
+</div>
+
+<div class="callout">
+  <div class="callout__icon">i</div>
+  <p>Texte du callout.</p>
+</div>
 ```
 
-`AdminLogin`, `AdminLayout`, `AdminDashboard` all behind `React.lazy`.
+`MarkdownSyntaxHelp` Sheet documents all of these with copyable examples.
 
-## 5. Supabase signup setting
+## Hooks (React Query)
 
-Lovable Cloud exposes `disable_signup` via `configure_auth`. I'll set `disable_signup: true` (keep `auto_confirm_email: false`, `password_hibp_enabled: true`, `external_anonymous_users_enabled: false`) so no random user can self-register. Will note this clearly in the final output.
+- `useAdminBlogPosts` — `queryKey: ['blog','posts','admin']`, no status filter, joined `author` + `category`, ordered `updated_at desc`, `staleTime: 30s`.
+- `useAdminBlogPost(id)` — `queryKey: ['blog','post','id', id]`.
+- `useCreateBlogPost` — invalidates `['blog','posts']` (matches both admin and public via `queryKey.startsWith`).
+- `useUpdateBlogPost` — same; also invalidates `['blog','post', oldSlug]` and `['blog','post', newSlug]` if changed, plus `['blog','post','id', id]`.
+- `useDeleteBlogPost` — invalidates `['blog','posts']`, removes `['blog','post', slug]`.
+- `useSlugExists` — one-shot `select('id').eq('slug', slug).neq('id', excludeId ?? '').maybeSingle()`; not cached, called manually before submit.
 
-## 6. Verification
+The public `useBlogPosts` `queryKey` from phase 4 is `['blog','posts','published']`; invalidating prefix `['blog','posts']` will refresh both admin and public lists.
 
-- `supabase--read_query` join confirming role + author link.
-- `tsc --noEmit` (handled by harness).
-- Walk the 9-item testing checklist — note any item requiring manual browser test.
+## Toasts
 
-## 7. Out of scope (untouched)
+Sonner (already used in `PartenairesForm`). Standard messages per spec.
 
-Public site, blog frontend (phase 4), schema (phase 3), Resend, Plausible, SEO assets.
+## Out of scope
+
+Public site, public blog hooks, RLS schema, AuthContext, AdminRoute, AdminLayout shell (only NavLink active behavior verified), Resend, Plausible, SEO meta of public site.
+
+## Verification
+
+- `tsc --noEmit` clean.
+- Walk the 16-item testing checklist; report any item needing manual click-through.
+- Confirm storage policies allow admin uploads (add migration if missing).
