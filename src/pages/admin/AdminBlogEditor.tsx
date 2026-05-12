@@ -85,6 +85,7 @@ const AdminBlogEditor = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const slugManuallyEditedRef = useRef(false);
   const [topError, setTopError] = useState<string | null>(null);
+  const [previewVisible, setPreviewVisible] = useState(true);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
