@@ -269,7 +269,7 @@ export const POLES: Pole[] = [
     title: "La précision au mètre carré",
     subtitle:
       "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Optimisez vos rendements et allégez votre charge de travail, parcelle par parcelle.",
-    statLabel: "Eau utilisée",
+    statLabel: "PRÉCISION",
     statValue: "2",
     statDetail: "précision RTK-GPS,\napplication zone par zone",
     comingSoon: true,
