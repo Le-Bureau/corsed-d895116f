@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
 
     supabase.auth.getSession().then(({ data }) => {
-      void applySession(data.session, true);
+      void applySession(data.session);
     });
 
     return () => {
