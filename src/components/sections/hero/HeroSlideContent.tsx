@@ -81,10 +81,12 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
     >
       <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)]">
         <div className="w-full max-w-[780px]">
-          {/* Compensating spacer for eyebrow moved to title track (md+ only) */}
+          {/* Compensating spacer for eyebrow moved to title track (md+ only).
+              Masqué en même temps que la pastille dans HeroCarousel.tsx — réactiver
+              en retirant `hidden` ici si la pastille revient. */}
           <div
             aria-hidden="true"
-            className="hidden md:block"
+            className="hidden"
             style={{ height: "calc(13px * 1.2 + 1rem + 0.75rem)" }}
           />
 
