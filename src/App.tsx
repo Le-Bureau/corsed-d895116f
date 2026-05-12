@@ -87,6 +87,22 @@ const App = () => (
                     </Suspense>
                   }
                 />
+                <Route
+                  path="/blog"
+                  element={
+                    <Suspense fallback={<RouteFallback />}>
+                      <Blog />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/blog/:slug"
+                  element={
+                    <Suspense fallback={<RouteFallback />}>
+                      <BlogPost />
+                    </Suspense>
+                  }
+                />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Route>
