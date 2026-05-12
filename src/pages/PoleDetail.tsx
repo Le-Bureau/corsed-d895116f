@@ -80,9 +80,10 @@ export default function PoleDetail() {
           <PoleProcess steps={pole.processSteps} />
         )
       )}
-      {pole.useCases && pole.useCases.length > 0 && (
+      {/* Section "Ils nous ont fait confiance" — masquée temporairement, à réactiver quand on aura des cas clients réels */}
+      {/* {pole.useCases && pole.useCases.length > 0 && (
         <PoleUseCases cases={pole.useCases} />
-      )}
+      )} */}
       {pole.poleFAQ && pole.poleFAQ.length > 0 && (
         <PoleFAQ items={pole.poleFAQ} />
       )}
