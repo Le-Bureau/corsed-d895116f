@@ -67,7 +67,7 @@ const BlogPostRow = ({ post, onDelete }: Props) => {
         </span>
       </td>
       <td className="py-3 px-3">
-        <span className="blog-scope inline-block">
+        <span className="blog-scope contents">
           <BlogCategoryPill category={post.category} />
         </span>
       </td>
