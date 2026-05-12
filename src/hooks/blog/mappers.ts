@@ -75,6 +75,7 @@ export const mapPost = (r: PostRow): BlogPost => ({
   readingTimeMinutes: r.reading_time_minutes,
   metaTitle: r.meta_title,
   metaDescription: r.meta_description,
+  updatedAt: r.updated_at,
   author: r.author ? mapAuthor(r.author) : null,
   category: r.category ? mapCategory(r.category) : null,
 });
