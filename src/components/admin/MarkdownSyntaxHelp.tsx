@@ -104,7 +104,7 @@ interface SectionProps {
 }
 
 const Section = ({ id, title, description, children }: SectionProps) => (
-  <section id={id} className="scroll-mt-6 space-y-3">
+  <section id={id} className="scroll-mt-40 space-y-3">
     <div>
       <h2
         className="text-foreground"
