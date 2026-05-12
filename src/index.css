@@ -739,7 +739,7 @@ html.lenis body {
 .blog-scope .home-featured__cover {
   position: relative;
   overflow: hidden;
-  min-height: 280px;
+  min-height: 560px;
   background: var(--blog-bg-sidebar);
 }
 .blog-scope .home-featured__cover img {
@@ -820,7 +820,7 @@ html.lenis body {
 
 @media (max-width: 1023px) {
   .blog-scope .home-featured { grid-template-columns: 300px 1fr; }
-  .blog-scope .home-featured__cover { min-height: 260px; }
+  .blog-scope .home-featured__cover { min-height: 520px; }
   .blog-scope .home-featured__content { padding: 28px 32px; }
 }
 @media (max-width: 640px) {
