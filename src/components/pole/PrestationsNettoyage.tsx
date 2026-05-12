@@ -4,7 +4,7 @@ import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 const prestations = [
   {
     number: "01",
-    title: "Nettoyage rapide",
+    title: "Nettoyage en profondeur",
     target: "Panneaux solaires · Vitrages",
     description:
       "Pulvérisation à l'eau chaude ou à l'eau osmosée pure, basse pression. Idéal quand vous avez besoin d'un résultat immédiat sans traitement de fond, pour restaurer la production d'une centrale photovoltaïque ou nettoyer des surfaces vitrées encrassées.",
@@ -156,7 +156,7 @@ const PrestationsNettoyage = () => {
               </h3>
               <p className="text-text-secondary text-[15px] leading-relaxed">
                 Pour les cas urgents, nous pouvons appliquer une méthode plus agressive
-                avec un résultat visible immédiat. Mais soyons transparents : si elle
+                avec un résultat visible immédiat. Mais soyons transparents: si elle
                 marche vite, elle peut abîmer les surfaces fragiles, et les saletés
                 reviennent plus rapidement qu'avec un démoussage classique. Nous ne la
                 conseillons que si vous n'avez pas d'autre option et nous la proposerons
