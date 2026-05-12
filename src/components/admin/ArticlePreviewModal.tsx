@@ -53,8 +53,13 @@ const ArticlePreviewModal = ({ open, onOpenChange, formValues, authors, categori
           onWheel={(e) => e.stopPropagation()}
         >
           <style>{`
-            .article-preview-modal .breadcrumb { padding-top: 24px; }
-            .article-preview-modal .article-hero { margin-top: 16px; }
+            .article-preview-modal .breadcrumb { padding-top: 24px; max-width: 100%; }
+            .article-preview-modal .article-hero { margin-top: 16px; max-width: 100%; }
+            .article-preview-modal .article-cover,
+            .article-preview-modal .article-body-layout {
+              max-width: 100%;
+              box-sizing: border-box;
+            }
             .article-preview-modal .article-body-layout {
               grid-template-columns: 1fr;
               gap: 0;
