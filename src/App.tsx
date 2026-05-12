@@ -19,6 +19,8 @@ const SubPoleDetail = lazy(() => import("./pages/SubPoleDetail"));
 const Partenaires = lazy(() => import("./pages/Partenaires"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 
 const RouteFallback = () => (
   <div className="min-h-[60vh] w-full flex items-center justify-center bg-background">
