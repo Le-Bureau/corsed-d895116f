@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SEO from "@/components/seo/SEO";
+import BlogPostSEO from "@/components/seo/BlogPostSEO";
 import BlogTOC from "@/components/blog/BlogTOC";
 import BlogContent, { extractToc } from "@/components/blog/BlogContent";
 import BlogAuthorBio from "@/components/blog/BlogAuthorBio";
@@ -65,13 +66,7 @@ const BlogPost = () => {
       className="blog-scope"
       style={{ ["--current-cat" as string]: cat?.color ?? "#5082AC" }}
     >
-      <SEO
-        title={`${post.title} | Corse Drone`}
-        description={post.excerpt}
-        canonicalPath={`/blog/${post.slug}`}
-        ogImage={post.coverImageUrl ?? undefined}
-        ogType="article"
-      />
+      <BlogPostSEO post={post} />
 
       <nav className="breadcrumb" aria-label="Fil d'Ariane">
         <Link to="/">Accueil</Link>
