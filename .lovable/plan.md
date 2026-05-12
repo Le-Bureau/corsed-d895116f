@@ -1,44 +1,30 @@
 ## Objectif
 
-Remplacer la barre d'onglets horizontale (scroll sur mobile) du formulaire de contact par une **grille de cartes cliquables** où tous les sujets sont visibles d'un coup, sans scroll.
+Permettre, sur mobile et tablette, de changer de pôle dans le hero d'accueil par un geste de swipe horizontal (gauche → pôle suivant, droite → pôle précédent), en complément des boutons et de la pagination déjà présents.
 
-## Mise en page
+## Approche
 
-- **Mobile (< 640px)** : 2 colonnes
-- **Tablet (≥ 640px)** : 3 colonnes
-- **Desktop (≥ 1024px)** : 4 colonnes
-- 7 sujets actuels → la dernière ligne se complète naturellement
+Ajouter un gestionnaire de gestes tactiles directement sur le conteneur racine de `HeroCarousel`, sans toucher au reste du carrousel (titres, animations, fond, contenu). On réutilise les fonctions `goToNext` / `goToPrev` déjà exposées par `useHeroCarousel`.
 
-## Anatomie d'une carte
+Choix technique : utiliser les `pointer events` natifs (`onPointerDown` / `onPointerMove` / `onPointerUp`) plutôt que d'ajouter une lib. Avantages :
+- pas de nouvelle dépendance
+- couvre touch + stylet
+- compatible avec les boutons internes (les CTA stoppent la propagation naturellement car le geste se mesure au pointerup global du conteneur, et un seuil de distance évite les faux positifs sur un tap).
 
-Chaque carte contient :
-- Une **pastille de couleur** (le `dot` actuel) en haut à gauche, avec le glow quand sélectionnée
-- Le **label du sujet** (ex. « Nettoyage par drone »), 2 lignes max
-- Une bordure fine + fond très clair
-- État sélectionné : bordure et fond teintés à la couleur d'accent du sujet, légère élévation
+## Détails d'implémentation
 
-Comportement :
-- Clic = sélection (même logique `setValue("requestType", …)` qu'aujourd'hui)
-- Hover : léger lift + bordure qui s'assombrit
-- `role="radiogroup"` / `role="radio"` + `aria-checked` (sémantique plus juste qu'un tablist pour ce cas)
-- Garde la même variable CSS `--contact-accent` qui pilote déjà la teinte du formulaire
+Fichier modifié : `src/components/sections/HeroCarousel.tsx`
 
-## Ce qui disparaît
+1. Ajouter un `useRef` pour stocker `{ startX, startY, startTime, active }` du geste en cours.
+2. Sur `onPointerDown` : enregistrer la position et marquer le geste actif. Ignorer si le pointer type est `mouse` (le swipe ne concerne que touch/pen) pour ne pas perturber l'UX desktop.
+3. Sur `onPointerMove` : si `Math.abs(deltaY) > Math.abs(deltaX)` et que deltaY dépasse un petit seuil, annuler le geste (l'utilisateur scrolle verticalement).
+4. Sur `onPointerUp` / `onPointerCancel` :
+   - si `|deltaX| >= 50px` ET `|deltaX| > |deltaY|` ET durée < 600ms → déclencher `goToNext()` (swipe vers la gauche, deltaX < 0) ou `goToPrev()` (swipe vers la droite, deltaX > 0).
+   - sinon : ne rien faire (c'est un tap ou un mouvement non concluant).
+5. Ne PAS ajouter `touch-action: none` sur le conteneur — on garde le scroll vertical natif. Le filtrage logique deltaY>deltaX suffit.
+6. Aucune modification visuelle, aucune modification du hook `useHeroCarousel`, aucun impact desktop.
 
-- Le scroll horizontal et le dégradé de fade mobile
-- La barre soulignée sous l'onglet actif (remplacée par la teinte de la carte)
-- Le bloc `tablist` actuel dans `ContactForm.tsx`
+## Hors scope
 
-## Ce qui ne change pas
-
-- Schéma de données, validation, soumission
-- Le système de couleurs `REQUEST_TYPE_COLORS` (réutilisé tel quel)
-- La synchronisation de l'accent avec le reste du formulaire (bouton, focus, lien RGPD)
-
-## Détails techniques
-
-- Fichier modifié : `src/components/contact/ContactForm.tsx`
-  - Remplacer le composant `TabButton` par un `RequestCard`
-  - Remplacer le wrapper `tablist` + scroll par une `<div>` en `grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5`
-- Le label « Sujet de votre demande » sera affiché au-dessus de la grille (petit label mono comme les autres champs) puisqu'on n'a plus la barre d'onglets contextuelle
-- Erreur `requestType` affichée sous la grille
+- Pas d'animation de "drag" suivant le doigt en temps réel (le carrousel a une orchestration complexe titre+fond+contenu+stat ; un drag interactif demanderait un refacto important). Le swipe déclenche directement la transition existante, identique à un clic sur les flèches.
+- Pas de changement sur les boutons, la pagination, ou la barre de progression.
