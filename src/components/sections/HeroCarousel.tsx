@@ -101,11 +101,56 @@ const HeroCarousel = () => {
 
   const duration = reduced ? 0.3 : 1.2;
 
+  // Touch swipe to change pole on mobile/tablet
+  const swipeRef = useRef<{
+    startX: number;
+    startY: number;
+    startTime: number;
+    active: boolean;
+  } | null>(null);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "mouse") return;
+    swipeRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      startTime: Date.now(),
+      active: true,
+    };
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    const s = swipeRef.current;
+    if (!s || !s.active) return;
+    const dx = e.clientX - s.startX;
+    const dy = e.clientY - s.startY;
+    if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+      s.active = false;
+    }
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    const s = swipeRef.current;
+    swipeRef.current = null;
+    if (!s || !s.active) return;
+    const dx = e.clientX - s.startX;
+    const dy = e.clientY - s.startY;
+    const dt = Date.now() - s.startTime;
+    if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) && dt < 600) {
+      if (dx < 0) goToNext();
+      else goToPrev();
+    }
+  };
+
   return (
     <div
       role="region"
       aria-label="Présentation des pôles d'expertise"
       className="relative w-full h-screen min-h-[100dvh] overflow-hidden bg-surface-darker text-text-on-dark"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={() => { swipeRef.current = null; }}
       style={
         {
           "--pole-base": currentPole.baseColorOnDark,
