@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import { LogOut, ExternalLink } from "lucide-react";
+import { LogOut, ExternalLink, User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
@@ -117,6 +117,12 @@ const AdminLayout = () => {
                   )}
                 </div>
                 <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/admin/profil" className="cursor-pointer">
+                    <User className="h-4 w-4" />
+                    Mon profil
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <a href="/" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                     <ExternalLink className="h-4 w-4" />

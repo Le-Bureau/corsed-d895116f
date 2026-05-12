@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Camera } from "lucide-react";
+import { ArrowRight, BookOpen, Camera, User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminBlogPosts } from "@/hooks/admin/useAdminBlogPosts";
 import { supabase } from "@/integrations/supabase/client";
@@ -55,6 +55,14 @@ const AdminDashboard = () => {
           meta={`${publishedCount} publié${publishedCount > 1 ? "s" : ""} · ${draftCount} brouillon${draftCount > 1 ? "s" : ""}`}
           ctaLabel="Gérer le blog"
           to="/admin/blog"
+        />
+        <DashboardCard
+          icon={<User className="h-5 w-5" />}
+          title="Mon profil"
+          description="Modifier votre nom, votre bio et votre avatar."
+          meta="Apparaît sous chaque article"
+          ctaLabel="Modifier mon profil"
+          to="/admin/profil"
         />
         <DashboardCard
           icon={<Camera className="h-5 w-5" />}
