@@ -32,7 +32,11 @@ const BlogPost = () => {
   if (isError || !post) {
     return (
       <div className="blog-scope">
-        <SEO title="Article introuvable | Corse Drone" canonicalPath={`/blog/${slug ?? ""}`} />
+        <SEO
+          title="Article introuvable | Corse Drone"
+          description="Cet article n'existe pas ou n'est plus publié."
+          canonicalPath={`/blog/${slug ?? ""}`}
+        />
         <div style={{ maxWidth: 640, margin: "120px auto", padding: "0 24px", textAlign: "center" }}>
           <h1 style={{ fontSize: 32, marginBottom: 16 }}>Article introuvable</h1>
           <p style={{ color: "var(--blog-text-muted)", marginBottom: 24 }}>
