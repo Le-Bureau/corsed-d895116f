@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     let mounted = true;
     let initialDone = false;
 
-    const applySession = async (next: Session | null, fromInitial = false) => {
+    const applySession = async (next: Session | null) => {
       if (!mounted) return;
       setSession(next);
       setUser(next?.user ?? null);
@@ -47,9 +47,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (uid !== lastCheckedUserIdRef.current) {
         lastCheckedUserIdRef.current = uid;
         if (uid) {
+          // Block route guards from rendering with stale isAdmin while checking
+          setIsLoading(true);
           const admin = await checkIsAdmin(uid);
           if (!mounted) return;
-          // Guard against stale resolution if user changed during await
           if (lastCheckedUserIdRef.current === uid) {
             setIsAdmin(admin);
           }
@@ -58,21 +59,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       }
 
-      if (fromInitial || initialDone) {
-        initialDone = true;
-        if (mounted) setIsLoading(false);
-      }
+      initialDone = true;
+      if (mounted) setIsLoading(false);
     };
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       // Defer Supabase calls outside the callback to avoid deadlocks
       setTimeout(() => {
-        void applySession(nextSession, false);
+        void applySession(nextSession);
       }, 0);
     });
 
     supabase.auth.getSession().then(({ data }) => {
-      void applySession(data.session, true);
+      void applySession(data.session);
     });
 
     return () => {
