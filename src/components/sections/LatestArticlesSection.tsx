@@ -3,11 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import StaggerChildren, { fadeUpItem } from "@/components/animations/StaggerChildren";
 import BlogCard from "@/components/blog/BlogCard";
+import HomeFeaturedCard from "@/components/blog/HomeFeaturedCard";
 import { BLOG_POSTS } from "@/data/mockBlogData";
-import { getLatestPosts } from "@/lib/blogHelpers";
+import { getHomeBlogSelection } from "@/lib/blogHelpers";
 
 const LatestArticlesSection = () => {
-  const latest = getLatestPosts(BLOG_POSTS, 3);
+  const { featured, secondary } = getHomeBlogSelection(BLOG_POSTS);
 
   return (
     <section
@@ -38,26 +39,29 @@ const LatestArticlesSection = () => {
           </motion.p>
         </StaggerChildren>
 
-        <StaggerChildren
-          staggerDelay={0.1}
-          className="blog-grid"
-        >
-          {latest.map((post) => (
-            <motion.div key={post.id} variants={fadeUpItem}>
-              <BlogCard post={post} />
-            </motion.div>
-          ))}
-        </StaggerChildren>
+        <StaggerChildren staggerDelay={0.08} initialDelay={0.08} className="flex flex-col gap-8">
+          <motion.div variants={fadeUpItem}>
+            <HomeFeaturedCard post={featured} />
+          </motion.div>
 
-        <div className="mt-14 md:mt-16 flex justify-center">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 font-body text-sm font-medium text-foreground border-b border-foreground/30 pb-1 hover:border-foreground transition-colors"
-          >
-            Tous les articles
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+            {secondary.map((post) => (
+              <motion.div key={post.id} variants={fadeUpItem}>
+                <BlogCard post={post} />
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div variants={fadeUpItem} className="mt-6 md:mt-8 flex justify-center">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 font-body text-sm font-medium text-foreground border-b border-foreground/30 pb-1 hover:border-foreground transition-colors"
+            >
+              Tous les articles
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+        </StaggerChildren>
       </div>
     </section>
   );
