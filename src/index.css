@@ -1249,7 +1249,7 @@ html.lenis body {
   .blog-scope .blog-grid-related { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .blog-scope .blog-layout { grid-template-columns: 1fr; padding: 32px 20px 64px; gap: 32px; }
+  .blog-scope .blog-layout { grid-template-columns: 1fr; padding: 120px 20px 64px; gap: 32px; }
   .blog-scope .blog-sidebar { display: none; }
   .blog-scope .blog-grid { grid-template-columns: 1fr; gap: 24px; }
   .blog-scope .blog-grid-related { grid-template-columns: 1fr; }
