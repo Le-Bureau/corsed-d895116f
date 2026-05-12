@@ -13,12 +13,12 @@ const labelBase =
 const inputBase =
   "w-full bg-transparent border-0 border-b-[1.5px] border-border-default text-text-primary font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-text-muted/50";
 
-interface TabButtonProps {
+interface RequestCardProps {
   value: RequestType;
   label: string;
 }
 
-const TabButton = ({ value, label }: TabButtonProps) => {
+const RequestCard = ({ value, label }: RequestCardProps) => {
   const { setValue } = useFormContext<ContactFormData>();
   const currentValue = useWatch<ContactFormData>({ name: "requestType" });
   const isActive = currentValue === value;
@@ -27,8 +27,8 @@ const TabButton = ({ value, label }: TabButtonProps) => {
   return (
     <button
       type="button"
-      role="tab"
-      aria-selected={isActive}
+      role="radio"
+      aria-checked={isActive}
       onClick={() =>
         setValue("requestType", value, {
           shouldValidate: true,
@@ -36,32 +36,26 @@ const TabButton = ({ value, label }: TabButtonProps) => {
         })
       }
       className={cn(
-        "relative inline-flex items-center gap-2 px-4 py-3.5 border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap cursor-pointer rounded-t-lg transition-all duration-200",
-        !isActive && "hover:bg-surface-bg",
+        "group relative flex items-start gap-2.5 text-left px-3.5 py-3 rounded-xl border cursor-pointer transition-all duration-200",
+        "hover:-translate-y-0.5",
+        isActive ? "shadow-soft-sm" : "bg-surface-card hover:bg-surface-bg",
       )}
       style={{
-        color: isActive ? color.base : "var(--text-muted)",
+        borderColor: isActive ? color.base : "var(--border-subtle)",
         backgroundColor: isActive ? `rgba(${color.rgb}, 0.06)` : undefined,
+        color: isActive ? color.base : "var(--text-primary)",
       }}
     >
       <span
-        className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+        className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all duration-300"
         style={{
           backgroundColor: isActive ? color.base : "var(--border-default)",
           boxShadow: isActive ? `0 0 12px ${color.base}` : "none",
         }}
       />
-      <span className="relative z-10">{label}</span>
-      {isActive && (
-        <span
-          aria-hidden="true"
-          className="absolute left-3 right-3 -bottom-px h-[2px] rounded-t-full"
-          style={{
-            backgroundColor: color.base,
-            boxShadow: `0 0 16px ${color.base}40`,
-          }}
-        />
-      )}
+      <span className="font-display text-[13px] sm:text-sm font-medium leading-snug tracking-[-0.01em]">
+        {label}
+      </span>
     </button>
   );
 };
