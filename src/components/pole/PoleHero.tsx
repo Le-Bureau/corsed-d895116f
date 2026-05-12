@@ -95,29 +95,20 @@ const PoleHero = ({ pole }: Props) => {
         {/* Title — STATIC */}
         <h1
           id="pole-hero-title"
-          className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-text-primary text-[44px] sm:text-[56px] lg:text-[clamp(56px,8vw,112px)]"
+          className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-[44px] sm:text-[56px] lg:text-[clamp(56px,8vw,112px)]"
+          style={{ color: "var(--pole-color)" }}
         >
           {pole.label}
         </h1>
 
         {pole.pitch && (
           <p
-            className="font-display font-semibold tracking-[-0.01em] mb-6 max-w-[820px]"
+            className="font-display font-semibold tracking-[-0.01em] mb-10 max-w-[820px] text-text-primary"
             style={{
               fontSize: "clamp(20px, 2.2vw, 30px)",
-              color: "var(--pole-color)",
             }}
           >
             {pole.pitch}
-          </p>
-        )}
-
-        {pole.heroPitch && (
-          <p
-            className="text-text-secondary max-w-[720px] leading-relaxed mb-10"
-            style={{ fontSize: "clamp(16px, 1.4vw, 19px)" }}
-          >
-            {pole.heroPitch}
           </p>
         )}
 
