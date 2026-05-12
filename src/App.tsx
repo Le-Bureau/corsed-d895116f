@@ -8,7 +8,9 @@ import RootLayout from "@/components/layout/RootLayout";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { UIBannerProvider } from "@/contexts/UIBannerContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { usePlausibleTracking } from "@/hooks/usePlausibleTracking";
+import AdminRoute from "@/components/admin/AdminRoute";
 import Index from "./pages/Index";
 import PoleDetail from "./pages/PoleDetail";
 import Expertises from "./pages/Expertises";
@@ -21,6 +23,9 @@ const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 
 const RouteFallback = () => (
   <div className="min-h-[60vh] w-full flex items-center justify-center bg-background">
