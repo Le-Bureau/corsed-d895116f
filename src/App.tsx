@@ -26,6 +26,8 @@ const BlogPost = lazy(() => import("./pages/BlogPost"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminBlogList = lazy(() => import("./pages/admin/AdminBlogList"));
+const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
 
 const RouteFallback = () => (
   <div className="min-h-[60vh] w-full flex items-center justify-center bg-background">
@@ -75,6 +77,9 @@ const App = () => (
                   }
                 >
                   <Route index element={<AdminDashboard />} />
+                  <Route path="blog" element={<AdminBlogList />} />
+                  <Route path="blog/new" element={<AdminBlogEditor />} />
+                  <Route path="blog/:id/edit" element={<AdminBlogEditor />} />
                 </Route>
 
                 <Route element={<RootLayout />}>
