@@ -170,7 +170,7 @@ const ArticlePreviewModal = ({ open, onOpenChange, formValues, authors, categori
             </div>
           )}
 
-          <div style={{ height: 60 }} />
+          <div style={{ height: 160 }} />
         </div>
       </DialogContent>
     </Dialog>
