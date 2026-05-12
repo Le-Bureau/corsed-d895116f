@@ -36,15 +36,32 @@ const BlogTOC = ({ items }: Props) => {
   }, [items]);
 
   useEffect(() => {
-    const onScroll = () => {
-      const h = document.documentElement;
-      const total = h.scrollHeight - h.clientHeight;
-      const p = total > 0 ? Math.min(100, Math.max(0, (h.scrollTop / total) * 100)) : 0;
-      setProgress(p);
+    const compute = () => {
+      const article = document.querySelector(".article-content") as HTMLElement | null;
+      const viewportH = window.innerHeight;
+      const scrollY = window.scrollY;
+
+      let start = 0;
+      let end = document.documentElement.scrollHeight - viewportH;
+
+      if (article) {
+        const rect = article.getBoundingClientRect();
+        start = rect.top + scrollY; // article top in document
+        const articleBottom = start + article.offsetHeight;
+        // Reach 100% when the article's bottom hits the viewport bottom.
+        end = Math.max(start + 1, articleBottom - viewportH);
+      }
+
+      const p = end > start ? ((scrollY - start) / (end - start)) * 100 : 0;
+      setProgress(Math.min(100, Math.max(0, p)));
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", compute, { passive: true });
+    window.addEventListener("resize", compute);
+    compute();
+    return () => {
+      window.removeEventListener("scroll", compute);
+      window.removeEventListener("resize", compute);
+    };
   }, []);
 
   if (items.length === 0) return null;
