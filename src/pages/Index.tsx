@@ -67,9 +67,9 @@ const Index = () => {
       <WhyDroneSection />
       <PolesAlternated />
       <OtherExpertisesSection />
+      <LatestArticlesSection />
       <PartnersSection />
       <CTAFinalSection />
-      <LatestArticlesSection />
     </main>
   );
 };
