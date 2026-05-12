@@ -4,6 +4,7 @@ import WhyDroneSection from "@/components/sections/WhyDroneSection";
 import OtherExpertisesSection from "@/components/sections/OtherExpertisesSection";
 import PartnersSection from "@/components/sections/PartnersSection";
 import CTAFinalSection from "@/components/sections/CTAFinalSection";
+import LatestArticlesSection from "@/components/sections/LatestArticlesSection";
 import { SEO } from "@/components/seo/SEO";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
@@ -68,6 +69,7 @@ const Index = () => {
       <OtherExpertisesSection />
       <PartnersSection />
       <CTAFinalSection />
+      <LatestArticlesSection />
     </main>
   );
 };

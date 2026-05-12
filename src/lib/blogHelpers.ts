@@ -23,6 +23,11 @@ export const getRelatedPosts = (
     .filter((p) => p.id !== current.id && p.categoryId === current.categoryId)
     .slice(0, n);
 
+export const getLatestPosts = (allPosts: BlogPost[], n: number = 3): BlogPost[] =>
+  [...allPosts]
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .slice(0, n);
+
 export const slugify = (text: string): string =>
   text
     .toLowerCase()
