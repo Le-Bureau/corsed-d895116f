@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import SEO from "@/components/seo/SEO";
+import BlogIndexSEO from "@/components/seo/BlogIndexSEO";
 import BlogSidebar from "@/components/blog/BlogSidebar";
 import BlogFeaturedCard from "@/components/blog/BlogFeaturedCard";
 import BlogCard from "@/components/blog/BlogCard";
