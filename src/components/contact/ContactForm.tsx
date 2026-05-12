@@ -13,12 +13,12 @@ const labelBase =
 const inputBase =
   "w-full bg-transparent border-0 border-b-[1.5px] border-border-default text-text-primary font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-text-muted/50";
 
-interface TabButtonProps {
+interface RequestCardProps {
   value: RequestType;
   label: string;
 }
 
-const TabButton = ({ value, label }: TabButtonProps) => {
+const RequestCard = ({ value, label }: RequestCardProps) => {
   const { setValue } = useFormContext<ContactFormData>();
   const currentValue = useWatch<ContactFormData>({ name: "requestType" });
   const isActive = currentValue === value;
@@ -27,8 +27,8 @@ const TabButton = ({ value, label }: TabButtonProps) => {
   return (
     <button
       type="button"
-      role="tab"
-      aria-selected={isActive}
+      role="radio"
+      aria-checked={isActive}
       onClick={() =>
         setValue("requestType", value, {
           shouldValidate: true,
@@ -36,32 +36,26 @@ const TabButton = ({ value, label }: TabButtonProps) => {
         })
       }
       className={cn(
-        "relative inline-flex items-center gap-2 px-4 py-3.5 border-0 font-display text-sm font-medium tracking-[-0.01em] whitespace-nowrap cursor-pointer rounded-t-lg transition-all duration-200",
-        !isActive && "hover:bg-surface-bg",
+        "group relative flex items-start gap-2.5 text-left px-3.5 py-3 rounded-xl border cursor-pointer transition-all duration-200",
+        "hover:-translate-y-0.5",
+        isActive ? "shadow-soft-sm" : "bg-surface-card hover:bg-surface-bg",
       )}
       style={{
-        color: isActive ? color.base : "var(--text-muted)",
+        borderColor: isActive ? color.base : "var(--border-subtle)",
         backgroundColor: isActive ? `rgba(${color.rgb}, 0.06)` : undefined,
+        color: isActive ? color.base : "var(--text-primary)",
       }}
     >
       <span
-        className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+        className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all duration-300"
         style={{
           backgroundColor: isActive ? color.base : "var(--border-default)",
           boxShadow: isActive ? `0 0 12px ${color.base}` : "none",
         }}
       />
-      <span className="relative z-10">{label}</span>
-      {isActive && (
-        <span
-          aria-hidden="true"
-          className="absolute left-3 right-3 -bottom-px h-[2px] rounded-t-full"
-          style={{
-            backgroundColor: color.base,
-            boxShadow: `0 0 16px ${color.base}40`,
-          }}
-        />
-      )}
+      <span className="font-display text-[13px] sm:text-sm font-medium leading-snug tracking-[-0.01em]">
+        {label}
+      </span>
     </button>
   );
 };
@@ -163,34 +157,32 @@ const ContactForm = () => {
 
   return (
     <div className="relative rounded-3xl overflow-hidden bg-surface-card border border-border-subtle shadow-soft-lg">
-      {/* TAB BAR */}
-      <div className="relative border-b border-border-subtle">
-        <div className="overflow-x-auto md:overflow-x-visible scrollbar-hide">
-          <div
-            role="tablist"
-            aria-label="Sujet de votre demande"
-            className="flex items-center gap-1 px-4 md:px-6 pt-[5px] min-w-max md:min-w-0 md:flex-wrap"
+      {/* SUJET — grille de cartes */}
+      <div className="px-6 md:px-10 pt-8 pb-2">
+        <span className="block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-muted mb-3">
+          Sujet de votre demande
+          <span
+            className="ml-1"
+            style={{ color: "var(--contact-accent, var(--logo-base-deep))" }}
           >
-            {REQUEST_TYPES.map((rt) => (
-              <TabButton
-                key={rt}
-                value={rt}
-                label={REQUEST_TYPE_LABELS[rt]}
-              />
-            ))}
-          </div>
-        </div>
-        {/* Mobile fade gradient */}
+            *
+          </span>
+        </span>
         <div
-          aria-hidden="true"
-          className="absolute top-0 right-0 bottom-0 w-12 pointer-events-none md:hidden"
-          style={{
-            background:
-              "linear-gradient(to left, var(--surface-card) 0%, transparent 100%)",
-          }}
-        />
+          role="radiogroup"
+          aria-label="Sujet de votre demande"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5"
+        >
+          {REQUEST_TYPES.map((rt) => (
+            <RequestCard
+              key={rt}
+              value={rt}
+              label={REQUEST_TYPE_LABELS[rt]}
+            />
+          ))}
+        </div>
         {errors.requestType?.message && (
-          <p className="px-6 pb-3 text-[12px] text-red-600" role="alert">
+          <p className="mt-3 text-[12px] text-red-600" role="alert">
             {errors.requestType.message}
           </p>
         )}
