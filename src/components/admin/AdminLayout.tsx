@@ -66,7 +66,7 @@ const AdminLayout = () => {
       <header className="border-b border-border/50 bg-[#FCFAF7]/95 backdrop-blur-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-8">
           <div className="flex items-center gap-3">
-            <Link to="/admin" className="flex items-center h-7" aria-label="Admin — Accueil">
+            <Link to="/" className="flex items-center h-7" aria-label="Aller à l'accueil du site">
               <img src={logoFullOnLight} alt="Corse Drone" className="h-full w-auto" />
             </Link>
             <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-semibold uppercase tracking-[0.15em] font-body">
