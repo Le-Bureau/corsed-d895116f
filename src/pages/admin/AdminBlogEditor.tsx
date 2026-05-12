@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, EyeOff, Loader2, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, Eye, Loader2, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import {
   Accordion,
   AccordionContent,
@@ -36,7 +36,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import BlogContent from "@/components/blog/BlogContent";
+import ArticlePreviewModal from "@/components/admin/ArticlePreviewModal";
 import ImageUploader from "@/components/admin/ImageUploader";
 import MarkdownToolbar from "@/components/admin/MarkdownToolbar";
 import MarkdownSyntaxHelp from "@/components/admin/MarkdownSyntaxHelp";
@@ -85,7 +85,7 @@ const AdminBlogEditor = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const slugManuallyEditedRef = useRef(false);
   const [topError, setTopError] = useState<string | null>(null);
-  const [previewVisible, setPreviewVisible] = useState(true);
+  const [previewModalOpen, setPreviewModalOpen] = useState(false);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
