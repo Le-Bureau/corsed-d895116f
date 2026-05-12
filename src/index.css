@@ -748,7 +748,7 @@ html.lenis body {
 .blog-scope .breadcrumb {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 24px 32px 0;
+  padding: 120px 32px 0;
   font-size: 13px;
   color: var(--blog-text-subtle);
   display: flex;
@@ -1255,7 +1255,7 @@ html.lenis body {
   .blog-scope .blog-grid-related { grid-template-columns: 1fr; }
   .blog-scope .featured { padding: 20px; }
   .blog-scope .blog-hero h1 { font-size: 40px; }
-  .blog-scope .breadcrumb { padding: 20px 20px 0; }
+  .blog-scope .breadcrumb { padding: 112px 20px 0; }
   .blog-scope .article-hero { padding: 0 20px; }
   .blog-scope .article-hero__excerpt { font-size: 17px; }
   .blog-scope .article-cover { padding: 0 20px; }
