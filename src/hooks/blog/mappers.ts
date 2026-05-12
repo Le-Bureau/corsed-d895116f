@@ -35,6 +35,7 @@ type PostRow = {
   reading_time_minutes: number;
   meta_title: string | null;
   meta_description: string | null;
+  updated_at: string | null;
   author?: AuthorRow | null;
   category?: CategoryRow | null;
 };
