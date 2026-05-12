@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Camera } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import { useBlogPosts } from "@/hooks/blog/useBlogPosts";
+import { useAdminBlogPosts } from "@/hooks/admin/useAdminBlogPosts";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 const AdminDashboard = () => {
   const { user } = useAuth();
-  const { data: posts } = useBlogPosts();
+  const { data: posts } = useAdminBlogPosts();
   const [firstName, setFirstName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,7 +33,8 @@ const AdminDashboard = () => {
   }, [user]);
 
   const greetingName = firstName ?? user?.email?.split("@")[0] ?? "";
-  const publishedCount = posts?.length ?? 0;
+  const publishedCount = posts?.filter((p) => p.status === "published").length ?? 0;
+  const draftCount = posts?.filter((p) => p.status === "draft").length ?? 0;
 
   return (
     <div className="space-y-10">
@@ -51,7 +52,7 @@ const AdminDashboard = () => {
           icon={<BookOpen className="h-5 w-5" />}
           title="Articles du blog"
           description="Créer, modifier, publier vos articles."
-          meta={`${publishedCount} article${publishedCount > 1 ? "s" : ""} publié${publishedCount > 1 ? "s" : ""}`}
+          meta={`${publishedCount} publié${publishedCount > 1 ? "s" : ""} · ${draftCount} brouillon${draftCount > 1 ? "s" : ""}`}
           ctaLabel="Gérer le blog"
           to="/admin/blog"
         />

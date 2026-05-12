@@ -218,6 +218,7 @@ const AdminBlogEditor = () => {
   const metaDescCount = metaDescValue?.length ?? 0;
 
   const submitting = isSubmitting || createMut.isPending || updateMut.isPending;
+  const errorList = useMemo(() => Object.values(errors).map((e) => e?.message).filter(Boolean), [errors]);
 
   if (isEdit && loadingPost) {
     return <p className="text-muted-foreground font-body">Chargement…</p>;
@@ -232,8 +233,6 @@ const AdminBlogEditor = () => {
       </div>
     );
   }
-
-  const errorList = useMemo(() => Object.values(errors).map((e) => e?.message).filter(Boolean), [errors]);
 
   return (
     <form onSubmit={handleSubmit((v) => submit(v))} className="space-y-6 pb-32 font-body">
