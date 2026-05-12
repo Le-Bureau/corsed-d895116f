@@ -1,17 +1,17 @@
-import { getCategory } from "@/data/mockBlogData";
+import type { BlogCategory } from "@/types/blog";
 
 interface Props {
-  categoryId: string;
+  category: BlogCategory | null;
   size?: "sm" | "md";
   className?: string;
 }
 
-const BlogCategoryPill = ({ categoryId, size = "sm", className = "" }: Props) => {
-  const cat = getCategory(categoryId);
+const BlogCategoryPill = ({ category, size = "sm", className = "" }: Props) => {
+  if (!category) return null;
   const cls = size === "md" ? "pill pill-lg" : "pill";
   return (
-    <span className={`${cls} ${className}`} style={{ background: cat.color }}>
-      {cat.name}
+    <span className={`${cls} ${className}`} style={{ background: category.color }}>
+      {category.name}
     </span>
   );
 };

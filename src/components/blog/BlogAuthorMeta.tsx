@@ -1,9 +1,9 @@
-import { getAuthor, getCategory } from "@/data/mockBlogData";
+import type { BlogAuthor } from "@/types/blog";
 import { formatBlogDate } from "@/lib/blogHelpers";
 
 interface Props {
-  authorId: string;
-  publishedAt: string;
+  author: BlogAuthor | null;
+  publishedAt: string | null;
   readingTimeMinutes?: number;
   size?: "sm" | "md" | "lg";
   showFullName?: boolean;
@@ -17,18 +17,19 @@ const sizeMap = {
 };
 
 const BlogAuthorMeta = ({
-  authorId,
+  author,
   publishedAt,
   readingTimeMinutes,
   size = "md",
   showFullName = true,
   short = false,
 }: Props) => {
-  const author = getAuthor(authorId);
   const { w, font } = sizeMap[size];
+  if (!author) return null;
+  const parts = author.name.split(" ");
   const display = showFullName
     ? author.name
-    : `${author.name.split(" ")[0][0]}. ${author.name.split(" ").slice(1).join(" ")}`;
+    : `${parts[0][0]}. ${parts.slice(1).join(" ")}`;
 
   return (
     <>
@@ -40,8 +41,12 @@ const BlogAuthorMeta = ({
         {author.initials}
       </div>
       <span>{display}</span>
-      <span className="meta-sep" />
-      <span>{formatBlogDate(publishedAt)}</span>
+      {publishedAt && (
+        <>
+          <span className="meta-sep" />
+          <span>{formatBlogDate(publishedAt)}</span>
+        </>
+      )}
       {readingTimeMinutes != null && (
         <>
           <span className="meta-sep" />
@@ -55,6 +60,3 @@ const BlogAuthorMeta = ({
 };
 
 export default BlogAuthorMeta;
-
-// silence unused warning helper
-export const __unused = getCategory;

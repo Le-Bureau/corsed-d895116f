@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import type { BlogPost } from "@/data/mockBlogData";
-import { getCategory } from "@/data/mockBlogData";
+import type { BlogPost } from "@/types/blog";
 import BlogCategoryPill from "./BlogCategoryPill";
 import BlogAuthorMeta from "./BlogAuthorMeta";
 
@@ -10,24 +9,26 @@ interface Props {
 }
 
 const BlogCard = ({ post, variant = "default" }: Props) => {
-  const cat = getCategory(post.categoryId);
+  const catColor = post.category?.color ?? "#5082AC";
   return (
     <Link
       to={`/blog/${post.slug}`}
       className={`card ${variant === "related" ? "card-related" : ""}`}
-      style={{ ["--current-cat" as string]: cat.color }}
+      style={{ ["--current-cat" as string]: catColor }}
       aria-label={post.title}
     >
       <div className="card__cover">
-        <img src={post.coverImageUrl} alt={post.title} loading="lazy" />
+        {post.coverImageUrl && (
+          <img src={post.coverImageUrl} alt={post.title} loading="lazy" />
+        )}
       </div>
       <div className="card__body">
-        <BlogCategoryPill categoryId={post.categoryId} />
+        <BlogCategoryPill category={post.category} />
         <h3 className="card__title">{post.title}</h3>
         {variant === "default" && <p className="card__excerpt">{post.excerpt}</p>}
         <div className="card__meta">
           <BlogAuthorMeta
-            authorId={post.authorId}
+            author={post.author}
             publishedAt={post.publishedAt}
             readingTimeMinutes={variant === "default" ? post.readingTimeMinutes : undefined}
             size="sm"

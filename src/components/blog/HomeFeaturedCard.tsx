@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import type { BlogPost } from "@/data/mockBlogData";
-import { getCategory } from "@/data/mockBlogData";
+import type { BlogPost } from "@/types/blog";
 import BlogCategoryPill from "./BlogCategoryPill";
 import BlogAuthorMeta from "./BlogAuthorMeta";
 
 const HomeFeaturedCard = ({ post }: { post: BlogPost }) => {
-  const cat = getCategory(post.categoryId);
+  const catColor = post.category?.color ?? "#5082AC";
 
   return (
     <Link
       to={`/blog/${post.slug}`}
       aria-label={`À la une : ${post.title}`}
       className="home-featured group"
-      style={{ ["--current-cat" as string]: cat.color }}
+      style={{ ["--current-cat" as string]: catColor }}
     >
       <div className="home-featured__cover">
         <span className="home-featured__badge">
@@ -22,16 +21,18 @@ const HomeFeaturedCard = ({ post }: { post: BlogPost }) => {
           </svg>
           À la une
         </span>
-        <img src={post.coverImageUrl} alt={post.title} loading="lazy" />
+        {post.coverImageUrl && (
+          <img src={post.coverImageUrl} alt={post.title} loading="lazy" />
+        )}
       </div>
       <div className="home-featured__content">
-        <BlogCategoryPill categoryId={post.categoryId} className="mb-4" />
+        <BlogCategoryPill category={post.category} className="mb-4" />
         <h3 className="home-featured__title font-display">{post.title}</h3>
         <p className="home-featured__excerpt">{post.excerpt}</p>
         <div className="home-featured__footer">
           <div className="home-featured__meta">
             <BlogAuthorMeta
-              authorId={post.authorId}
+              author={post.author}
               publishedAt={post.publishedAt}
               readingTimeMinutes={post.readingTimeMinutes}
               size="sm"
