@@ -48,9 +48,19 @@ const ArticlePreviewModal = ({ open, onOpenChange, formValues, authors, categori
         </div>
 
         <div
-          className="blog-scope overflow-y-auto max-h-[calc(90vh-40px)]"
+          className="blog-scope article-preview-modal overflow-y-auto overscroll-contain max-h-[calc(90vh-40px)]"
           style={{ ["--current-cat" as string]: category?.color ?? "#5082AC" }}
+          onWheel={(e) => e.stopPropagation()}
         >
+          <style>{`
+            .article-preview-modal .breadcrumb { padding-top: 24px; }
+            .article-preview-modal .article-hero { margin-top: 16px; }
+            .article-preview-modal .article-body-layout {
+              grid-template-columns: 1fr;
+              gap: 0;
+            }
+            .article-preview-modal .article-body-layout > div:first-child:empty { display: none; }
+          `}</style>
           {/* Breadcrumb */}
           <nav className="breadcrumb" aria-label="Fil d'Ariane">
             <span>Accueil</span>
