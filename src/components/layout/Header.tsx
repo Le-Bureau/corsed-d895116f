@@ -9,6 +9,7 @@ import { useUIBanner } from "@/contexts/UIBannerContext";
 
 const NAV_BEFORE = [{ label: "Accueil", to: "/", end: true }];
 const NAV_AFTER = [
+  { label: "Blog", to: "/blog" },
   { label: "Partenaires", to: "/partenaires" },
   { label: "Contact", to: "/contact" },
 ];

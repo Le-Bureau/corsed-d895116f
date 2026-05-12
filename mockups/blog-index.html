@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le blog · Corse Drone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #5082AC;
+      --primary-dark: #3F6A8E;
+      --bg: #FCFAF7;
+      --bg-elevated: #FFFFFF;
+      --bg-sidebar: #F7F4EF;
+      --text: #1C1917;
+      --text-muted: #57534E;
+      --text-subtle: #78716C;
+      --border: #E7E5E4;
+      --border-strong: #D6D3D1;
+      --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04);
+      --shadow-md: 0 4px 12px rgba(28, 25, 23, 0.06);
+      --shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.08);
+
+      --cat-nettoyage: #5082AC;
+      --cat-diagnostic: #14B8A6;
+      --cat-agriculture: #16A34A;
+      --cat-transport: #F59E0B;
+      --cat-cas-clients: #8B5CF6;
+      --cat-actualites-drone: #DC2626;
+      --cat-actualites-boite: #475569;
+
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-body: 'Geist', system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); }
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01", "cv11";
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ============ HEADER (simulating corse-drone.com header) ============ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(252, 250, 247, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .site-header__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+    .site-header__brand .dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--primary);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .site-header nav {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .site-header nav a {
+      transition: color 0.18s ease;
+    }
+    .site-header nav a:hover { color: var(--text); }
+    .site-header nav a.active { color: var(--text); font-weight: 500; }
+    .site-header__cta {
+      background: var(--text);
+      color: var(--bg);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+    .site-header__cta:hover {
+      background: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    /* ============ LAYOUT ============ */
+    .layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 32px 96px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ============ SIDEBAR ============ */
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+    .search {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .search input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .search input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(80, 130, 172, 0.12);
+    }
+    .search input::placeholder { color: var(--text-subtle); }
+    .search svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--text-subtle);
+    }
+
+    .sidebar-section { margin-bottom: 32px; }
+    .sidebar-heading {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--text-subtle);
+      margin-bottom: 12px;
+      padding-left: 12px;
+    }
+
+    .category-list { display: flex; flex-direction: column; gap: 2px; }
+    .category-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+    .category-item:hover {
+      background: var(--bg-elevated);
+      color: var(--text);
+    }
+    .category-item.active {
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 500;
+    }
+    .category-item.active .category-count { color: rgba(252, 250, 247, 0.6); }
+    .category-label { display: flex; align-items: center; gap: 10px; }
+    .category-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .category-item.active .category-dot { background: var(--bg) !important; }
+    .category-count {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sidebar-footer {
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar-footer a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-radius: 6px;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+    .sidebar-footer a:hover {
+      color: var(--text);
+      background: var(--bg-elevated);
+    }
+
+    /* ============ MAIN ============ */
+    .blog-hero {
+      margin-bottom: 56px;
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .blog-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .blog-hero h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--primary);
+    }
+    .blog-hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 580px;
+    }
+
+    /* ============ FEATURED ============ */
+    .featured {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 32px;
+      margin-bottom: 64px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+      animation: fadeUp 0.7s 0.08s ease-out both;
+    }
+    .featured:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--cat-cas-clients);
+    }
+    .featured__cover {
+      aspect-ratio: 16 / 11;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: #2a2a2a;
+    }
+    .featured__cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .featured:hover .featured__cover img { transform: scale(1.04); }
+    .featured__badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text);
+      padding: 5px 11px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .featured__content { padding: 8px 0; }
+    .featured__pill {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: white;
+      background: var(--cat-cas-clients);
+      margin-bottom: 16px;
+    }
+    .featured__title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .featured__excerpt {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+    .featured__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+    .meta-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+    .meta-sep {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--border-strong);
+    }
+
+    /* ============ GRID ============ */
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .section-heading h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+    }
+    .section-heading a {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.18s ease, gap 0.18s ease;
+    }
+    .section-heading a:hover {
+      color: var(--text);
+      gap: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+      cursor: pointer;
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .card[data-cat="nettoyage"]:hover { border-color: var(--cat-nettoyage); }
+    .card[data-cat="diagnostic"]:hover { border-color: var(--cat-diagnostic); }
+    .card[data-cat="agriculture"]:hover { border-color: var(--cat-agriculture); }
+    .card[data-cat="transport"]:hover { border-color: var(--cat-transport); }
+    .card[data-cat="cas-clients"]:hover { border-color: var(--cat-cas-clients); }
+    .card[data-cat="actualites-drone"]:hover { border-color: var(--cat-actualites-drone); }
+    .card[data-cat="actualites-boite"]:hover { border-color: var(--cat-actualites-boite); }
+
+    .card__cover {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #2a2a2a;
+      position: relative;
+    }
+    .card__cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .card:hover .card__cover img { transform: scale(1.05); }
+
+    .card__body {
+      padding: 22px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 11px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: white;
+      align-self: flex-start;
+      margin-bottom: 14px;
+    }
+    .pill[data-cat="nettoyage"] { background: var(--cat-nettoyage); }
+    .pill[data-cat="diagnostic"] { background: var(--cat-diagnostic); }
+    .pill[data-cat="agriculture"] { background: var(--cat-agriculture); }
+    .pill[data-cat="transport"] { background: var(--cat-transport); }
+    .pill[data-cat="cas-clients"] { background: var(--cat-cas-clients); }
+    .pill[data-cat="actualites-drone"] { background: var(--cat-actualites-drone); }
+    .pill[data-cat="actualites-boite"] { background: var(--cat-actualites-boite); }
+
+    .card__title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card__excerpt {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+    .card__meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+    .card__meta .meta-avatar {
+      width: 22px;
+      height: 22px;
+      font-size: 9px;
+    }
+
+    .author-PF { background: linear-gradient(135deg, #5082AC, #3F6A8E); }
+    .author-LG { background: linear-gradient(135deg, #16A34A, #15803D); }
+    .author-JC { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+
+    /* ============ PAGINATION ============ */
+    .pagination {
+      margin-top: 56px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+    .pagination button {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .pagination button:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .pagination button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card:nth-child(1) { animation-delay: 0.10s; }
+    .card:nth-child(2) { animation-delay: 0.16s; }
+    .card:nth-child(3) { animation-delay: 0.22s; }
+    .card:nth-child(4) { animation-delay: 0.28s; }
+    .card:nth-child(5) { animation-delay: 0.34s; }
+    .card:nth-child(6) { animation-delay: 0.40s; }
+    .card:nth-child(7) { animation-delay: 0.46s; }
+
+    /* ============ MOBILE ============ */
+    @media (max-width: 1024px) {
+      .layout { grid-template-columns: 240px 1fr; gap: 40px; }
+      .featured { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 768px) {
+      .site-header__inner { padding: 14px 20px; }
+      .site-header nav { display: none; }
+      .layout { grid-template-columns: 1fr; padding: 32px 20px 64px; gap: 32px; }
+      .sidebar { position: static; max-height: none; padding: 0; }
+      .grid { grid-template-columns: 1fr; gap: 24px; }
+      .featured { padding: 20px; }
+      .blog-hero h1 { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== HEADER (placeholder simulating the existing site header) ====== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__brand" href="#">
+        <span class="dot">CD</span>
+        <span>CORSE DRONE · MCG</span>
+      </a>
+      <nav>
+        <a href="#">Pôles</a>
+        <a href="#">Réalisations</a>
+        <a href="#" class="active">Blog</a>
+        <a href="#">Partenaires</a>
+        <a href="#">Contact</a>
+      </nav>
+      <a class="site-header__cta" href="#">Demander un devis</a>
+    </div>
+  </header>
+
+  <!-- ====== LAYOUT ====== -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="search">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" placeholder="Rechercher un article..." />
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-heading">Catégories</div>
+        <div class="category-list">
+          <div class="category-item active">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--text);"></span>
+              <span>Tous les articles</span>
+            </span>
+            <span class="category-count">24</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-nettoyage);"></span>
+              <span>Nettoyage</span>
+            </span>
+            <span class="category-count">5</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-diagnostic);"></span>
+              <span>Diagnostic</span>
+            </span>
+            <span class="category-count">7</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-agriculture);"></span>
+              <span>Agriculture</span>
+            </span>
+            <span class="category-count">2</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-transport);"></span>
+              <span>Transport</span>
+            </span>
+            <span class="category-count">1</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-cas-clients);"></span>
+              <span>Cas clients</span>
+            </span>
+            <span class="category-count">4</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-actualites-drone);"></span>
+              <span>Actualités drone</span>
+            </span>
+            <span class="category-count">3</span>
+          </div>
+          <div class="category-item">
+            <span class="category-label">
+              <span class="category-dot" style="background: var(--cat-actualites-boite);"></span>
+              <span>Actualités Corse Drone</span>
+            </span>
+            <span class="category-count">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="#">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4a16 16 0 0 1 16 16"/><path d="M4 11a9 9 0 0 1 9 9"/><circle cx="5" cy="19" r="1.5" fill="currentColor"/></svg>
+          Flux RSS
+        </a>
+        <a href="#">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Newsletter mensuelle
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+      <!-- Hero blog -->
+      <section class="blog-hero">
+        <h1>Le <em>journal</em> de bord</h1>
+        <p>Retours de chantiers, expertises drone et actualités du secteur. Écrit depuis Bastia par Pierre-François, Logan et Joan.</p>
+      </section>
+
+      <!-- Featured article -->
+      <article class="featured" data-cat="cas-clients">
+        <div class="featured__cover">
+          <div class="featured__badge">
+            <svg width="10" height="10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            À la une
+          </div>
+          <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1200&h=900&fit=crop&q=80" alt="Relevé thermique" />
+        </div>
+        <div class="featured__content">
+          <span class="featured__pill">Cas clients</span>
+          <h2 class="featured__title">Relevé thermique sur 3000 m² à Ajaccio : ce que les images ont révélé</h2>
+          <p class="featured__excerpt">Mission terrain pour un syndic de copropriété : cartographier les déperditions thermiques d'un ensemble résidentiel avant rénovation énergétique. Méthodologie, résultats et chiffrage des travaux à prévoir.</p>
+          <div class="featured__meta">
+            <div class="meta-avatar author-PF">PF</div>
+            <span>Pierre-François Morganti</span>
+            <span class="meta-sep"></span>
+            <span>8 mai 2026</span>
+            <span class="meta-sep"></span>
+            <span>9 min de lecture</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Section heading -->
+      <div class="section-heading">
+        <h2>Tous les articles</h2>
+        <a href="#">
+          Trier par : Plus récents
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </a>
+      </div>
+
+      <!-- Grid -->
+      <section class="grid">
+
+        <article class="card" data-cat="diagnostic" onclick="window.location.href='blog-article.html'">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1572985788098-7e58c2683043?w=800&h=450&fit=crop&q=80" alt="Diagnostic toiture" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="diagnostic">Diagnostic</span>
+            <h3 class="card__title">Diagnostic de toiture par drone à Bastia : retour d'expérience</h3>
+            <p class="card__excerpt">Un immeuble de 6 étages, des tuiles centenaires, et la nécessité de cartographier l'état du toit sans monter dessus. Voici comment on a procédé.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-PF">PF</div>
+              <span>P.-F. Morganti</span>
+              <span class="meta-sep"></span>
+              <span>5 mai 2026</span>
+              <span class="meta-sep"></span>
+              <span>7 min</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="diagnostic">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=450&fit=crop&q=80" alt="Panneaux solaires" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="diagnostic">Diagnostic</span>
+            <h3 class="card__title">Pourquoi inspecter ses panneaux solaires en hiver</h3>
+            <p class="card__excerpt">Contraste thermique optimal, points chauds visibles, micro-fissures détectables : l'hiver est le bon moment pour un audit complet de votre installation.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-LG">LG</div>
+              <span>L. Gaspard</span>
+              <span class="meta-sep"></span>
+              <span>1 mai 2026</span>
+              <span class="meta-sep"></span>
+              <span>6 min</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="nettoyage">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1597008641621-cefdcf718025?w=800&h=450&fit=crop&q=80" alt="Nettoyage façade" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="nettoyage">Nettoyage</span>
+            <h3 class="card__title">Nettoyage de façades en hauteur : nos méthodes éprouvées</h3>
+            <p class="card__excerpt">Pression, dosage, sécurité : tour d'horizon des techniques que l'on applique sur les façades inaccessibles depuis l'échafaudage.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-PF">PF</div>
+              <span>P.-F. Morganti</span>
+              <span class="meta-sep"></span>
+              <span>27 avril 2026</span>
+              <span class="meta-sep"></span>
+              <span>8 min</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="actualites-drone">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&h=450&fit=crop&q=80" alt="Réglementation drone" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="actualites-drone">Actualités drone</span>
+            <h3 class="card__title">Nouvelle réglementation drone 2026 : ce qui change pour les pros</h3>
+            <p class="card__excerpt">Mise à jour des catégories Open et Specific, élargissement des scénarios standards STS, nouvelles obligations d'enregistrement : on fait le point.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-JC">JC</div>
+              <span>J. Cacciari</span>
+              <span class="meta-sep"></span>
+              <span>22 avril 2026</span>
+              <span class="meta-sep"></span>
+              <span>10 min</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="actualites-boite">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=800&h=450&fit=crop&q=80" alt="DJI Matrice 400" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="actualites-boite">Actualités Corse Drone</span>
+            <h3 class="card__title">On a investi dans le DJI Matrice 400 : ce que ça change pour vos missions</h3>
+            <p class="card__excerpt">Capacité de charge multipliée par deux, autonomie de 59 minutes, précision RTK : présentation de notre nouveau bras armé en photogrammétrie.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-PF">PF</div>
+              <span>P.-F. Morganti</span>
+              <span class="meta-sep"></span>
+              <span>18 avril 2026</span>
+              <span class="meta-sep"></span>
+              <span>5 min</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="agriculture">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800&h=450&fit=crop&q=80" alt="Vignes" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="agriculture">Agriculture</span>
+            <h3 class="card__title">Analyse multispectrale de vignes : suivi de vigueur sur 14 hectares</h3>
+            <p class="card__excerpt">Capteurs NDVI, NDRE et red edge embarqués : comment on aide les vignerons corses à anticiper les zones de stress hydrique avant qu'elles ne soient visibles à l'œil nu.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-LG">LG</div>
+              <span>L. Gaspard</span>
+              <span class="meta-sep"></span>
+              <span>14 avril 2026</span>
+              <span class="meta-sep"></span>
+              <span>11 min</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="transport">
+          <div class="card__cover">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=450&fit=crop&q=80" alt="Montagne Corse" />
+          </div>
+          <div class="card__body">
+            <span class="pill" data-cat="transport">Transport</span>
+            <h3 class="card__title">Transport de matériel en zone montagneuse : retours du Cap Corse</h3>
+            <p class="card__excerpt">Trois missions de portage drone sur des refuges isolés. Météo capricieuse, charge utile à optimiser, planification millimétrée : les leçons retenues.</p>
+            <div class="card__meta">
+              <div class="meta-avatar author-JC">JC</div>
+              <span>J. Cacciari</span>
+              <span class="meta-sep"></span>
+              <span>9 avril 2026</span>
+              <span class="meta-sep"></span>
+              <span>8 min</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Pagination">
+        <button>‹</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>›</button>
+      </nav>
+
+    </main>
+  </div>
+
+</body>
+</html>

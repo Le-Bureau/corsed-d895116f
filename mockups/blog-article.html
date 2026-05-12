@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnostic de toiture par drone à Bastia · Corse Drone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #5082AC;
+      --primary-dark: #3F6A8E;
+      --bg: #FCFAF7;
+      --bg-elevated: #FFFFFF;
+      --bg-sidebar: #F7F4EF;
+      --text: #1C1917;
+      --text-muted: #57534E;
+      --text-subtle: #78716C;
+      --border: #E7E5E4;
+      --border-strong: #D6D3D1;
+      --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04);
+      --shadow-md: 0 4px 12px rgba(28, 25, 23, 0.06);
+      --shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.08);
+
+      --cat-nettoyage: #5082AC;
+      --cat-diagnostic: #14B8A6;
+      --cat-agriculture: #16A34A;
+      --cat-transport: #F59E0B;
+      --cat-cas-clients: #8B5CF6;
+      --cat-actualites-drone: #DC2626;
+      --cat-actualites-boite: #475569;
+
+      --current-cat: var(--cat-diagnostic);
+
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-body: 'Geist', system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); }
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01", "cv11";
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ============ HEADER ============ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(252, 250, 247, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .site-header__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+    .site-header__brand .dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--primary);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .site-header nav { display: flex; gap: 28px; font-size: 14px; color: var(--text-muted); }
+    .site-header nav a { transition: color 0.18s ease; }
+    .site-header nav a:hover { color: var(--text); }
+    .site-header nav a.active { color: var(--text); font-weight: 500; }
+    .site-header__cta {
+      background: var(--text);
+      color: var(--bg);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+    .site-header__cta:hover { background: var(--primary); transform: translateY(-1px); }
+
+    /* ============ BREADCRUMB ============ */
+    .breadcrumb {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 32px 0;
+      font-size: 13px;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breadcrumb a { transition: color 0.18s ease; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb-sep { color: var(--border-strong); }
+
+    /* ============ ARTICLE HERO ============ */
+    .article-hero {
+      max-width: 880px;
+      margin: 32px auto 40px;
+      padding: 0 32px;
+      text-align: center;
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .article-hero__pill {
+      display: inline-block;
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: white;
+      background: var(--current-cat);
+      margin-bottom: 20px;
+    }
+    .article-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5.5vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .article-hero__excerpt {
+      font-family: var(--font-display);
+      font-size: 20px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-style: italic;
+      max-width: 680px;
+      margin: 0 auto 32px;
+    }
+    .article-hero__meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 14px;
+      color: var(--text-subtle);
+      flex-wrap: wrap;
+    }
+    .meta-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+    .author-PF { background: linear-gradient(135deg, #5082AC, #3F6A8E); }
+    .author-LG { background: linear-gradient(135deg, #16A34A, #15803D); }
+    .author-JC { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+    .meta-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--border-strong); }
+    .meta-author-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+
+    .share-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 12px;
+      padding-left: 16px;
+      border-left: 1px solid var(--border);
+    }
+    .share-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-subtle);
+      display: grid;
+      place-items: center;
+      transition: all 0.18s ease;
+      cursor: pointer;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--text); transform: translateY(-1px); }
+
+    /* ============ COVER ============ */
+    .article-cover {
+      max-width: 1100px;
+      margin: 0 auto 56px;
+      padding: 0 32px;
+    }
+    .article-cover__inner {
+      aspect-ratio: 21 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .article-cover__inner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ============ BODY LAYOUT ============ */
+    .article-body-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ============ TOC ============ */
+    .toc {
+      position: sticky;
+      top: 100px;
+      padding-top: 4px;
+    }
+    .toc__heading {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      color: var(--text-subtle);
+      margin-bottom: 14px;
+    }
+    .toc__list { display: flex; flex-direction: column; gap: 2px; }
+    .toc__item {
+      display: block;
+      padding: 7px 0 7px 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 2px solid var(--border);
+      transition: color 0.18s ease, border-color 0.18s ease;
+      line-height: 1.4;
+    }
+    .toc__item:hover { color: var(--text); border-color: var(--border-strong); }
+    .toc__item.active {
+      color: var(--text);
+      border-color: var(--current-cat);
+      font-weight: 500;
+    }
+    .toc__item.subitem { padding-left: 24px; font-size: 12px; }
+
+    .reading-progress {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+    .progress-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      border-radius: 100px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .progress-bar__fill {
+      width: 38%;
+      height: 100%;
+      background: var(--current-cat);
+      border-radius: 100px;
+    }
+
+    /* ============ ARTICLE CONTENT ============ */
+    .article-content {
+      max-width: 680px;
+      animation: fadeUp 0.8s 0.1s ease-out both;
+    }
+    .article-content > * + * { margin-top: 1.5em; }
+    .article-content p {
+      font-size: 17px;
+      line-height: 1.75;
+      color: #292524;
+    }
+    .article-content p.lead {
+      font-size: 19px;
+      line-height: 1.7;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .article-content h2 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+      margin-top: 56px !important;
+      margin-bottom: 8px;
+      scroll-margin-top: 100px;
+    }
+    .article-content h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+      margin-top: 36px !important;
+      scroll-margin-top: 100px;
+    }
+    .article-content ul, .article-content ol {
+      padding-left: 24px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: #292524;
+    }
+    .article-content li + li { margin-top: 8px; }
+    .article-content blockquote {
+      border-left: 3px solid var(--current-cat);
+      padding: 4px 0 4px 24px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.5;
+      color: var(--text);
+      margin: 36px 0;
+    }
+    .article-content blockquote cite {
+      display: block;
+      margin-top: 12px;
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 13px;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .article-content strong { font-weight: 600; color: var(--text); }
+    .article-content a {
+      color: var(--current-cat);
+      border-bottom: 1px solid currentColor;
+      transition: opacity 0.18s ease;
+    }
+    .article-content a:hover { opacity: 0.7; }
+    .article-content code {
+      background: var(--bg-sidebar);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.92em;
+      font-family: 'SF Mono', Menlo, monospace;
+    }
+    .article-content figure {
+      margin: 40px 0;
+    }
+    .article-content figure img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+    }
+    .article-content figcaption {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-subtle);
+      text-align: center;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* Wide figure that bleeds beyond the prose column for impact */
+    .article-content figure.wide {
+      margin-left: calc(-1 * ((100vw - 100%) / 2 - 32px));
+      margin-right: calc(-1 * ((100vw - 100%) / 2 - 32px));
+      max-width: 980px;
+    }
+    .article-content figure.wide img {
+      border-radius: 16px;
+    }
+
+    /* Side-by-side image comparison */
+    .article-content .image-grid {
+      margin: 40px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .article-content .image-grid figure {
+      margin: 0;
+    }
+    .article-content .image-grid img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .article-content .image-grid figcaption {
+      margin-top: 8px;
+      font-size: 12px;
+      text-align: left;
+      font-style: normal;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .article-content .image-grid figcaption::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--current-cat);
+      flex-shrink: 0;
+    }
+
+    /* Inline callout */
+    .callout {
+      margin: 36px 0;
+      padding: 20px 24px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--current-cat);
+      border-radius: 8px;
+      display: flex;
+      gap: 16px;
+    }
+    .callout__icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--current-cat);
+      color: white;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-weight: 700;
+      font-family: var(--font-display);
+      font-size: 16px;
+    }
+    .callout p { font-size: 15px; margin: 0 !important; color: var(--text-muted); }
+
+    /* ============ ARTICLE FOOTER ============ */
+    .article-footer {
+      max-width: 680px;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .author-bio {
+      display: flex;
+      gap: 20px;
+      padding: 28px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 64px;
+    }
+    .author-bio .meta-avatar { width: 60px; height: 60px; font-size: 20px; }
+    .author-bio__content { flex: 1; }
+    .author-bio__name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .author-bio__role {
+      font-size: 13px;
+      color: var(--text-subtle);
+      margin-bottom: 10px;
+    }
+    .author-bio__text {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ============ CTA ============ */
+    .cta {
+      margin: 0 auto 80px;
+      max-width: 880px;
+      padding: 56px 48px;
+      background: linear-gradient(135deg, #1C1917 0%, #292524 100%);
+      border-radius: 24px;
+      text-align: center;
+      color: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--current-cat) 0%, transparent 60%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .cta__inner { position: relative; z-index: 1; }
+    .cta__eyebrow {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(252, 250, 247, 0.1);
+      color: var(--bg);
+      margin-bottom: 20px;
+    }
+    .cta h3 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .cta p {
+      font-size: 16px;
+      color: rgba(252, 250, 247, 0.7);
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta__buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--bg);
+      color: var(--text);
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: transform 0.18s ease, background 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid rgba(252, 250, 247, 0.2);
+      color: var(--bg);
+      transition: background 0.18s ease;
+    }
+    .btn-secondary:hover { background: rgba(252, 250, 247, 0.08); }
+
+    /* ============ RELATED ============ */
+    .related {
+      max-width: 1400px;
+      margin: 0 auto 80px;
+      padding: 0 32px;
+    }
+    .related__heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .related__heading h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+    }
+    .related__heading a {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.18s ease, gap 0.18s ease;
+    }
+    .related__heading a:hover { color: var(--text); gap: 8px; }
+    .related__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+      cursor: pointer;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .card[data-cat="diagnostic"]:hover { border-color: var(--cat-diagnostic); }
+    .card[data-cat="cas-clients"]:hover { border-color: var(--cat-cas-clients); }
+    .card[data-cat="actualites-drone"]:hover { border-color: var(--cat-actualites-drone); }
+
+    .card__cover {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #2a2a2a;
+    }
+    .card__cover img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .card:hover .card__cover img { transform: scale(1.05); }
+    .card__body { padding: 20px 20px 22px; }
+    .pill {
+      display: inline-flex;
+      padding: 4px 11px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .pill[data-cat="diagnostic"] { background: var(--cat-diagnostic); }
+    .pill[data-cat="cas-clients"] { background: var(--cat-cas-clients); }
+    .pill[data-cat="actualites-drone"] { background: var(--cat-actualites-drone); }
+    .card__title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .card__meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-subtle);
+      margin-top: 8px;
+    }
+    .card__meta .meta-avatar { width: 20px; height: 20px; font-size: 8px; }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============ MOBILE ============ */
+    @media (max-width: 1024px) {
+      .article-body-layout { grid-template-columns: 1fr; gap: 32px; }
+      .toc { display: none; }
+    }
+    @media (max-width: 768px) {
+      .site-header__inner { padding: 14px 20px; }
+      .site-header nav { display: none; }
+      .breadcrumb { padding: 20px 20px 0; }
+      .article-hero { padding: 0 20px; }
+      .article-hero__excerpt { font-size: 17px; }
+      .article-cover { padding: 0 20px; }
+      .article-body-layout { padding: 0 20px; }
+      .article-content p { font-size: 16px; }
+      .article-content h2 { font-size: 26px; }
+      .article-content h3 { font-size: 19px; }
+      .article-content figure.wide {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .article-content .image-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .related { padding: 0 20px; }
+      .related__grid { grid-template-columns: 1fr; }
+      .cta { margin: 0 20px 56px; padding: 40px 28px; }
+      .share-row { margin-left: 0; padding-left: 0; border-left: none; margin-top: 4px; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__brand" href="blog-index.html">
+        <span class="dot">CD</span>
+        <span>CORSE DRONE · MCG</span>
+      </a>
+      <nav>
+        <a href="#">Pôles</a>
+        <a href="#">Réalisations</a>
+        <a href="blog-index.html" class="active">Blog</a>
+        <a href="#">Partenaires</a>
+        <a href="#">Contact</a>
+      </nav>
+      <a class="site-header__cta" href="#">Demander un devis</a>
+    </div>
+  </header>
+
+  <!-- ====== BREADCRUMB ====== -->
+  <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <a href="#">Accueil</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="blog-index.html">Blog</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#">Diagnostic</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color: var(--text-muted);">Diagnostic de toiture par drone à Bastia</span>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <header class="article-hero">
+    <span class="article-hero__pill">Diagnostic</span>
+    <h1 class="article-hero__title">Diagnostic de toiture par drone à Bastia : retour d'expérience</h1>
+    <p class="article-hero__excerpt">Un immeuble de 6 étages, des tuiles centenaires, et la nécessité de cartographier l'état du toit sans monter dessus. Voici comment on a procédé, ce qu'on a découvert, et ce que ça a fait économiser au syndic.</p>
+    <div class="article-hero__meta">
+      <div class="meta-author-block">
+        <div class="meta-avatar author-PF">PF</div>
+        <span>Pierre-François Morganti</span>
+      </div>
+      <span class="meta-sep"></span>
+      <span>5 mai 2026</span>
+      <span class="meta-sep"></span>
+      <span>7 min de lecture</span>
+      <div class="share-row">
+        <button class="share-btn" aria-label="Partager sur LinkedIn">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Partager sur Twitter / X">
+          <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </button>
+        <button class="share-btn" aria-label="Copier le lien">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== COVER ====== -->
+  <div class="article-cover">
+    <div class="article-cover__inner">
+      <img src="https://images.unsplash.com/photo-1572985788098-7e58c2683043?w=1600&h=900&fit=crop&q=85" alt="Vue aérienne d'une toiture d'immeuble" />
+    </div>
+  </div>
+
+  <!-- ====== BODY ====== -->
+  <div class="article-body-layout">
+
+    <!-- TOC -->
+    <aside class="toc">
+      <div class="toc__heading">Sommaire</div>
+      <nav class="toc__list">
+        <a href="#contexte" class="toc__item">Le contexte de la mission</a>
+        <a href="#prep" class="toc__item active">Préparation du vol</a>
+        <a href="#equipement" class="toc__item subitem">Équipement utilisé</a>
+        <a href="#meteo" class="toc__item subitem">Fenêtre météo</a>
+        <a href="#vol" class="toc__item">Le déroulé du vol</a>
+        <a href="#analyse" class="toc__item">L'analyse des images</a>
+        <a href="#resultats" class="toc__item">Ce que ça a permis d'éviter</a>
+        <a href="#conclusion" class="toc__item">Pour conclure</a>
+      </nav>
+      <div class="reading-progress">
+        <span>Progression de lecture</span>
+        <div class="progress-bar"><div class="progress-bar__fill"></div></div>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <article class="article-content">
+
+      <p>Quand le syndic de la résidence des Orangers à Bastia nous a contactés en mars, le problème était classique : une fuite récurrente sur les combles d'un immeuble haussmannien de 6 étages, et personne ne savait exactement d'où elle venait. Le couvreur avait fait une première intervention l'année précédente, mais le problème était revenu après les premières pluies d'automne.</p>
+
+      <p>L'idée d'envoyer un drone faire une cartographie complète de la toiture est venue après deux devis de nacelle à plus de 4 800 euros, juste pour aller jeter un œil.</p>
+
+      <h2 id="contexte">Le contexte de la mission</h2>
+      <p>La toiture en question fait environ 480 m². Tuiles canal traditionnelles, exposées plein sud-ouest, donc particulièrement battues par les vents marins et les averses méditerranéennes. L'immeuble est dans un secteur historique de Bastia, donc impossible de monter un échafaudage sans autorisation longue et coûteuse.</p>
+
+      <p>Notre brief tenait en trois lignes : <strong>identifier l'origine de la fuite</strong>, <strong>cartographier l'état général</strong>, et <strong>fournir au syndic un document exploitable</strong> pour demander des devis précis à plusieurs couvreurs.</p>
+
+      <h2 id="prep">Préparation du vol</h2>
+      <p>Avant chaque mission de diagnostic toiture, on fait trois choses : une étude de site, une vérification réglementaire (zone, hauteurs, riverains), et une checklist équipement. C'est le triptyque qui fait la différence entre une mission propre et une mission ratée.</p>
+
+      <h3 id="equipement">Équipement utilisé</h3>
+      <ul>
+        <li><strong>DJI Mavic 3 Enterprise</strong> avec capteur 4/3 CMOS pour les vues détaillées</li>
+        <li>Caméra thermique <strong>H20T</strong> pour repérer les ponts thermiques et les zones d'infiltration</li>
+        <li>Tablette terrain avec DJI Pilot 2, missions planifiées la veille</li>
+        <li>Backup batteries (6 au total pour cette mission)</li>
+      </ul>
+
+      <figure>
+        <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1200&h=750&fit=crop&q=85" alt="Drone DJI prêt au décollage sur le toit terrasse" />
+        <figcaption>Mise en route du Mavic 3 Enterprise depuis la terrasse de l'immeuble voisin. Le décollage en hauteur évite les zones de turbulence en bas du bâtiment.</figcaption>
+      </figure>
+
+      <div class="callout">
+        <div class="callout__icon">i</div>
+        <p>L'imagerie thermique est souvent l'élément décisif pour les diagnostics de toiture. Une infiltration invisible à l'œil nu apparaît clairement comme une zone froide sur un cliché infrarouge pris en fin d'après-midi.</p>
+      </div>
+
+      <h3 id="meteo">Fenêtre météo</h3>
+      <p>On a attendu une journée sèche après 48h sans pluie, pour avoir un contraste thermique maximal entre les zones saines (sèches, donc plus chaudes au soleil) et les zones humides (refroidies par évaporation). C'est un détail qui semble anodin mais qui change tout : voler par temps gris ou juste après une averse divise par trois la lisibilité des résultats.</p>
+
+      <h2 id="vol">Le déroulé du vol</h2>
+      <p>43 minutes de vol total, répartis sur deux batteries. Première passe en orthophotographie à 40 m de hauteur, avec 80% de recouvrement frontal et 70% latéral pour permettre la reconstitution photogrammétrique. Deuxième passe à 15 m pour les détails fins.</p>
+
+      <p>La caméra thermique a tourné en parallèle. Au total, <strong>312 photos visibles et 187 thermiques</strong> ont été remontées au bureau pour traitement.</p>
+
+      <figure class="wide">
+        <img src="https://images.unsplash.com/photo-1444858345-8c2c2c0fbafd?w=1600&h=900&fit=crop&q=85" alt="Vue aérienne d'une toiture en tuiles canal à Bastia" />
+        <figcaption>Vue d'ensemble obtenue après orthorectification des 312 clichés visibles. Résolution finale : 1,2 cm par pixel au sol.</figcaption>
+      </figure>
+
+      <blockquote>
+        Le drone ne remplace pas le couvreur. Mais il transforme radicalement la façon dont on prépare son intervention : précision, sécurité, et économie.
+        <cite>— Note interne après mission</cite>
+      </blockquote>
+
+      <h2 id="analyse">L'analyse des images</h2>
+      <p>De retour au bureau, traitement dans Pix4Dmapper pour la photogrammétrie (modèle 3D de la toiture), puis exploration manuelle des images thermiques sur DJI Thermal Analysis Tool.</p>
+
+      <div class="image-grid">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1572985788098-7e58c2683043?w=800&h=600&fit=crop&q=85" alt="Vue visible de la noue nord-ouest" />
+          <figcaption>Vue visible · noue nord-ouest</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1517483000871-1dbf64a6e1c1?w=800&h=600&fit=crop&q=85" alt="Vue thermique de la même zone montrant l'infiltration" />
+          <figcaption>Vue thermique · zone froide visible</figcaption>
+        </figure>
+      </div>
+
+      <p>Deux découvertes principales :</p>
+      <ol>
+        <li>Une <strong>zone d'infiltration franche</strong> au niveau du noue nord-ouest, là où deux pans de toit se rejoignent. La signature thermique était sans ambiguïté : 4°C de moins que les zones adjacentes, sur un rayon d'environ 1,2 m.</li>
+        <li>Une <strong>quinzaine de tuiles déplacées ou fissurées</strong> ailleurs, sans infiltration active immédiate mais à surveiller. Plusieurs étaient invisibles à l'œil nu depuis la rue.</li>
+      </ol>
+
+      <h2 id="resultats">Ce que ça a permis d'éviter</h2>
+      <p>Avec le rapport en main (40 pages avec orthophoto, modèle 3D, vues thermiques annotées), le syndic a pu demander trois devis ciblés. Résultat : intervention finale à 2 100 €, contre les 4 800 € initialement estimés pour une simple visite en nacelle.</p>
+
+      <p>Et surtout, l'intervention du couvreur a duré une demi-journée au lieu des deux jours qui auraient été nécessaires avec une inspection à l'aveugle. Les tuiles à risque ont aussi été remplacées dans la foulée, ce qui évite probablement une autre fuite dans les 12 prochains mois.</p>
+
+      <h2 id="conclusion">Pour conclure</h2>
+      <p>Ce genre de mission, c'est ce qu'on aime faire. Un problème concret, une méthodologie qui marche, des chiffres qui parlent au client. Si vous gérez un syndic, une copropriété ou un patrimoine immobilier en Corse, n'hésitez pas à <a href="#">nous contacter</a> avant de commander une nacelle. Dans 80% des cas, on apporte une réponse plus précise pour moins cher.</p>
+
+    </article>
+  </div>
+
+  <!-- ====== ARTICLE FOOTER (author + CTA) ====== -->
+  <div class="article-body-layout">
+    <div></div>
+    <div class="article-footer">
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="meta-avatar author-PF">PF</div>
+        <div class="author-bio__content">
+          <div class="author-bio__name">Pierre-François Morganti</div>
+          <div class="author-bio__role">Fondateur & pilote drone · Corse Drone</div>
+          <p class="author-bio__text">Pilote drone certifié DGAC depuis 2019, je dirige Corse Drone depuis Bastia. Spécialiste en photogrammétrie, thermographie aérienne et inspections d'ouvrages. J'écris ici sur nos retours de terrain et les bonnes pratiques du métier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== CTA ====== -->
+  <section class="cta">
+    <div class="cta__inner">
+      <span class="cta__eyebrow">Un projet à étudier ?</span>
+      <h3>Discutons de votre besoin en diagnostic drone</h3>
+      <p>Inspection de toiture, audit thermique, relevé d'ouvrage : on étudie chaque demande pour vous proposer la méthode la plus adaptée et un devis sous 48h.</p>
+      <div class="cta__buttons">
+        <a class="btn-primary" href="#">
+          Demander un devis
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+        <a class="btn-secondary" href="#">Voir nos réalisations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== RELATED ====== -->
+  <section class="related">
+    <div class="related__heading">
+      <h2>Articles similaires</h2>
+      <a href="blog-index.html">
+        Tous les articles
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+      </a>
+    </div>
+    <div class="related__grid">
+      <article class="card" data-cat="diagnostic">
+        <div class="card__cover">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=450&fit=crop&q=80" alt="Panneaux solaires" />
+        </div>
+        <div class="card__body">
+          <span class="pill" data-cat="diagnostic">Diagnostic</span>
+          <h3 class="card__title">Pourquoi inspecter ses panneaux solaires en hiver</h3>
+          <div class="card__meta">
+            <div class="meta-avatar author-LG">LG</div>
+            <span>L. Gaspard · 1 mai 2026</span>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-cat="cas-clients">
+        <div class="card__cover">
+          <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&h=450&fit=crop&q=80" alt="Relevé thermique" />
+        </div>
+        <div class="card__body">
+          <span class="pill" data-cat="cas-clients">Cas clients</span>
+          <h3 class="card__title">Relevé thermique sur 3000 m² à Ajaccio : ce que les images ont révélé</h3>
+          <div class="card__meta">
+            <div class="meta-avatar author-PF">PF</div>
+            <span>P.-F. Morganti · 8 mai 2026</span>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-cat="actualites-drone">
+        <div class="card__cover">
+          <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=800&h=450&fit=crop&q=80" alt="Drone professional" />
+        </div>
+        <div class="card__body">
+          <span class="pill" data-cat="actualites-drone">Actualités drone</span>
+          <h3 class="card__title">Nouvelle réglementation drone 2026 : ce qui change pour les pros</h3>
+          <div class="card__meta">
+            <div class="meta-avatar author-JC">JC</div>
+            <span>J. Cacciari · 22 avril 2026</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</body>
+</html>

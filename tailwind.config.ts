@@ -22,6 +22,8 @@ export default {
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["Geist", "Geist Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        fraunces: ["Fraunces", "Georgia", "Times New Roman", "serif"],
+        geist: ["Geist", "Geist Sans", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       transitionTimingFunction: {
         "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -91,6 +93,14 @@ export default {
           tint: "var(--pole-transport-tint)",
           light: "var(--pole-transport-light)",
         },
+
+        "cat-nettoyage": "#5082AC",
+        "cat-diagnostic": "#14B8A6",
+        "cat-agriculture": "#16A34A",
+        "cat-transport": "#F59E0B",
+        "cat-cas-clients": "#8B5CF6",
+        "cat-actualites-drone": "#DC2626",
+        "cat-actualites-boite": "#475569",
 
         // shadcn compatibility (mapped to brand)
         secondary: {
