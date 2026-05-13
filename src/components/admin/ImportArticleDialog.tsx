@@ -133,7 +133,7 @@ const ImportArticleDialog = ({ open, onOpenChange }: Props) => {
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden">
         {stage === "input" && (
           <>
             <DialogHeader>
@@ -205,7 +205,7 @@ const ImportArticleDialog = ({ open, onOpenChange }: Props) => {
                 </Button>
               </CollapsibleTrigger>
               <CollapsibleContent className="space-y-2 mt-2">
-                <pre className="text-xs bg-muted/50 p-3 rounded-md overflow-x-auto font-mono">
+                <pre className="text-xs bg-muted/50 p-3 rounded-md font-mono whitespace-pre-wrap break-words max-w-full">
                   {ARTICLE_TEMPLATE_MD}
                 </pre>
                 <div className="flex gap-2">
