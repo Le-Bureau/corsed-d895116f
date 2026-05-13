@@ -28,6 +28,7 @@ const Blog = () => {
   const [params] = useSearchParams();
   const catSlug = params.get("cat") ?? undefined;
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState<SortKey>("recent");
 
   useEffect(() => {
     const q = search.trim();
