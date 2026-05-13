@@ -198,7 +198,9 @@ const BlogPost = () => {
 
       <div className="article-body-layout">
         <BlogTOC items={tocItems} />
-        <BlogContent markdown={post.contentMd} />
+        <div ref={articleRef}>
+          <BlogContent markdown={post.contentMd} />
+        </div>
       </div>
 
       <div className="article-body-layout">
@@ -209,7 +211,11 @@ const BlogPost = () => {
       </div>
 
       <BlogArticleCTA />
-      <BlogRelatedPosts currentPostId={post.id} categoryId={cat?.id ?? null} />
+      <BlogRelatedPosts
+        currentPostId={post.id}
+        currentSlug={post.slug}
+        categoryId={cat?.id ?? null}
+      />
     </div>
   );
 };
