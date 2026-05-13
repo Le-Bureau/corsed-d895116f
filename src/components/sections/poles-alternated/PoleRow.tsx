@@ -40,6 +40,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   const hasLinkedSubServices = pole.subServices?.some((s) => s.slug);
   const reduced = useReducedMotion();
   const { ref: contentRevealRef, isVisible: contentIsVisible } = useScrollReveal<HTMLDivElement>();
+  const { ref: imageRevealRef, isVisible: imageIsVisible } = useScrollReveal<HTMLDivElement>();
 
   const imageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -78,7 +79,13 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
         }`}
       >
         {/* Image */}
-        <div className="lg:[direction:ltr] relative">
+        <motion.div
+          ref={imageRevealRef}
+          initial={false}
+          animate={imageIsVisible ? (reduced ? { opacity: 1 } : { opacity: 1, y: 0 }) : reduced ? { opacity: 0 } : { opacity: 0, y: 36 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="lg:[direction:ltr] relative"
+        >
           <div
             ref={imageRef}
             className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-elevated shadow-soft-lg group transition-all duration-700 ease-out hover:scale-[1.01]"
@@ -135,7 +142,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
               CORSE DRONE · {pole.label.toUpperCase()}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Content */}
         <div className="lg:[direction:ltr] relative">
