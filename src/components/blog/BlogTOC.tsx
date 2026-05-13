@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 export interface TocItem {
   id: string;
@@ -13,6 +14,7 @@ interface Props {
 const BlogTOC = ({ items }: Props) => {
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null);
   const [progress, setProgress] = useState(0);
+  const lenis = useLenis();
 
   useEffect(() => {
     if (items.length === 0) return;
@@ -39,16 +41,15 @@ const BlogTOC = ({ items }: Props) => {
     const compute = () => {
       const article = document.querySelector(".article-content") as HTMLElement | null;
       const viewportH = window.innerHeight;
-      const scrollY = window.scrollY;
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
 
       let start = 0;
       let end = document.documentElement.scrollHeight - viewportH;
 
       if (article) {
         const rect = article.getBoundingClientRect();
-        start = rect.top + scrollY; // article top in document
+        start = rect.top + scrollY;
         const articleBottom = start + article.offsetHeight;
-        // Reach 100% when the article's bottom hits the viewport bottom.
         end = Math.max(start + 1, articleBottom - viewportH);
       }
 
@@ -58,11 +59,19 @@ const BlogTOC = ({ items }: Props) => {
     window.addEventListener("scroll", compute, { passive: true });
     window.addEventListener("resize", compute);
     compute();
+
+    let unsubLenis: (() => void) | undefined;
+    if (lenis) {
+      lenis.on("scroll", compute);
+      unsubLenis = () => lenis.off("scroll", compute);
+    }
+
     return () => {
       window.removeEventListener("scroll", compute);
       window.removeEventListener("resize", compute);
+      unsubLenis?.();
     };
-  }, []);
+  }, [lenis]);
 
   if (items.length === 0) return null;
 
