@@ -1,5 +1,6 @@
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -27,6 +28,7 @@ const StaggerChildren = ({
   initialDelay = 0,
 }: Props) => {
   const reduced = useReducedMotion();
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
   const container: Variants = {
     hidden: {},
@@ -40,11 +42,11 @@ const StaggerChildren = ({
 
   return (
     <motion.div
+      ref={ref}
       className={className}
       variants={container}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: "some" }}
+      animate={isVisible ? "show" : "hidden"}
     >
       {children}
     </motion.div>
