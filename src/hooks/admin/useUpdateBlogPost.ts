@@ -29,6 +29,8 @@ export const useUpdateBlogPost = () => {
           featured_on_home: values.featured_on_home,
           meta_title: values.meta_title?.trim() ? values.meta_title : null,
           meta_description: values.meta_description?.trim() ? values.meta_description : null,
+          published_at:
+            values.published_at ?? (values.status === "published" ? new Date().toISOString() : null),
           updated_at: new Date().toISOString(),
         })
         .eq("id", id)
