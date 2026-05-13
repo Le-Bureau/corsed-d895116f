@@ -7,8 +7,8 @@ const BlogFeaturedSkeleton = () => (
     </div>
     <div className="featured__content">
       <Skeleton className="h-6 w-24 mb-4 rounded-full" />
-      <Skeleton className="h-9 w-[95%] mb-3" />
-      <Skeleton className="h-9 w-[70%] mb-5" />
+      <Skeleton className="h-11 w-[95%] mb-3" />
+      <Skeleton className="h-11 w-[70%] mb-5" />
       <Skeleton className="h-4 w-full mb-2" />
       <Skeleton className="h-4 w-[90%] mb-2" />
       <Skeleton className="h-4 w-[75%] mb-6" />

@@ -107,6 +107,15 @@ const Blog = () => {
               <BlogFeaturedSkeleton />
               <div className="section-heading">
                 <h2>Tous les articles</h2>
+                <span
+                  aria-hidden
+                  className="inline-flex items-center gap-1.5 text-[13px] text-[color:var(--blog-text-muted)] px-1 py-0.5 opacity-60"
+                >
+                  Trier par : {SORT_LABELS[sort]}
+                  <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <polyline points="6,9 12,15 18,9" />
+                  </svg>
+                </span>
               </div>
               <section className="blog-grid">
                 {Array.from({ length: 6 }).map((_, i) => (
