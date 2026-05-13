@@ -1,3 +1,24 @@
+/**
+ * AuthContext — runId pattern
+ * ---------------------------
+ * `applySession` is reentrant: it can be invoked concurrently by overlapping
+ * auth events (INITIAL_SESSION + TOKEN_REFRESHED, React StrictMode double
+ * effects, sign-in shortly after rehydration, etc.). Each invocation performs
+ * an async `checkIsAdmin` call, which means a stale (superseded) run could
+ * otherwise write `setIsAdmin(false)` or `setIsLoading(false)` AFTER a newer
+ * run has already populated correct state — producing a transient
+ * `user && !isAdmin && !isLoading` snapshot that triggers AdminRoute to
+ * redirect with a toast.
+ *
+ * The `runIdRef` counter is bumped at the start of every `applySession`. After
+ * each `await`, we re-check `runId === runIdRef.current` before writing state.
+ * Only the most recent run is allowed to mutate state. DO NOT REMOVE.
+ *
+ * `isRoleLoading` is a separate flag from `isLoading`:
+ *   - `isLoading`     = first session check pending
+ *   - `isRoleLoading` = admin role check pending for the current user
+ * AdminRoute must gate on `isLoading || (user && isRoleLoading)`.
+ */
 import { createContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,6 +28,7 @@ export interface AuthContextValue {
   session: Session | null;
   isAdmin: boolean;
   isLoading: boolean;
+  isRoleLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
 }
@@ -32,29 +54,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const lastCheckedUserIdRef = useRef<string | null>(null);
+  const [isRoleLoading, setIsRoleLoading] = useState(false);
+  const runIdRef = useRef(0);
 
   useEffect(() => {
     let mounted = true;
 
     const applySession = async (next: Session | null) => {
       if (!mounted) return;
+      const runId = ++runIdRef.current;
+
+      // Synchronous writes — safe to apply unconditionally; the latest event
+      // wins naturally because they happen before any await.
       setSession(next);
       setUser(next?.user ?? null);
 
       const uid = next?.user?.id ?? null;
-      lastCheckedUserIdRef.current = uid;
 
       if (uid) {
+        setIsRoleLoading(true);
         const admin = await checkIsAdmin(uid);
-        if (!mounted) return;
-        if (lastCheckedUserIdRef.current !== uid) return; // stale
+        if (!mounted || runId !== runIdRef.current) return; // stale
         setIsAdmin(admin);
+        setIsRoleLoading(false);
       } else {
         setIsAdmin(false);
+        setIsRoleLoading(false);
       }
 
-      if (mounted) setIsLoading(false);
+      if (!mounted || runId !== runIdRef.current) return; // stale
+      setIsLoading(false);
     };
 
     // onAuthStateChange fires INITIAL_SESSION on subscribe, so we don't need
@@ -81,7 +110,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, isAdmin, isLoading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, session, isAdmin, isLoading, isRoleLoading, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

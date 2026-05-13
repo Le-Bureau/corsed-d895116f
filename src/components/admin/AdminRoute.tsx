@@ -8,20 +8,20 @@ interface Props {
 }
 
 const AdminRoute = ({ children }: Props) => {
-  const { user, isAdmin, isLoading } = useAuth();
+  const { user, isAdmin, isLoading, isRoleLoading } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
-    if (!isLoading && user && !isAdmin) {
+    if (!isLoading && user && !isRoleLoading && !isAdmin) {
       toast({
         title: "Accès refusé",
         description: "Vous n'avez pas accès à cette zone.",
         variant: "destructive",
       });
     }
-  }, [isLoading, user, isAdmin]);
+  }, [isLoading, isRoleLoading, user, isAdmin]);
 
-  if (isLoading) {
+  if (isLoading || (user && isRoleLoading)) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-3">
