@@ -1,4 +1,4 @@
-import matter from "gray-matter";
+import { parse as parseYaml } from "yaml";
 import { getReadingTime } from "@/lib/blogHelpers";
 import type { BlogAuthor, BlogCategory } from "@/types/blog";
 
