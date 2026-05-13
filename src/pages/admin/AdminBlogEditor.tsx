@@ -455,6 +455,47 @@ const AdminBlogEditor = () => {
             />
           </div>
 
+          {/* Date de publication */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label>Date de publication</Label>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">Auto</span>
+                <Switch
+                  checked={autoPublishedAt}
+                  onCheckedChange={(checked) => {
+                    setAutoPublishedAt(checked);
+                    if (checked) {
+                      setValue("published_at", null);
+                    } else {
+                      const existingDate = form.getValues("published_at");
+                      setValue("published_at", existingDate ?? new Date().toISOString());
+                    }
+                  }}
+                />
+              </div>
+            </div>
+            {!autoPublishedAt && (
+              <Controller
+                control={control}
+                name="published_at"
+                render={({ field }) => (
+                  <input
+                    type="datetime-local"
+                    value={toLocalDatetime(field.value ?? null)}
+                    onChange={(e) => field.onChange(fromLocalDatetime(e.target.value))}
+                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                  />
+                )}
+              />
+            )}
+            {autoPublishedAt && (
+              <p className="text-xs text-muted-foreground">
+                Fixée automatiquement lors de la publication.
+              </p>
+            )}
+          </div>
+
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="featured">À la une</Label>
