@@ -193,23 +193,99 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                       }
                       className="overflow-hidden"
                     >
-                      <li className="h-3" aria-hidden />
-                      {SERVICE_ITEMS.map((item) => (
-                        <li key={item.label}>
-                          <Link
-                            to={item.to}
-                            onClick={onClose}
-                            className="flex items-center gap-3 py-2.5 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-                          >
-                            <span
-                              className="h-2 w-2 rounded-full"
-                              style={{ backgroundColor: item.color }}
-                              aria-hidden
-                            />
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
+                      <li className="h-2" aria-hidden />
+                      {POLE_ITEMS.map((pole) => {
+                        const isOpen = openPole === pole.key;
+                        const hasSubs = pole.subServices.length > 0;
+                        return (
+                          <li key={pole.key} className="border-b border-border-subtle/60 last:border-b-0">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                hasSubs
+                                  ? setOpenPole((v) => (v === pole.key ? null : pole.key))
+                                  : undefined
+                              }
+                              aria-expanded={hasSubs ? isOpen : undefined}
+                              className="flex w-full items-center justify-between py-3 text-[15px] font-medium text-text-primary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                            >
+                              <span className="flex items-center gap-3">
+                                <span
+                                  className="h-2 w-2 rounded-full"
+                                  style={{ backgroundColor: pole.color }}
+                                  aria-hidden
+                                />
+                                {pole.label}
+                              </span>
+                              {hasSubs && (
+                                <ChevronDown
+                                  size={16}
+                                  className={cn(
+                                    "transition-transform duration-300 ease-out-expo text-text-secondary",
+                                    isOpen && "rotate-180",
+                                  )}
+                                />
+                              )}
+                            </button>
+                            <AnimatePresence initial={false}>
+                              {isOpen && hasSubs && (
+                                <motion.ul
+                                  key={`${pole.key}-subs`}
+                                  initial={reduced ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                                  animate={
+                                    reduced
+                                      ? { opacity: 1 }
+                                      : { height: "auto", opacity: 1, transition: { duration: 0.25, ease: EASE } }
+                                  }
+                                  exit={
+                                    reduced
+                                      ? { opacity: 0 }
+                                      : { height: 0, opacity: 0, transition: { duration: 0.2, ease: EASE } }
+                                  }
+                                  className="overflow-hidden pl-5"
+                                >
+                                  {pole.subServices.map((sub) => (
+                                    <li key={sub.slug ?? sub.name}>
+                                      <Link
+                                        to={sub.slug ? `/pole/${pole.slug}/${sub.slug}` : `/pole/${pole.slug}`}
+                                        onClick={onClose}
+                                        className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                                      >
+                                        {sub.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                  <li>
+                                    <Link
+                                      to={`/pole/${pole.slug}`}
+                                      onClick={onClose}
+                                      className="flex items-center gap-1.5 py-2 text-[13px] font-medium uppercase tracking-[0.08em] text-text-primary transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                                    >
+                                      Voir le pôle
+                                      <span aria-hidden>→</span>
+                                    </Link>
+                                  </li>
+                                  <li className="h-1" aria-hidden />
+                                </motion.ul>
+                              )}
+                            </AnimatePresence>
+                          </li>
+                        );
+                      })}
+                      <li>
+                        <Link
+                          to="/expertises"
+                          onClick={onClose}
+                          className="flex items-center gap-3 py-3 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                        >
+                          <span
+                            className="h-2 w-2 rounded-full"
+                            style={{ backgroundColor: "var(--logo-base)" }}
+                            aria-hidden
+                          />
+                          Autres expertises
+                        </Link>
+                      </li>
                     </motion.ul>
                   )}
                 </AnimatePresence>
