@@ -75,6 +75,8 @@ const AdminBlogEditor = () => {
   const { id } = useParams<{ id: string }>();
   const isEdit = !!id;
   const navigate = useNavigate();
+  const location = useLocation();
+  const importedPayload = (location.state as { imported?: ValidationOk } | null)?.imported ?? null;
 
   const { data: existing, isLoading: loadingPost } = useAdminBlogPost(id);
   const { data: authors } = useBlogAuthors();
@@ -85,8 +87,10 @@ const AdminBlogEditor = () => {
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const slugManuallyEditedRef = useRef(false);
+  const importAppliedRef = useRef(false);
   const [topError, setTopError] = useState<string | null>(null);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
+  const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
