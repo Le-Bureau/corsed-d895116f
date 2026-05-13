@@ -129,9 +129,28 @@ export async function validateImport(
     };
   }
 
-  let parsed;
+  // Split frontmatter and body. Match opening --- (with optional BOM/whitespace) and the next --- on its own line.
+  const fmMatch = source.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!fmMatch) {
+    return {
+      ok: false,
+      errors: [
+        {
+          field: "format",
+          message:
+            "Frontmatter YAML invalide : impossible de trouver la délimitation '---' de fermeture.",
+        },
+      ],
+    };
+  }
+
+  let fm: Record<string, unknown>;
   try {
-    parsed = matter(source);
+    const parsedYaml = parseYaml(fmMatch[1]);
+    fm = (parsedYaml ?? {}) as Record<string, unknown>;
+    if (typeof fm !== "object" || Array.isArray(fm)) {
+      throw new Error("le frontmatter doit être un objet clé/valeur");
+    }
   } catch (e) {
     const msg = e instanceof Error ? e.message : "erreur inconnue";
     return {
@@ -140,8 +159,7 @@ export async function validateImport(
     };
   }
 
-  const fm = (parsed.data ?? {}) as Record<string, unknown>;
-  const content = (parsed.content ?? "").trim();
+  const content = (fmMatch[2] ?? "").trim();
 
   if (content.length > 500_000) {
     warnings.push("Article volumineux, traitement plus long.");
