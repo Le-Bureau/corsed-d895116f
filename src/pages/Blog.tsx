@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Events, trackEvent } from "@/lib/analytics";
 import { Link, useSearchParams } from "react-router-dom";
 import BlogIndexSEO from "@/components/seo/BlogIndexSEO";
@@ -10,6 +10,19 @@ import BlogCardSkeleton from "@/components/blog/skeletons/BlogCardSkeleton";
 import { useBlogCategories } from "@/hooks/blog/useBlogCategories";
 import { useBlogPosts } from "@/hooks/blog/useBlogPosts";
 import { useBlogCategoryCounts } from "@/hooks/blog/useBlogCategoryCounts";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+type SortKey = "recent" | "oldest" | "title";
+const SORT_LABELS: Record<SortKey, string> = {
+  recent: "Plus récents",
+  oldest: "Plus anciens",
+  title: "Titre (A-Z)",
+};
 
 const Blog = () => {
   const [params] = useSearchParams();
