@@ -1,11 +1,4 @@
-declare global {
-  interface Window {
-    plausible?: (
-      event: string,
-      opts?: { props?: Record<string, string | number | boolean | null | undefined> },
-    ) => void;
-  }
-}
+// Window.plausible is declared in src/hooks/usePlausibleTracking.ts
 
 interface TrackEventProps {
   [key: string]: string | number | boolean | null | undefined;
