@@ -30,7 +30,17 @@ const BlogRelatedPosts = ({ currentPostId, currentSlug, categoryId }: Props) => 
       </div>
       <div className="blog-grid-related">
         {related.map((p) => (
-          <BlogCard key={p.id} post={p} variant="related" />
+          <div
+            key={p.id}
+            onClickCapture={() =>
+              trackEvent(Events.RELATED_ARTICLE_CLICKED, {
+                from_slug: currentSlug,
+                to_slug: p.slug,
+              })
+            }
+          >
+            <BlogCard post={p} variant="related" />
+          </div>
         ))}
       </div>
     </section>
