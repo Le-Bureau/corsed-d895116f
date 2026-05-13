@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 export interface TocItem {
   id: string;
