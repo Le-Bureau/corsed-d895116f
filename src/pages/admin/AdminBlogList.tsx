@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus } from "lucide-react";
+import { Plus, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +20,7 @@ import { useBlogCategories } from "@/hooks/blog/useBlogCategories";
 import { useBlogAuthors } from "@/hooks/blog/useBlogAuthors";
 import { useDeleteBlogPost } from "@/hooks/admin/useDeleteBlogPost";
 import type { BlogPost } from "@/types/blog";
+import ImportArticleDialog from "@/components/admin/ImportArticleDialog";
 
 const AdminBlogList = () => {
   const { data: posts, isLoading } = useAdminBlogPosts();
@@ -32,6 +33,7 @@ const AdminBlogList = () => {
   const [categoryId, setCategoryId] = useState("all");
   const [authorId, setAuthorId] = useState("all");
   const [toDelete, setToDelete] = useState<BlogPost | null>(null);
+  const [importOpen, setImportOpen] = useState(false);
 
   const counts = useMemo(() => {
     const drafts = posts?.filter((p) => p.status === "draft").length ?? 0;
@@ -76,12 +78,18 @@ const AdminBlogList = () => {
             {counts.published > 1 ? "s" : ""}
           </p>
         </div>
-        <Button asChild>
-          <Link to="/admin/blog/new">
-            <Plus className="h-4 w-4" />
-            Nouvel article
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => setImportOpen(true)}>
+            <Upload className="h-4 w-4" />
+            Importer
+          </Button>
+          <Button asChild>
+            <Link to="/admin/blog/new">
+              <Plus className="h-4 w-4" />
+              Nouvel article
+            </Link>
+          </Button>
+        </div>
       </header>
 
       <BlogListFilters
@@ -138,6 +146,8 @@ const AdminBlogList = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <ImportArticleDialog open={importOpen} onOpenChange={setImportOpen} />
     </div>
   );
 };

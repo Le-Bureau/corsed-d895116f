@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, Loader2, Trash2 } from "lucide-react";
+import { ArrowLeft, Eye, Loader2, Trash2, X } from "lucide-react";
+import type { ValidationOk } from "@/lib/admin/importArticle";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,6 +75,8 @@ const AdminBlogEditor = () => {
   const { id } = useParams<{ id: string }>();
   const isEdit = !!id;
   const navigate = useNavigate();
+  const location = useLocation();
+  const importedPayload = (location.state as { imported?: ValidationOk } | null)?.imported ?? null;
 
   const { data: existing, isLoading: loadingPost } = useAdminBlogPost(id);
   const { data: authors } = useBlogAuthors();
@@ -84,8 +87,10 @@ const AdminBlogEditor = () => {
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const slugManuallyEditedRef = useRef(false);
+  const importAppliedRef = useRef(false);
   const [topError, setTopError] = useState<string | null>(null);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
+  const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
@@ -134,6 +139,34 @@ const AdminBlogEditor = () => {
       setValue("category_id", categories[0].id);
     }
   }, [authors, categories, isEdit, setValue, form]);
+
+  // Apply imported article payload (create mode, once)
+  useEffect(() => {
+    if (isEdit) return;
+    if (importAppliedRef.current) return;
+    if (!importedPayload) return;
+    const { parsed, author, category, slugAvailable } = importedPayload;
+    const slugRegenerated = !slugAvailable;
+    slugManuallyEditedRef.current = !slugRegenerated;
+    reset({
+      title: parsed.title,
+      slug: slugRegenerated ? "" : parsed.slug,
+      excerpt: parsed.excerpt,
+      content_md: parsed.content_md,
+      cover_image_url: parsed.cover_image_url,
+      hero_image_url: parsed.hero_image_url,
+      author_id: author.id,
+      category_id: category.id,
+      status: parsed.status,
+      featured_on_home: parsed.featured_on_home,
+      meta_title: parsed.meta_title ?? "",
+      meta_description: parsed.meta_description ?? "",
+    });
+    setImportBanner({ slugRegenerated });
+    importAppliedRef.current = true;
+    // clear router state to prevent re-application on reload
+    navigate(location.pathname, { replace: true, state: {} });
+  }, [importedPayload, isEdit, reset, navigate, location.pathname]);
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
@@ -248,6 +281,25 @@ const AdminBlogEditor = () => {
           {isEdit ? "Modifier l'article" : "Nouvel article"}
         </h1>
       </div>
+
+      {importBanner && (
+        <div className="rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3">
+          <p>
+            <span className="font-medium">Article importé.</span>{" "}
+            {importBanner.slugRegenerated
+              ? "Le slug original était déjà utilisé. Un nouveau slug a été généré, vérifiez-le."
+              : "Relisez avant de publier."}
+          </p>
+          <button
+            type="button"
+            onClick={() => setImportBanner(null)}
+            className="text-muted-foreground hover:text-foreground"
+            aria-label="Fermer"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
 
       {(topError || errorList.length > 0) && (
         <div className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
