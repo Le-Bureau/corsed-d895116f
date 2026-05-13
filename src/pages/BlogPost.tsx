@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SEO from "@/components/seo/SEO";
 import BlogPostSEO from "@/components/seo/BlogPostSEO";
@@ -10,6 +10,7 @@ import BlogRelatedPosts from "@/components/blog/BlogRelatedPosts";
 import BlogPostSkeleton from "@/components/blog/skeletons/BlogPostSkeleton";
 import { useBlogPost } from "@/hooks/blog/useBlogPost";
 import { formatBlogDate } from "@/lib/blogHelpers";
+import { Events, trackEvent } from "@/lib/analytics";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -27,6 +28,41 @@ const BlogPost = () => {
       return () => clearTimeout(t);
     }
   }, [copied]);
+
+  // ARTICLE_VIEWED — fire once per mounted post
+  const viewedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!post) return;
+    if (viewedRef.current === post.id) return;
+    viewedRef.current = post.id;
+    trackEvent(Events.ARTICLE_VIEWED, {
+      slug: post.slug,
+      title: post.title.slice(0, 80),
+      category: post.category?.slug,
+      author: post.author?.initials,
+    });
+  }, [post]);
+
+  // ARTICLE_CTA_CLICKED — delegated listener on article body
+  const articleRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const root = articleRef.current;
+    if (!root || !post) return;
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.("a") as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      if (!href.startsWith("/")) return; // external, mailto, tel, hash
+      trackEvent(Events.ARTICLE_CTA_CLICKED, {
+        article_slug: post.slug,
+        to: href,
+      });
+    };
+    root.addEventListener("click", onClick);
+    return () => root.removeEventListener("click", onClick);
+  }, [post]);
 
   if (isLoading) return <BlogPostSkeleton />;
 
