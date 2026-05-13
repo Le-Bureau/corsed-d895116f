@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const ENTER_OFFSET = 36;
 
 interface Props {
   children: ReactNode;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export const fadeUpItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: ENTER_OFFSET },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
