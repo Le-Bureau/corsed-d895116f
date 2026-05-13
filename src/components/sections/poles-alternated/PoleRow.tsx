@@ -60,7 +60,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   };
 
   const itemVariants: Variants = {
-    hidden: reduced ? { opacity: 0 } : { opacity: 0, y: 20 },
+    hidden: reduced ? { opacity: 0 } : { opacity: 0, y: 36 },
     visible: reduced
       ? { opacity: 1, transition: { duration: 0.2 } }
       : { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
