@@ -7,8 +7,8 @@ interface UseScrollRevealOptions {
 }
 
 export function useScrollReveal<T extends HTMLElement = HTMLElement>({
-  amount = 0.3,
-  rootMargin = "0px 0px -28% 0px",
+  amount = 0.08,
+  rootMargin = "0px 0px -8% 0px",
 }: UseScrollRevealOptions = {}) {
   const ref = useRef<T | null>(null);
   const reduced = useReducedMotion();
