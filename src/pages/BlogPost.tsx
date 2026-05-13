@@ -91,6 +91,7 @@ const BlogPost = () => {
   const author = post.author;
 
   const handleCopy = () => {
+    trackEvent(Events.ARTICLE_SHARED, { slug: post.slug, method: "copy_link" });
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(window.location.href);
       setCopied(true);
