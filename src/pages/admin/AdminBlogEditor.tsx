@@ -140,6 +140,34 @@ const AdminBlogEditor = () => {
     }
   }, [authors, categories, isEdit, setValue, form]);
 
+  // Apply imported article payload (create mode, once)
+  useEffect(() => {
+    if (isEdit) return;
+    if (importAppliedRef.current) return;
+    if (!importedPayload) return;
+    const { parsed, author, category, slugAvailable } = importedPayload;
+    const slugRegenerated = !slugAvailable;
+    slugManuallyEditedRef.current = !slugRegenerated;
+    reset({
+      title: parsed.title,
+      slug: slugRegenerated ? "" : parsed.slug,
+      excerpt: parsed.excerpt,
+      content_md: parsed.content_md,
+      cover_image_url: parsed.cover_image_url,
+      hero_image_url: parsed.hero_image_url,
+      author_id: author.id,
+      category_id: category.id,
+      status: parsed.status,
+      featured_on_home: parsed.featured_on_home,
+      meta_title: parsed.meta_title ?? "",
+      meta_description: parsed.meta_description ?? "",
+    });
+    setImportBanner({ slugRegenerated });
+    importAppliedRef.current = true;
+    // clear router state to prevent re-application on reload
+    navigate(location.pathname, { replace: true, state: {} });
+  }, [importedPayload, isEdit, reset, navigate, location.pathname]);
+
   const titleValue = watch("title");
   const slugValue = watch("slug");
   const excerptValue = watch("excerpt");
