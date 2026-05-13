@@ -1,6 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
+import { toast } from "sonner";
 import type { BlogCategory } from "@/types/blog";
+import { Events, trackEvent } from "@/lib/analytics";
 
 interface Props {
   categories: BlogCategory[];
