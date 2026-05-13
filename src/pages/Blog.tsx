@@ -133,12 +133,30 @@ const Blog = () => {
                       ? "Résultats"
                       : "Tous les articles"}
                 </h2>
-                <span>
-                  Trier par : Plus récents
-                  <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
-                    <polyline points="6,9 12,15 18,9" />
-                  </svg>
-                </span>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1.5 text-[13px] text-[color:var(--blog-text-muted)] hover:text-[color:var(--blog-text)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md px-1 py-0.5"
+                    >
+                      Trier par : {SORT_LABELS[sort]}
+                      <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+                        <polyline points="6,9 12,15 18,9" />
+                      </svg>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="font-body">
+                    {(Object.keys(SORT_LABELS) as SortKey[]).map((key) => (
+                      <DropdownMenuItem
+                        key={key}
+                        onClick={() => setSort(key)}
+                        className={sort === key ? "font-semibold" : ""}
+                      >
+                        {SORT_LABELS[key]}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
 
               <section className="blog-grid">
