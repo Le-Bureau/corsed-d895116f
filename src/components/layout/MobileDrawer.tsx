@@ -22,14 +22,13 @@ const NAV_LINKS = [
   { label: "Contact", to: "/contact" },
 ];
 
-const SERVICE_ITEMS = [
-  ...POLES.map((p) => ({
-    label: p.label,
-    to: `/pole/${p.slug}`,
-    color: p.baseColorOnDark,
-  })),
-  { label: "Autres expertises", to: "/expertises", color: "var(--logo-base)" },
-];
+const POLE_ITEMS = POLES.map((p) => ({
+  key: p.key,
+  label: p.label,
+  slug: p.slug,
+  color: p.baseColorOnDark,
+  subServices: p.subServices,
+}));
 
 const panelVariants: Variants = {
   hidden: { x: "100%" },
