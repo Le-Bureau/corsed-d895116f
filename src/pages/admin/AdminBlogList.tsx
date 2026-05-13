@@ -78,12 +78,18 @@ const AdminBlogList = () => {
             {counts.published > 1 ? "s" : ""}
           </p>
         </div>
-        <Button asChild>
-          <Link to="/admin/blog/new">
-            <Plus className="h-4 w-4" />
-            Nouvel article
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => setImportOpen(true)}>
+            <Upload className="h-4 w-4" />
+            Importer
+          </Button>
+          <Button asChild>
+            <Link to="/admin/blog/new">
+              <Plus className="h-4 w-4" />
+              Nouvel article
+            </Link>
+          </Button>
+        </div>
       </header>
 
       <BlogListFilters
