@@ -18,6 +18,7 @@ export const blogPostSchema = z.object({
   featured_on_home: z.boolean(),
   meta_title: z.string().max(70, "Max 70 caractères").nullable().optional(),
   meta_description: z.string().max(160, "Max 160 caractères").nullable().optional(),
+  published_at: z.string().datetime().nullable().optional(),
 });
 
 export type BlogPostFormValues = z.infer<typeof blogPostSchema>;
