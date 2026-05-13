@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Events, trackEvent } from "@/lib/analytics";
 import { Link, useSearchParams } from "react-router-dom";
 import BlogIndexSEO from "@/components/seo/BlogIndexSEO";
 import BlogSidebar from "@/components/blog/BlogSidebar";
