@@ -282,6 +282,25 @@ const AdminBlogEditor = () => {
         </h1>
       </div>
 
+      {importBanner && (
+        <div className="rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3">
+          <p>
+            <span className="font-medium">Article importé.</span>{" "}
+            {importBanner.slugRegenerated
+              ? "Le slug original était déjà utilisé. Un nouveau slug a été généré, vérifiez-le."
+              : "Relisez avant de publier."}
+          </p>
+          <button
+            type="button"
+            onClick={() => setImportBanner(null)}
+            className="text-muted-foreground hover:text-foreground"
+            aria-label="Fermer"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
       {(topError || errorList.length > 0) && (
         <div className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
           {topError && <p className="font-medium">{topError}</p>}
