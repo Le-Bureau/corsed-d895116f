@@ -14,6 +14,7 @@ interface Props {
 const BlogTOC = ({ items }: Props) => {
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null);
   const [progress, setProgress] = useState(0);
+  const lenis = useLenis();
 
   useEffect(() => {
     if (items.length === 0) return;
