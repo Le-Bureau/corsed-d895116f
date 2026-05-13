@@ -44,7 +44,7 @@ const StaggerChildren = ({
       variants={container}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, amount: "some" }}
     >
       {children}
     </motion.div>

@@ -18,7 +18,7 @@ const FadeInWhenVisible = ({ children, className, delay = 0, duration = 0.6 }: P
       className={className}
       initial={reduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
       whileInView={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, amount: "some" }}
       transition={{ duration, delay, ease: EASE }}
     >
       {children}
