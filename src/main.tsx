@@ -46,8 +46,6 @@ POLES.forEach((pole) => {
 
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
-    <MotionConfig reducedMotion="user">
-      <App />
-    </MotionConfig>
+    <App />
   </HelmetProvider>,
 );
