@@ -49,12 +49,23 @@ const Blog = () => {
 
   const q = search.trim().toLowerCase();
   const allPosts = posts ?? [];
+  const sortedAll = useMemo(() => {
+    const arr = [...allPosts];
+    if (sort === "recent") {
+      arr.sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
+    } else if (sort === "oldest") {
+      arr.sort((a, b) => (a.publishedAt ?? "").localeCompare(b.publishedAt ?? ""));
+    } else if (sort === "title") {
+      arr.sort((a, b) => a.title.localeCompare(b.title, "fr", { sensitivity: "base" }));
+    }
+    return arr;
+  }, [allPosts, sort]);
   const searched = q
-    ? allPosts.filter(
+    ? sortedAll.filter(
         (p) =>
           p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q),
       )
-    : allPosts;
+    : sortedAll;
 
   // Featured only when no filter / search
   const featured = !catSlug && !q ? searched.find((p) => p.featuredOnHome) : undefined;
