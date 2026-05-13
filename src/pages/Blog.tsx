@@ -16,6 +16,15 @@ const Blog = () => {
   const catSlug = params.get("cat") ?? undefined;
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    const q = search.trim();
+    if (q.length < 3) return;
+    const t = setTimeout(() => {
+      trackEvent(Events.SEARCH_PERFORMED, { query_length: q.length });
+    }, 800);
+    return () => clearTimeout(t);
+  }, [search]);
+
   const { data: categories = [] } = useBlogCategories();
   const { data: counts = {}, total } = useBlogCategoryCounts();
   const {
