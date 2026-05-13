@@ -31,7 +31,7 @@ const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
 const AdminProfile = lazy(() => import("./pages/admin/AdminProfile"));
 
 const RouteFallback = () => (
-  <div className="min-h-[60vh] w-full flex items-center justify-center bg-background">
+  <div className="min-h-screen w-full flex items-center justify-center bg-background">
     <div
       className="h-8 w-8 rounded-full border-2 border-muted border-t-primary animate-spin"
       role="status"
