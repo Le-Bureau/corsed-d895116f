@@ -92,6 +92,28 @@ const AdminBlogEditor = () => {
   const [topError, setTopError] = useState<string | null>(null);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
+  const [autoPublishedAt, setAutoPublishedAt] = useState(true);
+
+  // Helpers for datetime-local input
+  const toLocalDatetime = (iso: string | null): string => {
+    if (!iso) return "";
+    const d = new Date(iso);
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+  const fromLocalDatetime = (local: string): string | null => {
+    if (!local) return null;
+    const d = new Date(local);
+    if (isNaN(d.getTime())) return null;
+    return d.toISOString();
+  };
+
+  // On edit, derive autoPublishedAt from existing data
+  useEffect(() => {
+    if (existing) {
+      setAutoPublishedAt(!existing.publishedAt);
+    }
+  }, [existing]);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
