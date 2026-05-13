@@ -69,6 +69,7 @@ const emptyDefaults: BlogPostFormValues = {
   featured_on_home: false,
   meta_title: "",
   meta_description: "",
+  published_at: null,
 };
 
 const AdminBlogEditor = () => {
