@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { Pole } from "@/lib/poles";
 import AnimatedStatValue from "@/components/animations/AnimatedStatValue";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface Props {
   pole: Pole;
@@ -38,6 +39,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   const titleId = `pole-${pole.key}-title`;
   const hasLinkedSubServices = pole.subServices?.some((s) => s.slug);
   const reduced = useReducedMotion();
+  const { ref: contentRevealRef, isVisible: contentIsVisible } = useScrollReveal<HTMLDivElement>();
 
   const imageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -138,10 +140,10 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
         {/* Content */}
         <div className="lg:[direction:ltr] relative">
           <motion.div
+            ref={contentRevealRef}
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: "some" }}
+            animate={contentIsVisible ? "visible" : "hidden"}
             className="relative z-10 pl-8 border-l-2"
             style={{ borderColor: color }}
           >
