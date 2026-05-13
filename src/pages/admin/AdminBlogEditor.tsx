@@ -126,6 +126,7 @@ const AdminBlogEditor = () => {
         featured_on_home: existing.featuredOnHome,
         meta_title: existing.metaTitle ?? "",
         meta_description: existing.metaDescription ?? "",
+        published_at: existing.publishedAt,
       });
     }
   }, [existing, reset]);
