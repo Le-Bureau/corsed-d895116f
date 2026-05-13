@@ -146,6 +146,8 @@ const AdminBlogList = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <ImportArticleDialog open={importOpen} onOpenChange={setImportOpen} />
     </div>
   );
 };
