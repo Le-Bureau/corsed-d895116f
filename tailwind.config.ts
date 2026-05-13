@@ -20,10 +20,10 @@ export default {
         container: "1280px",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Geist", "Geist Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        fraunces: ["Fraunces", "Georgia", "Times New Roman", "serif"],
-        geist: ["Geist", "Geist Sans", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Inter", "Geist Fallback", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Geist", "Geist Sans", "Geist Fallback", "ui-sans-serif", "system-ui", "sans-serif"],
+        fraunces: ["Fraunces", "Fraunces Fallback", "Georgia", "Times New Roman", "serif"],
+        geist: ["Geist", "Geist Sans", "Geist Fallback", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       transitionTimingFunction: {
         "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
