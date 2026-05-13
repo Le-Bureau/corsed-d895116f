@@ -57,10 +57,19 @@ export function useHeroCarousel(): UseHeroCarousel {
   // Keyboard navigation
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      const target = e.target as HTMLElement | null;
+      const isTypingTarget =
+        target?.tagName === "INPUT" ||
+        target?.tagName === "TEXTAREA" ||
+        target?.tagName === "SELECT" ||
+        target?.isContentEditable;
+
+      if (isTypingTarget) return;
+
+      if (e.key === "ArrowRight") {
         e.preventDefault();
         goToNext();
-      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         goToPrev();
       }
