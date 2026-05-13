@@ -10,6 +10,7 @@ interface Props {
 }
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const ENTER_OFFSET = 36;
 
 const FadeInWhenVisible = ({ children, className, delay = 0, duration = 0.6 }: Props) => {
   const { ref, isVisible, reduced } = useScrollReveal<HTMLDivElement>();
@@ -19,7 +20,7 @@ const FadeInWhenVisible = ({ children, className, delay = 0, duration = 0.6 }: P
       ref={ref}
       className={className}
       initial={false}
-      animate={isVisible ? (reduced ? { opacity: 1 } : { opacity: 1, y: 0 }) : reduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
+      animate={isVisible ? (reduced ? { opacity: 1 } : { opacity: 1, y: 0 }) : reduced ? { opacity: 0 } : { opacity: 0, y: ENTER_OFFSET }}
       transition={{ duration, delay, ease: EASE }}
     >
       {children}
