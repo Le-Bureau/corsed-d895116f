@@ -57,6 +57,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
   const { pathname } = useLocation();
   const panelRef = useRef<HTMLDivElement>(null);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [openPole, setOpenPole] = useState<string | null>(null);
   const lenis = useLenis();
 
   // Close on route change
