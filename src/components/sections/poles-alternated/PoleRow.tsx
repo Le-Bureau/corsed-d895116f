@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { Pole } from "@/lib/poles";
 import AnimatedStatValue from "@/components/animations/AnimatedStatValue";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface Props {
   pole: Pole;
@@ -38,6 +39,8 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   const titleId = `pole-${pole.key}-title`;
   const hasLinkedSubServices = pole.subServices?.some((s) => s.slug);
   const reduced = useReducedMotion();
+  const { ref: contentRevealRef, isVisible: contentIsVisible } = useScrollReveal<HTMLDivElement>();
+  const { ref: imageRevealRef, isVisible: imageIsVisible } = useScrollReveal<HTMLDivElement>();
 
   const imageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -58,7 +61,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   };
 
   const itemVariants: Variants = {
-    hidden: reduced ? { opacity: 0 } : { opacity: 0, y: 20 },
+    hidden: reduced ? { opacity: 0 } : { opacity: 0, y: 36 },
     visible: reduced
       ? { opacity: 1, transition: { duration: 0.2 } }
       : { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
@@ -76,7 +79,13 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
         }`}
       >
         {/* Image */}
-        <div className="lg:[direction:ltr] relative">
+        <motion.div
+          ref={imageRevealRef}
+          initial={false}
+          animate={imageIsVisible ? (reduced ? { opacity: 1 } : { opacity: 1, y: 0 }) : reduced ? { opacity: 0 } : { opacity: 0, y: 36 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="lg:[direction:ltr] relative"
+        >
           <div
             ref={imageRef}
             className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-elevated shadow-soft-lg group transition-all duration-700 ease-out hover:scale-[1.01]"
@@ -133,15 +142,15 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
               CORSE DRONE · {pole.label.toUpperCase()}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Content */}
         <div className="lg:[direction:ltr] relative">
           <motion.div
+            ref={contentRevealRef}
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: "some" }}
+            animate={contentIsVisible ? "visible" : "hidden"}
             className="relative z-10 pl-8 border-l-2"
             style={{ borderColor: color }}
           >
