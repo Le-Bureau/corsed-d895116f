@@ -17,6 +17,8 @@ const toRow = (v: BlogPostFormValues) => ({
   featured_on_home: v.featured_on_home,
   meta_title: v.meta_title?.trim() ? v.meta_title : null,
   meta_description: v.meta_description?.trim() ? v.meta_description : null,
+  published_at:
+    v.published_at ?? (v.status === "published" ? new Date().toISOString() : null),
 });
 
 export const useCreateBlogPost = () => {
