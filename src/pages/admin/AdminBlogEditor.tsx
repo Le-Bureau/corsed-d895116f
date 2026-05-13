@@ -69,6 +69,7 @@ const emptyDefaults: BlogPostFormValues = {
   featured_on_home: false,
   meta_title: "",
   meta_description: "",
+  published_at: null,
 };
 
 const AdminBlogEditor = () => {
@@ -91,6 +92,28 @@ const AdminBlogEditor = () => {
   const [topError, setTopError] = useState<string | null>(null);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
+  const [autoPublishedAt, setAutoPublishedAt] = useState(true);
+
+  // Helpers for datetime-local input
+  const toLocalDatetime = (iso: string | null): string => {
+    if (!iso) return "";
+    const d = new Date(iso);
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+  const fromLocalDatetime = (local: string): string | null => {
+    if (!local) return null;
+    const d = new Date(local);
+    if (isNaN(d.getTime())) return null;
+    return d.toISOString();
+  };
+
+  // On edit, derive autoPublishedAt from existing data
+  useEffect(() => {
+    if (existing) {
+      setAutoPublishedAt(!existing.publishedAt);
+    }
+  }, [existing]);
 
   const form = useForm<BlogPostFormValues>({
     resolver: zodResolver(blogPostSchema),
@@ -125,6 +148,7 @@ const AdminBlogEditor = () => {
         featured_on_home: existing.featuredOnHome,
         meta_title: existing.metaTitle ?? "",
         meta_description: existing.metaDescription ?? "",
+        published_at: existing.publishedAt,
       });
     }
   }, [existing, reset]);
@@ -161,6 +185,7 @@ const AdminBlogEditor = () => {
       featured_on_home: parsed.featured_on_home,
       meta_title: parsed.meta_title ?? "",
       meta_description: parsed.meta_description ?? "",
+      published_at: null,
     });
     setImportBanner({ slugRegenerated });
     importAppliedRef.current = true;
@@ -428,6 +453,47 @@ const AdminBlogEditor = () => {
                 </div>
               )}
             />
+          </div>
+
+          {/* Date de publication */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label>Date de publication</Label>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">Auto</span>
+                <Switch
+                  checked={autoPublishedAt}
+                  onCheckedChange={(checked) => {
+                    setAutoPublishedAt(checked);
+                    if (checked) {
+                      setValue("published_at", null);
+                    } else {
+                      const existingDate = form.getValues("published_at");
+                      setValue("published_at", existingDate ?? new Date().toISOString());
+                    }
+                  }}
+                />
+              </div>
+            </div>
+            {!autoPublishedAt && (
+              <Controller
+                control={control}
+                name="published_at"
+                render={({ field }) => (
+                  <input
+                    type="datetime-local"
+                    value={toLocalDatetime(field.value ?? null)}
+                    onChange={(e) => field.onChange(fromLocalDatetime(e.target.value))}
+                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                  />
+                )}
+              />
+            )}
+            {autoPublishedAt && (
+              <p className="text-xs text-muted-foreground">
+                Fixée automatiquement lors de la publication.
+              </p>
+            )}
           </div>
 
           <div className="space-y-2">
