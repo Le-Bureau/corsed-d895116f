@@ -163,6 +163,7 @@ const AdminBlogEditor = () => {
       featured_on_home: parsed.featured_on_home,
       meta_title: parsed.meta_title ?? "",
       meta_description: parsed.meta_description ?? "",
+      published_at: null,
     });
     setImportBanner({ slugRegenerated });
     importAppliedRef.current = true;
