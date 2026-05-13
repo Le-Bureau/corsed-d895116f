@@ -139,13 +139,33 @@
   }
 }
 
+/* Fallback font metrics — minimize CLS during web font swap.
+   These local() fonts are aliased to closely match the metrics
+   of the real web fonts, so the layout barely shifts on swap. */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia');
+  size-adjust: 105.5%;
+  ascent-override: 90%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial');
+  size-adjust: 100.6%;
+  ascent-override: 95%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
 @layer base {
   * {
     border-color: var(--border);
   }
 
   html {
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', 'Geist Fallback', ui-sans-serif, system-ui, -apple-system, sans-serif;
   }
 
   body {
