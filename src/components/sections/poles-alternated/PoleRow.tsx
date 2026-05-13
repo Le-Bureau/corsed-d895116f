@@ -141,7 +141,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: true, amount: 0.15 }}
             className="relative z-10 pl-8 border-l-2"
             style={{ borderColor: color }}
           >
