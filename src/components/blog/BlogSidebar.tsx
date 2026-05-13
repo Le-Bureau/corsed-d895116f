@@ -38,6 +38,12 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
           <Link
             to="/blog"
             className={`category-item ${activeSlug === null ? "active" : ""}`}
+            onClick={() => {
+              const from = activeSlug ?? "all";
+              if (from !== "all") {
+                trackEvent(Events.CATEGORY_FILTER, { from, to: "all" });
+              }
+            }}
           >
             <span className="category-label">
               <span className="category-dot" style={{ background: "var(--blog-text)" }} />
@@ -50,6 +56,12 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
               key={c.id}
               to={`/blog?cat=${c.slug}`}
               className={`category-item ${activeSlug === c.slug ? "active" : ""}`}
+              onClick={() => {
+                const from = activeSlug ?? "all";
+                if (from !== c.slug) {
+                  trackEvent(Events.CATEGORY_FILTER, { from, to: c.slug });
+                }
+              }}
             >
               <span className="category-label">
                 <span className="category-dot" style={{ background: c.color }} />
