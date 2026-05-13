@@ -33,6 +33,7 @@ const AdminBlogList = () => {
   const [categoryId, setCategoryId] = useState("all");
   const [authorId, setAuthorId] = useState("all");
   const [toDelete, setToDelete] = useState<BlogPost | null>(null);
+  const [importOpen, setImportOpen] = useState(false);
 
   const counts = useMemo(() => {
     const drafts = posts?.filter((p) => p.status === "draft").length ?? 0;
