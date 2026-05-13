@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SEO from "@/components/seo/SEO";
 import BlogPostSEO from "@/components/seo/BlogPostSEO";
@@ -10,6 +10,7 @@ import BlogRelatedPosts from "@/components/blog/BlogRelatedPosts";
 import BlogPostSkeleton from "@/components/blog/skeletons/BlogPostSkeleton";
 import { useBlogPost } from "@/hooks/blog/useBlogPost";
 import { formatBlogDate } from "@/lib/blogHelpers";
+import { Events, trackEvent } from "@/lib/analytics";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -27,6 +28,41 @@ const BlogPost = () => {
       return () => clearTimeout(t);
     }
   }, [copied]);
+
+  // ARTICLE_VIEWED — fire once per mounted post
+  const viewedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!post) return;
+    if (viewedRef.current === post.id) return;
+    viewedRef.current = post.id;
+    trackEvent(Events.ARTICLE_VIEWED, {
+      slug: post.slug,
+      title: post.title.slice(0, 80),
+      category: post.category?.slug,
+      author: post.author?.initials,
+    });
+  }, [post]);
+
+  // ARTICLE_CTA_CLICKED — delegated listener on article body
+  const articleRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const root = articleRef.current;
+    if (!root || !post) return;
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.("a") as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      if (!href.startsWith("/")) return; // external, mailto, tel, hash
+      trackEvent(Events.ARTICLE_CTA_CLICKED, {
+        article_slug: post.slug,
+        to: href,
+      });
+    };
+    root.addEventListener("click", onClick);
+    return () => root.removeEventListener("click", onClick);
+  }, [post]);
 
   if (isLoading) return <BlogPostSkeleton />;
 
@@ -55,6 +91,7 @@ const BlogPost = () => {
   const author = post.author;
 
   const handleCopy = () => {
+    trackEvent(Events.ARTICLE_SHARED, { slug: post.slug, method: "copy_link" });
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(window.location.href);
       setCopied(true);
@@ -108,12 +145,13 @@ const BlogPost = () => {
               type="button"
               className="share-btn"
               aria-label="Partager sur LinkedIn"
-              onClick={() =>
+              onClick={() => {
+                trackEvent(Events.ARTICLE_SHARED, { slug: post.slug, method: "linkedin" });
                 window.open(
                   `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`,
                   "_blank",
-                )
-              }
+                );
+              }}
             >
               <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -123,12 +161,13 @@ const BlogPost = () => {
               type="button"
               className="share-btn"
               aria-label="Partager sur X"
-              onClick={() =>
+              onClick={() => {
+                trackEvent(Events.ARTICLE_SHARED, { slug: post.slug, method: "twitter" });
                 window.open(
                   `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`,
                   "_blank",
-                )
-              }
+                );
+              }}
             >
               <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -159,7 +198,9 @@ const BlogPost = () => {
 
       <div className="article-body-layout">
         <BlogTOC items={tocItems} />
-        <BlogContent markdown={post.contentMd} />
+        <div ref={articleRef}>
+          <BlogContent markdown={post.contentMd} />
+        </div>
       </div>
 
       <div className="article-body-layout">
@@ -170,7 +211,11 @@ const BlogPost = () => {
       </div>
 
       <BlogArticleCTA />
-      <BlogRelatedPosts currentPostId={post.id} categoryId={cat?.id ?? null} />
+      <BlogRelatedPosts
+        currentPostId={post.id}
+        currentSlug={post.slug}
+        categoryId={cat?.id ?? null}
+      />
     </div>
   );
 };

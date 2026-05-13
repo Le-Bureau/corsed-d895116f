@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import BlogCard from "./BlogCard";
 import { useBlogPosts } from "@/hooks/blog/useBlogPosts";
+import { Events, trackEvent } from "@/lib/analytics";
 
 interface Props {
   currentPostId: string;
+  currentSlug: string;
   categoryId: string | null;
 }
 
-const BlogRelatedPosts = ({ currentPostId, categoryId }: Props) => {
+const BlogRelatedPosts = ({ currentPostId, currentSlug, categoryId }: Props) => {
   const { data: posts } = useBlogPosts();
   const related = (posts ?? [])
     .filter((p) => p.id !== currentPostId && p.category?.id === categoryId)
@@ -28,7 +30,17 @@ const BlogRelatedPosts = ({ currentPostId, categoryId }: Props) => {
       </div>
       <div className="blog-grid-related">
         {related.map((p) => (
-          <BlogCard key={p.id} post={p} variant="related" />
+          <div
+            key={p.id}
+            onClickCapture={() =>
+              trackEvent(Events.RELATED_ARTICLE_CLICKED, {
+                from_slug: currentSlug,
+                to_slug: p.slug,
+              })
+            }
+          >
+            <BlogCard post={p} variant="related" />
+          </div>
         ))}
       </div>
     </section>

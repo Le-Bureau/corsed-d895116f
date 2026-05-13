@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Events, trackEvent } from "@/lib/analytics";
 import { Link, useSearchParams } from "react-router-dom";
 import BlogIndexSEO from "@/components/seo/BlogIndexSEO";
 import BlogSidebar from "@/components/blog/BlogSidebar";
@@ -14,6 +15,15 @@ const Blog = () => {
   const [params] = useSearchParams();
   const catSlug = params.get("cat") ?? undefined;
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const q = search.trim();
+    if (q.length < 3) return;
+    const t = setTimeout(() => {
+      trackEvent(Events.SEARCH_PERFORMED, { query_length: q.length });
+    }, 800);
+    return () => clearTimeout(t);
+  }, [search]);
 
   const { data: categories = [] } = useBlogCategories();
   const { data: counts = {}, total } = useBlogCategoryCounts();

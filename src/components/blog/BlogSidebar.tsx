@@ -1,6 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
+import { toast } from "sonner";
 import type { BlogCategory } from "@/types/blog";
+import { Events, trackEvent } from "@/lib/analytics";
 
 interface Props {
   categories: BlogCategory[];
@@ -36,6 +38,12 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
           <Link
             to="/blog"
             className={`category-item ${activeSlug === null ? "active" : ""}`}
+            onClick={() => {
+              const from = activeSlug ?? "all";
+              if (from !== "all") {
+                trackEvent(Events.CATEGORY_FILTER, { from, to: "all" });
+              }
+            }}
           >
             <span className="category-label">
               <span className="category-dot" style={{ background: "var(--blog-text)" }} />
@@ -48,6 +56,12 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
               key={c.id}
               to={`/blog?cat=${c.slug}`}
               className={`category-item ${activeSlug === c.slug ? "active" : ""}`}
+              onClick={() => {
+                const from = activeSlug ?? "all";
+                if (from !== c.slug) {
+                  trackEvent(Events.CATEGORY_FILTER, { from, to: c.slug });
+                }
+              }}
             >
               <span className="category-label">
                 <span className="category-dot" style={{ background: c.color }} />
@@ -68,7 +82,14 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
           </svg>
           Flux RSS
         </a>
-        <a href="#" aria-disabled>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            trackEvent(Events.NEWSLETTER_INTEREST, { source: "sidebar" });
+            toast("Bientôt disponible — restez à l'écoute");
+          }}
+        >
           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
             <polyline points="22,6 12,13 2,6" />
