@@ -15,23 +15,24 @@ const SectionShell = ({ children }: { children: React.ReactNode }) => (
     className="blog-scope py-20 md:py-28 bg-[#FCFAF7]"
   >
     <div className="max-w-[1200px] mx-auto px-5 sm:px-8">
-      <StaggerChildren staggerDelay={0.08} className="text-center mb-14 md:mb-16">
+      <StaggerChildren staggerDelay={0.08} className="mb-14 md:mb-16 max-w-[880px]">
         <motion.span
           variants={fadeUpItem}
-          className="inline-block font-body text-[11px] font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-5"
+          className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-6"
         >
+          <span className="w-1.5 h-1.5 rounded-full bg-logo-base shadow-[0_0_12px_rgba(168,192,212,0.5)]" />
           Blog
         </motion.span>
         <motion.h2
           variants={fadeUpItem}
           id="latest-articles-title"
-          className="font-display font-medium text-[clamp(34px,4.5vw,52px)] leading-[1.05] tracking-[-0.02em] text-foreground mb-5"
+          className="font-display font-semibold text-text-primary text-[clamp(40px,5.2vw,68px)] leading-[1.05] tracking-[-0.035em] mb-6"
         >
-          Le <em className="italic text-primary font-normal">journal</em> de bord
+          Le <span className="italic text-logo-base-deep">journal</span> de bord.
         </motion.h2>
         <motion.p
           variants={fadeUpItem}
-          className="font-body text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+          className="text-lg leading-relaxed text-text-muted max-w-[620px]"
         >
           Retours de chantiers, expertises drone et actualités du secteur.
         </motion.p>
