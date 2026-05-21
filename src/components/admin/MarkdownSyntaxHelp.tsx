@@ -14,6 +14,7 @@ import {
   CALLOUT_SNIPPET,
   FIGURE_SNIPPET,
   FIGURE_WIDE_SNIPPET,
+  IMAGE_GALLERY_SNIPPET,
   IMAGE_GRID_SNIPPET,
 } from "@/lib/admin/markdownSnippets";
 
@@ -21,6 +22,10 @@ const PLACEHOLDER_IMG_1 =
   "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900&q=80";
 const PLACEHOLDER_IMG_2 =
   "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900&q=80";
+const PLACEHOLDER_IMG_3 =
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&q=80";
+const PLACEHOLDER_IMG_4 =
+  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80";
 
 const FIGURE_DEMO = FIGURE_SNIPPET.replace("https://", PLACEHOLDER_IMG_1).replace(
   "Description de l'image",
@@ -38,6 +43,13 @@ const IMAGE_GRID_DEMO = IMAGE_GRID_SNIPPET.replace(
   .replace('src=""', `src="${PLACEHOLDER_IMG_2}"`)
   .replace("Image 1", "Avant")
   .replace("Image 2", "Après");
+
+const IMAGE_GALLERY_DEMO = `<div class="image-gallery">
+  <figure><img src="${PLACEHOLDER_IMG_1}" alt="Toiture 1" /><figcaption>Vue d'ensemble</figcaption></figure>
+  <figure><img src="${PLACEHOLDER_IMG_2}" alt="Toiture 2" /><figcaption>Détail nord</figcaption></figure>
+  <figure><img src="${PLACEHOLDER_IMG_3}" alt="Toiture 3" /><figcaption>Détail sud</figcaption></figure>
+  <figure><img src="${PLACEHOLDER_IMG_4}" alt="Toiture 4" /><figcaption>Zone à reprendre</figcaption></figure>
+</div>`;
 
 const CALLOUT_DEMO = CALLOUT_SNIPPET.replace(
   "Texte du callout.",
@@ -278,6 +290,17 @@ const MarkdownSyntaxHelp = () => {
                 </p>
                 <Row source={IMAGE_GRID_SNIPPET}>
                   <BlogContent markdown={IMAGE_GRID_DEMO} />
+                </Row>
+              </div>
+
+              <div>
+                <h3 className="text-sm font-semibold mb-2">Galerie d'images</h3>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Plusieurs images en grille (3 ou plus). Les visiteurs cliquent pour les
+                  voir en grand dans un agrandisseur.
+                </p>
+                <Row source={IMAGE_GALLERY_SNIPPET}>
+                  <BlogContent markdown={IMAGE_GALLERY_DEMO} />
                 </Row>
               </div>
             </div>

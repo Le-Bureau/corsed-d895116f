@@ -9,6 +9,7 @@ import {
   Quote,
   Code,
   Image as ImageIconLucide,
+  Images,
   LayoutGrid,
   Info,
 } from "lucide-react";
@@ -16,8 +17,9 @@ import { applySnippet, type SnippetKind } from "@/lib/admin/markdownSnippets";
 import { cn } from "@/lib/utils";
 import InsertImageDialog from "@/components/admin/InsertImageDialog";
 import InsertImageGridDialog from "@/components/admin/InsertImageGridDialog";
+import InsertGalleryDialog from "@/components/admin/InsertGalleryDialog";
 
-type Action = SnippetKind | "image" | "imageGridDialog";
+type Action = SnippetKind | "image" | "imageGridDialog" | "galleryDialog";
 
 interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
@@ -43,12 +45,14 @@ const tools: ToolDef[] = [
   { action: "code", label: "Code", Icon: Code },
   { action: "image", label: "Image", Icon: ImageIconLucide },
   { action: "imageGridDialog", label: "Image en grille", Icon: LayoutGrid },
+  { action: "galleryDialog", label: "Galerie d'images", Icon: Images },
   { action: "callout", label: "Encadré (callout)", Icon: Info },
 ];
 
 const MarkdownToolbar = ({ textareaRef, value, onChange, postId }: Props) => {
   const [imageOpen, setImageOpen] = useState(false);
   const [gridOpen, setGridOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
   const insertSnippetKind = (kind: SnippetKind) => {
     const ta = textareaRef.current;
@@ -92,6 +96,10 @@ const MarkdownToolbar = ({ textareaRef, value, onChange, postId }: Props) => {
       setGridOpen(true);
       return;
     }
+    if (action === "galleryDialog") {
+      setGalleryOpen(true);
+      return;
+    }
     insertSnippetKind(action);
   };
 
@@ -128,6 +136,12 @@ const MarkdownToolbar = ({ textareaRef, value, onChange, postId }: Props) => {
       <InsertImageGridDialog
         open={gridOpen}
         onOpenChange={setGridOpen}
+        onInsert={insertRawBlock}
+        postId={postId}
+      />
+      <InsertGalleryDialog
+        open={galleryOpen}
+        onOpenChange={setGalleryOpen}
         onInsert={insertRawBlock}
         postId={postId}
       />
