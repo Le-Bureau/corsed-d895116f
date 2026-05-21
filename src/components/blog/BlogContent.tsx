@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { isValidElement, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import rehypeSlug from "rehype-slug";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import type { TocItem } from "./BlogTOC";
@@ -40,8 +39,29 @@ interface Slide {
   description?: string;
 }
 
+const getNodeText = (node: ReactNode): string => {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(getNodeText).join("");
+  if (isValidElement(node)) return getNodeText(node.props.children);
+  return "";
+};
+
 const BlogContent = ({ markdown }: Props) => {
-  const components = useMemo(() => ({}), []);
+  const components = useMemo(
+    () => ({
+      h2: ({ children, ...props }: any) => (
+        <h2 {...props} id={slugify(getNodeText(children))}>
+          {children}
+        </h2>
+      ),
+      h3: ({ children, ...props }: any) => (
+        <h3 {...props} id={slugify(getNodeText(children))}>
+          {children}
+        </h3>
+      ),
+    }),
+    [],
+  );
   const rootRef = useRef<HTMLElement>(null);
 
   const [lightbox, setLightbox] = useState<{
@@ -94,7 +114,7 @@ const BlogContent = ({ markdown }: Props) => {
       <article ref={rootRef} className="article-content">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw, rehypeSlug]}
+          rehypePlugins={[rehypeRaw]}
           components={components}
         >
           {markdown}
