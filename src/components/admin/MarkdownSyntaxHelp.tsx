@@ -292,6 +292,17 @@ const MarkdownSyntaxHelp = () => {
                   <BlogContent markdown={IMAGE_GRID_DEMO} />
                 </Row>
               </div>
+
+              <div>
+                <h3 className="text-sm font-semibold mb-2">Galerie d'images</h3>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Plusieurs images en grille (3 ou plus). Les visiteurs cliquent pour les
+                  voir en grand dans un agrandisseur.
+                </p>
+                <Row source={IMAGE_GALLERY_SNIPPET}>
+                  <BlogContent markdown={IMAGE_GALLERY_DEMO} />
+                </Row>
+              </div>
             </div>
           </Section>
 
