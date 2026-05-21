@@ -96,6 +96,10 @@ const MarkdownToolbar = ({ textareaRef, value, onChange, postId }: Props) => {
       setGridOpen(true);
       return;
     }
+    if (action === "galleryDialog") {
+      setGalleryOpen(true);
+      return;
+    }
     insertSnippetKind(action);
   };
 
