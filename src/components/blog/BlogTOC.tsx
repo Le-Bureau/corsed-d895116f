@@ -19,23 +19,51 @@ const BlogTOC = ({ items }: Props) => {
   useEffect(() => {
     if (items.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible[0]) setActiveId(visible[0].target.id);
-      },
-      { rootMargin: "-100px 0px -60% 0px", threshold: 0 },
-    );
+    const elements = items
+      .map(({ id }) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
-    items.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
+    if (elements.length === 0) return;
+
+    const computeActive = () => {
+      const offset = 80;
+      let current: string | null = null;
+      for (const el of elements) {
+        const top = el.getBoundingClientRect().top;
+        if (top - offset <= 0) {
+          current = el.id;
+        } else {
+          break;
+        }
+      }
+      if (!current && elements[0]) current = elements[0].id;
+      setActiveId(current);
+    };
+
+    computeActive();
+
+    const observer = new IntersectionObserver(computeActive, {
+      rootMargin: "-80px 0px -66% 0px",
+      threshold: 0,
     });
+    elements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, [items]);
+    window.addEventListener("scroll", computeActive, { passive: true });
+    window.addEventListener("resize", computeActive);
+
+    let unsubLenis: (() => void) | undefined;
+    if (lenis) {
+      lenis.on("scroll", computeActive);
+      unsubLenis = () => lenis.off("scroll", computeActive);
+    }
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", computeActive);
+      window.removeEventListener("resize", computeActive);
+      unsubLenis?.();
+    };
+  }, [items, lenis]);
 
   useEffect(() => {
     const compute = () => {
