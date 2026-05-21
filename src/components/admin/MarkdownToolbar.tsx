@@ -19,7 +19,7 @@ import InsertImageDialog from "@/components/admin/InsertImageDialog";
 import InsertImageGridDialog from "@/components/admin/InsertImageGridDialog";
 import InsertGalleryDialog from "@/components/admin/InsertGalleryDialog";
 
-type Action = SnippetKind | "image" | "imageGridDialog";
+type Action = SnippetKind | "image" | "imageGridDialog" | "galleryDialog";
 
 interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
