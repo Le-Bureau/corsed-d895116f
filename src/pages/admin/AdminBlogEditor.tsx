@@ -77,7 +77,11 @@ const AdminBlogEditor = () => {
   const isEdit = !!id;
   const navigate = useNavigate();
   const location = useLocation();
-  const importedPayload = (location.state as { imported?: ValidationOk } | null)?.imported ?? null;
+  // Capture the imported payload ONCE at mount. Subsequent renders (after we
+  // clear router state) won't lose it, and re-running effects can't fire twice.
+  const [importedPayload] = useState<ValidationOk | null>(
+    () => (location.state as { imported?: ValidationOk } | null)?.imported ?? null,
+  );
 
   const { data: existing, isLoading: loadingPost } = useAdminBlogPost(id);
   const { data: authors } = useBlogAuthors();
@@ -94,6 +98,14 @@ const AdminBlogEditor = () => {
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
   const [autoPublishedAt, setAutoPublishedAt] = useState(true);
+
+  // Clear router state once on mount so a browser refresh won't re-apply import.
+  useEffect(() => {
+    if (importedPayload && location.state && (location.state as { imported?: unknown }).imported) {
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Helpers for datetime-local input
   const toLocalDatetime = (iso: string | null): string => {
