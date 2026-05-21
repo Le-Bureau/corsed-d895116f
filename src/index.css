@@ -620,6 +620,7 @@ html.lenis body {
   letter-spacing: 0.06em;
   color: white;
   align-self: flex-start;
+  white-space: nowrap;
 }
 .blog-scope .pill-lg {
   padding: 5px 13px;
