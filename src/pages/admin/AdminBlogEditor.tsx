@@ -45,7 +45,7 @@ import SeoPreview from "@/components/admin/SeoPreview";
 import UnsavedChangesPrompt from "@/components/admin/UnsavedChangesPrompt";
 
 import { blogPostSchema, type BlogPostFormValues } from "@/lib/admin/blogPostSchema";
-import { slugify } from "@/lib/blogHelpers";
+import { slugify, formatRelativeTime } from "@/lib/blogHelpers";
 import { cn } from "@/lib/utils";
 
 import { useBlogAuthors } from "@/hooks/blog/useBlogAuthors";
@@ -55,6 +55,7 @@ import { useCreateBlogPost } from "@/hooks/admin/useCreateBlogPost";
 import { useUpdateBlogPost } from "@/hooks/admin/useUpdateBlogPost";
 import { useDeleteBlogPost } from "@/hooks/admin/useDeleteBlogPost";
 import { slugExists } from "@/hooks/admin/useSlugExists";
+import { useDraftPersistence } from "@/hooks/admin/useDraftPersistence";
 
 const emptyDefaults: BlogPostFormValues = {
   title: "",
@@ -98,6 +99,8 @@ const AdminBlogEditor = () => {
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
   const [autoPublishedAt, setAutoPublishedAt] = useState(true);
+  const [formInitialized, setFormInitialized] = useState(false);
+  const [draftBannerDismissed, setDraftBannerDismissed] = useState(false);
 
   // Clear router state once on mount so a browser refresh won't re-apply import.
   useEffect(() => {
