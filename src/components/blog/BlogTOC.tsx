@@ -26,18 +26,15 @@ const BlogTOC = ({ items }: Props) => {
     if (elements.length === 0) return;
 
     const computeActive = () => {
-      const offset = 80;
-      let current: string | null = null;
-      for (const el of elements) {
-        const top = el.getBoundingClientRect().top;
-        if (top - offset <= 0) {
-          current = el.id;
-        } else {
-          break;
-        }
-      }
-      if (!current && elements[0]) current = elements[0].id;
-      setActiveId(current);
+      const headerOffset = 88;
+      const activationLine = Math.min(window.innerHeight * 0.36, 360);
+      const visibleSection = elements.find((el, index) => {
+        const currentTop = el.getBoundingClientRect().top;
+        const nextTop = elements[index + 1]?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+        return currentTop <= activationLine && nextTop > headerOffset;
+      });
+
+      setActiveId(visibleSection?.id ?? elements[0].id);
     };
 
     computeActive();
