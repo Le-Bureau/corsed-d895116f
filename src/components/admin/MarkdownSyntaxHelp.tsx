@@ -14,6 +14,7 @@ import {
   CALLOUT_SNIPPET,
   FIGURE_SNIPPET,
   FIGURE_WIDE_SNIPPET,
+  IMAGE_GALLERY_SNIPPET,
   IMAGE_GRID_SNIPPET,
 } from "@/lib/admin/markdownSnippets";
 
