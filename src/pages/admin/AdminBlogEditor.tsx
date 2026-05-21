@@ -359,6 +359,23 @@ const AdminBlogEditor = () => {
         </h1>
       </div>
 
+      {showDraftBanner && recoveredDraft && (
+        <div className="rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3 flex-wrap">
+          <p>
+            <span className="font-medium">Brouillon non sauvegardé.</span>{" "}
+            Une version locale existe pour cet article (modifiée {formatRelativeTime(recoveredDraft.savedAt)}).
+          </p>
+          <div className="flex items-center gap-2">
+            <Button type="button" size="sm" onClick={restoreDraft}>
+              Restaurer le brouillon
+            </Button>
+            <Button type="button" size="sm" variant="outline" onClick={ignoreDraft}>
+              Ignorer
+            </Button>
+          </div>
+        </div>
+      )}
+
       {importBanner && (
         <div className="rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3">
           <p>
