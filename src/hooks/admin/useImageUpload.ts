@@ -2,7 +2,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Options {
-  folder: "covers" | "heroes" | "inline-images" | "avatars";
+  folder: "covers" | "heroes" | "inline-images" | "avatars" | "gallery-images";
   postId?: string;
 }
 
