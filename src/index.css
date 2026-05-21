@@ -1178,6 +1178,39 @@ html.lenis body {
   background: var(--current-cat);
   flex-shrink: 0;
 }
+.blog-scope .article-content .image-gallery {
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.blog-scope .article-content .image-gallery figure {
+  margin: 0;
+  cursor: zoom-in;
+}
+.blog-scope .article-content .image-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+.blog-scope .article-content .image-gallery figure:hover img {
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.25);
+}
+.blog-scope .article-content .image-gallery figcaption {
+  margin-top: 6px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--blog-text-muted);
+  text-align: left;
+}
+@media (max-width: 1023px) {
+  .blog-scope .article-content .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
 .blog-scope .article-content .callout {
   margin: 36px 0;
   padding: 20px 24px;
