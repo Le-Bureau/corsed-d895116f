@@ -293,9 +293,11 @@ const AdminBlogEditor = () => {
           toast.success("Modifications enregistrées");
         }
         reset(finalValues, { keepValues: true });
+        clearDraft();
       } else {
         await createMut.mutateAsync(finalValues);
         toast.success(finalValues.status === "published" ? "Article publié" : "Article créé");
+        clearDraft();
         navigate("/admin/blog");
       }
     } catch (e) {
@@ -313,6 +315,7 @@ const AdminBlogEditor = () => {
   const handleDelete = async () => {
     if (!id || !existing) return;
     try {
+      clearDraft();
       await deleteMut.mutateAsync({ id, slug: existing.slug });
       toast.success("Article supprimé");
       navigate("/admin/blog");
