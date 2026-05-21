@@ -22,6 +22,10 @@ const PLACEHOLDER_IMG_1 =
   "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900&q=80";
 const PLACEHOLDER_IMG_2 =
   "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900&q=80";
+const PLACEHOLDER_IMG_3 =
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900&q=80";
+const PLACEHOLDER_IMG_4 =
+  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80";
 
 const FIGURE_DEMO = FIGURE_SNIPPET.replace("https://", PLACEHOLDER_IMG_1).replace(
   "Description de l'image",
