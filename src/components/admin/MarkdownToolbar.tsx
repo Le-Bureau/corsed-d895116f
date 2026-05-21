@@ -9,6 +9,7 @@ import {
   Quote,
   Code,
   Image as ImageIconLucide,
+  Images,
   LayoutGrid,
   Info,
 } from "lucide-react";
@@ -16,6 +17,7 @@ import { applySnippet, type SnippetKind } from "@/lib/admin/markdownSnippets";
 import { cn } from "@/lib/utils";
 import InsertImageDialog from "@/components/admin/InsertImageDialog";
 import InsertImageGridDialog from "@/components/admin/InsertImageGridDialog";
+import InsertGalleryDialog from "@/components/admin/InsertGalleryDialog";
 
 type Action = SnippetKind | "image" | "imageGridDialog";
 
