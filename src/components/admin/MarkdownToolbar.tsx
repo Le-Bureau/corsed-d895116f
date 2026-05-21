@@ -139,6 +139,12 @@ const MarkdownToolbar = ({ textareaRef, value, onChange, postId }: Props) => {
         onInsert={insertRawBlock}
         postId={postId}
       />
+      <InsertGalleryDialog
+        open={galleryOpen}
+        onOpenChange={setGalleryOpen}
+        onInsert={insertRawBlock}
+        postId={postId}
+      />
     </>
   );
 };
