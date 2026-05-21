@@ -132,26 +132,27 @@ const AdminBlogEditor = () => {
     formState: { errors, isDirty, isSubmitting },
   } = form;
 
-  // Hydrate form on edit
+  // Hydrate form on edit (once per post.id)
   useEffect(() => {
-    if (existing) {
-      slugManuallyEditedRef.current = true; // existing slug is "manual"
-      reset({
-        title: existing.title,
-        slug: existing.slug,
-        excerpt: existing.excerpt,
-        content_md: existing.contentMd,
-        cover_image_url: existing.coverImageUrl,
-        hero_image_url: existing.heroImageUrl,
-        author_id: existing.author?.id ?? "",
-        category_id: existing.category?.id ?? "",
-        status: existing.status,
-        featured_on_home: existing.featuredOnHome,
-        meta_title: existing.metaTitle ?? "",
-        meta_description: existing.metaDescription ?? "",
-        published_at: existing.publishedAt,
-      });
-    }
+    if (!existing) return;
+    if (existing.id === initializedForPostIdRef.current) return;
+    slugManuallyEditedRef.current = true; // existing slug is "manual"
+    reset({
+      title: existing.title,
+      slug: existing.slug,
+      excerpt: existing.excerpt,
+      content_md: existing.contentMd,
+      cover_image_url: existing.coverImageUrl,
+      hero_image_url: existing.heroImageUrl,
+      author_id: existing.author?.id ?? "",
+      category_id: existing.category?.id ?? "",
+      status: existing.status,
+      featured_on_home: existing.featuredOnHome,
+      meta_title: existing.metaTitle ?? "",
+      meta_description: existing.metaDescription ?? "",
+      published_at: existing.publishedAt,
+    });
+    initializedForPostIdRef.current = existing.id;
   }, [existing, reset]);
 
   // Default author/category once loaded for create mode
