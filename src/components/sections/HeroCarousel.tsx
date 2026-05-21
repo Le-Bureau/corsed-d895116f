@@ -170,7 +170,7 @@ const HeroCarousel = () => {
           Mirrors HeroSlideContent's full layout (eyebrow + title + pitch + mb-12 + CTAs)
           with invisible spacers so flex items-center aligns the title slot
           exactly with HeroSlideContent's title slot. */}
-      <div className="absolute inset-0 z-20 flex items-center pointer-events-none max-md:items-end max-md:pb-[18vh]"
+      <div className="absolute inset-0 z-20 flex items-center pointer-events-none max-md:items-end max-md:pb-[18vh]">
         <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)]">
           <div className="w-full max-w-[780px]">
             {/* Pole pill eyebrow — temporairement masquée (à réactiver en retirant `hidden`
