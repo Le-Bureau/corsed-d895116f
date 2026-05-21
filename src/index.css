@@ -1430,6 +1430,7 @@ html.lenis body {
   .blog-scope .article-content h3 { font-size: 19px; }
   .blog-scope .article-content figure.wide { margin-left: 0; margin-right: 0; }
   .blog-scope .article-content .image-grid { grid-template-columns: 1fr; gap: 16px; }
+  .blog-scope .article-content .image-gallery { grid-template-columns: 1fr; gap: 8px; }
   .blog-scope .related { padding: 0 20px; }
   .blog-scope .blog-cta { margin: 0 20px 56px; padding: 40px 28px; }
   .blog-scope .share-row {
