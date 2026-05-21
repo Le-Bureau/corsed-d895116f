@@ -45,7 +45,7 @@ import SeoPreview from "@/components/admin/SeoPreview";
 import UnsavedChangesPrompt from "@/components/admin/UnsavedChangesPrompt";
 
 import { blogPostSchema, type BlogPostFormValues } from "@/lib/admin/blogPostSchema";
-import { slugify } from "@/lib/blogHelpers";
+import { slugify, formatRelativeTime } from "@/lib/blogHelpers";
 import { cn } from "@/lib/utils";
 
 import { useBlogAuthors } from "@/hooks/blog/useBlogAuthors";
@@ -55,6 +55,7 @@ import { useCreateBlogPost } from "@/hooks/admin/useCreateBlogPost";
 import { useUpdateBlogPost } from "@/hooks/admin/useUpdateBlogPost";
 import { useDeleteBlogPost } from "@/hooks/admin/useDeleteBlogPost";
 import { slugExists } from "@/hooks/admin/useSlugExists";
+import { useDraftPersistence } from "@/hooks/admin/useDraftPersistence";
 
 const emptyDefaults: BlogPostFormValues = {
   title: "",
@@ -98,6 +99,8 @@ const AdminBlogEditor = () => {
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
   const [autoPublishedAt, setAutoPublishedAt] = useState(true);
+  const [formInitialized, setFormInitialized] = useState(false);
+  const [draftBannerDismissed, setDraftBannerDismissed] = useState(false);
 
   // Clear router state once on mount so a browser refresh won't re-apply import.
   useEffect(() => {
@@ -165,6 +168,7 @@ const AdminBlogEditor = () => {
       published_at: existing.publishedAt,
     });
     initializedForPostIdRef.current = existing.id;
+    setFormInitialized(true);
   }, [existing, reset]);
 
   // Default author/category once loaded for create mode
@@ -203,7 +207,40 @@ const AdminBlogEditor = () => {
     });
     setImportBanner({ slugRegenerated });
     importAppliedRef.current = true;
+    setFormInitialized(true);
   }, [importedPayload, isEdit, reset]);
+
+  // Create mode without import: mark initialized immediately
+  useEffect(() => {
+    if (isEdit) return;
+    if (importedPayload) return;
+    setFormInitialized(true);
+  }, [isEdit, importedPayload]);
+
+  // Live form values for draft persistence
+  const watchedValues = watch();
+  const postKey = id ?? "new";
+  const { recoveredDraft, clearDraft } = useDraftPersistence<BlogPostFormValues>(
+    postKey,
+    watchedValues,
+    formInitialized,
+  );
+
+  const showDraftBanner =
+    !!recoveredDraft &&
+    formInitialized &&
+    !draftBannerDismissed &&
+    JSON.stringify(recoveredDraft.values) !== JSON.stringify(watchedValues);
+
+  const restoreDraft = () => {
+    if (!recoveredDraft) return;
+    reset(recoveredDraft.values);
+    setDraftBannerDismissed(true);
+  };
+  const ignoreDraft = () => {
+    clearDraft();
+    setDraftBannerDismissed(true);
+  };
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
@@ -256,9 +293,11 @@ const AdminBlogEditor = () => {
           toast.success("Modifications enregistrées");
         }
         reset(finalValues, { keepValues: true });
+        clearDraft();
       } else {
         await createMut.mutateAsync(finalValues);
         toast.success(finalValues.status === "published" ? "Article publié" : "Article créé");
+        clearDraft();
         navigate("/admin/blog");
       }
     } catch (e) {
@@ -276,6 +315,7 @@ const AdminBlogEditor = () => {
   const handleDelete = async () => {
     if (!id || !existing) return;
     try {
+      clearDraft();
       await deleteMut.mutateAsync({ id, slug: existing.slug });
       toast.success("Article supprimé");
       navigate("/admin/blog");
@@ -318,6 +358,23 @@ const AdminBlogEditor = () => {
           {isEdit ? "Modifier l'article" : "Nouvel article"}
         </h1>
       </div>
+
+      {showDraftBanner && recoveredDraft && (
+        <div className="rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3 flex-wrap">
+          <p>
+            <span className="font-medium">Brouillon non sauvegardé.</span>{" "}
+            Une version locale existe pour cet article (modifiée {formatRelativeTime(recoveredDraft.savedAt)}).
+          </p>
+          <div className="flex items-center gap-2">
+            <Button type="button" size="sm" onClick={restoreDraft}>
+              Restaurer le brouillon
+            </Button>
+            <Button type="button" size="sm" variant="outline" onClick={ignoreDraft}>
+              Ignorer
+            </Button>
+          </div>
+        </div>
+      )}
 
       {importBanner && (
         <div className="rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3">
