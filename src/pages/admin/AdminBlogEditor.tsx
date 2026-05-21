@@ -89,6 +89,7 @@ const AdminBlogEditor = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const slugManuallyEditedRef = useRef(false);
   const importAppliedRef = useRef(false);
+  const initializedForPostIdRef = useRef<string | null>(null);
   const [topError, setTopError] = useState<string | null>(null);
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
