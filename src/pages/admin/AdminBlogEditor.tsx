@@ -168,6 +168,7 @@ const AdminBlogEditor = () => {
       published_at: existing.publishedAt,
     });
     initializedForPostIdRef.current = existing.id;
+    setFormInitialized(true);
   }, [existing, reset]);
 
   // Default author/category once loaded for create mode
@@ -206,7 +207,40 @@ const AdminBlogEditor = () => {
     });
     setImportBanner({ slugRegenerated });
     importAppliedRef.current = true;
+    setFormInitialized(true);
   }, [importedPayload, isEdit, reset]);
+
+  // Create mode without import: mark initialized immediately
+  useEffect(() => {
+    if (isEdit) return;
+    if (importedPayload) return;
+    setFormInitialized(true);
+  }, [isEdit, importedPayload]);
+
+  // Live form values for draft persistence
+  const watchedValues = watch();
+  const postKey = id ?? "new";
+  const { recoveredDraft, clearDraft } = useDraftPersistence<BlogPostFormValues>(
+    postKey,
+    watchedValues,
+    formInitialized,
+  );
+
+  const showDraftBanner =
+    !!recoveredDraft &&
+    formInitialized &&
+    !draftBannerDismissed &&
+    JSON.stringify(recoveredDraft.values) !== JSON.stringify(watchedValues);
+
+  const restoreDraft = () => {
+    if (!recoveredDraft) return;
+    reset(recoveredDraft.values);
+    setDraftBannerDismissed(true);
+  };
+  const ignoreDraft = () => {
+    clearDraft();
+    setDraftBannerDismissed(true);
+  };
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
