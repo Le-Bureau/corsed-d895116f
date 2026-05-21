@@ -203,9 +203,7 @@ const AdminBlogEditor = () => {
     });
     setImportBanner({ slugRegenerated });
     importAppliedRef.current = true;
-    // clear router state to prevent re-application on reload
-    navigate(location.pathname, { replace: true, state: {} });
-  }, [importedPayload, isEdit, reset, navigate, location.pathname]);
+  }, [importedPayload, isEdit, reset]);
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
