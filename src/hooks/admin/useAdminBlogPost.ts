@@ -7,6 +7,8 @@ export const useAdminBlogPost = (id: string | undefined) =>
   useQuery<BlogPost | null>({
     queryKey: ["blog", "post", "id", id],
     enabled: !!id,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
