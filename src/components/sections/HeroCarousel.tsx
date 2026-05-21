@@ -170,7 +170,7 @@ const HeroCarousel = () => {
           Mirrors HeroSlideContent's full layout (eyebrow + title + pitch + mb-12 + CTAs)
           with invisible spacers so flex items-center aligns the title slot
           exactly with HeroSlideContent's title slot. */}
-      <div className="absolute inset-0 z-20 flex items-center pointer-events-none">
+      <div className="absolute inset-0 z-20 flex items-center pointer-events-none max-md:items-end max-md:pb-[18vh]"
         <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)]">
           <div className="w-full max-w-[780px]">
             {/* Pole pill eyebrow — temporairement masquée (à réactiver en retirant `hidden`
@@ -305,7 +305,7 @@ const HeroCarousel = () => {
                 Mobile: subtitle (~5 lines × 28px ≈ 8.75rem) + mt-4 (1rem) + mb-12 (3rem)
                 + CTAs stacked (2 × ~3.4rem + gap 0.75rem ≈ 7.5rem).
                 md+: subtitle (~3 lines ≈ 5.25rem) + mb-12 (3rem) + CTAs row (≈ 3.125rem). */}
-            <div aria-hidden="true" className="md:hidden" style={{ height: "calc(8.75rem + 1rem + 3rem + 7.5rem)" }} />
+            <div aria-hidden="true" className="md:hidden" style={{ height: "7.5rem" }} />
             <div aria-hidden="true" className="hidden md:block" style={{ height: "calc(5.25rem + 3rem + 3.125rem)" }} />
           </div>
         </div>
