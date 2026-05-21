@@ -44,6 +44,13 @@ const IMAGE_GRID_DEMO = IMAGE_GRID_SNIPPET.replace(
   .replace("Image 1", "Avant")
   .replace("Image 2", "Après");
 
+const IMAGE_GALLERY_DEMO = `<div class="image-gallery">
+  <figure><img src="${PLACEHOLDER_IMG_1}" alt="Toiture 1" /><figcaption>Vue d'ensemble</figcaption></figure>
+  <figure><img src="${PLACEHOLDER_IMG_2}" alt="Toiture 2" /><figcaption>Détail nord</figcaption></figure>
+  <figure><img src="${PLACEHOLDER_IMG_3}" alt="Toiture 3" /><figcaption>Détail sud</figcaption></figure>
+  <figure><img src="${PLACEHOLDER_IMG_4}" alt="Toiture 4" /><figcaption>Zone à reprendre</figcaption></figure>
+</div>`;
+
 const CALLOUT_DEMO = CALLOUT_SNIPPET.replace(
   "Texte du callout.",
   "Cette mission a nécessité une autorisation préfectorale spécifique.",
