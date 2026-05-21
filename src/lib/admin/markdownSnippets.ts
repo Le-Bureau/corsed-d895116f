@@ -96,6 +96,21 @@ export const IMAGE_GRID_SNIPPET = `<div class="image-grid">
   </figure>
 </div>`;
 
+export const IMAGE_GALLERY_SNIPPET = `<div class="image-gallery">
+  <figure>
+    <img src="https://" alt="Image 1" />
+    <figcaption>Légende 1</figcaption>
+  </figure>
+  <figure>
+    <img src="https://" alt="Image 2" />
+    <figcaption>Légende 2</figcaption>
+  </figure>
+  <figure>
+    <img src="https://" alt="Image 3" />
+    <figcaption>Légende 3</figcaption>
+  </figure>
+</div>`;
+
 export const CALLOUT_SNIPPET = `<div class="callout">
   <div class="callout__icon">i</div>
   <p>Texte du callout.</p>
