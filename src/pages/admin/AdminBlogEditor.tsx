@@ -100,7 +100,7 @@ const AdminBlogEditor = () => {
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
   const [autoPublishedAt, setAutoPublishedAt] = useState(true);
   const [formInitialized, setFormInitialized] = useState(false);
-  const [draftBannerDismissed, setDraftBannerDismissed] = useState(false);
+  const draftAutoRestoredRef = useRef(false);
 
   // Clear router state once on mount so a browser refresh won't re-apply import.
   useEffect(() => {
