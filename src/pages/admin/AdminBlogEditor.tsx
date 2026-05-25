@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, Loader2, Trash2, X } from "lucide-react";
+import { ArrowLeft, Eye, Loader2, RotateCcw, Trash2, X } from "lucide-react";
 import type { ValidationOk } from "@/lib/admin/importArticle";
 
 import { Button } from "@/components/ui/button";
@@ -307,6 +307,37 @@ const AdminBlogEditor = () => {
       setTopError(msg);
       toast.error("Une erreur s'est produite. Réessaie ou contacte le support.");
     }
+  };
+
+  const handleReset = () => {
+    if (!isDirty) return;
+    if (!window.confirm("Annuler les modifications en cours ? Les changements non enregistrés seront perdus.")) return;
+
+    if (isEdit && existing) {
+      reset({
+        title: existing.title,
+        slug: existing.slug,
+        excerpt: existing.excerpt,
+        content_md: existing.contentMd,
+        cover_image_url: existing.coverImageUrl,
+        hero_image_url: existing.heroImageUrl,
+        author_id: existing.author?.id ?? "",
+        category_id: existing.category?.id ?? "",
+        status: existing.status,
+        featured_on_home: existing.featuredOnHome,
+        meta_title: existing.metaTitle ?? "",
+        meta_description: existing.metaDescription ?? "",
+        published_at: existing.publishedAt,
+      });
+      slugManuallyEditedRef.current = true;
+    } else {
+      reset(emptyDefaults);
+      slugManuallyEditedRef.current = false;
+    }
+    clearDraft();
+    draftAutoRestoredRef.current = true; // prevent auto-restore from firing immediately
+    setImportBanner(null);
+    toast.info("Modifications annulées");
   };
 
   const onCancel = () => {
@@ -733,6 +764,12 @@ const AdminBlogEditor = () => {
           )}
 
           <div className="flex items-center gap-2">
+            {isDirty && (
+              <Button type="button" variant="ghost" size="sm" onClick={handleReset}>
+                <RotateCcw className="h-4 w-4" />
+                Annuler les modifs
+              </Button>
+            )}
             {!isEdit && (
               <Button
                 type="button"
