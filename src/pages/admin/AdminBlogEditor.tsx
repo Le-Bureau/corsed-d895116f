@@ -764,6 +764,12 @@ const AdminBlogEditor = () => {
           )}
 
           <div className="flex items-center gap-2">
+            {isDirty && (
+              <Button type="button" variant="ghost" size="sm" onClick={handleReset}>
+                <RotateCcw className="h-4 w-4" />
+                Annuler les modifs
+              </Button>
+            )}
             {!isEdit && (
               <Button
                 type="button"
