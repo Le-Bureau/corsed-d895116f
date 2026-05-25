@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, Loader2, Trash2, X } from "lucide-react";
+import { ArrowLeft, Eye, Loader2, RotateCcw, Trash2, X } from "lucide-react";
 import type { ValidationOk } from "@/lib/admin/importArticle";
 
 import { Button } from "@/components/ui/button";
