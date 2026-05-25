@@ -226,21 +226,23 @@ const AdminBlogEditor = () => {
     formInitialized,
   );
 
-  const showDraftBanner =
-    !!recoveredDraft &&
-    formInitialized &&
-    !draftBannerDismissed &&
-    JSON.stringify(recoveredDraft.values) !== JSON.stringify(watchedValues);
-
-  const restoreDraft = () => {
+  // Auto-restore the locally-saved draft as soon as the form is initialized.
+  // No banner, no click required — user comes back exactly where they left off.
+  useEffect(() => {
+    if (!formInitialized) return;
+    if (draftAutoRestoredRef.current) return;
     if (!recoveredDraft) return;
-    reset(recoveredDraft.values);
-    setDraftBannerDismissed(true);
-  };
-  const ignoreDraft = () => {
-    clearDraft();
-    setDraftBannerDismissed(true);
-  };
+    const sameAsCurrent =
+      JSON.stringify(recoveredDraft.values) === JSON.stringify(watchedValues);
+    draftAutoRestoredRef.current = true;
+    if (!sameAsCurrent) {
+      reset(recoveredDraft.values, { keepDirty: true });
+      toast.info(
+        `Brouillon local restauré (modifié ${formatRelativeTime(recoveredDraft.savedAt)})`,
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formInitialized, recoveredDraft]);
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
