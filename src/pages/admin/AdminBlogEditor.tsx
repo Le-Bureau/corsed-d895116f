@@ -100,7 +100,7 @@ const AdminBlogEditor = () => {
   const [importBanner, setImportBanner] = useState<{ slugRegenerated: boolean } | null>(null);
   const [autoPublishedAt, setAutoPublishedAt] = useState(true);
   const [formInitialized, setFormInitialized] = useState(false);
-  const [draftBannerDismissed, setDraftBannerDismissed] = useState(false);
+  const draftAutoRestoredRef = useRef(false);
 
   // Clear router state once on mount so a browser refresh won't re-apply import.
   useEffect(() => {
@@ -226,21 +226,23 @@ const AdminBlogEditor = () => {
     formInitialized,
   );
 
-  const showDraftBanner =
-    !!recoveredDraft &&
-    formInitialized &&
-    !draftBannerDismissed &&
-    JSON.stringify(recoveredDraft.values) !== JSON.stringify(watchedValues);
-
-  const restoreDraft = () => {
+  // Auto-restore the locally-saved draft as soon as the form is initialized.
+  // No banner, no click required — user comes back exactly where they left off.
+  useEffect(() => {
+    if (!formInitialized) return;
+    if (draftAutoRestoredRef.current) return;
     if (!recoveredDraft) return;
-    reset(recoveredDraft.values);
-    setDraftBannerDismissed(true);
-  };
-  const ignoreDraft = () => {
-    clearDraft();
-    setDraftBannerDismissed(true);
-  };
+    const sameAsCurrent =
+      JSON.stringify(recoveredDraft.values) === JSON.stringify(watchedValues);
+    draftAutoRestoredRef.current = true;
+    if (!sameAsCurrent) {
+      reset(recoveredDraft.values, { keepDirty: true });
+      toast.info(
+        `Brouillon local restauré (modifié ${formatRelativeTime(recoveredDraft.savedAt)})`,
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formInitialized, recoveredDraft]);
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
@@ -358,23 +360,6 @@ const AdminBlogEditor = () => {
           {isEdit ? "Modifier l'article" : "Nouvel article"}
         </h1>
       </div>
-
-      {showDraftBanner && recoveredDraft && (
-        <div className="rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3 flex-wrap">
-          <p>
-            <span className="font-medium">Brouillon non sauvegardé.</span>{" "}
-            Une version locale existe pour cet article (modifiée {formatRelativeTime(recoveredDraft.savedAt)}).
-          </p>
-          <div className="flex items-center gap-2">
-            <Button type="button" size="sm" onClick={restoreDraft}>
-              Restaurer le brouillon
-            </Button>
-            <Button type="button" size="sm" variant="outline" onClick={ignoreDraft}>
-              Ignorer
-            </Button>
-          </div>
-        </div>
-      )}
 
       {importBanner && (
         <div className="rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground flex items-start justify-between gap-3">
