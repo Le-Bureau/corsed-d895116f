@@ -309,6 +309,37 @@ const AdminBlogEditor = () => {
     }
   };
 
+  const handleReset = () => {
+    if (!isDirty) return;
+    if (!window.confirm("Annuler les modifications en cours ? Les changements non enregistrés seront perdus.")) return;
+
+    if (isEdit && existing) {
+      reset({
+        title: existing.title,
+        slug: existing.slug,
+        excerpt: existing.excerpt,
+        content_md: existing.contentMd,
+        cover_image_url: existing.coverImageUrl,
+        hero_image_url: existing.heroImageUrl,
+        author_id: existing.author?.id ?? "",
+        category_id: existing.category?.id ?? "",
+        status: existing.status,
+        featured_on_home: existing.featuredOnHome,
+        meta_title: existing.metaTitle ?? "",
+        meta_description: existing.metaDescription ?? "",
+        published_at: existing.publishedAt,
+      });
+      slugManuallyEditedRef.current = true;
+    } else {
+      reset(emptyDefaults);
+      slugManuallyEditedRef.current = false;
+    }
+    clearDraft();
+    draftAutoRestoredRef.current = true; // prevent auto-restore from firing immediately
+    setImportBanner(null);
+    toast.info("Modifications annulées");
+  };
+
   const onCancel = () => {
     if (isDirty && !window.confirm("Quitter sans enregistrer les modifications ?")) return;
     navigate("/admin/blog");
