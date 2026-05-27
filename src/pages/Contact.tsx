@@ -67,7 +67,7 @@ const Contact = () => {
     } catch (err) {
       console.error("Contact submission error:", err);
       toast.error(
-        "Une erreur est survenue. Réessayez ou appelez-nous au 07 69 97 77 00.",
+        "Une erreur est survenue. Réessayez ou appelez-nous au 07 59 50 35 17.",
       );
     }
   };

@@ -142,7 +142,7 @@ export default function PolitiqueConfidentialite() {
                   </a>
                   <br />
                   Téléphone :{" "}
-                  <a href="tel:+33769977700">07 69 97 77 00</a>
+                  <a href="tel:+33759503517">07 59 50 35 17</a>
                 </p>
                 <p>
                   Pour toute question relative à la protection de vos données

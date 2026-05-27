@@ -53,9 +53,9 @@ const ContactInfoCards = () => {
       <InfoCard
         icon={Phone}
         label="Téléphone"
-        value="07 69 97 77 00"
+        value="07 59 50 35 17"
         detail="Lun-Ven 9h-18h"
-        href="tel:+33769977700"
+        href="tel:+33759503517"
       />
       <InfoCard
         icon={Mail}
