@@ -22,7 +22,7 @@ const Index = () => {
           name: "Corse Drone",
           image: "https://corse-drone.com/og-default.jpg",
           url: "https://corse-drone.com",
-          telephone: "+33769977700",
+          telephone: "+33759503517",
           address: {
             "@type": "PostalAddress",
             streetAddress: "Marine d'Albo, 44 Strada di a Torra",

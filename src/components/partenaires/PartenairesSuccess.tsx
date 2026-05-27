@@ -34,10 +34,10 @@ export function PartenairesSuccess({ data, onReset }: PartenairesSuccessProps) {
           <p className="text-[14px] leading-relaxed text-text-muted max-w-xl mx-auto mb-10">
             En cas d'urgence, vous pouvez nous appeler directement au{" "}
             <a
-              href="tel:+33769977700"
+              href="tel:+33759503517"
               className="text-logo-base-deep hover:opacity-80 transition-opacity font-medium"
             >
-              07 69 97 77 00
+              07 59 50 35 17
             </a>
             .
           </p>
