@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <main>
       <SEO
-        title="Corse Drone — Drone professionnel en Corse"
+        title="Corse Drone | Drone professionnel en Corse"
         description="Nettoyage, diagnostic, agriculture, transport : 4 expertises drone pour les professionnels en Corse. Sans nacelle, sans échafaudage, sans immobilisation de site."
         canonicalPath="/"
         jsonLd={{
