@@ -10,6 +10,7 @@ interface Props {
 const AdminRoute = ({ children }: Props) => {
   const { user, isAdmin, isLoading, isRoleLoading } = useAuth();
   const location = useLocation();
+  const shouldShowLoader = isLoading || (!!user && isRoleLoading && !isAdmin);
 
   useEffect(() => {
     if (!isLoading && user && !isRoleLoading && !isAdmin) {
@@ -21,7 +22,7 @@ const AdminRoute = ({ children }: Props) => {
     }
   }, [isLoading, isRoleLoading, user, isAdmin]);
 
-  if (isLoading || (user && isRoleLoading)) {
+  if (shouldShowLoader) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-3">
@@ -41,7 +42,7 @@ const AdminRoute = ({ children }: Props) => {
     return <Navigate to={`/admin/login?redirect=${redirect}`} replace />;
   }
 
-  if (!isAdmin) {
+  if (!isAdmin && !isRoleLoading) {
     return <Navigate to="/" replace />;
   }
 
