@@ -223,7 +223,7 @@ const AdminBlogEditor = () => {
   const { recoveredDraft, clearDraft } = useDraftPersistence<BlogPostFormValues>(
     postKey,
     watchedValues,
-    formInitialized,
+    formInitialized && isDirty,
   );
 
   // Auto-restore the locally-saved draft as soon as the form is initialized.

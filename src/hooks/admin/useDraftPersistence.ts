@@ -66,6 +66,13 @@ export function useDraftPersistence<T>(
   const [hasDraft, setHasDraft] = useState(false);
   const initialReadDoneRef = useRef(false);
   const lastWrittenRef = useRef<string | null>(null);
+  const currentValuesRef = useRef(currentValues);
+  const isEnabledRef = useRef(isEnabled);
+
+  useEffect(() => {
+    currentValuesRef.current = currentValues;
+    isEnabledRef.current = isEnabled;
+  }, [currentValues, isEnabled]);
 
   // Read once per postId
   useEffect(() => {
@@ -106,6 +113,39 @@ export function useDraftPersistence<T>(
     }, DEBOUNCE_MS);
     return () => clearTimeout(t);
   }, [currentValues, isEnabled, postId]);
+
+  // Flush immediately when the tab is hidden/reloaded. This protects the last
+  // keystrokes that haven't reached the debounced save yet.
+  useEffect(() => {
+    const writeNow = () => {
+      if (!isEnabledRef.current) return;
+      if (!initialReadDoneRef.current) return;
+      const serialized = JSON.stringify(currentValuesRef.current);
+      if (serialized === lastWrittenRef.current) return;
+      safeWrite<T>(postId, {
+        values: currentValuesRef.current,
+        savedAt: Date.now(),
+        postId,
+      });
+      lastWrittenRef.current = serialized;
+      setHasDraft(true);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") writeNow();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pagehide", writeNow);
+    window.addEventListener("beforeunload", writeNow);
+
+    return () => {
+      writeNow();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pagehide", writeNow);
+      window.removeEventListener("beforeunload", writeNow);
+    };
+  }, [postId]);
 
   const clearDraft = useCallback(() => {
     safeRemove(postId);
