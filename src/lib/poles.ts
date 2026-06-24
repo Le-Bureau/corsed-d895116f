@@ -1,5 +1,5 @@
 import nettoyageImg from "@/assets/hero/nettoyage.webp";
-import diagnosticImg from "@/assets/hero/diagnostic.webp";
+import diagnosticImg from "@/assets/hero/diagnostic.webp.asset.json";
 import agricultureImg from "@/assets/hero/agriculture.webp";
 import transportImg from "@/assets/hero/transport.webp";
 import nettoyageShowcase from "@/assets/poles/nettoyage.webp";
