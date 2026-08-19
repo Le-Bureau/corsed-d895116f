@@ -1,6 +1,18 @@
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { HelmetProvider, type FilledContext } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
+
+// react-helmet-async v3 does not export FilledContext; describe what we use.
+type HelmetTag = { toString: () => string };
+type HelmetCtx = {
+  helmet?: {
+    title: HelmetTag;
+    meta: HelmetTag;
+    link: HelmetTag;
+    script: HelmetTag;
+    htmlAttributes: HelmetTag;
+  };
+};
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { UIBannerProvider } from "@/contexts/UIBannerContext";
@@ -78,7 +90,7 @@ export async function render(url: string): Promise<RenderResult> {
   });
   await prefetch(queryClient, url);
 
-  const helmetContext = {} as FilledContext;
+  const helmetContext: HelmetCtx = {};
 
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
