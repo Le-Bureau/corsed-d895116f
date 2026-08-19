@@ -5,7 +5,7 @@
  * route to static HTML so crawlers and AI agents receive full page content
  * without executing JavaScript. The client bundle still boots and takes over.
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 
 // ---------------------------------------------------------------------------
@@ -125,6 +125,9 @@ const main = async () => {
       console.error(`[prerender] FAILED ${route}:`, (err as Error).message);
     }
   }
+
+  // The SSR bundle is a build artifact only: keep it out of the published output.
+  rmSync(join(DIST, "server"), { recursive: true, force: true });
 
   console.log(`[prerender] ${ok}/${routes.length} routes written`);
 };
