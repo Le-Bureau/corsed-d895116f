@@ -104,6 +104,9 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
     }, 2500);
   }
 
+  // No DOM during the build-time prerender: nothing to portal into.
+  if (typeof document === "undefined") return null;
+
   return createPortal(
     <AnimatePresence>
       {isOpen && (
