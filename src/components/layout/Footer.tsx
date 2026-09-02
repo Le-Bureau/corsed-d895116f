@@ -4,6 +4,7 @@ import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import BrandLogo from "./BrandLogo";
 import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
+import { CONTACT } from "@/lib/contact";
 
 const colTitle =
   "text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-1";
@@ -161,15 +162,15 @@ const Footer = () => {
 
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Téléphone</span>
-                <a href="tel:+33759503517" className={contactValue}>
-                  07 59 50 35 17
+                <a href={CONTACT.phoneLink} className={contactValue}>
+                  {CONTACT.phone}
                 </a>
               </div>
 
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Email</span>
-                <a href="mailto:contact@corse-drone.com" className={contactValue}>
-                  contact@corse-drone.com
+                <a href={CONTACT.emailLink} className={contactValue}>
+                  {CONTACT.email}
                 </a>
               </div>
 

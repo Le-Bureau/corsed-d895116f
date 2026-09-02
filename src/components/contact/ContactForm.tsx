@@ -237,7 +237,7 @@ const ContactForm = () => {
             J'accepte que mes données soient traitées dans le cadre de cette
             demande conformément à la{" "}
             <Link
-              to="/mentions-legales"
+              to="/politique-confidentialite"
               className="underline hover:opacity-80 transition-opacity"
               style={{
                 color: "var(--contact-accent, var(--logo-base-deep))",

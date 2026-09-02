@@ -1,6 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/seo/SEO";
+import { CONTACT } from "@/lib/contact";
 
 const SECTIONS = [
   { id: "introduction", label: "Introduction" },
@@ -137,12 +138,9 @@ export default function PolitiqueConfidentialite() {
                   20217 Ogliastro, France
                   <br />
                   Email :{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>
-                  <br />
-                  Téléphone :{" "}
-                  <a href="tel:+33759503517">07 59 50 35 17</a>
+                   <a href={CONTACT.emailLink}>{CONTACT.email}</a>
+                   <br />
+                   Téléphone : <a href={CONTACT.phoneLink}>{CONTACT.phone}</a>
                 </p>
                 <p>
                   Pour toute question relative à la protection de vos données
@@ -459,10 +457,8 @@ export default function PolitiqueConfidentialite() {
                 <p>
                   Pour exercer l'un de ces droits, adressez votre demande par
                   email à{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>{" "}
-                  ou par courrier à l'adresse :
+                   <a href={CONTACT.emailLink}>{CONTACT.email}</a>{" "}
+                   ou par courrier à l'adresse :
                 </p>
                 <p>
                   <strong>SAS Corse Drone</strong>

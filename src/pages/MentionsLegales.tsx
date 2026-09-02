@@ -1,6 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/seo/SEO";
+import { CONTACT } from "@/lib/contact";
 
 const SECTIONS = [
   { id: "editeur", label: "Éditeur du site" },
@@ -130,11 +131,9 @@ export default function MentionsLegales() {
                 </p>
                 <p>
                   <strong>Contact :</strong>{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>
-                </p>
-              </Section>
+                   <a href={CONTACT.emailLink}>{CONTACT.email}</a>
+                 </p>
+               </Section>
 
               <Section id="directeur" title="Directeur de la publication">
                 <p>
@@ -213,10 +212,7 @@ export default function MentionsLegales() {
                 </p>
                 <p>
                   Pour toute question relative à vos données personnelles :{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>
-                  .
+                   <a href={CONTACT.emailLink}>{CONTACT.email}</a>.
                 </p>
               </Section>
 
