@@ -457,10 +457,8 @@ export default function PolitiqueConfidentialite() {
                 <p>
                   Pour exercer l'un de ces droits, adressez votre demande par
                   email à{" "}
-                  <a href="mailto:contact@corse-drone.com">
-                    contact@corse-drone.com
-                  </a>{" "}
-                  ou par courrier à l'adresse :
+                   <a href={CONTACT.emailLink}>{CONTACT.email}</a>{" "}
+                   ou par courrier à l'adresse :
                 </p>
                 <p>
                   <strong>SAS Corse Drone</strong>
