@@ -11,6 +11,7 @@ import {
   type PartnerFormData,
 } from "@/lib/partners/partnerSchema";
 import { cn } from "@/lib/utils";
+import { CONTACT } from "@/lib/contact";
 import { PartenairesSuccess } from "./PartenairesSuccess";
 
 const labelBase =

@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { PartnerFormData } from "@/lib/partners/partnerSchema";
+import { CONTACT } from "@/lib/contact";
 
 interface PartenairesSuccessProps {
   data: PartnerFormData;
@@ -34,10 +35,10 @@ export function PartenairesSuccess({ data, onReset }: PartenairesSuccessProps) {
           <p className="text-[14px] leading-relaxed text-text-muted max-w-xl mx-auto mb-10">
             En cas d'urgence, vous pouvez nous appeler directement au{" "}
             <a
-              href="tel:+33759503517"
+              href={CONTACT.phoneLink}
               className="text-logo-base-deep hover:opacity-80 transition-opacity font-medium"
             >
-              07 59 50 35 17
+              {CONTACT.phone}
             </a>
             .
           </p>
