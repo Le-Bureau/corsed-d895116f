@@ -1,44 +1,45 @@
-# Phase 10 — Blog analytics (Plausible custom events)
+# Diagnostic : emails notify-lead non reçus
 
-## 1. New file: `src/lib/analytics.ts`
+## 1. Logs de la fonction notify-lead
 
-Create the helper exactly as specified:
-- `trackEvent(name, props?)` — guards `window`, guards `typeof window.plausible === 'function'`, strips `null`/`undefined` props, swallows errors (warn only in DEV).
-- `Events` const map with the 7 event names in Title Case.
+| timestamp | type | ligne de log |
+|---|---|---|
+| — | — | **aucune invocation trouvée** |
 
-## 2. Files modified & event wiring
+`edge_function_logs` pour `notify-lead` : « No logs found ». La table analytique `function_edge_logs` (requêtes HTTP entrantes) renvoie également 0 ligne.
 
-### `src/pages/BlogPost.tsx` — ARTICLE_VIEWED + ARTICLE_SHARED + ARTICLE_CTA_CLICKED
-- Add `firedRef = useRef(false)` and a `useEffect([post?.id])` that fires `Events.ARTICLE_VIEWED` once when `post` becomes available, with props `{ slug, title: post.title.slice(0, 80), category: post.category?.slug, author: post.author?.initials }`.
-- Wrap the 3 share button `onClick` handlers (LinkedIn, X, Copy) to call `trackEvent(Events.ARTICLE_SHARED, { slug: post.slug, method })` before the existing behavior. Methods: `linkedin`, `twitter`, `copy_link`.
-- Add a delegated click listener via `useEffect` on a ref attached to the article body container (wrap `<BlogContent>` in a `<div ref={articleRef}>` — purely structural, no visual change). Listener filters `<a>` ancestors whose `href` starts with `/` and is not `#…`, then fires `Events.ARTICLE_CTA_CLICKED` with `{ article_slug: post.slug, to: href }`. Skip external (`http(s)://`), `mailto:`, `tel:`, and pure hash links.
-  - Rationale: keeps `BlogContent.tsx` untouched (no prop drilling) and avoids regenerating ReactMarkdown components.
+**Conclusion explicite : zéro invocation loggée. Les appels du front n'atteignent pas la fonction.**
 
-### `src/components/blog/BlogSidebar.tsx` — CATEGORY_FILTER + NEWSLETTER_INTEREST
-- For each category `<Link>` (including "Tous les articles"), add `onClick` that computes `from = activeSlug ?? 'all'`, `to = c.slug ?? 'all'`, and fires `Events.CATEGORY_FILTER` only if `from !== to`.
-- Replace the "Newsletter" anchor `onClick` to: `e.preventDefault()`, fire `Events.NEWSLETTER_INTEREST` with `{ source: 'sidebar' }`, and `toast("Bientôt disponible — restez à l'écoute")` from `sonner`.
+## 2. Secrets présents
 
-### `src/pages/Blog.tsx` — SEARCH_PERFORMED
-- Add a `useEffect([search])` with a 800ms `setTimeout`; if `search.trim().length >= 3`, fire `Events.SEARCH_PERFORMED` with `{ query_length: search.trim().length }`. Cleanup clears the timeout (debounce).
+- `LOVABLE_API_KEY` — présent (géré)
+- `RESEND_API_KEY` — présent **en double** : une version manuelle + une version gérée par le connecteur (collision de nom)
+- `RESEND_API_KEY_1` — **absent** (or le code le lit en priorité)
 
-### `src/components/blog/BlogRelatedPosts.tsx` — RELATED_ARTICLE_CLICKED
-- Currently `BlogCard` renders the `<Link>`. Two clean options; pick option A:
-  - **A (chosen):** wrap each `<BlogCard>` in a `<div onClickCapture>` that fires `Events.RELATED_ARTICLE_CLICKED` with `{ from_slug: currentSlug, to_slug: p.slug }`. Requires passing `currentSlug` in addition to `currentPostId` from `BlogPost.tsx` (one extra prop).
-- Update the `Props` interface and the `BlogPost.tsx` call site accordingly.
+## 3. Connecteur Resend
 
-## 3. Untouched
-- `index.html` Plausible snippet, `usePlausibleTracking`, `BlogContent.tsx`, all styling, routing, auth, Supabase, admin.
+Connexion « Corse Drone Resend » (`api_key`, gateway activé) : **liée au projet**, accès OK. Expéditeur codé en dur dans la fonction : `noreply@corse-drone.com` → `contact@corse-drone.com`.
 
-## 4. Verification
-- `tsc --noEmit` (auto via harness).
-- Manual: 11-step DevTools network checklist from the brief.
+## 4. Lignes insérées (30 j) vs invocations
 
-## 5. Manual Plausible dashboard goals (to add by PF)
-Site Settings → Goals → "+ Add goal" → Custom event, with these exact names:
-1. `Article viewed`
-2. `Article shared`
-3. `Category filter`
-4. `Search performed`
-5. `Related article clicked`
-6. `Article CTA clicked`
-7. `Newsletter interest`
+- `contact_submissions` : 2 lignes sur 30 j (10 au total, dernière 2026-09-02 08:57)
+- `partner_applications` : 0 ligne
+- Invocations loggées : 0
+
+## 5. Diagnostic (3 lignes)
+
+1. Les insertions passent mais la fonction n'est jamais exécutée : `supabase/config.toml` ne contient **aucun bloc `[functions.notify-lead]` avec `verify_jwt = false`**, donc les appels anonymes du formulaire sont rejetés en amont (401) et ne produisent aucun log.
+2. Risque secondaire une fois l'appel passé : le code lit `RESEND_API_KEY_1` (inexistant) puis retombe sur `RESEND_API_KEY`, qui existe en double (manuel + connecteur) — la mauvaise valeur peut être injectée et faire échouer le gateway en 401.
+3. **Le fix principal** : déclarer `verify_jwt = false` pour `notify-lead` dans `config.toml` et redéployer.
+
+## Correctifs proposés (à approuver)
+
+1. **Fix A (principal)** — ajouter dans `supabase/config.toml` :
+   ```toml
+   [functions.notify-lead]
+   verify_jwt = false
+   ```
+   puis redéployer la fonction.
+2. **Fix B (fiabilité clé)** — supprimer le secret `RESEND_API_KEY` manuel en doublon pour ne garder que celui géré par le connecteur (action côté Connecteurs / Project Settings), et simplifier la lecture de la clé dans la fonction.
+3. **Fix C (observabilité)** — journaliser aussi les succès/échecs côté front (`console.error` existe déjà) et faire remonter le champ `skipped` dans un toast admin ou un log, pour ne plus dépendre uniquement des logs serveur.
+4. **Vérification** — après déploiement : envoi test depuis /contact avec une vraie adresse, puis relecture des logs pour confirmer `notify-lead: sent type=contact`.
