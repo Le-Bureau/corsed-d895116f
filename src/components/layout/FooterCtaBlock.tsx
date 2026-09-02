@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import { CONTACT } from "@/lib/contact";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -62,10 +63,10 @@ const FooterCtaBlock = () => {
             <ArrowRight size={16} />
           </Link>
           <a
-            href="tel:+33759503517"
+            href={CONTACT.phoneLink}
             className="glass-light hover:bg-white/[0.14] inline-flex items-center rounded-full px-7 py-4 text-[15px] font-medium text-text-on-dark transition-all duration-200 hover:-translate-y-0.5"
           >
-            07 59 50 35 17
+            {CONTACT.phone}
           </a>
         </motion.div>
       </motion.div>

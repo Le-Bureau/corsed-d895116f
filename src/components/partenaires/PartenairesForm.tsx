@@ -149,7 +149,7 @@ const PartenairesForm = () => {
     } catch (err) {
       console.error("Partner application error:", err);
       toast.error(
-        "Une erreur est survenue. Réessayez ou appelez-nous au 07 59 50 35 17.",
+        `Une erreur est survenue. Réessayez ou appelez-nous au ${CONTACT.phone}.`,
       );
     }
   };
@@ -242,7 +242,7 @@ const PartenairesForm = () => {
                 J'accepte que mes données soient traitées dans le cadre de
                 cette candidature conformément à la{" "}
                 <Link
-                  to="/mentions-legales"
+                  to="/politique-confidentialite"
                   className="text-logo-base-deep underline hover:opacity-80 transition-opacity"
                 >
                   politique de confidentialité

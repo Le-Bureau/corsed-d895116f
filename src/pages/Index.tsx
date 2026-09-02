@@ -7,6 +7,7 @@ import CTAFinalSection from "@/components/sections/CTAFinalSection";
 import LatestArticlesSection from "@/components/sections/LatestArticlesSection";
 import { SEO } from "@/components/seo/SEO";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
+import { CONTACT } from "@/lib/contact";
 
 const Index = () => {
   return (
@@ -22,7 +23,7 @@ const Index = () => {
           name: "Corse Drone",
           image: "https://corse-drone.com/og-default.jpg",
           url: "https://corse-drone.com",
-          telephone: "+33759503517",
+          telephone: CONTACT.phoneLink.replace("tel:", ""),
           address: {
             "@type": "PostalAddress",
             streetAddress: "Marine d'Albo, 44 Strada di a Torra",

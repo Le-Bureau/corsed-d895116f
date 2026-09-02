@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, ArrowUpRight, type LucideIcon } from "lucide-react";
+import { CONTACT } from "@/lib/contact";
 
 interface InfoCardProps {
   icon: LucideIcon;
@@ -53,16 +54,16 @@ const ContactInfoCards = () => {
       <InfoCard
         icon={Phone}
         label="Téléphone"
-        value="07 59 50 35 17"
-        detail="Lun-Ven 9h-18h"
-        href="tel:+33759503517"
+        value={CONTACT.phone}
+        detail={CONTACT.phoneHours}
+        href={CONTACT.phoneLink}
       />
       <InfoCard
         icon={Mail}
         label="Email"
-        value="contact@corse-drone.com"
+        value={CONTACT.email}
         detail="Réponse sous 24h"
-        href="mailto:contact@corse-drone.com"
+        href={CONTACT.emailLink}
       />
       <InfoCard
         icon={MapPin}
