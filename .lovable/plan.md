@@ -1,45 +1,31 @@
-# Diagnostic : emails notify-lead non reçus
+# Diagnostic : soumission du 2026-09-03 06:15 UTC
 
-## 1. Logs de la fonction notify-lead
+## 1. Ligne de log de l'invocation
 
-| timestamp | type | ligne de log |
-|---|---|---|
-| — | — | **aucune invocation trouvée** |
+| timestamp (UTC) | ligne |
+|---|---|
+| 2026-09-03T06:15:40Z | `booted (time: 34ms)` |
+| 2026-09-03T06:15:41Z | `booted (time: 23ms)` |
+| 2026-09-03T06:15:41Z | **`notify-lead: sent type=contact`** |
 
-`edge_function_logs` pour `notify-lead` : « No logs found ». La table analytique `function_edge_logs` (requêtes HTTP entrantes) renvoie également 0 ligne.
+Aucune ligne `Resend error`, `rate limited`, `invalid body`, `missing API keys` ni `unexpected error`. La fonction a répondu **HTTP 200** avec `{ ok: true, sent: true }`.
 
-**Conclusion explicite : zéro invocation loggée. Les appels du front n'atteignent pas la fonction.**
+(La table `function_edge_logs` ne renvoie rien sur la fenêtre — artefact d'indexation analytique, sans incidence : les logs de la fonction sont formels.)
 
-## 2. Secrets présents
+## 2. Réponse de Resend
 
-- `LOVABLE_API_KEY` — présent (géré)
-- `RESEND_API_KEY` — présent **en double** : une version manuelle + une version gérée par le connecteur (collision de nom)
-- `RESEND_API_KEY_1` — **absent** (or le code le lit en priorité)
+Resend a **accepté** l'envoi : le code ne logge `sent` que si `res.ok` est vrai (statut 2xx). Aucun corps d'erreur 4xx à citer — il n'y en a pas eu.
 
-## 3. Connecteur Resend
+## 3. Diagnostic (2 lignes)
 
-Connexion « Corse Drone Resend » (`api_key`, gateway activé) : **liée au projet**, accès OK. Expéditeur codé en dur dans la fonction : `noreply@corse-drone.com` → `contact@corse-drone.com`.
+1. La chaîne front → fonction → Resend fonctionne : l'API a accepté le message, donc l'échec est **après** Resend, à la livraison chez Infomaniak.
+2. Le formulaire a été rempli avec `test@test.com`, qui est injecté en `Reply-To` — exactement le cas déjà constaté où Infomaniak rejette avec `554 5.7.1 test@test.com is rbl blacklisted`, d'où l'absence de mail dans la boîte.
 
-## 4. Lignes insérées (30 j) vs invocations
+## Fix unique
 
-- `contact_submissions` : 2 lignes sur 30 j (10 au total, dernière 2026-09-02 08:57)
-- `partner_applications` : 0 ligne
-- Invocations loggées : 0
+Aucun correctif code n'est nécessaire pour ce symptôme. Deux options, au choix :
 
-## 5. Diagnostic (3 lignes)
+- **Option A (recommandée, aucun code)** — refaire le test avec une adresse email réelle dans le formulaire. Le mail arrivera.
+- **Option B (durcissement, code)** — ne plus utiliser l'email saisi comme `Reply-To` brut : envoyer avec `reply_to` uniquement si le domaine de l'adresse est plausible (MX résolvable / liste noire de domaines de test comme `test.com`, `example.com`), et mettre l'adresse du demandeur dans le corps du message dans tous les cas. Cela évite qu'une saisie fantaisiste fasse rejeter tout le message par le serveur de réception.
 
-1. Les insertions passent mais la fonction n'est jamais exécutée : `supabase/config.toml` ne contient **aucun bloc `[functions.notify-lead]` avec `verify_jwt = false`**, donc les appels anonymes du formulaire sont rejetés en amont (401) et ne produisent aucun log.
-2. Risque secondaire une fois l'appel passé : le code lit `RESEND_API_KEY_1` (inexistant) puis retombe sur `RESEND_API_KEY`, qui existe en double (manuel + connecteur) — la mauvaise valeur peut être injectée et faire échouer le gateway en 401.
-3. **Le fix principal** : déclarer `verify_jwt = false` pour `notify-lead` dans `config.toml` et redéployer.
-
-## Correctifs proposés (à approuver)
-
-1. **Fix A (principal)** — ajouter dans `supabase/config.toml` :
-   ```toml
-   [functions.notify-lead]
-   verify_jwt = false
-   ```
-   puis redéployer la fonction.
-2. **Fix B (fiabilité clé)** — supprimer le secret `RESEND_API_KEY` manuel en doublon pour ne garder que celui géré par le connecteur (action côté Connecteurs / Project Settings), et simplifier la lecture de la clé dans la fonction.
-3. **Fix C (observabilité)** — journaliser aussi les succès/échecs côté front (`console.error` existe déjà) et faire remonter le champ `skipped` dans un toast admin ou un log, pour ne plus dépendre uniquement des logs serveur.
-4. **Vérification** — après déploiement : envoi test depuis /contact avec une vraie adresse, puis relecture des logs pour confirmer `notify-lead: sent type=contact`.
+Aucun fichier, secret ni donnée n'a été modifié, et aucun email de test n'a été envoyé.
