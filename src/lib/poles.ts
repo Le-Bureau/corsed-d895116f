@@ -379,28 +379,12 @@ export const POLES: Pole[] = [
         iconName: "HardHat",
       },
       {
-        name: "Dépose précise sur ouvrage",
-        slug: "depose-precise",
-        category: "Pose et installation",
-        description:
-          "Pose de matériel sur toitures, antennes, châteaux d'eau et ouvrages en hauteur. Câble de levage 10-15m avec dépose centimétrique sans atterrissage requis.",
-        iconName: "Target",
-      },
-      {
         name: "Approvisionnement zones isolées",
         slug: "approvisionnement-zones-isolees",
         category: "Logistique territoriale",
         description:
           "Refuges, bergeries, parcelles de montagne, zones non aménagées. Réapprovisionnement régulier ou ponctuel pour exploitations agricoles, sylvicoles et pastorales.",
         iconName: "Mountain",
-      },
-      {
-        name: "Levage et treuillage",
-        slug: "levage-treuillage",
-        category: "Héliportage léger",
-        description:
-          "Soulèvement de matériel ou évacuation de charges depuis des points inaccessibles. Plus économique et plus rapide que l'hélicoptère pour les opérations jusqu'à 100 kg.",
-        iconName: "MoveVertical",
       },
     ],
     heroImage: transportImg,
