@@ -28,6 +28,7 @@ const POLE_ITEMS = POLES.map((p) => ({
   slug: p.slug,
   color: p.baseColorOnDark,
   subServices: p.subServices,
+  isInDevelopment: p.isInDevelopment,
 }));
 
 const panelVariants: Variants = {
