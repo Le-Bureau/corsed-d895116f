@@ -269,9 +269,9 @@ export const POLES: Pole[] = [
     title: "La précision au mètre carré",
     subtitle:
       "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Optimisez vos rendements et allégez votre charge de travail, parcelle par parcelle.",
-    statLabel: "PRÉCISION",
-    statValue: "2cm",
-    statDetail: "précision RTK-GPS,\napplication zone par zone",
+    statLabel: "Cartographie",
+    statValue: "250ha",
+    statDetail: "cartographiés par jour\nen vol multispectral",
     comingSoon: true,
     pitch: "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
     description:
@@ -307,14 +307,6 @@ export const POLES: Pole[] = [
         iconName: "Sprout",
       },
       {
-        name: "Semis anti-incendie (DFCI)",
-        slug: "semis-anti-incendie",
-        category: "Prévention / Collectivités",
-        description:
-          "Revégétalisation post-incendie, semis d'espèces peu combustibles sur zones de coupures, prévention de l'érosion sur sols dénudés. Service dédié aux collectivités, ONF et conservatoires.",
-        iconName: "Shield",
-      },
-      {
         name: "Blanchiment de serre",
         slug: "blanchiment-serre",
         category: "Régulation thermique",
@@ -344,7 +336,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
-    stat: { value: "2", unit: "cm", labelStrong: "précision RTK-GPS, ", labelMuted: "application zone par zone" },
+    stat: { value: "250", unit: "ha", labelStrong: "cartographiés par jour", labelMuted: "en un seul vol multispectral" },
   },
   {
     key: "transport",
@@ -379,28 +371,12 @@ export const POLES: Pole[] = [
         iconName: "HardHat",
       },
       {
-        name: "Dépose précise sur ouvrage",
-        slug: "depose-precise",
-        category: "Pose et installation",
-        description:
-          "Pose de matériel sur toitures, antennes, châteaux d'eau et ouvrages en hauteur. Câble de levage 10-15m avec dépose centimétrique sans atterrissage requis.",
-        iconName: "Target",
-      },
-      {
         name: "Approvisionnement zones isolées",
         slug: "approvisionnement-zones-isolees",
         category: "Logistique territoriale",
         description:
           "Refuges, bergeries, parcelles de montagne, zones non aménagées. Réapprovisionnement régulier ou ponctuel pour exploitations agricoles, sylvicoles et pastorales.",
         iconName: "Mountain",
-      },
-      {
-        name: "Levage et treuillage",
-        slug: "levage-treuillage",
-        category: "Héliportage léger",
-        description:
-          "Soulèvement de matériel ou évacuation de charges depuis des points inaccessibles. Plus économique et plus rapide que l'hélicoptère pour les opérations jusqu'à 100 kg.",
-        iconName: "MoveVertical",
       },
     ],
     heroImage: transportImg,

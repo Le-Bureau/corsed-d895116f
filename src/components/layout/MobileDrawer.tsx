@@ -28,6 +28,7 @@ const POLE_ITEMS = POLES.map((p) => ({
   slug: p.slug,
   color: p.baseColorOnDark,
   subServices: p.subServices,
+  isInDevelopment: p.isInDevelopment,
 }));
 
 const panelVariants: Variants = {
@@ -244,17 +245,23 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                   }
                                   className="overflow-hidden pl-5"
                                 >
-                                  {pole.subServices.map((sub) => (
-                                    <li key={sub.slug ?? sub.name}>
-                                      <Link
-                                        to={sub.slug ? `/pole/${pole.slug}/${sub.slug}` : `/pole/${pole.slug}`}
-                                        onClick={onClose}
-                                        className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-                                      >
+                                  {pole.subServices.map((sub) =>
+                                    sub.slug && !pole.isInDevelopment ? (
+                                      <li key={sub.slug ?? sub.name}>
+                                        <Link
+                                          to={`/pole/${pole.slug}/${sub.slug}`}
+                                          onClick={onClose}
+                                          className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                                        >
+                                          {sub.name}
+                                        </Link>
+                                      </li>
+                                    ) : (
+                                      <li key={sub.name} className="py-2 text-[14px] text-text-secondary/50">
                                         {sub.name}
-                                      </Link>
-                                    </li>
-                                  ))}
+                                      </li>
+                                    ),
+                                  )}
                                   <li>
                                     <Link
                                       to={`/pole/${pole.slug}`}

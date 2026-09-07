@@ -8,14 +8,6 @@ export type Expertise = {
 
 export const EXPERTISES: Expertise[] = [
   {
-    key: "photogrammetrie",
-    label: "Photogrammétrie",
-    slug: "photogrammetrie",
-    tagline: "Modélisation 3D",
-    description:
-      "Reconstitution de modèles 3D précis à partir de prises de vues aériennes.",
-  },
-  {
     key: "releve-3d",
     label: "Relevé 3D & topographie",
     slug: "releve-3d",
