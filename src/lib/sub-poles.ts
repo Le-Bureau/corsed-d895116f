@@ -39,7 +39,7 @@ export interface SubPoleCompareCol {
   isOurs?: boolean;
   badge?: string;
   title: string;
-  price: string;
+  price?: string;
   rows: { label: string; value: string }[];
 }
 
@@ -212,7 +212,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { iconName: "Factory", category: "Industriel", title: "Bâtiments industriels", description: "Hangars, entrepôts et bâtiments industriels équipés en toiture ou ombrières de parking. Intervention sans arrêt d'activité, coordination avec vos équipes de maintenance.", highlightLabel: "Sans arrêt", highlightDescription: "d'activité ni de production" },
       ],
       faq: [
-        { question: "À quelle fréquence faut-il nettoyer ses panneaux solaires en Corse ?", answer: "En Corse, un nettoyage des panneaux solaires est généralement recommandé tous les 12 à 18 mois afin de maintenir un bon niveau de production. Les installations situées en bord de mer ou fortement exposées au vent, au sel et aux poussières subissent plus rapidement des pertes de rendement." },
+        { question: "À quelle fréquence faut-il nettoyer ses panneaux solaires en Corse ?", answer: "En Corse, un nettoyage des panneaux solaires est recommandé tous les 6 à 12 mois pour maintenir un bon niveau de production. Les installations en bord de mer ou fortement exposées au vent, au sel et aux poussières sahariennes perdent du rendement plus vite : visez plutôt un passage tous les 6 mois. Pour une installation abritée, un nettoyage annuel suffit généralement." },
         { question: "Le nettoyage abîme-t-il les panneaux ?", answer: "Absolument pas, le nettoyage se fait à basse pression, avec des produits adaptés ainsi que de l'eau osmosée, afin de préserver l'intégrité du verre, des cellules photovoltaïques et des joints." },
         { question: "Peut-on constater un gain de production après nettoyage ?", answer: "Un gain de production est immédiatement constaté après le nettoyage. Après environ un an sans entretien, le gain se situe souvent entre 10 et 15%. Sur des installations restées plusieurs années sans nettoyage, notamment en zones exposées au sel, poussières ou pollution, le gain peut atteindre 30 à 50%." },
         { question: "Intervenez-vous sur des centrales de grande surface ?", answer: "Oui, nous intervenons sur les centrales photovoltaïques de grande surface. Ce type d'intervention nécessite des moyens adaptés pour garantir rapidité et rentabilité. Nos solutions permettent de traiter de vastes installations en un temps réduit." },
@@ -268,26 +268,26 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       compareTitle: "De 15 jours à 3 heures",
       compareSubtitle: "Comparatif pour l'inspection d'une villa R+2 en Corse (façades et toiture).",
       compareCols: [
-        { isOurs: true, badge: "MÉTHODE moderne", title: "Corse Drone", price: "400 - 700 €", rows: [
+        { isOurs: true, badge: "MÉTHODE moderne", title: "Corse Drone", rows: [
           { label: "Préavis légal", value: "10 jours" },
           { label: "Intervention", value: "2 à 3 heures" },
           { label: "Couverture", value: "100%" },
           { label: "Risque humain", value: "Nul" },
         ]},
-        { badge: "MÉTHODE ALTERNATIVE", title: "Cordiste thermographe", price: "900 - 1 800 €", rows: [
+        { badge: "MÉTHODE ALTERNATIVE", title: "Cordiste thermographe", rows: [
           { label: "Temps sur site", value: "1 à 2 jours" },
           { label: "Ancrage requis", value: "Oui" },
           { label: "Couverture", value: "Partielle" },
           { label: "Risque humain", value: "Élevé" },
         ]},
-        { badge: "MÉTHODE TRADITIONNELLE", title: "Nacelle + thermographe", price: "800 - 1 300 €", rows: [
+        { badge: "MÉTHODE TRADITIONNELLE", title: "Nacelle + thermographe", rows: [
           { label: "Temps sur site", value: "1 journée" },
           { label: "Accès voirie", value: "Obligatoire" },
           { label: "Angles d'analyse", value: "Limités" },
           { label: "Couverture toiture", value: "Partielle" },
         ]},
       ],
-      compareDisclaimer: "Estimations basées sur les tarifs moyens constatés en France (2025-2026). Devis personnalisé sur demande.",
+      compareDisclaimer: "Comparatif indicatif, basé sur les pratiques constatées en France. Devis personnalisé sur demande.",
       faq: [
         { question: "Quand réaliser un diagnostic thermique ?", answer: "Idéalement en période froide, entre octobre et avril en Corse, lorsque l'écart de température entre intérieur chauffé et extérieur est suffisant. Pour les inspections photovoltaïques, en plein ensoleillement entre 11h et 15h, irradiance > 600 W/m²." },
         { question: "Faut-il des conditions météo particulières ?", answer: "Oui : ΔT > 10°C entre intérieur/extérieur, vent < 30 km/h, ciel dégagé depuis 2h, absence de pluie dans les 12h précédentes. Si non réunies, mission reportée sans frais. Pour le photovoltaïque : irradiance > 600 W/m²." },
@@ -338,26 +338,26 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       compareTitle: "De 1 semaine à 1 journée",
       compareSubtitle: "Comparatif pour l'inspection d'une copropriété de 4 bâtiments R+5 en Corse (~5 000 m² de façades + 4 toitures).",
       compareCols: [
-        { isOurs: true, badge: "MÉTHODE moderne", title: "Corse Drone", price: "2 400 - 3 500 €", rows: [
+        { isOurs: true, badge: "MÉTHODE moderne", title: "Corse Drone", rows: [
           { label: "Préavis légal", value: "10 jours" },
           { label: "Intervention", value: "1 journée" },
           { label: "Couverture", value: "100%" },
           { label: "Risque humain", value: "Nul" },
         ]},
-        { badge: "MÉTHODE ALTERNATIVE", title: "Cordistes", price: "6 000 - 10 000 €", rows: [
+        { badge: "MÉTHODE ALTERNATIVE", title: "Cordistes", rows: [
           { label: "Temps sur site", value: "5 à 7 jours" },
           { label: "Ancrage requis", value: "Oui" },
           { label: "Couverture", value: "Complète" },
           { label: "Risque humain", value: "Élevé" },
         ]},
-        { badge: "MÉTHODE TRADITIONNELLE", title: "Nacelle + opérateur", price: "3 000 - 5 000 €", rows: [
+        { badge: "MÉTHODE TRADITIONNELLE", title: "Nacelle + opérateur", rows: [
           { label: "Temps sur site", value: "3 jours" },
           { label: "Accès voirie", value: "Obligatoire" },
           { label: "Angles d'analyse", value: "Limités" },
           { label: "Couverture toiture", value: "Partielle" },
         ]},
       ],
-      compareDisclaimer: "Estimations basées sur les tarifs moyens constatés en France (2025-2026). Devis personnalisé sur demande.",
+      compareDisclaimer: "Comparatif indicatif, basé sur les pratiques constatées en France. Devis personnalisé sur demande.",
       techItems: [
         { title: "Catalogue d'inspection", description: "Fissures structurelles, étanchéité défaillante, éléments déplacés, corrosion, décollements, dégâts climatiques : tous les défauts visibles sont détectés et documentés.", spec: "Résolution 4K + zoom optique 10×" },
         { title: "Précision GPS", description: "Chaque anomalie est géoréférencée avec une précision centimétrique pour faciliter la localisation des travaux ultérieurs.", spec: "≤ 5 cm de géoréférencement" },
