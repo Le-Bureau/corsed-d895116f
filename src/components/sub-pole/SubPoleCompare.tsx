@@ -65,15 +65,21 @@ const SubPoleCompare = ({ title, subtitle, cols, disclaimer }: Props) => {
                     {col.badge}
                   </div>
                 )}
-                <h3 className="font-display font-bold text-xl text-text-primary mb-3">
+                <h3
+                  className={`font-display font-bold text-xl text-text-primary ${
+                    col.price ? "mb-3" : "mb-5"
+                  }`}
+                >
                   {col.title}
                 </h3>
-                <div
-                  className="font-display text-2xl font-bold mb-5"
-                  style={col.isOurs ? { color: "var(--pole-color)" } : undefined}
-                >
-                  {col.price}
-                </div>
+                {col.price && (
+                  <div
+                    className="font-display text-2xl font-bold mb-5"
+                    style={col.isOurs ? { color: "var(--pole-color)" } : undefined}
+                  >
+                    {col.price}
+                  </div>
+                )}
                 <ul className="list-none p-0 m-0">
                   {col.rows.map((row, i) => (
                     <li
