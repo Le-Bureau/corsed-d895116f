@@ -9,6 +9,7 @@ import SubPoleStats from "@/components/sub-pole/SubPoleStats";
 import SubPoleWhyTraiter from "@/components/sub-pole/SubPoleWhyTraiter";
 import SubPoleFormules from "@/components/sub-pole/SubPoleFormules";
 import SubPoleDomaines from "@/components/sub-pole/SubPoleDomaines";
+import SubPoleTool from "@/components/sub-pole/SubPoleTool";
 import SubPoleTechnologie from "@/components/sub-pole/SubPoleTechnologie";
 import SubPoleCompare from "@/components/sub-pole/SubPoleCompare";
 import PoleProcess from "@/components/pole/PoleProcess";
@@ -103,6 +104,7 @@ export default function SubPoleDetail() {
           <PoleProcess steps={content.processSteps} />
         </div>
       )}
+      {content.toolImage && <SubPoleTool content={content} />}
       {content.techItems && content.techItems.length > 0 && (
         <SubPoleTechnologie items={content.techItems} />
       )}

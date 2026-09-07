@@ -1,3 +1,6 @@
+import spectraThermique from "@/assets/tools/spectra-thermique.jpg";
+import axioVisuel from "@/assets/tools/axio-visuel.webp";
+
 export interface SubPoleStat {
   prefix?: string;
   value: string;
@@ -71,6 +74,14 @@ export interface SubPoleContent {
   domaines: SubPoleDomain[];
   processSteps?: SubProcessStep[];
   techItems?: SubPoleTechItem[];
+  toolEyebrow?: string;
+  toolTitle?: string;
+  toolTitleAccent?: string;
+  toolIntro?: string;
+  toolImage?: string;
+  toolImageAlt?: string;
+  toolImageWidth?: number;
+  toolImageHeight?: number;
   compareTitle?: string;
   compareSubtitle?: string;
   compareCols?: SubPoleCompareCol[];
@@ -265,6 +276,14 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { title: "Les conditions de mesure", description: "L'écart de température intérieur/extérieur (ΔT) doit dépasser 10°C pour les audits d'isolation. Les inspections photovoltaïques se font à l'inverse en plein soleil.", spec: "ΔT ≥ 10°C · Irradiance ≥ 600 W/m²" },
         { title: "L'avantage du drone", description: "Notre drone capture la toiture à distance constante en chaque point. Lecture thermique homogène, comparaisons fiables.", spec: "5 000 m² / 60 min" },
       ],
+      toolEyebrow: "La plateforme",
+      toolTitle: "Chaque anomalie,",
+      toolTitleAccent: "localisée.",
+      toolIntro: "Spectra est notre plateforme d'analyse thermique. Chaque point chaud détecté est numéroté, classé par niveau de criticité et positionné sur l'orthomosaïque du site. Vous recevez le rapport PDF, l'orthophoto et un export JSON exploitable par vos équipes de maintenance.",
+      toolImage: spectraThermique,
+      toolImageAlt: "Interface Spectra affichant l'orthomosaïque thermique d'une centrale photovoltaïque et ses anomalies localisées",
+      toolImageWidth: 1413,
+      toolImageHeight: 790,
       compareTitle: "De 15 jours à 3 heures",
       compareSubtitle: "Comparatif pour l'inspection d'une villa R+2 en Corse (façades et toiture).",
       compareCols: [
@@ -363,6 +382,14 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { title: "Précision GPS", description: "Chaque anomalie est géoréférencée avec une précision centimétrique pour faciliter la localisation des travaux ultérieurs.", spec: "≤ 5 cm de géoréférencement" },
         { title: "Rapport complet", description: "Document PDF détaillé avec cartographie des anomalies, images annotées, interprétations techniques et préconisations de travaux priorisées.", spec: "15 à 40 pages détaillées" },
       ],
+      toolEyebrow: "La plateforme",
+      toolTitle: "Le bâtiment en 3D,",
+      toolTitleAccent: "anomalies comprises.",
+      toolIntro: "Axio est notre plateforme d'inspection visuelle. Le bâtiment est restitué en modèle 3D navigable et chaque anomalie relevée est épinglée à sa position exacte sur l'ouvrage. Vous recevez le rapport PDF et un accès au modèle.",
+      toolImage: axioVisuel,
+      toolImageAlt: "Interface Axio affichant le modèle 3D d'un bâtiment et ses anomalies positionnées",
+      toolImageWidth: 1617,
+      toolImageHeight: 873,
       faq: [
         { question: "Quels types d'anomalies détectez-vous ?", answer: "Microfissures et fissures traversantes, joints dégradés, étanchéité défaillante, tuiles cassées ou glissées, ardoises manquantes, ferrailles apparentes, corrosion, décollements d'enduits, peintures cloquées, dégâts climatiques, et plus encore." },
         { question: "Quelle est la précision des images ?", answer: "Résolution 4K avec zoom optique 10× et précision GPS de l'ordre du centimètre. Les microfissures, joints dégradés et corrosion naissante sont détectables." },
