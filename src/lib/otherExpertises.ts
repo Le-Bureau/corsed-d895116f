@@ -31,12 +31,4 @@ export const OTHER_EXPERTISES: Expertise[] = [
     description:
       "Documentation aérienne périodique de l'avancement de vos travaux pour reporting et archivage.",
   },
-  {
-    key: "photogrammetrie",
-    slug: "photogrammetrie",
-    index: "04",
-    title: "Photogrammétrie",
-    description:
-      "Modélisation 3D précise par traitement d'images aériennes pour l'ingénierie et le patrimoine.",
-  },
 ];
