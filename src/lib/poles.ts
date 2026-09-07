@@ -307,14 +307,6 @@ export const POLES: Pole[] = [
         iconName: "Sprout",
       },
       {
-        name: "Semis anti-incendie (DFCI)",
-        slug: "semis-anti-incendie",
-        category: "Prévention / Collectivités",
-        description:
-          "Revégétalisation post-incendie, semis d'espèces peu combustibles sur zones de coupures, prévention de l'érosion sur sols dénudés. Service dédié aux collectivités, ONF et conservatoires.",
-        iconName: "Shield",
-      },
-      {
         name: "Blanchiment de serre",
         slug: "blanchiment-serre",
         category: "Régulation thermique",
