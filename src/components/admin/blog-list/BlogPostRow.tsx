@@ -66,12 +66,12 @@ const BlogPostRow = ({ post, onDelete }: Props) => {
           {post.status === "published" ? "Publié" : "Brouillon"}
         </span>
       </td>
-      <td className="py-3 px-3">
+      <td className="py-3 px-3 hidden lg:table-cell">
         <span className="blog-scope contents">
           <BlogCategoryPill category={post.category} />
         </span>
       </td>
-      <td className="py-3 px-3">
+      <td className="py-3 px-3 hidden lg:table-cell">
         {post.author && (
           <span
             className="inline-flex h-7 w-7 items-center justify-center rounded-full text-white text-[10px] font-semibold"
