@@ -228,9 +228,20 @@ const AdminBlogEditor = () => {
 
   // Auto-restore the locally-saved draft as soon as the form is initialized.
   // No banner, no click required — user comes back exactly where they left off.
+  // EXCEPTION: an imported article is an explicit user intent expressed seconds
+  // earlier, so it must always win over a passively saved local draft. When an
+  // import just happened, skip restoration and clear the stale "new" entry so it
+  // can't shadow the next import either.
   useEffect(() => {
     if (!formInitialized) return;
     if (draftAutoRestoredRef.current) return;
+
+    if (importedPayload) {
+      draftAutoRestoredRef.current = true;
+      clearDraft();
+      return;
+    }
+
     if (!recoveredDraft) return;
     const sameAsCurrent =
       JSON.stringify(recoveredDraft.values) === JSON.stringify(watchedValues);
@@ -242,7 +253,7 @@ const AdminBlogEditor = () => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formInitialized, recoveredDraft]);
+  }, [formInitialized, recoveredDraft, importedPayload, clearDraft]);
 
   const titleValue = watch("title");
   const slugValue = watch("slug");
