@@ -40,7 +40,7 @@ const InfoCard = ({
       <div className="flex items-center gap-1.5 text-[13px] text-text-muted">
         <span>{detail}</span>
         <ArrowUpRight
-          className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 text-logo-base-deep"
+          className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 text-logo-base-deep motion-reduce:transform-none"
           strokeWidth={2.2}
         />
       </div>
