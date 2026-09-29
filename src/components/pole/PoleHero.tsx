@@ -40,7 +40,7 @@ const PoleHero = ({ pole }: Props) => {
         <div className="absolute inset-0 z-0" aria-hidden="true">
           <img
             src={pole.heroImage}
-            alt={`${pole.label} par drone professionnel en Corse — Corse Drone`}
+            alt={`${pole.label} par drone professionnel en Corse, Corse Drone`}
             loading="eager"
             decoding="async"
             fetchPriority="high"

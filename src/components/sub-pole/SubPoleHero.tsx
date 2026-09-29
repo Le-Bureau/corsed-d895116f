@@ -36,7 +36,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src={content.heroImage}
-            alt={`${content.heroTitle} par drone — Corse Drone`}
+            alt={`${content.heroTitle} par drone, Corse Drone`}
             className="w-full h-full object-cover"
             style={{ objectPosition: "center" }}
             loading="eager"
