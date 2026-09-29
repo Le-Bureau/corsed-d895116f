@@ -1,0 +1,10 @@
+{
+  "functions": [
+    {
+      "name": "notify-lead",
+      "classification": "Deno-only dependency",
+      "signal": "imports zod from https://deno.land/x/zod@v3.23.8/mod.ts; called from 3 src/ files but explicitly scoped out of the migration by the user (email delivery must stay untouched)",
+      "outcome": "left"
+    }
+  ]
+}
