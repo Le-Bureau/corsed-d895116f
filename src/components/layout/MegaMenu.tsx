@@ -9,7 +9,7 @@ import { useUIBanner } from "@/contexts/UIBannerContext";
 interface Props {
   open: boolean;
   onClose: () => void;
-  triggerRef: React.RefObject<HTMLButtonElement>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 }

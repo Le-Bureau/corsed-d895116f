@@ -12,7 +12,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 interface Props {
   open: boolean;
   onClose: () => void;
-  triggerRef: React.RefObject<HTMLButtonElement>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 const NAV_LINKS = [
@@ -105,6 +105,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
       const t = window.setTimeout(() => triggerRef.current?.focus(), 50);
       return () => window.clearTimeout(t);
     }
+    return undefined;
   }, [open, triggerRef]);
 
   return (
@@ -152,7 +153,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
 
             {/* Sections */}
             <motion.nav
-              variants={reduced ? undefined : sectionsContainer}
+              {...(reduced ? {} : { variants: sectionsContainer })}
               initial="hidden"
               animate="show"
               className="mt-8 flex flex-1 flex-col"

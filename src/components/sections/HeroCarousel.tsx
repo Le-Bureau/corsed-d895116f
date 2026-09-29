@@ -211,7 +211,7 @@ const HeroCarousel = () => {
             return (
               <motion.div
                 key={pole.key}
-                ref={(el) => (titleRefs.current[i] = el)}
+                ref={(el) => { titleRefs.current[i] = el; }}
                 role={isGhost ? "button" : undefined}
                 tabIndex={isGhost ? 0 : -1}
                 aria-hidden={!isActive ? "true" : undefined}
