@@ -46,7 +46,7 @@ const PlausibleTracker = () => {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: ({ matches }) => {
-    console.log("HEAD_MATCHES", JSON.stringify(matches.map((m:any)=>({id:m.routeId,status:m.status})))); const isNotFound = matches.some((m) => m.status === "notFound");
+    console.log("HEAD_MATCHES", JSON.stringify(matches.map((m:any)=>({id:m.routeId,status:m.status,err:m.error?.routerCode??m.error?.message,nf:m.notFound}))));
     return {
     meta: [
       { charSet: "utf-8" },
