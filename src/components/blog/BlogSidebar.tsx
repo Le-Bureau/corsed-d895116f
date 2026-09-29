@@ -94,7 +94,7 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
             <polyline points="22,6 12,13 2,6" />
           </svg>
           Newsletter&nbsp;
-        </a>
+        </button>
       </div>
     </aside>
   );
