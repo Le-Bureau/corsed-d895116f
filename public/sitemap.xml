@@ -2,99 +2,93 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://corse-drone.com/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/blog</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/contact</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/partenaires</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/nettoyage</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/diagnostic</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/agriculture</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/transport</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/nettoyage/toitures</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/nettoyage/facades</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/nettoyage/panneaux-solaires</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/diagnostic/thermique</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/pole/diagnostic/visuel</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/mentions-legales</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/politique-confidentialite</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://corse-drone.com/blog/fixation-amiante-drone-corse</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://corse-drone.com/blog/canari-fixation-amiante-drone-terelian-vinci</loc>
@@ -115,8 +109,32 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://corse-drone.com/blog/fixation-amiante-drone-corse</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://corse-drone.com/blog/nettoyage-panneaux-solaires-drone-corse</loc>
     <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://corse-drone.com/blog/imagerie-multispectrale-par-drone-ce-quelle-apporte-aux-cultures-corses</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://corse-drone.com/blog/sable-sahara-panneaux-solaires-corse</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://corse-drone.com/blog/inspection-toiture-drone-cab-bastia</loc>
+    <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
