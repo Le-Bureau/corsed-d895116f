@@ -140,7 +140,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
           >
             {/* Top bar */}
             <div className="flex items-center justify-between">
-              <HeaderLogo tone="on-dark" onClick={onClose} className="h-24" />
+              <HeaderLogo onClick={onClose} className="h-24" />
               <button
                 type="button"
                 onClick={onClose}
