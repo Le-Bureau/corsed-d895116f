@@ -5,6 +5,14 @@ import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { SUB_POLE_META, LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
+const SUB_POLE_TITLES: Record<string, string> = {
+  toitures: "Nettoyage de toiture par drone en Corse",
+  facades: "Nettoyage de façade par drone en Corse",
+  "panneaux-solaires": "Nettoyage de panneaux solaires par drone en Corse",
+  thermique: "Thermographie par drone en Corse",
+  visuel: "Inspection visuelle par drone en Corse",
+};
+
 export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
   loader: ({ params }) => {
     const pole = POLES.some((p) => p.key === params.slug);
@@ -25,7 +33,7 @@ export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
       });
     }
     return seoHead({
-      title: `${content.heroTitle} par drone`,
+      title: SUB_POLE_TITLES[params.subSlug] || content.heroTitle,
       description:
         SUB_POLE_META[params.subSlug] || (content.heroPitch || "").slice(0, 160),
       canonicalPath: `/pole/${params.slug}/${params.subSlug}`,

@@ -72,7 +72,7 @@ const BLOG_DEFAULT_DESC =
 const RSS_LINK = {
   rel: "alternate",
   type: "application/rss+xml",
-  title: "Corse Drone — Le journal de bord",
+  title: "Le journal de bord",
   href: `${SITE_URL}/rss.xml`,
 };
 
@@ -81,7 +81,7 @@ export function blogIndexHead(activeCategoryName?: string | null) {
     ? `${activeCategoryName} | Blog | ${SITE_NAME}`
     : `Blog | ${SITE_NAME}`;
   const description = activeCategoryName
-    ? `Articles dans la catégorie ${activeCategoryName} — ${SITE_NAME}.`
+    ? `Articles dans la catégorie ${activeCategoryName}, ${SITE_NAME}.`
     : BLOG_DEFAULT_DESC;
 
   return seoHead({

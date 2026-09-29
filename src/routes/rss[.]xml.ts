@@ -41,7 +41,7 @@ export const Route = createFileRoute("/rss.xml")({
         const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-  <title>Corse Drone — Le journal de bord</title>
+  <title>Le journal de bord | Corse Drone</title>
   <link>${SITE_URL}/blog</link>
   <description>Retours de chantiers, expertises drone et actualités du secteur. Le journal de bord de Corse Drone, écrit depuis Bastia.</description>
   <language>fr-FR</language>

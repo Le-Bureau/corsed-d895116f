@@ -13,7 +13,7 @@ const ExpertiseItem = ({ expertise }: Props) => {
   return (
     <Link
       to={`/contact?expertise=${expertise.slug}`}
-      aria-label={`${expertise.index} ${expertise.title} — Demander un devis`}
+      aria-label={`${expertise.index} ${expertise.title}, demander un devis`}
       className={`block border-b border-border-subtle transition-colors duration-300 ease-out hover:bg-surface-card group
                   grid items-center gap-4 px-0 py-6 lg:gap-8 lg:py-8
                   grid-cols-[50px_1fr_40px] grid-rows-[auto_auto]

@@ -366,12 +366,8 @@ export default function PolitiqueConfidentialite() {
                 </p>
                 <ul>
                   <li>
-                    Adhésion au Data Privacy Framework (cadre de protection
-                    des données UE-USA)
-                  </li>
-                  <li>
-                    Application de clauses contractuelles types approuvées par
-                    la Commission européenne
+                    Application de clauses contractuelles types de la
+                    Commission européenne
                   </li>
                 </ul>
                 <p>

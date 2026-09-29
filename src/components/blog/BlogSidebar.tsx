@@ -86,7 +86,7 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
           type="button"
           onClick={() => {
             trackEvent(Events.NEWSLETTER_INTEREST, { source: "sidebar" });
-            toast("Bientôt disponible — restez à l'écoute");
+            toast("Bientôt disponible, restez à l'écoute");
           }}
         >
           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>

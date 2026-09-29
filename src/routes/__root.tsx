@@ -140,7 +140,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "alternate",
         type: "application/rss+xml",
-        title: "Corse Drone — Le journal de bord",
+        title: "Le journal de bord | Corse Drone",
         href: "https://corse-drone.com/rss.xml",
       },
     ],

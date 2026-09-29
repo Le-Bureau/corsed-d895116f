@@ -32,7 +32,7 @@ export const Route = createFileRoute("/_public/pole/$slug/")({
         "@context": "https://schema.org",
         "@type": "Service",
         serviceType: pole.label,
-        name: `${pole.label} par drone — Corse Drone`,
+        name: `${pole.label} par drone, Corse Drone`,
         description: pole.heroPitch || pole.pitch,
         provider: { "@id": LOCAL_BUSINESS_ID },
         areaServed: { "@type": "AdministrativeArea", name: "Corse" },
