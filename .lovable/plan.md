@@ -29,8 +29,9 @@ La migration se lance avec l'outil intégré (menu "/" puis "Migrate to TanStack
 | `/admin/login`, `/admin`, `/admin/blog`, `/admin/blog/new`, `/admin/blog/:id/edit`, `/admin/profil` | `admin.*.tsx` |
 
 - **Barre finale** : le routeur est réglé en `trailingSlash: "never"`, identique à aujourd'hui. Les canonicals restent sans barre finale (sauf `/`).
-- **Titre, description, canonical, Open Graph, Twitter, robots, `lang="fr"`** : le composant `SEO` actuel devient un utilitaire `seoHead({ title, description, canonicalPath, ogImage, ogType, noindex, jsonLd })` qui produit exactement les mêmes balises et le même format de titre (suffixe " — Corse Drone" ajouté seulement s'il manque). Chaque route l'appelle dans `head()` avec les mêmes valeurs que ses props actuelles.
-- **JSON-LD** : le même objet est émis en `<script type="application/ld+json">` via `head()` (LocalBusiness de l'accueil avec `CONTACT.phoneLink`, Article et BreadcrumbList du blog, FAQ si présente).
+- **Titre, description, canonical, Open Graph, Twitter, robots, `lang="fr"`** : le composant `SEO` actuel devient un utilitaire `seoHead({ title, description, canonicalPath, ogImage, ogType, noindex, jsonLd })` qui produit exactement les mêmes balises et le même format de titre (suffixe " | Corse Drone" ajouté seulement s'il manque). Chaque route l'appelle dans `head()` avec les mêmes valeurs que ses props actuelles.
+- **Format des titres (écart volontaire)** : plus de tiret cadratin nulle part. Le suffixe devient « | Corse Drone » (exemple : « Nettoyage par drone en Corse | Corse Drone »). Même règle pour `og:title` et `twitter:title`. C'est le seul écart volontaire par rapport aux balises actuelles.
+- **JSON-LD** : le même objet est émis en `<script type="application/ld+json">` via `head()` (LocalBusiness de l'accueil avec `CONTACT.phoneLink`, et pour le blog exactement le type actuel `BlogPosting` — pas `Article` — avec les mêmes propriétés qu'aujourd'hui, plus le `BreadcrumbList` existant).
 - **Balises globales** d'`index.html` (vérification Search Console, favicons, apple-touch-icon, preload Fraunces/Geist 600, script Plausible) reportées dans `__root.tsx`.
 - **Contrôle automatique** : avant la bascule, un script capture pour chaque URL publique le `<head>` du site actuel publié ; après migration, la même capture sur la prévisualisation ; les deux sont comparées balise par balise.
 
@@ -78,7 +79,8 @@ Le rendu serveur et le premier rendu navigateur doivent être identiques : aucun
 
 ## 7. Pages introuvables
 
-- `notFoundComponent` de `__root.tsx` affiche la page `NotFound` actuelle (en français, avec Header et Footer), statut HTTP 404, `noindex`.
+- La page `NotFound` actuelle est en anglais (« Oops! Page not found », « Return to Home ») : elle est réécrite en français dans la charte du site — titre « Page introuvable », courte phrase, lien « Retour à l'accueil » — avec Header et Footer.
+- `notFoundComponent` de `__root.tsx` affiche cette page avec le statut HTTP 404 et `noindex`.
 - S'applique aux URL inconnues, aux articles absents et aux pôles ou sous-pôles inexistants (`notFound()` dans le loader).
 
 ## 8. Coût, risques et limites
@@ -109,6 +111,16 @@ Le rendu serveur et le premier rendu navigateur doivent être identiques : aucun
 7. Formulaire de contact : envoi réel avec une adresse valide, email reçu.
 
 **Retour arrière** : tant que rien n'est publié, le site en ligne n'est pas affecté. Si besoin, restaurer depuis l'historique du chat la version d'avant le message de migration ; le code et le mode de publication reviennent tous deux à l'état actuel. Ne publier qu'après validation complète des points ci-dessus.
+
+## Écarts volontaires par rapport au site actuel
+
+La comparaison avant publication doit distinguer ces différences voulues des régressions :
+
+1. **Titres sans tiret cadratin** : suffixe « | Corse Drone » partout, y compris `og:title` et `twitter:title`.
+2. **og:image des articles** : image de couverture de l'article (déjà le cas aujourd'hui via `BlogPostSEO`, confirmé comme comportement de référence).
+3. **404 réelle** : page française « Page introuvable » avec statut HTTP 404, au lieu du shell SPA actuel qui répond 200 avec le HTML de l'accueil.
+4. **noindex sur l'admin** : les routes `/admin*` portent `noindex` (elles étaient exclues du prérendu mais pas explicitement noindex).
+5. **Contenu visible dans le HTML serveur** : les sections animées au scroll sont rendues visibles dans le HTML initial (l'effet d'apparition ne s'applique qu'au navigateur), donc le HTML brut contient tout le texte.
 
 ## Hypothèses retenues
 
