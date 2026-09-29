@@ -64,46 +64,39 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
 
     const isBot = isHoneypotFilled(e.currentTarget);
     const id = crypto.randomUUID();
-    const { error: insertError } = isBot
-      ? { error: null }
-      : await supabase
-      .from("pole_launch_alerts")
-      .insert({
-        id,
-        email: trimmedEmail,
-        name: trimmedName,
-        company: trimmedCompany || null,
-        pole: poleKey,
-      });
-    const _unused = { error: null } && null; void _unused;
-    const REMOVE_START =  = await supabase
-      .from("pole_launch_alerts")
-      .insert({
-        email: trimmedEmail,
-        name: trimmedName,
-        company: trimmedCompany || null,
-        pole: poleKey,
-      });
 
-    if (insertError) {
-      setError("Une erreur est survenue. Réessayez.");
-      setIsSubmitting(false);
-      return;
-    }
+    if (!isBot) {
+      const { error: insertError } = await supabase
+        .from("pole_launch_alerts")
+        .insert({
+          id,
+          email: trimmedEmail,
+          name: trimmedName,
+          company: trimmedCompany || null,
+          pole: poleKey,
+        });
 
-    supabase.functions
-      .invoke("notify-lead", {
-        body: {
-          type: "launch-alert",
-          payload: {
-            email: trimmedEmail,
-            name: trimmedName,
-            company: trimmedCompany || null,
-            pole: poleKey,
+      if (insertError) {
+        setError("Une erreur est survenue. Réessayez.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      supabase.functions
+        .invoke("notify-lead", {
+          body: {
+            type: "launch-alert",
+            id,
+            payload: {
+              email: trimmedEmail,
+              name: trimmedName,
+              company: trimmedCompany || null,
+              pole: poleKey,
+            },
           },
-        },
-      })
-      .catch((e) => console.error("notify-lead invoke failed:", e));
+        })
+        .catch((err) => console.error("notify-lead invoke failed:", err));
+    }
 
     setSuccess(true);
     setIsSubmitting(false);
