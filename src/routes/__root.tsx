@@ -124,7 +124,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/rss+xml",
         title: "Corse Drone — Le journal de bord",
         href: "https://corse-drone.com/rss.xml",
-
       },
     ],
     scripts: [
@@ -137,7 +136,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
       },
     ],
-  }),
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFound,
