@@ -37,6 +37,7 @@ import { Link } from "@/lib/router-compat";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { POLES } from "@/lib/poles";
+import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { reportLovableError } from "@/lib/lovable-error-reporting";
 
 const PlausibleTracker = () => {
@@ -47,7 +48,20 @@ const PlausibleTracker = () => {
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: ({ matches }) => {
     // No leaf route matched → the notFoundComponent is rendering (true 404).
-    const isNotFound = matches.every((m) => m.routeId === "__root__");
+    // Pole routes with an unknown slug also render the 404 (their loader
+    // throws notFound, which skips their own head), so detect them here.
+    const leaf = matches[matches.length - 1];
+    const leafParams = (leaf?.params ?? {}) as Record<string, string>;
+    const invalidPole =
+      (leaf?.routeId === "/_public/pole/$slug/" ||
+        leaf?.routeId === "/_public/pole/$slug/$subSlug") &&
+      (!POLES.some((p) => p.key === leafParams["slug"]) ||
+        (leaf.routeId === "/_public/pole/$slug/$subSlug" &&
+          !SUB_POLE_CONTENT[leafParams["slug"] ?? ""]?.[
+            leafParams["subSlug"] ?? ""
+          ]));
+    const isNotFound =
+      matches.every((m) => m.routeId === "__root__") || invalidPole;
     return {
     meta: [
       { charSet: "utf-8" },
