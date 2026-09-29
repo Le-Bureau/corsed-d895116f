@@ -4,7 +4,7 @@ import { seoHead } from "@/lib/seo-head";
 import { POLES } from "@/lib/poles";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
-export const Route = createFileRoute("/_public/pole/$slug")({
+export const Route = createFileRoute("/_public/pole/$slug/")({
   head: ({ params }) => {
     const pole = POLES.find((p) => p.key === params.slug);
     if (!pole) {
