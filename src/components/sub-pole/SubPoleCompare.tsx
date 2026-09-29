@@ -3,9 +3,9 @@ import type { SubPoleCompareCol } from "@/lib/sub-poles";
 
 interface Props {
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
   cols: SubPoleCompareCol[];
-  disclaimer?: string;
+  disclaimer?: string | undefined;
 }
 
 const SubPoleCompare = ({ title, subtitle, cols, disclaimer }: Props) => {

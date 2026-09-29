@@ -67,8 +67,8 @@ export interface Pole {
   heroImageAlt?: string;
   heroPoleNumber?: string;
   heroPitch?: string;
-  whyDroneItems?: WhyDroneItem[];
-  processSteps?: ProcessStep[];
+  whyDroneItems?: WhyDroneItem[] | undefined;
+  processSteps?: ProcessStep[] | undefined;
   useCases?: UseCase[];
   poleFAQ?: PoleFAQItem[];
   finalCTATitle?: string;
