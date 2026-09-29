@@ -32,7 +32,7 @@ export function useCountUp({
     if (hasStarted || !elementRef.current) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0]?.isIntersecting) {
           setHasStarted(true);
           observer.disconnect();
         }
@@ -94,7 +94,7 @@ export function parseAnimatableStat(
   if (/\d-\d/.test(cleaned)) return null;
   const match = cleaned.match(/^([+-]?)(\d+(?:\.\d+)?)([+a-zA-Z%]*)$/);
   if (!match) return null;
-  const n = parseFloat(match[2]);
+  const n = parseFloat(match[2]!);
   if (n === 0) return null;
-  return { number: n, prefix: match[1], suffix: match[3] };
+  return { number: n, prefix: match[1] ?? "", suffix: match[3] ?? "" };
 }

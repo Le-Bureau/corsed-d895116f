@@ -12,7 +12,8 @@ export const useHomeBlogSelection = () => {
   const selection = useMemo<HomeBlogSelection>(() => {
     const posts = query.data ?? [];
     if (posts.length === 0) return { featured: null, secondary: [] };
-    const featured = posts.find((p) => p.featuredOnHome) ?? posts[0];
+    const featured = posts.find((p) => p.featuredOnHome) ?? posts[0] ?? null;
+    if (!featured) return { featured: null, secondary: [] };
     const secondary = posts.filter((p) => p.id !== featured.id).slice(0, 2);
     return { featured, secondary };
   }, [query.data]);

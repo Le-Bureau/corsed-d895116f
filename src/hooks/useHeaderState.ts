@@ -88,7 +88,7 @@ export function useHeaderState(): HeaderState {
           break;
         }
       }
-      if (!chosen) chosen = sections[0];
+      if (!chosen) chosen = sections[0] ?? null;
       setActiveBg(readBg(chosen));
     };
 
@@ -116,7 +116,7 @@ export function useHeaderState(): HeaderState {
       (entries) => {
         const intersecting = entries.filter((e) => e.isIntersecting);
         if (intersecting.length === 0) return;
-        const target = intersecting[intersecting.length - 1].target;
+        const target = intersecting[intersecting.length - 1]!.target;
         pendingBg = readBg(target);
         if (rafId === null) rafId = requestAnimationFrame(flush);
       },
