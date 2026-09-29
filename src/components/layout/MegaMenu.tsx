@@ -96,7 +96,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                 role="menuitem"
                 to={`/pole/${pole.slug}`}
                 onClick={onClose}
-                className="group/title inline-flex items-center gap-1.5 mb-1.5 font-display text-[17px] font-bold tracking-[-0.02em] text-text-primary transition-all duration-200 rounded-md px-1 -mx-1 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15 self-start"
+                className="group/title inline-flex items-center gap-1.5 mb-1.5 font-display text-[17px] font-bold tracking-[-0.02em] text-text-primary transition-all duration-200 rounded-md px-1 -mx-1 focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black/15 self-start"
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.color = pole.baseColorOnLight)
                 }
@@ -118,7 +118,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                           role="menuitem"
                           to={`/pole/${pole.slug}/${sub.slug}`}
                           onClick={onClose}
-                          className="group/sublink flex items-center gap-2.5 py-2 px-2 -mx-2 rounded-lg text-[13px] text-text-secondary hover:bg-black/[0.02] transition-all duration-150 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15"
+                          className="group/sublink flex items-center gap-2.5 py-2 px-2 -mx-2 rounded-lg text-[13px] text-text-secondary hover:bg-black/[0.02] transition-all duration-150 focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black/15"
                           onMouseEnter={(e) => {
                             e.currentTarget.style.color = "var(--text-primary)";
                             const arrow = e.currentTarget.querySelector("[data-arrow]");
@@ -170,7 +170,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
               <Link
                 to={`/pole/${pole.slug}`}
                 onClick={onClose}
-                className="inline-flex items-center gap-1 mt-auto pt-3 border-t border-black/5 text-[12.5px] font-semibold transition-all duration-200 rounded-sm focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/15 self-start"
+                className="inline-flex items-center gap-1 mt-auto pt-3 border-t border-black/5 text-[12.5px] font-semibold transition-all duration-200 rounded-sm focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black/15 self-start"
                 style={{ color: pole.baseColorOnLight }}
               >
                 Voir tout le pôle

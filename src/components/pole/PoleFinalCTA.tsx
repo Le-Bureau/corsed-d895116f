@@ -76,7 +76,7 @@ const PoleFinalCTA = ({ pole }: Props) => {
                 {subtitle}
               </p>
               {(() => {
-                const sharedClass = "group inline-flex items-center gap-2 px-8 py-4 rounded-full text-[15px] font-semibold text-white transition-all duration-300 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+                const sharedClass = "group inline-flex items-center gap-2 px-8 py-4 rounded-full text-[15px] font-semibold text-white transition-all duration-300 focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2";
                 const sharedStyle = {
                   background: "var(--pole-color)",
                   boxShadow:

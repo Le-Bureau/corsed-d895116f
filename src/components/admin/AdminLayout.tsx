@@ -97,7 +97,7 @@ const AdminLayout = () => {
           <div className="ml-auto">
             <DropdownMenu>
               <DropdownMenuTrigger
-                className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="flex items-center gap-2 rounded-full focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 aria-label="Menu utilisateur"
               >
                 <span

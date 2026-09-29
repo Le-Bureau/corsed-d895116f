@@ -246,7 +246,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                     <Link
                       key={sub.slug}
                       to={`/pole/${pole.key}/${sub.slug}`}
-                      className="group/sub relative flex items-center justify-between py-4 border-b border-border-subtle last:border-b-0 text-text-primary text-base font-medium tracking-[-0.015em] transition-all duration-250 ease-out hover:pl-2 outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm"
+                      className="group/sub relative flex items-center justify-between py-4 border-b border-border-subtle last:border-b-0 text-text-primary text-base font-medium tracking-[-0.015em] transition-all duration-250 ease-out hover:pl-2 outline-hidden focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm"
                       style={
                         {
                           ["--tw-ring-color" as string]: `${color}66`,
@@ -298,7 +298,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
             <motion.div variants={itemVariants}>
               <Link
                 to={`/pole/${pole.key}`}
-                className="group/cta inline-flex items-center gap-2 mt-8 px-6 py-3.5 rounded-full transition-all duration-300 text-sm font-semibold text-white outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="group/cta inline-flex items-center gap-2 mt-8 px-6 py-3.5 rounded-full transition-all duration-300 text-sm font-semibold text-white outline-hidden focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2"
                 style={
                   {
                     background: color,

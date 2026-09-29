@@ -20,7 +20,7 @@ const ExpertiseItem = ({ expertise }: Props) => {
                   lg:grid-cols-[80px_1fr_1fr_60px] lg:grid-rows-1
                   transition-[padding] duration-300 ease-out
                   ${reduced ? "" : "lg:hover:pl-4"}
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-logo-base-deep/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-bg rounded-sm`}
+                  focus:outline-hidden focus-visible:ring-2 focus-visible:ring-logo-base-deep/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-bg rounded-sm`}
     >
       <span className="font-mono text-[13px] font-medium tracking-[0.1em] text-text-muted group-hover:text-logo-base-deep transition-colors duration-300 ease-out row-start-1 col-start-1">
         {expertise.index}

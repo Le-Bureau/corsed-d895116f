@@ -144,7 +144,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                 type="button"
                 onClick={onClose}
                 aria-label="Fermer le menu"
-                className="flex h-10 w-10 items-center justify-center rounded-full text-text-primary transition-colors hover:bg-black/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-text-primary transition-colors hover:bg-black/[0.05] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
               >
                 <X size={20} />
               </button>
@@ -166,7 +166,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                   type="button"
                   onClick={() => setServicesOpen((v) => !v)}
                   aria-expanded={servicesOpen}
-                  className="flex w-full items-center justify-between font-display text-[22px] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                  className="flex w-full items-center justify-between font-display text-[22px] font-medium focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                 >
                   <span>Pôles</span>
                   <ChevronDown
@@ -208,7 +208,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                   : undefined
                               }
                               aria-expanded={hasSubs ? isOpen : undefined}
-                              className="flex w-full items-center justify-between py-3 text-[15px] font-medium text-text-primary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                              className="flex w-full items-center justify-between py-3 text-[15px] font-medium text-text-primary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                             >
                               <span className="flex items-center gap-3">
                                 <span
@@ -251,7 +251,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                         <Link
                                           to={`/pole/${pole.slug}/${sub.slug}`}
                                           onClick={onClose}
-                                          className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                                          className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                                         >
                                           {sub.name}
                                         </Link>
@@ -266,7 +266,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                     <Link
                                       to={`/pole/${pole.slug}`}
                                       onClick={onClose}
-                                      className="flex items-center gap-1.5 py-2 text-[13px] font-medium uppercase tracking-[0.08em] text-text-primary transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                                      className="flex items-center gap-1.5 py-2 text-[13px] font-medium uppercase tracking-[0.08em] text-text-primary transition-opacity hover:opacity-70 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                                     >
                                       Voir le pôle
                                       <span aria-hidden>→</span>
@@ -283,7 +283,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                         <Link
                           to="/expertises"
                           onClick={onClose}
-                          className="flex items-center gap-3 py-3 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                          className="flex items-center gap-3 py-3 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                         >
                           <span
                             className="h-2 w-2 rounded-full"
@@ -308,7 +308,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                   <Link
                     to={link.to}
                     onClick={onClose}
-                    className="flex w-full items-center justify-between font-display text-[22px] font-medium transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                    className="flex w-full items-center justify-between font-display text-[22px] font-medium transition-opacity hover:opacity-80 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                   >
                     {link.label}
                   </Link>
@@ -328,7 +328,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                 <Link
                   to="/contact"
                   onClick={onClose}
-                  className="block w-full rounded-full bg-logo-base py-3 text-center text-[15px] font-semibold text-text-primary transition-colors hover:bg-logo-base-deep hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="block w-full rounded-full bg-logo-base py-3 text-center text-[15px] font-semibold text-text-primary transition-colors hover:bg-logo-base-deep hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
                   style={{ boxShadow: "0 2px 8px rgba(168,192,212,0.4)" }}
                 >
                   Demander un devis

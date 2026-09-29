@@ -16,7 +16,7 @@ const HeaderLogo = ({ className, tone = "on-light", onClick }: Props) => {
       to="/"
       onClick={onClick}
       className={cn(
-        "flex items-center h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md",
+        "flex items-center h-9 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md",
         className,
       )}
       aria-label="Corse Drone MCG — Accueil"

@@ -109,7 +109,7 @@ const Blog = () => {
                 <h2>Tous les articles</h2>
                 <span
                   aria-hidden
-                  className="inline-flex items-center gap-1.5 text-[13px] text-[color:var(--blog-text-muted)] px-1 py-0.5 opacity-60"
+                  className="inline-flex items-center gap-1.5 text-[13px] text-(--blog-text-muted) px-1 py-0.5 opacity-60"
                 >
                   Trier par : {SORT_LABELS[sort]}
                   <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ const Blog = () => {
                   <DropdownMenuTrigger asChild>
                     <button
                       type="button"
-                      className="inline-flex items-center gap-1.5 text-[13px] text-[color:var(--blog-text-muted)] hover:text-[color:var(--blog-text)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md px-1 py-0.5"
+                      className="inline-flex items-center gap-1.5 text-[13px] text-(--blog-text-muted) hover:text-(--blog-text) transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md px-1 py-0.5"
                     >
                       Trier par : {SORT_LABELS[sort]}
                       <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>

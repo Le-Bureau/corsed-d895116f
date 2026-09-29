@@ -118,7 +118,7 @@ const MarkdownToolbar = ({ textareaRef, value, onChange, postId }: Props) => {
               aria-label={label}
               className={cn(
                 "h-8 w-8 inline-flex items-center justify-center rounded text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary",
               )}
             >
               <Icon className="h-4 w-4" />
