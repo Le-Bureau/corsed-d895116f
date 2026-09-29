@@ -21,7 +21,7 @@ const FadeInWhenVisible = ({ children, className, delay = 0, duration = 0.6 }: P
       className={className}
       initial={false}
       animate={isVisible ? (reduced ? { opacity: 1 } : { opacity: 1, y: 0 }) : reduced ? { opacity: 0 } : { opacity: 0, y: ENTER_OFFSET }}
-      transition={{ duration, delay, ease: EASE }}
+      transition={isVisible ? { duration, delay, ease: EASE } : { duration: 0 }}
     >
       {children}
     </motion.div>

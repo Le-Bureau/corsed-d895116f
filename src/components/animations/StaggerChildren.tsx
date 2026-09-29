@@ -13,12 +13,12 @@ interface Props {
 }
 
 export const fadeUpItem: Variants = {
-  hidden: { opacity: 0, y: ENTER_OFFSET },
+  hidden: { opacity: 0, y: ENTER_OFFSET, transition: { duration: 0 } },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
 export const fadeOnlyItem: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, transition: { duration: 0 } },
   show: { opacity: 1, transition: { duration: 0.6, ease: EASE } },
 };
 
@@ -46,7 +46,7 @@ const StaggerChildren = ({
       ref={ref}
       className={className}
       variants={container}
-      initial="hidden"
+      initial={false}
       animate={isVisible ? "show" : "hidden"}
     >
       {children}

@@ -2,12 +2,14 @@ import { Link } from "@/lib/router-compat";
 import { motion, useReducedMotion, type Variants } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CONTACT } from "@/lib/contact";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const FooterCtaBlock = () => {
   const reduced = useReducedMotion();
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ rootMargin: "0px 0px -100px 0px" });
 
   const container: Variants = {
     hidden: {},
@@ -15,7 +17,9 @@ const FooterCtaBlock = () => {
   };
 
   const make = (y: number, delay: number): Variants => ({
-    hidden: reduced ? { opacity: 0 } : { opacity: 0, y },
+    hidden: reduced
+      ? { opacity: 0, transition: { duration: 0 } }
+      : { opacity: 0, y, transition: { duration: 0 } },
     show: {
       opacity: 1,
       y: 0,
@@ -27,9 +31,9 @@ const FooterCtaBlock = () => {
     <FadeInWhenVisible className="border-b border-white/[0.08] pb-16 md:pb-20 mb-12 md:mb-16">
       <motion.div
         variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
+        ref={ref}
+        initial={false}
+        animate={isVisible ? "show" : "hidden"}
         className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12"
       >
         <div className="max-w-[600px]">
