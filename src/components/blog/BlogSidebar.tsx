@@ -82,10 +82,9 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
           </svg>
           Flux RSS
         </a>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
+        <button
+          type="button"
+          onClick={() => {
             trackEvent(Events.NEWSLETTER_INTEREST, { source: "sidebar" });
             toast("Bientôt disponible — restez à l'écoute");
           }}
