@@ -57,8 +57,8 @@ const HeroCarousel = () => {
   const reduced = useReducedMotion();
 
   const [viewport, setViewport] = useState(() => ({
-    width: typeof window !== "undefined" ? window.innerWidth : 1200,
-    isMobile: typeof window !== "undefined" ? window.innerWidth < 768 : false,
+    width: 1200,
+    isMobile: false,
   }));
   const trackRef = useRef<HTMLDivElement>(null);
   const titleRefs = useRef<Array<HTMLDivElement | null>>([]);

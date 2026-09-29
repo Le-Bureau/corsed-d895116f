@@ -88,8 +88,7 @@ const HeroBackground = ({ currentIndex, direction }: HeroBackgroundProps) => {
             src={heroImage}
             alt=""
             aria-hidden
-            // @ts-expect-error fetchpriority is a valid HTML attribute, supported by browsers
-            fetchpriority="high"
+            fetchPriority="high"
             decoding="async"
             custom={direction}
             variants={imageVariants}
