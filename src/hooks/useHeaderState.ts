@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@/lib/router-compat";
 
 export type HeaderState = "top" | "scrolled-dark" | "scrolled-light";
 export type SectionBg = "dark" | "light";

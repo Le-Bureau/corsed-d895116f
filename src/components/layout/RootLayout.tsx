@@ -1,4 +1,4 @@
-import { useLocation, useOutlet } from "react-router-dom";
+import { useLocation, useOutlet } from "@/lib/router-compat";
 import { AnimatePresence } from "motion/react";
 import Header from "./Header";
 import Footer from "./Footer";

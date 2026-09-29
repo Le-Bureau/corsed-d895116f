@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import BlogCard from "./BlogCard";
 import { useBlogPosts } from "@/hooks/blog/useBlogPosts";
 import { Events, trackEvent } from "@/lib/analytics";

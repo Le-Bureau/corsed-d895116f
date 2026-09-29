@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm, type UseFormRegister, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link } from "@/lib/router-compat";
 import { useReducedMotion } from "motion/react";
 import { Loader2, Send } from "lucide-react";
 import { toast } from "sonner";

@@ -1,4 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate } from "@/lib/router-compat";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
 import { SEO } from "@/components/seo/SEO";

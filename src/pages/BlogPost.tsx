@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "@/lib/router-compat";
 import SEO from "@/components/seo/SEO";
 import BlogPostSEO from "@/components/seo/BlogPostSEO";
 import BlogTOC from "@/components/blog/BlogTOC";

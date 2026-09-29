@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "@/lib/router-compat";
 import { ArrowRight, ChevronDown, Menu } from "lucide-react";
 
 import MegaMenu from "./MegaMenu";

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "@/lib/router-compat";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import { ChevronDown, X } from "lucide-react";
 import HeaderLogo from "./HeaderLogo";

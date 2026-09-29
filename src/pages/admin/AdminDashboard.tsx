@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowRight, BookOpen, Camera, User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminBlogPosts } from "@/hooks/admin/useAdminBlogPosts";

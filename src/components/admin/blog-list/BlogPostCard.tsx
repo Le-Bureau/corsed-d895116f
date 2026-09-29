@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ExternalLink, MoreVertical, Pencil, Star, Trash2 } from "lucide-react";
 import {
   DropdownMenu,

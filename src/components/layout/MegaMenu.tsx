@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "@/lib/router-compat";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";

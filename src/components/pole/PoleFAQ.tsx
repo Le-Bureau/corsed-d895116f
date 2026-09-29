@@ -1,5 +1,5 @@
 import { ChevronDown, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import type { PoleFAQItem } from "@/lib/poles";
 
