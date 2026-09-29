@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm, type UseFormRegister, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link } from "@/lib/router-compat";
 import { useReducedMotion } from "motion/react";
 import { Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
@@ -18,7 +18,7 @@ const labelBase =
   "block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-muted mb-2";
 
 const inputBase =
-  "w-full bg-transparent border-0 border-b-[1.5px] text-text-primary font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-text-muted/50";
+  "w-full bg-transparent border-0 border-b-[1.5px] text-text-primary font-display text-base py-2.5 px-0 outline-hidden transition-colors duration-200 placeholder:text-text-muted/50";
 
 interface FieldGroupProps {
   name: keyof PartnerFormData;

@@ -1,5 +1,5 @@
 import { ChevronDown, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import type { PoleFAQItem } from "@/lib/poles";
 
@@ -44,7 +44,7 @@ const PoleFAQ = ({ items }: Props) => {
               </p>
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-md"
+                className="group inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 rounded-md"
                 style={
                   {
                     color: "var(--pole-color)",

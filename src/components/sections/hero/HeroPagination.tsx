@@ -19,7 +19,7 @@ const HeroPagination = ({ currentIndex, onSelect }: HeroPaginationProps) => {
             aria-label={`${String(i + 1).padStart(2, "0")} ${p.label}`}
             aria-current={active ? "true" : undefined}
             className={cn(
-              "px-4 py-2.5 rounded-full transition-all duration-250 font-mono text-[13px] font-medium inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-darker",
+              "px-4 py-2.5 rounded-full transition-all duration-250 font-mono text-[13px] font-medium inline-flex items-center gap-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-darker",
               active
                 ? "bg-white/[0.95] text-surface-darker"
                 : "bg-transparent text-text-on-dark-muted hover:bg-white/[0.08] hover:text-text-on-dark"

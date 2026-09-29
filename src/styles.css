@@ -1,6 +1,212 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition (ported from the Classic src/index.css + tailwind.config.ts).
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ * The :root block below defines the actual values.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Core semantic colors (shadcn-compatible, mapped to brand) */
+  --color-background: var(--background);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--background);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--background);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--text-on-dark);
+  --color-secondary: var(--surface-tint);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--surface-tint);
+  --color-muted-foreground: var(--text-secondary);
+  --color-accent: var(--primary-tint);
+  --color-accent-foreground: var(--primary-deep);
+  --color-destructive: var(--pole-diag-base-onlight);
+  --color-destructive-foreground: var(--text-on-dark);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+
+  /* Surfaces */
+  --color-surface: var(--background);
+  --color-surface-bg: var(--surface-bg);
+  --color-surface-card: var(--surface-card);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-tint: var(--surface-tint);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-darker: var(--surface-darker);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-on-dark: var(--text-on-dark);
+  --color-text-on-dark-muted: var(--text-on-dark-muted);
+
+  /* Borders */
+  --color-border-on-dark: var(--border-on-dark);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+
+  /* Logo identity */
+  --color-logo-base: var(--logo-base);
+  --color-logo-base-deep: var(--logo-base-deep);
+  --color-logo-deep: var(--logo-deep);
+  --color-logo-tint: var(--logo-tint);
+
+  /* Primary (brand = pôle Nettoyage) */
+  --color-primary-deep: var(--primary-deep);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-light: var(--primary-light);
+
+  /* Pole tokens */
+  --color-pole-nettoyage-base: var(--pole-nettoyage-base);
+  --color-pole-nettoyage-deep: var(--pole-nettoyage-deep);
+  --color-pole-nettoyage-tint: var(--pole-nettoyage-tint);
+  --color-pole-nettoyage-light: var(--pole-nettoyage-light);
+  --color-pole-diag-base-onlight: var(--pole-diag-base-onlight);
+  --color-pole-diag-base-ondark: var(--pole-diag-base-ondark);
+  --color-pole-diag-deep: var(--pole-diag-deep);
+  --color-pole-diag-tint: var(--pole-diag-tint);
+  --color-pole-agri-base-onlight: var(--pole-agri-base-onlight);
+  --color-pole-agri-base-ondark: var(--pole-agri-base-ondark);
+  --color-pole-agri-deep: var(--pole-agri-deep);
+  --color-pole-agri-tint: var(--pole-agri-tint);
+  --color-pole-transport-base: var(--pole-transport-base);
+  --color-pole-transport-deep: var(--pole-transport-deep);
+  --color-pole-transport-tint: var(--pole-transport-tint);
+  --color-pole-transport-light: var(--pole-transport-light);
+
+  /* Blog category colors */
+  --color-cat-nettoyage: #5082AC;
+  --color-cat-diagnostic: #14B8A6;
+  --color-cat-agriculture: #16A34A;
+  --color-cat-transport: #F59E0B;
+  --color-cat-cas-clients: #8B5CF6;
+  --color-cat-actualites-drone: #DC2626;
+  --color-cat-actualites-boite: #475569;
+
+  /* Fonts */
+  --font-sans: "Inter", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist", "Geist Sans", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-fraunces: "Fraunces", "Fraunces Fallback", Georgia, "Times New Roman", serif;
+  --font-geist: "Geist", "Geist Sans", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+
+  /* Easing curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  /* Soft shadow system */
+  --shadow-soft-sm: var(--shadow-sm);
+  --shadow-soft-md: var(--shadow-md);
+  --shadow-soft-lg: var(--shadow-lg);
+  --shadow-soft-xl: var(--shadow-xl);
+
+  /* max-w-container */
+  --container-container: 1280px;
+
+  /* Accordion animations (shadcn ui/accordion) */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+:root {
+  /* Light surfaces (dominant) */
+  --surface-bg: #F5F7FA;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #FAFBFC;
+
+  /* Background resolves to the light grey base */
+  --background: var(--surface-bg);
+  --surface-tint: #FAFBFD;
+  --surface-dark: #0A0E1A;
+  --surface-darker: #050811;
+
+  /* Text */
+  --text-primary: #0A0E1A;
+  --text-secondary: #4A5061;
+  --text-muted: #6B7280;
+  --text-on-dark: #FAFAFC;
+  --text-on-dark-muted: rgba(250, 250, 252, 0.65);
+
+  /* Borders */
+  --border: rgba(10, 14, 26, 0.08);
+  --border-subtle: #E5E8EC;
+  --border-default: #D8DCE4;
+  --border-on-dark: rgba(255, 255, 255, 0.1);
+
+  /* Logo identity */
+  --logo-base: #A8C0D4;
+  --logo-base-rgb: 168, 192, 212;
+  --logo-deep: #4F6F8E;
+  --logo-base-deep: #6B8FB1;
+  --logo-tint: #F2F6FA;
+
+  /* Shadow system (light mode) */
+  --shadow-sm: 0 1px 2px rgba(10, 14, 26, 0.04), 0 1px 3px rgba(10, 14, 26, 0.06);
+  --shadow-md: 0 4px 12px rgba(10, 14, 26, 0.06), 0 2px 6px rgba(10, 14, 26, 0.04);
+  --shadow-lg: 0 12px 32px rgba(10, 14, 26, 0.08), 0 4px 12px rgba(10, 14, 26, 0.04);
+  --shadow-xl: 0 24px 60px rgba(10, 14, 26, 0.10), 0 8px 24px rgba(10, 14, 26, 0.06);
+
+  /* Brand primary = pôle Nettoyage (phare) */
+  --primary: #5082AC;
+  --primary-deep: #2C5784;
+  --primary-tint: #E8F0F8;
+  --primary-light: #8FB1D0;
+
+  /* Pole tokens */
+  --pole-nettoyage-base: #5082AC;
+  --pole-nettoyage-deep: #2C5784;
+  --pole-nettoyage-tint: #E8F0F8;
+  --pole-nettoyage-light: #8FB1D0;
+
+  --pole-diag-base-onlight: #890000;
+  --pole-diag-base-ondark: #A33333;
+  --pole-diag-deep: #5C0000;
+  --pole-diag-tint: #FBE5E5;
+
+  --pole-agri-base-onlight: #2B5527;
+  --pole-agri-base-ondark: #3F7A38;
+  --pole-agri-deep: #1A3618;
+  --pole-agri-tint: #E6EDE5;
+
+  --pole-transport-base: #F4A60C;
+  --pole-transport-deep: #B57708;
+  --pole-transport-tint: #FEF5E1;
+  --pole-transport-light: #F8C355;
+
+  /* Easing curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  /* shadcn radius */
+  --radius: 0.5rem;
+}
+
+/* Container (ported from tailwind.config.ts: centered, px-5 / lg:px-10, max 1280px) */
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 1280px;
+}
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: 2.5rem;
+  }
+}
 
 /* Animatable color custom properties for hero pole transitions */
 @property --pole-base {
@@ -64,81 +270,6 @@
   }
 }
 
-@layer base {
-  :root {
-    /* Light surfaces (NEW — dominant) */
-    --surface-bg: #F5F7FA;
-    --surface-card: #FFFFFF;
-    --surface-elevated: #FAFBFC;
-
-    /* Background now resolves to the light grey base */
-    --background: var(--surface-bg);
-    --surface-tint: #FAFBFD;
-    --surface-dark: #0A0E1A;
-    --surface-darker: #050811;
-
-    /* Text */
-    --text-primary: #0A0E1A;
-    --text-secondary: #4A5061;
-    --text-muted: #6B7280;
-    --text-on-dark: #FAFAFC;
-    --text-on-dark-muted: rgba(250, 250, 252, 0.65);
-
-    /* Borders */
-    --border: rgba(10, 14, 26, 0.08);
-    --border-subtle: #E5E8EC;
-    --border-default: #D8DCE4;
-    --border-on-dark: rgba(255, 255, 255, 0.1);
-
-    /* Logo identity */
-    --logo-base: #A8C0D4;
-    --logo-base-rgb: 168, 192, 212;
-    --logo-deep: #4F6F8E;
-    --logo-base-deep: #6B8FB1;
-    --logo-tint: #F2F6FA;
-
-    /* Shadow system (light mode) */
-    --shadow-sm: 0 1px 2px rgba(10, 14, 26, 0.04), 0 1px 3px rgba(10, 14, 26, 0.06);
-    --shadow-md: 0 4px 12px rgba(10, 14, 26, 0.06), 0 2px 6px rgba(10, 14, 26, 0.04);
-    --shadow-lg: 0 12px 32px rgba(10, 14, 26, 0.08), 0 4px 12px rgba(10, 14, 26, 0.04);
-    --shadow-xl: 0 24px 60px rgba(10, 14, 26, 0.10), 0 8px 24px rgba(10, 14, 26, 0.06);
-
-    /* Brand primary = pôle Nettoyage (phare) */
-    --primary: #5082AC;
-    --primary-deep: #2C5784;
-    --primary-tint: #E8F0F8;
-    --primary-light: #8FB1D0;
-
-    /* Pole tokens */
-    --pole-nettoyage-base: #5082AC;
-    --pole-nettoyage-deep: #2C5784;
-    --pole-nettoyage-tint: #E8F0F8;
-    --pole-nettoyage-light: #8FB1D0;
-
-    --pole-diag-base-onlight: #890000;
-    --pole-diag-base-ondark: #A33333;
-    --pole-diag-deep: #5C0000;
-    --pole-diag-tint: #FBE5E5;
-
-    --pole-agri-base-onlight: #2B5527;
-    --pole-agri-base-ondark: #3F7A38;
-    --pole-agri-deep: #1A3618;
-    --pole-agri-tint: #E6EDE5;
-
-    --pole-transport-base: #F4A60C;
-    --pole-transport-deep: #B57708;
-    --pole-transport-tint: #FEF5E1;
-    --pole-transport-light: #F8C355;
-
-    /* Easing curves */
-    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
-
-    /* shadcn radius (kept) */
-    --radius: 0.5rem;
-  }
-}
-
 /* Fallback font metrics — minimize CLS during web font swap.
    These local() fonts are aliased to closely match the metrics
    of the real web fonts, so the layout barely shifts on swap. */
@@ -175,13 +306,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight;
-  }
-}
-
-@layer utilities {
-  .font-display {
-    font-family: 'Geist', 'Geist Sans', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -324,6 +449,16 @@ html.lenis body {
 @keyframes eyebrowGlow {
   0%, 100% { box-shadow: 0 0 8px currentColor; opacity: 1; }
   50% { box-shadow: 0 0 16px currentColor; opacity: 0.85; }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

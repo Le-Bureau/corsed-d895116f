@@ -1,0 +1,20 @@
+{
+  "customizations": [
+    { "token": "--surface-* / --background / --text-* / --border-* / --logo-* / --shadow-* / --primary* / --pole-* / --ease-* / --radius", "source": "src/index.css :root + tailwind.config.ts colors", "reappliedIn": "src/styles.css :root + @theme inline" },
+    { "token": "color utilities bg-surface-*, text-text-*, border-border-*, logo-*, pole-*, cat-*, primary-deep/tint/light", "source": "tailwind.config.ts theme.extend.colors", "reappliedIn": "src/styles.css @theme inline --color-*" },
+    { "token": "font-sans / font-display / font-fraunces / font-geist", "source": "tailwind.config.ts fontFamily", "reappliedIn": "src/styles.css @theme inline --font-*" },
+    { "token": "ease-out-expo / ease-in-out-expo", "source": "tailwind.config.ts transitionTimingFunction", "reappliedIn": "src/styles.css @theme inline --ease-*" },
+    { "token": "shadow-soft-sm/md/lg/xl", "source": "tailwind.config.ts boxShadow", "reappliedIn": "src/styles.css @theme inline --shadow-soft-*" },
+    { "token": "max-w-container + .container centering/padding", "source": "tailwind.config.ts container + maxWidth", "reappliedIn": "src/styles.css --container-container + .container CSS rule" },
+    { "token": "animate-accordion-down / animate-accordion-up", "source": "tailwind.config.ts keyframes/animation (tailwindcss-animate)", "reappliedIn": "src/styles.css @theme inline --animate-accordion-* + @keyframes" },
+    { "token": "@property --pole-base / --pole-deep / --border-angle", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "@keyframes border-light-pass / nodePulse / devPulse / eyebrowGlow / blogFadeUp", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": ".hover-border-card", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "@font-face Fraunces Fallback / Geist Fallback (CLS metrics)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "base layer: html font, body bg/color, headings tracking-tight, * border-color", "source": "src/index.css @layer base", "reappliedIn": "src/styles.css @layer base" },
+    { "token": ".glass-light / .glass-light-strong / .glass-dark / .glass-white + @supports fallback", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "Lenis smooth-scroll styles (html.lenis, .lenis-smooth, ...)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": ".cta-tinted-liquid / .cta-tinted-liquid-dark", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": ".blog-scope complete block (~1100 lines: layout, sidebar, cards, article, TOC, gallery, callout, CTA, responsive)", "source": "src/index.css", "reappliedIn": "src/styles.css" }
+  ]
+}

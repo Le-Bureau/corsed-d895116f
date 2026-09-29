@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import type { PartnerFormData } from "@/lib/partners/partnerSchema";
 import { CONTACT } from "@/lib/contact";
 

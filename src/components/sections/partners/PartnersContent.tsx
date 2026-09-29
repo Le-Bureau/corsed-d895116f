@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowRight, Check } from "lucide-react";
 import { motion } from "motion/react";
 import StaggerChildren, { fadeUpItem } from "@/components/animations/StaggerChildren";

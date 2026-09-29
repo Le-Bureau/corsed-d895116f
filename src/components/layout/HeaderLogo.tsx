@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { cn } from "@/lib/utils";
 import logoFull from "@/assets/logo-mcg-full.svg";
 import logoFullOnLight from "@/assets/logo-mcg-full-onlight.svg";
@@ -16,7 +16,7 @@ const HeaderLogo = ({ className, tone = "on-light", onClick }: Props) => {
       to="/"
       onClick={onClick}
       className={cn(
-        "flex items-center h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md",
+        "flex items-center h-9 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md",
         className,
       )}
       aria-label="Corse Drone MCG — Accueil"

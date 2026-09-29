@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Check, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import type { ContactFormData } from "@/lib/contactSchema";

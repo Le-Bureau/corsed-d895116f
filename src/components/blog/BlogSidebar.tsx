@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "@/lib/router-compat";
 import { Search } from "lucide-react";
 import { toast } from "sonner";
 import type { BlogCategory } from "@/types/blog";

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "@/lib/router-compat";
 import { ArrowRight, ChevronDown, Menu } from "lucide-react";
 
 import MegaMenu from "./MegaMenu";
@@ -45,7 +45,7 @@ const navItemClass = ({ isActive }: { isActive: boolean }) =>
     "px-3.5 py-[3.5px] rounded-full text-[13px] font-medium",
     "transition-colors duration-300",
     "text-black/60 hover:text-black",
-    "outline-none focus:outline-none focus-visible:outline-none",
+    "outline-hidden focus:outline-hidden focus-visible:outline-hidden",
     "focus-visible:ring-2 focus-visible:ring-black/15 focus-visible:ring-offset-0",
     isActive && "text-black",
   );
@@ -95,7 +95,7 @@ const Header = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            className="flex items-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
             aria-label="Corse Drone, Accueil"
           >
             <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
@@ -139,7 +139,7 @@ const Header = () => {
                   "flex items-center gap-1 px-3.5 py-[3.5px] rounded-full text-[13px] font-medium",
                   "transition-colors duration-300",
                   "text-black/60 hover:text-black",
-                  "outline-none focus:outline-none focus-visible:outline-none",
+                  "outline-hidden focus:outline-hidden focus-visible:outline-hidden",
                   "focus-visible:ring-2 focus-visible:ring-black/15 focus-visible:ring-offset-0",
                   (polesOpen || polesActive) && "text-black",
                 )}
@@ -191,7 +191,7 @@ const Header = () => {
             className={cn(
               "lg:hidden flex h-9 w-9 items-center justify-center rounded-full",
               "bg-black/[0.05] hover:bg-black/[0.08] transition-colors",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+              "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary",
             )}
           >
             <Menu size={18} />

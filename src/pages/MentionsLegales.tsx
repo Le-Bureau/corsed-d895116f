@@ -1,5 +1,5 @@
 import { useState, useEffect, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { SEO } from "@/components/seo/SEO";
 import { CONTACT } from "@/lib/contact";
 

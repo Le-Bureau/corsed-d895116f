@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useLenis } from "@/components/SmoothScrollProvider";
 import { type Pole } from "@/lib/poles";

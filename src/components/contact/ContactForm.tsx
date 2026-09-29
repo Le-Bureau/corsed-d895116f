@@ -1,5 +1,5 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { useReducedMotion } from "motion/react";
 import { Loader2, Send } from "lucide-react";
 import type { ContactFormData } from "@/lib/contactSchema";
@@ -11,7 +11,7 @@ const labelBase =
   "block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-muted mb-2";
 
 const inputBase =
-  "w-full bg-transparent border-0 border-b-[1.5px] border-border-default text-text-primary font-display text-base py-2.5 px-0 outline-none transition-colors duration-200 placeholder:text-text-muted/50";
+  "w-full bg-transparent border-0 border-b-[1.5px] border-border-default text-text-primary font-display text-base py-2.5 px-0 outline-hidden transition-colors duration-200 placeholder:text-text-muted/50";
 
 interface RequestCardProps {
   value: RequestType;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/types/blog";
 import BlogCategoryPill from "./BlogCategoryPill";

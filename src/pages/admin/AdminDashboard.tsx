@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowRight, BookOpen, Camera, User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminBlogPosts } from "@/hooks/admin/useAdminBlogPosts";
@@ -122,7 +122,7 @@ const DashboardCard = ({ icon, title, description, meta, ctaLabel, to, disabled 
 
   if (disabled || !to) return inner;
   return (
-    <Link to={to} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
+    <Link to={to} className="block focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
       {inner}
     </Link>
   );

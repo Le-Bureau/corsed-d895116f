@@ -207,7 +207,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                         onChange={(e) => setName(e.target.value)}
                         required
                         autoFocus
-                        className="w-full px-4 py-2.5 rounded-lg border border-border-default bg-surface-bg text-text-primary text-[14px] focus:outline-none focus:ring-2 focus:ring-text-primary/15 focus:border-transparent transition-all"
+                        className="w-full px-4 py-2.5 rounded-lg border border-border-default bg-surface-bg text-text-primary text-[14px] focus:outline-hidden focus:ring-2 focus:ring-text-primary/15 focus:border-transparent transition-all"
                         placeholder="Marc Dupont"
                       />
                     </div>
@@ -222,7 +222,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full px-4 py-2.5 rounded-lg border border-border-default bg-surface-bg text-text-primary text-[14px] focus:outline-none focus:ring-2 focus:ring-text-primary/15 focus:border-transparent transition-all"
+                        className="w-full px-4 py-2.5 rounded-lg border border-border-default bg-surface-bg text-text-primary text-[14px] focus:outline-hidden focus:ring-2 focus:ring-text-primary/15 focus:border-transparent transition-all"
                         placeholder="marc@exemple.fr"
                       />
                     </div>
@@ -236,7 +236,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                         type="text"
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
-                        className="w-full px-4 py-2.5 rounded-lg border border-border-default bg-surface-bg text-text-primary text-[14px] focus:outline-none focus:ring-2 focus:ring-text-primary/15 focus:border-transparent transition-all"
+                        className="w-full px-4 py-2.5 rounded-lg border border-border-default bg-surface-bg text-text-primary text-[14px] focus:outline-hidden focus:ring-2 focus:ring-text-primary/15 focus:border-transparent transition-all"
                         placeholder="Mon entreprise"
                       />
                     </div>
