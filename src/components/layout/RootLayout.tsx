@@ -1,4 +1,4 @@
-import { useLocation, useOutlet } from "@/lib/router-compat";
+import { useLocation, Outlet } from "@/lib/router-compat";
 import { AnimatePresence } from "motion/react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -7,14 +7,15 @@ import { PageTransition } from "./PageTransition";
 
 const RootLayout = () => {
   const location = useLocation();
-  const outlet = useOutlet();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-text-primary">
+    <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait" initial={false}>
-          <PageTransition key={location.pathname}>{outlet}</PageTransition>
+          <PageTransition key={location.pathname}>
+            <Outlet />
+          </PageTransition>
         </AnimatePresence>
       </main>
       <Footer />
