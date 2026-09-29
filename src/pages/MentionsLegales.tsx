@@ -19,7 +19,7 @@ const SECTIONS = [
   { id: "droit", label: "Droit applicable" },
 ];
 
-const LAST_UPDATE = "8 mai 2026";
+const LAST_UPDATE = "29 septembre 2026";
 
 export default function MentionsLegales() {
   const [activeSection, setActiveSection] = useState("editeur");
@@ -106,7 +106,7 @@ export default function MentionsLegales() {
               <Section id="editeur" title="Éditeur du site">
                 <p>
                   Le présent site, accessible à l'URL{" "}
-                  <strong>www.corse-drone.com</strong>, est édité par :
+                  <strong>corse-drone.com</strong>, est édité par :
                 </p>
                 <p>
                   <strong>SAS Corse Drone</strong>, Société par Actions
@@ -131,8 +131,11 @@ export default function MentionsLegales() {
                 </p>
                 <p>
                   <strong>Contact :</strong>{" "}
-                   <a href={CONTACT.emailLink}>{CONTACT.email}</a>
-                 </p>
+                  <a href={CONTACT.emailLink}>{CONTACT.email}</a>
+                  <br />
+                  Téléphone :{" "}
+                  <a href={CONTACT.phoneLink}>{CONTACT.phone}</a>
+                </p>
                </Section>
 
               <Section id="directeur" title="Directeur de la publication">
@@ -171,27 +174,28 @@ export default function MentionsLegales() {
               <Section id="hebergeur" title="Hébergeur">
                 <p>Le Site est hébergé par :</p>
                 <p>
-                  <strong>Vercel Inc.</strong>
+                  <strong>Lovable Labs Incorporated</strong>
                   <br />
-                  340 S Lemon Ave #4133
-                  <br />
-                  Walnut, CA 91789, États-Unis
+                  1 Lincoln St, Boston, MA 02111, États-Unis
                   <br />
                   Site :{" "}
                   <a
-                    href="https://vercel.com"
+                    href="https://lovable.dev"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    vercel.com
+                    lovable.dev
                   </a>
+                  <br />
+                  Contact :{" "}
+                  <a href="mailto:support@lovable.dev">support@lovable.dev</a>
                 </p>
               </Section>
 
               <Section id="rgpd" title="Protection des données personnelles">
                 <p>
                   Conformément au Règlement Général sur la Protection des
-                  Données (RGPD – Règlement UE 2016/679) et à la loi française
+                  Données (RGPD, Règlement UE 2016/679) et à la loi française
                   du 6 janvier 1978 modifiée, Corse Drone s'engage à assurer
                   la protection et la confidentialité des données
                   personnelles collectées via le présent Site.
@@ -266,7 +270,7 @@ export default function MentionsLegales() {
                 <p>
                   <strong>Conception et réalisation du site :</strong>
                   <br />
-                  SAS Le Bureau –{" "}
+                  SAS Le Bureau,{" "}
                   <a
                     href="https://www.lebureaubastia.fr"
                     target="_blank"

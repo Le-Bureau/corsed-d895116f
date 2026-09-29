@@ -20,7 +20,7 @@ const SECTIONS = [
   { id: "modifications", label: "Modifications" },
 ];
 
-const LAST_UPDATE = "8 mai 2026";
+const LAST_UPDATE = "29 septembre 2026";
 
 export default function PolitiqueConfidentialite() {
   const [activeSection, setActiveSection] = useState("introduction");
@@ -107,13 +107,13 @@ export default function PolitiqueConfidentialite() {
               <Section id="introduction" title="Introduction">
                 <p>
                   La présente politique de confidentialité s'applique au site{" "}
-                  <strong>www.corse-drone.com</strong> et décrit la manière dont
+                  <strong>corse-drone.com</strong> et décrit la manière dont
                   SAS Corse Drone collecte, utilise et protège les données
                   personnelles des utilisateurs du Site.
                 </p>
                 <p>
                   Cette politique respecte le Règlement Général sur la
-                  Protection des Données (RGPD – Règlement UE 2016/679) et la
+                  Protection des Données (RGPD, Règlement UE 2016/679) et la
                   loi française n° 78-17 du 6 janvier 1978 modifiée, dite
                   « Informatique et Libertés ».
                 </p>
@@ -158,26 +158,26 @@ export default function PolitiqueConfidentialite() {
                 <h3>Formulaire de contact</h3>
                 <ul>
                   <li>
-                    <strong>Nom</strong> : obligatoire — pour personnaliser
+                    <strong>Nom</strong> : obligatoire, pour personnaliser
                     notre réponse
                   </li>
                   <li>
-                    <strong>Email</strong> : obligatoire — pour vous répondre
+                    <strong>Email</strong> : obligatoire, pour vous répondre
                   </li>
                   <li>
-                    <strong>Téléphone</strong> : optionnel — si vous préférez
+                    <strong>Téléphone</strong> : optionnel, si vous préférez
                     un échange téléphonique
                   </li>
                   <li>
-                    <strong>Entreprise</strong> : optionnel — pour adapter
+                    <strong>Entreprise</strong> : optionnel, pour adapter
                     notre proposition à votre contexte
                   </li>
                   <li>
-                    <strong>Pôle d'intérêt</strong> : optionnel — pour orienter
+                    <strong>Pôle d'intérêt</strong> : optionnel, pour orienter
                     votre demande
                   </li>
                   <li>
-                    <strong>Message</strong> : obligatoire — votre demande
+                    <strong>Message</strong> : obligatoire, votre demande
                   </li>
                 </ul>
                 <h3>Formulaire candidature partenaire</h3>
@@ -198,15 +198,15 @@ export default function PolitiqueConfidentialite() {
                 <h3>Alerte de lancement de pôle</h3>
                 <ul>
                   <li>
-                    <strong>Nom et email</strong> : obligatoires — pour vous
+                    <strong>Nom et email</strong> : obligatoires, pour vous
                     notifier au lancement
                   </li>
                   <li>
-                    <strong>Entreprise</strong> : optionnel — pour
+                    <strong>Entreprise</strong> : optionnel, pour
                     contextualiser votre intérêt
                   </li>
                   <li>
-                    <strong>Pôle d'intérêt</strong> : automatique — selon le
+                    <strong>Pôle d'intérêt</strong> : automatique, selon le
                     pôle où vous avez cliqué
                   </li>
                 </ul>
@@ -298,16 +298,21 @@ export default function PolitiqueConfidentialite() {
                 </p>
                 <ul>
                   <li>
-                    <strong>Vercel Inc.</strong> — hébergement du Site
-                    (États-Unis, certifié Data Privacy Framework UE-USA)
+                    <strong>Lovable Labs Incorporated</strong> : hébergement du
+                    site et passerelle d'envoi des emails de notification
+                    (États-Unis)
                   </li>
                   <li>
-                    <strong>Supabase</strong> — base de données et stockage des
+                    <strong>Supabase</strong> : base de données et stockage des
                     formulaires (région Europe)
                   </li>
                   <li>
-                    <strong>Resend</strong> — envoi des emails de notification
+                    <strong>Resend</strong> : envoi des emails de notification
                     (UE/USA, certifié RGPD)
+                  </li>
+                  <li>
+                    <strong>Plausible Analytics</strong> : mesure d'audience
+                    sans cookie ni donnée personnelle (Union européenne)
                   </li>
                 </ul>
                 <p>
@@ -352,8 +357,8 @@ export default function PolitiqueConfidentialite() {
               <Section id="transferts" title="Transferts hors UE">
                 <p>
                   Certains de nos sous-traitants peuvent traiter vos données
-                  hors de l'Union Européenne (notamment Vercel et Resend,
-                  basés aux États-Unis).
+                  hors de l'Union Européenne (notamment Lovable Labs
+                  Incorporated et Resend, basés aux États-Unis).
                 </p>
                 <p>
                   Ces transferts sont encadrés par des garanties appropriées
@@ -369,6 +374,11 @@ export default function PolitiqueConfidentialite() {
                     la Commission européenne
                   </li>
                 </ul>
+                <p>
+                  Plausible Analytics, utilisé pour la mesure d'audience
+                  anonyme, traite les données exclusivement au sein de l'Union
+                  Européenne.
+                </p>
                 <p>
                   Pour Supabase, vos données sont stockées dans la région
                   Europe (centres de données européens).
@@ -389,17 +399,16 @@ export default function PolitiqueConfidentialite() {
                   <li>Cookies de session (gestion de votre navigation)</li>
                   <li>Cookies de sécurité (prévention des abus)</li>
                 </ul>
-                <h3>Cookies de mesure d'audience</h3>
+                <h3>Mesure d'audience</h3>
                 <p>
-                  Le Site n'utilise actuellement aucun cookie de mesure
-                  d'audience ni de cookie publicitaire ou de tracking.
+                  Le Site utilise Plausible Analytics pour mesurer son
+                  audience. Cet outil ne dépose aucun cookie, ne collecte
+                  aucune donnée personnelle et rend les visites anonymes :
+                  aucune bannière de consentement n'est donc nécessaire.
                 </p>
                 <p>
-                  Si à l'avenir nous mettons en place un outil d'analytics, il
-                  sera privacy-friendly et sans collecte de données
-                  personnelles (type Plausible Analytics ou Vercel Analytics,
-                  sans cookies de tracking et conformes RGPD par défaut).
-                  Cette politique sera alors mise à jour.
+                  Le Site n'utilise ni cookie publicitaire ni cookie de
+                  tracking.
                 </p>
               </Section>
 
