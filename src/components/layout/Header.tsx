@@ -98,7 +98,7 @@ const Header = () => {
             className="flex items-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
             aria-label="Corse Drone, Accueil"
           >
-            <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]">
+            <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-black/80 transition-colors duration-300 hover:text-black">
               CORSE DRONE · MCG
             </span>
           </Link>

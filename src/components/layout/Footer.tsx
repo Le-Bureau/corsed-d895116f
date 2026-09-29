@@ -83,7 +83,7 @@ const Footer = () => {
                       <span>{p.label}</span>
                       {p.comingSoon && (
                         <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-semibold ml-1">
-                          Soon
+                          Bientôt
                         </span>
                       )}
                     </Link>
