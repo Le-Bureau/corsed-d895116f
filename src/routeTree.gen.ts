@@ -10,32 +10,262 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicContactRouteImport } from './routes/_public/contact'
+import { Route as PublicExpertisesRouteImport } from './routes/_public/expertises'
+import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
+import { Route as PublicPartenairesRouteImport } from './routes/_public/partenaires'
+import { Route as PublicPolitiqueConfidentialiteRouteImport } from './routes/_public/politique-confidentialite'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminBlogRouteImport } from './routes/admin/blog'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminProfilRouteImport } from './routes/admin/profil'
+import { Route as PublicBlogIndexRouteImport } from './routes/_public/blog/index'
+import { Route as PublicBlogSlugRouteImport } from './routes/_public/blog/$slug'
+import { Route as PublicPoleSlugRouteImport } from './routes/_public/pole/$slug'
+import { Route as AdminBlogNewRouteImport } from './routes/admin/blog.new'
+import { Route as PublicPoleSlugSubSlugRouteImport } from './routes/_public/pole/$slug/$subSlug'
+import { Route as AdminBlogIdEditRouteImport } from './routes/admin/blog.$id.edit'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicIndexRoute = PublicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicContactRoute = PublicContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicExpertisesRoute = PublicExpertisesRouteImport.update({
+  id: '/expertises',
+  path: '/expertises',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicMentionsLegalesRoute = PublicMentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicPartenairesRoute = PublicPartenairesRouteImport.update({
+  id: '/partenaires',
+  path: '/partenaires',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicPolitiqueConfidentialiteRoute =
+  PublicPolitiqueConfidentialiteRouteImport.update({
+    id: '/politique-confidentialite',
+    path: '/politique-confidentialite',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProfilRoute = AdminProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => AdminRoute,
+} as any)
+const PublicBlogIndexRoute = PublicBlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicBlogSlugRoute = PublicBlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicPoleSlugRoute = PublicPoleSlugRouteImport.update({
+  id: '/pole/$slug',
+  path: '/pole/$slug',
+  getParentRoute: () => PublicRoute,
+} as any)
+const AdminBlogNewRoute = AdminBlogNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminBlogRoute,
+} as any)
+const PublicPoleSlugSubSlugRoute = PublicPoleSlugSubSlugRouteImport.update({
+  id: '/$subSlug',
+  path: '/$subSlug',
+  getParentRoute: () => PublicPoleSlugRoute,
+} as any)
+const AdminBlogIdEditRoute = AdminBlogIdEditRouteImport.update({
+  id: '/$id/edit',
+  path: '/$id/edit',
+  getParentRoute: () => AdminBlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof PublicRoute
+  '/': typeof PublicIndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/contact': typeof PublicContactRoute
+  '/expertises': typeof PublicExpertisesRoute
+  '/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/partenaires': typeof PublicPartenairesRoute
+  '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
+  '/admin/blog': typeof AdminBlogRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/profil': typeof AdminProfilRoute
+  '/admin/': typeof AdminIndexRoute
+  '/blog/$slug': typeof PublicBlogSlugRoute
+  '/pole/$slug': typeof PublicPoleSlugRouteWithChildren
+  '/admin/blog/new': typeof AdminBlogNewRoute
+  '/blog/': typeof PublicBlogIndexRoute
+  '/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
+  '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof PublicRoute
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/contact': typeof PublicContactRoute
+  '/expertises': typeof PublicExpertisesRoute
+  '/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/partenaires': typeof PublicPartenairesRoute
+  '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
+  '/admin/blog': typeof AdminBlogRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/profil': typeof AdminProfilRoute
+  '/': typeof PublicIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/blog/$slug': typeof PublicBlogSlugRoute
+  '/pole/$slug': typeof PublicPoleSlugRouteWithChildren
+  '/admin/blog/new': typeof AdminBlogNewRoute
+  '/blog': typeof PublicBlogIndexRoute
+  '/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
+  '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_public': typeof PublicRoute
+  '/_public': typeof PublicRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/rss.xml': typeof RssDotxmlRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_public/contact': typeof PublicContactRoute
+  '/_public/expertises': typeof PublicExpertisesRoute
+  '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/_public/partenaires': typeof PublicPartenairesRoute
+  '/_public/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
+  '/admin/blog': typeof AdminBlogRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/profil': typeof AdminProfilRoute
+  '/_public/': typeof PublicIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/_public/blog/$slug': typeof PublicBlogSlugRoute
+  '/_public/pole/$slug': typeof PublicPoleSlugRouteWithChildren
+  '/admin/blog/new': typeof AdminBlogNewRoute
+  '/_public/blog/': typeof PublicBlogIndexRoute
+  '/_public/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
+  '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/rss.xml'
+    | '/sitemap.xml'
+    | '/contact'
+    | '/expertises'
+    | '/mentions-legales'
+    | '/partenaires'
+    | '/politique-confidentialite'
+    | '/admin/blog'
+    | '/admin/login'
+    | '/admin/profil'
+    | '/admin/'
+    | '/blog/$slug'
+    | '/pole/$slug'
+    | '/admin/blog/new'
+    | '/blog/'
+    | '/pole/$slug/$subSlug'
+    | '/admin/blog/$id/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_public'
+  to:
+    | '/rss.xml'
+    | '/sitemap.xml'
+    | '/contact'
+    | '/expertises'
+    | '/mentions-legales'
+    | '/partenaires'
+    | '/politique-confidentialite'
+    | '/admin/blog'
+    | '/admin/login'
+    | '/admin/profil'
+    | '/'
+    | '/admin'
+    | '/blog/$slug'
+    | '/pole/$slug'
+    | '/admin/blog/new'
+    | '/blog'
+    | '/pole/$slug/$subSlug'
+    | '/admin/blog/$id/edit'
+  id:
+    | '__root__'
+    | '/_public'
+    | '/admin'
+    | '/rss.xml'
+    | '/sitemap.xml'
+    | '/_public/contact'
+    | '/_public/expertises'
+    | '/_public/mentions-legales'
+    | '/_public/partenaires'
+    | '/_public/politique-confidentialite'
+    | '/admin/blog'
+    | '/admin/login'
+    | '/admin/profil'
+    | '/_public/'
+    | '/admin/'
+    | '/_public/blog/$slug'
+    | '/_public/pole/$slug'
+    | '/admin/blog/new'
+    | '/_public/blog/'
+    | '/_public/pole/$slug/$subSlug'
+    | '/admin/blog/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  PublicRoute: typeof PublicRoute
+  PublicRoute: typeof PublicRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
+  RssDotxmlRoute: typeof RssDotxmlRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -47,11 +277,216 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/': {
+      id: '/_public/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/contact': {
+      id: '/_public/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof PublicContactRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/expertises': {
+      id: '/_public/expertises'
+      path: '/expertises'
+      fullPath: '/expertises'
+      preLoaderRoute: typeof PublicExpertisesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/mentions-legales': {
+      id: '/_public/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof PublicMentionsLegalesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/partenaires': {
+      id: '/_public/partenaires'
+      path: '/partenaires'
+      fullPath: '/partenaires'
+      preLoaderRoute: typeof PublicPartenairesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/politique-confidentialite': {
+      id: '/_public/politique-confidentialite'
+      path: '/politique-confidentialite'
+      fullPath: '/politique-confidentialite'
+      preLoaderRoute: typeof PublicPolitiqueConfidentialiteRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/profil': {
+      id: '/admin/profil'
+      path: '/profil'
+      fullPath: '/admin/profil'
+      preLoaderRoute: typeof AdminProfilRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_public/blog/': {
+      id: '/_public/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof PublicBlogIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/blog/$slug': {
+      id: '/_public/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof PublicBlogSlugRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/pole/$slug': {
+      id: '/_public/pole/$slug'
+      path: '/pole/$slug'
+      fullPath: '/pole/$slug'
+      preLoaderRoute: typeof PublicPoleSlugRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/admin/blog/new': {
+      id: '/admin/blog/new'
+      path: '/new'
+      fullPath: '/admin/blog/new'
+      preLoaderRoute: typeof AdminBlogNewRouteImport
+      parentRoute: typeof AdminBlogRoute
+    }
+    '/_public/pole/$slug/$subSlug': {
+      id: '/_public/pole/$slug/$subSlug'
+      path: '/$subSlug'
+      fullPath: '/pole/$slug/$subSlug'
+      preLoaderRoute: typeof PublicPoleSlugSubSlugRouteImport
+      parentRoute: typeof PublicPoleSlugRoute
+    }
+    '/admin/blog/$id/edit': {
+      id: '/admin/blog/$id/edit'
+      path: '/$id/edit'
+      fullPath: '/admin/blog/$id/edit'
+      preLoaderRoute: typeof AdminBlogIdEditRouteImport
+      parentRoute: typeof AdminBlogRoute
+    }
   }
 }
 
+interface PublicPoleSlugRouteChildren {
+  PublicPoleSlugSubSlugRoute: typeof PublicPoleSlugSubSlugRoute
+}
+
+const PublicPoleSlugRouteChildren: PublicPoleSlugRouteChildren = {
+  PublicPoleSlugSubSlugRoute: PublicPoleSlugSubSlugRoute,
+}
+
+const PublicPoleSlugRouteWithChildren = PublicPoleSlugRoute._addFileChildren(
+  PublicPoleSlugRouteChildren,
+)
+
+interface PublicRouteChildren {
+  PublicContactRoute: typeof PublicContactRoute
+  PublicExpertisesRoute: typeof PublicExpertisesRoute
+  PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
+  PublicPartenairesRoute: typeof PublicPartenairesRoute
+  PublicPolitiqueConfidentialiteRoute: typeof PublicPolitiqueConfidentialiteRoute
+  PublicIndexRoute: typeof PublicIndexRoute
+  PublicBlogSlugRoute: typeof PublicBlogSlugRoute
+  PublicPoleSlugRoute: typeof PublicPoleSlugRouteWithChildren
+  PublicBlogIndexRoute: typeof PublicBlogIndexRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicContactRoute: PublicContactRoute,
+  PublicExpertisesRoute: PublicExpertisesRoute,
+  PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
+  PublicPartenairesRoute: PublicPartenairesRoute,
+  PublicPolitiqueConfidentialiteRoute: PublicPolitiqueConfidentialiteRoute,
+  PublicIndexRoute: PublicIndexRoute,
+  PublicBlogSlugRoute: PublicBlogSlugRoute,
+  PublicPoleSlugRoute: PublicPoleSlugRouteWithChildren,
+  PublicBlogIndexRoute: PublicBlogIndexRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
+
+interface AdminBlogRouteChildren {
+  AdminBlogNewRoute: typeof AdminBlogNewRoute
+  AdminBlogIdEditRoute: typeof AdminBlogIdEditRoute
+}
+
+const AdminBlogRouteChildren: AdminBlogRouteChildren = {
+  AdminBlogNewRoute: AdminBlogNewRoute,
+  AdminBlogIdEditRoute: AdminBlogIdEditRoute,
+}
+
+const AdminBlogRouteWithChildren = AdminBlogRoute._addFileChildren(
+  AdminBlogRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminBlogRoute: typeof AdminBlogRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminProfilRoute: typeof AdminProfilRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBlogRoute: AdminBlogRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminProfilRoute: AdminProfilRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  PublicRoute: PublicRoute,
+  PublicRoute: PublicRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
+  RssDotxmlRoute: RssDotxmlRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
