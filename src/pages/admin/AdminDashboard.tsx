@@ -22,9 +22,9 @@ const AdminDashboard = () => {
       .then(({ data }) => {
         if (cancelled) return;
         if (data?.name) {
-          setFirstName(data.name.split(" ")[0]);
+          setFirstName(data.name.split(" ")[0] ?? null);
         } else if (user.email) {
-          setFirstName(user.email.split("@")[0]);
+          setFirstName(user.email.split("@")[0] ?? null);
         }
       });
     return () => {

@@ -6,7 +6,7 @@ import { fetchBlogCategories } from "@/hooks/blog/useBlogCategories";
 
 export const Route = createFileRoute("/_public/blog/")({
   validateSearch: (search: Record<string, unknown>) => ({
-    cat: typeof search.cat === "string" ? search.cat : undefined,
+    cat: typeof search["cat"] === "string" ? search["cat"] : undefined,
   }),
   loader: async ({ context }) => {
     const [posts, categories] = await Promise.all([

@@ -27,7 +27,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const urls: Array<{ loc: string; lastmod?: string }> = [];
+        const urls: Array<{ loc: string; lastmod?: string | undefined }> = [];
 
         for (const path of STATIC_PATHS) {
           urls.push({ loc: `${SITE_URL}${path}` });
