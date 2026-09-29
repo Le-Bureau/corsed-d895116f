@@ -50,8 +50,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     // No leaf route matched → the notFoundComponent is rendering (true 404).
     // Pole routes with an unknown slug also render the 404 (their loader
     // throws notFound, which skips their own head), so detect them here.
-    const leaf = matches[matches.length - 1];
-    const leafParams = (leaf?.params ?? {}) as Record<string, string>;
+    const leaf = matches[matches.length - 1] as
+      | { routeId?: string; params?: Record<string, string> }
+      | undefined;
+    const leafParams = leaf?.params ?? {};
     const invalidPole =
       (leaf?.routeId === "/_public/pole/$slug/" ||
         leaf?.routeId === "/_public/pole/$slug/$subSlug") &&
