@@ -1,5 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
+import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
@@ -12,6 +13,8 @@ export const getRouter = () => {
     defaultPreloadStaleTime: 0,
     trailingSlash: "never",
   });
+
+  setupRouterSsrQueryIntegration({ router, queryClient, wrapQueryClient: false });
 
   return router;
 };
