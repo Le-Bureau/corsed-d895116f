@@ -36,7 +36,7 @@ const BackToTop = () => {
           animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: 12 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="fixed bottom-6 right-6 z-[100] flex h-12 w-12 items-center justify-center rounded-full glass-light-strong text-text-on-dark transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+          className="fixed bottom-6 right-6 z-[100] flex h-12 w-12 items-center justify-center rounded-full glass-light-strong text-text-on-dark transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary motion-reduce:transform-none"
         >
           <ArrowUp size={18} />
         </motion.button>

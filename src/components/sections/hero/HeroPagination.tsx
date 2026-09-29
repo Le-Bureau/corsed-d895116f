@@ -1,12 +1,15 @@
 import { POLES } from "@/lib/poles";
+import { Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HeroPaginationProps {
   currentIndex: number;
   onSelect: (i: number) => void;
+  paused: boolean;
+  onTogglePause: () => void;
 }
 
-const HeroPagination = ({ currentIndex, onSelect }: HeroPaginationProps) => {
+const HeroPagination = ({ currentIndex, onSelect, paused, onTogglePause }: HeroPaginationProps) => {
   return (
     <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[15] glass-light-strong rounded-full p-2 flex gap-1">
       {POLES.map((p, i) => {
@@ -43,6 +46,15 @@ const HeroPagination = ({ currentIndex, onSelect }: HeroPaginationProps) => {
           </button>
         );
       })}
+      <button
+        type="button"
+        onClick={onTogglePause}
+        aria-label={paused ? "Lancer le défilement automatique" : "Mettre en pause le défilement automatique"}
+        aria-pressed={paused}
+        className="ml-1 px-3 py-2.5 rounded-full inline-flex items-center justify-center text-text-on-dark-muted hover:bg-white/[0.08] hover:text-text-on-dark transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-darker"
+      >
+        {paused ? <Play className="h-3.5 w-3.5" aria-hidden="true" /> : <Pause className="h-3.5 w-3.5" aria-hidden="true" />}
+      </button>
     </div>
   );
 };

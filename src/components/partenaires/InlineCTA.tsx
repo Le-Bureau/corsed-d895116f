@@ -28,14 +28,14 @@ const InlineCTA = ({ title, subtitle, ctaLabel, ctaHref }: InlineCTAProps) => {
       </div>
       <a
         href={ctaHref}
-        className="relative group inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 self-start md:self-auto transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
+        className="relative group inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 self-start md:self-auto transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap motion-reduce:transform-none"
         style={{
           boxShadow:
             "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)",
         }}
       >
         {ctaLabel}
-        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
       </a>
     </div>
   );

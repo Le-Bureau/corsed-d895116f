@@ -31,7 +31,7 @@ const ContactSuccess = ({ data, onReset }: ContactSuccessProps) => {
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           to="/"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-6 py-3 transition-all duration-300 hover:-translate-y-0.5"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-6 py-3 transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
           style={{ boxShadow: "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)" }}
         >
           Retour à l'accueil

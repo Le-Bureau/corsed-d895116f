@@ -46,7 +46,7 @@ export function PartenairesSuccess({ data, onReset }: PartenairesSuccessProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/"
-              className="inline-flex items-center justify-center rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
               style={{
                 boxShadow:
                   "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)",

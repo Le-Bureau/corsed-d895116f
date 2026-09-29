@@ -156,7 +156,7 @@ const PoleUseCases = ({ cases }: Props) => {
               type="button"
               onClick={goPrev}
               aria-label="Cas précédent"
-              className="w-10 h-10 rounded-full bg-surface-card border border-border-subtle shadow-soft-sm flex items-center justify-center text-text-primary hover:-translate-y-0.5 hover:shadow-soft-md transition-all duration-300 motion-reduce:hover:transform-none"
+              className="w-10 h-10 rounded-full bg-surface-card border border-border-subtle shadow-soft-sm flex items-center justify-center text-text-primary hover:-translate-y-0.5 hover:shadow-soft-md transition-all duration-300 motion-reduce:hover:transform-none motion-reduce:transform-none"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
@@ -164,7 +164,7 @@ const PoleUseCases = ({ cases }: Props) => {
               type="button"
               onClick={goNext}
               aria-label="Cas suivant"
-              className="w-10 h-10 rounded-full bg-surface-card border border-border-subtle shadow-soft-sm flex items-center justify-center text-text-primary hover:-translate-y-0.5 hover:shadow-soft-md transition-all duration-300 motion-reduce:hover:transform-none"
+              className="w-10 h-10 rounded-full bg-surface-card border border-border-subtle shadow-soft-sm flex items-center justify-center text-text-primary hover:-translate-y-0.5 hover:shadow-soft-md transition-all duration-300 motion-reduce:hover:transform-none motion-reduce:transform-none"
             >
               <ArrowRight className="w-4 h-4" />
             </button>

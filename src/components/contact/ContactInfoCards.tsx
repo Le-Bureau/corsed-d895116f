@@ -22,10 +22,10 @@ const InfoCard = ({
     href={href}
     target={external ? "_blank" : undefined}
     rel={external ? "noreferrer noopener" : undefined}
-    className="group relative block overflow-hidden rounded-2xl border border-border-subtle bg-surface-card shadow-soft-md p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg hover:border-logo-base/40"
+    className="group relative block overflow-hidden rounded-2xl border border-border-subtle bg-surface-card shadow-soft-md p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg hover:border-logo-base/40 motion-reduce:transform-none"
   >
     <div className="relative">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-logo-base/25 bg-logo-base/10 transition-all duration-300 group-hover:scale-105">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-logo-base/25 bg-logo-base/10 transition-all duration-300 group-hover:scale-105 motion-reduce:transform-none">
         <Icon className="h-[18px] w-[18px] text-logo-base-deep" strokeWidth={2} />
       </div>
 
@@ -40,7 +40,7 @@ const InfoCard = ({
       <div className="flex items-center gap-1.5 text-[13px] text-text-muted">
         <span>{detail}</span>
         <ArrowUpRight
-          className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 text-logo-base-deep"
+          className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 text-logo-base-deep motion-reduce:transform-none"
           strokeWidth={2.2}
         />
       </div>

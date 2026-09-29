@@ -13,9 +13,20 @@ interface Props {
 }
 
 export const fadeUpItem: Variants = {
-  hidden: { opacity: 0, y: ENTER_OFFSET, transition: { duration: 0 } },
+  // Plain function variant: offset is dropped when the user prefers reduced
+  // motion (read from the media query at animation time — client only).
+  hidden: () => ({
+    opacity: 0,
+    y: prefersReducedMotion() ? 0 : ENTER_OFFSET,
+    transition: { duration: 0 },
+  }),
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
+
+function prefersReducedMotion() {
+  return typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+}
 
 export const fadeOnlyItem: Variants = {
   hidden: { opacity: 0, transition: { duration: 0 } },

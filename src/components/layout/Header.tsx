@@ -173,7 +173,7 @@ const Header = () => {
               style={CTA_STYLE}
             >
               <span>Demander un devis</span>
-              <span className="w-6 h-6 rounded-full bg-text-primary flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5">
+              <span className="w-6 h-6 rounded-full bg-text-primary flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 motion-reduce:transform-none">
                 <ArrowRight className="w-3 h-3 text-white" />
               </span>
             </Link>

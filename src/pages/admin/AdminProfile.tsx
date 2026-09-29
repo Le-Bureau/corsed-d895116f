@@ -285,7 +285,7 @@ const AdminProfile = () => {
                       "h-10 w-10 rounded-full transition-all",
                       selected
                         ? "ring-2 ring-foreground ring-offset-2 ring-offset-background"
-                        : "ring-1 ring-border hover:scale-105",
+                        : "ring-1 ring-border hover:scale-105 motion-reduce:transform-none",
                     )}
                     style={{
                       background: `linear-gradient(135deg, ${s.from}, ${s.to})`,

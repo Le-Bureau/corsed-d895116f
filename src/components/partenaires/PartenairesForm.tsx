@@ -306,7 +306,7 @@ const PartenairesForm = () => {
               ) : (
                 <>
                   Envoyer mon message
-                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" />
                 </>
               )}
             </button>

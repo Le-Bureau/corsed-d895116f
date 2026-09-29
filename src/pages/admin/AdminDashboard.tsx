@@ -93,7 +93,7 @@ const DashboardCard = ({ icon, title, description, meta, ctaLabel, to, disabled 
         "h-full rounded-xl border border-border/60 bg-white p-6 flex flex-col gap-4 transition-all",
         disabled
           ? "opacity-60 cursor-not-allowed"
-          : "hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5",
+          : "hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5 motion-reduce:transform-none",
       )}
     >
       <div className="flex items-center gap-3">

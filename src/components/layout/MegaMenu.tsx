@@ -178,7 +178,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                 style={{ color: pole.baseColorOnLight }}
               >
                 Voir tout le pôle
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none" />
               </Link>
             </div>
           );

@@ -26,6 +26,7 @@ import "@fontsource/playfair-display/600.css";
 import "@fontsource/playfair-display/700.css";
 
 import { AuthProvider } from "@/contexts/AuthContext";
+import { MotionConfig } from "motion/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -191,6 +192,7 @@ function RootComponent() {
   }, []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <TooltipProvider>
@@ -206,6 +208,7 @@ function RootComponent() {
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
+    </MotionConfig>
   );
 }
 
@@ -226,7 +229,7 @@ function NotFound() {
           </p>
           <Link
             to="/"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-pole-nettoyage px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-pole-nettoyage px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
           >
             Retour à l'accueil
           </Link>
@@ -262,7 +265,7 @@ function RootErrorComponent({ error, reset }: { error: unknown; reset: () => voi
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-full bg-pole-nettoyage px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-full bg-pole-nettoyage px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
           >
             Réessayer
           </button>

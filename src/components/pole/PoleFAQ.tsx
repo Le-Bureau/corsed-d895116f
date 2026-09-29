@@ -54,7 +54,7 @@ const PoleFAQ = ({ items }: Props) => {
               >
                 <span>Une autre question ?</span>
                 <ArrowRight
-                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
                   strokeWidth={2.5}
                   aria-hidden="true"
                 />

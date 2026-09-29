@@ -10,7 +10,7 @@ const colTitle =
   "text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-1";
 
 const linkBase =
-  "text-sm font-medium text-text-on-dark-muted hover:text-text-on-dark hover:translate-x-0.5 transition-all duration-200";
+  "text-sm font-medium text-text-on-dark-muted hover:text-text-on-dark hover:translate-x-0.5 transition-all duration-200 motion-reduce:transform-none";
 
 const contactLabel =
   "text-[11px] tracking-[0.18em] uppercase font-semibold text-text-on-dark-muted";
@@ -60,7 +60,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.05] border border-white/[0.12] text-text-on-dark-muted backdrop-blur-md transition-all duration-200 ease-out hover:border-logo-base hover:text-logo-base hover:-translate-y-0.5"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.05] border border-white/[0.12] text-text-on-dark-muted backdrop-blur-md transition-all duration-200 ease-out hover:border-logo-base hover:text-logo-base hover:-translate-y-0.5 motion-reduce:transform-none"
                 >
                   <Instagram size={16} />
                 </a>

@@ -1,3 +1,4 @@
+import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { POLES, type Pole } from "@/lib/poles";
@@ -15,6 +16,11 @@ export interface UseHeroCarousel {
   goToPrev: () => void;
   goToIndex: (i: number) => void;
   isPaused: boolean;
+  userPaused: boolean;
+  togglePause: () => void;
+  setHovered: (v: boolean) => void;
+  setFocused: (v: boolean) => void;
+  onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
 export function useHeroCarousel(): UseHeroCarousel {
@@ -42,7 +48,14 @@ export function useHeroCarousel(): UseHeroCarousel {
     });
   }, []);
 
-  const isPaused = !!prefersReduced;
+  const [userPaused, setUserPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  useEffect(() => {
+    if (prefersReduced) setUserPaused(true);
+  }, [prefersReduced]);
+  const isPaused = userPaused || hovered || focused;
+  const togglePause = useCallback(() => setUserPaused((v) => !v), []);
 
   // Auto-rotate — restarts on every index/pause change.
   const intervalRef = useRef<number | null>(null);
@@ -54,18 +67,16 @@ export function useHeroCarousel(): UseHeroCarousel {
     };
   }, [isPaused, currentIndex, goToNext]);
 
-  // Keyboard navigation
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
+  // Keyboard navigation — scoped to the carousel region (attach onKeyDown).
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
       const isTypingTarget =
         target?.tagName === "INPUT" ||
         target?.tagName === "TEXTAREA" ||
         target?.tagName === "SELECT" ||
         target?.isContentEditable;
-
       if (isTypingTarget) return;
-
       if (e.key === "ArrowRight") {
         e.preventDefault();
         goToNext();
@@ -73,10 +84,9 @@ export function useHeroCarousel(): UseHeroCarousel {
         e.preventDefault();
         goToPrev();
       }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [goToNext, goToPrev]);
+    },
+    [goToNext, goToPrev],
+  );
 
   return {
     currentIndex,
@@ -86,5 +96,10 @@ export function useHeroCarousel(): UseHeroCarousel {
     goToPrev,
     goToIndex,
     isPaused,
+    userPaused,
+    togglePause,
+    setHovered,
+    setFocused,
+    onKeyDown,
   };
 }

@@ -37,7 +37,7 @@ const RequestCard = ({ value, label }: RequestCardProps) => {
       }
       className={cn(
         "group relative flex items-start gap-2.5 text-left px-3.5 py-3 rounded-xl border cursor-pointer transition-all duration-200",
-        "hover:-translate-y-0.5",
+        "hover:-translate-y-0.5 motion-reduce:transform-none",
         isActive ? "shadow-soft-sm" : "bg-surface-card hover:bg-surface-bg",
       )}
       style={{
@@ -286,7 +286,7 @@ const ContactForm = () => {
           ) : (
             <>
               Envoyer ma demande
-              <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              <Send className="w-4 h-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none" />
             </>
           )}
         </button>

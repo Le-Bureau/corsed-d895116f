@@ -1,7 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { X, ArrowRight, Check } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
@@ -14,6 +14,7 @@ interface LaunchAlertPopupProps {
 }
 
 export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupProps) {
+  const reduced = useReducedMotion();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
@@ -134,9 +135,9 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
             role="dialog"
             aria-modal="true"
             aria-labelledby="launch-alert-title"
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
+            animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full max-w-[480px] bg-surface-card rounded-2xl shadow-xl overflow-hidden"
           >
@@ -266,7 +267,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                     >
                       {isSubmitting ? "Envoi..." : "Me prévenir"}
                       {!isSubmitting && (
-                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={2.5} />
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" strokeWidth={2.5} />
                       )}
                     </button>
 
