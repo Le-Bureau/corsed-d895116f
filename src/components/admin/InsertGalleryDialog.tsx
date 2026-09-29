@@ -60,7 +60,9 @@ const InsertGalleryDialog = ({ open, onOpenChange, onInsert, postId }: Props) =>
       const next = [...prev];
       const target = idx + dir;
       if (target < 0 || target >= next.length) return prev;
-      [next[idx], next[target]] = [next[target], next[idx]];
+      const a = next[idx]!;
+      next[idx] = next[target]!;
+      next[target] = a;
       return next;
     });
   };

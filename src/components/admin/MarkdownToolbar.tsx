@@ -22,7 +22,7 @@ import InsertGalleryDialog from "@/components/admin/InsertGalleryDialog";
 type Action = SnippetKind | "image" | "imageGridDialog" | "galleryDialog";
 
 interface Props {
-  textareaRef: RefObject<HTMLTextAreaElement>;
+  textareaRef: RefObject<HTMLTextAreaElement | null>;
   value: string;
   onChange: (next: string) => void;
   postId?: string | undefined;
