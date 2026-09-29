@@ -25,8 +25,8 @@ export const extractToc = (md: string): TocItem[] => {
     if (inFence) continue;
     const m = /^(#{2,3})\s+(.+?)\s*$/.exec(line);
     if (m) {
-      const level = m[1].length as 2 | 3;
-      const text = m[2].replace(/[#*_`]/g, "").trim();
+      const level = m[1]!.length as 2 | 3;
+      const text = m[2]!.replace(/[#*_`]/g, "").trim();
       items.push({ id: slugify(text), text, level });
     }
   }
@@ -42,7 +42,7 @@ interface Slide {
 const getNodeText = (node: ReactNode): string => {
   if (typeof node === "string" || typeof node === "number") return String(node);
   if (Array.isArray(node)) return node.map(getNodeText).join("");
-  if (isValidElement(node)) return getNodeText(node.props.children);
+  if (isValidElement(node)) return getNodeText((node.props as { children?: ReactNode }).children);
   return "";
 };
 
@@ -86,10 +86,11 @@ const BlogContent = ({ markdown }: Props) => {
       const slides: Slide[] = figures.map((fig) => {
         const img = fig.querySelector<HTMLImageElement>("img");
         const cap = fig.querySelector<HTMLElement>("figcaption");
+        const description = cap?.textContent?.trim();
         return {
           src: img?.getAttribute("src") ?? "",
           alt: img?.getAttribute("alt") ?? "",
-          description: cap?.textContent?.trim() || undefined,
+          ...(description ? { description } : {}),
         };
       }).filter((s) => s.src);
 

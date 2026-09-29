@@ -34,7 +34,7 @@ const BlogTOC = ({ items }: Props) => {
         return currentTop <= activationLine && nextTop > headerOffset;
       });
 
-      setActiveId(visibleSection?.id ?? elements[0].id);
+      setActiveId(visibleSection?.id ?? elements[0]?.id ?? "");
     };
 
     computeActive();
