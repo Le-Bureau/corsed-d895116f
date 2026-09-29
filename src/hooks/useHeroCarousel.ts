@@ -51,7 +51,10 @@ export function useHeroCarousel(): UseHeroCarousel {
   const [userPaused, setUserPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
-  const isPaused = !!prefersReduced || userPaused || hovered || focused;
+  useEffect(() => {
+    if (prefersReduced) setUserPaused(true);
+  }, [prefersReduced]);
+  const isPaused = userPaused || hovered || focused;
   const togglePause = useCallback(() => setUserPaused((v) => !v), []);
 
   // Auto-rotate — restarts on every index/pause change.
@@ -93,7 +96,7 @@ export function useHeroCarousel(): UseHeroCarousel {
     goToPrev,
     goToIndex,
     isPaused,
-    userPaused: userPaused || !!prefersReduced,
+    userPaused,
     togglePause,
     setHovered,
     setFocused,

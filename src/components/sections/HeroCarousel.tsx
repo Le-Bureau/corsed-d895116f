@@ -53,6 +53,11 @@ const HeroCarousel = () => {
     goToNext,
     goToPrev,
     goToIndex,
+    userPaused,
+    togglePause,
+    setHovered,
+    setFocused,
+    onKeyDown,
   } = useHeroCarousel();
   const reduced = useReducedMotion();
 
@@ -145,7 +150,16 @@ const HeroCarousel = () => {
   return (
     <div
       role="region"
+      aria-roledescription="carrousel"
       aria-label="Présentation des pôles d'expertise"
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocused(false);
+      }}
       className="relative w-full h-screen min-h-[100dvh] overflow-hidden bg-surface-darker text-text-on-dark"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -325,7 +339,7 @@ const HeroCarousel = () => {
       </AnimatePresence>
 
       <HeroNavButtons currentIndex={currentIndex} onPrev={goToPrev} onNext={goToNext} />
-      <HeroPagination currentIndex={currentIndex} onSelect={goToIndex} />
+      <HeroPagination currentIndex={currentIndex} onSelect={goToIndex} paused={userPaused} onTogglePause={togglePause} />
       <HeroProgressBar currentIndex={currentIndex} total={POLES.length} />
     </div>
   );

@@ -134,9 +134,9 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
             role="dialog"
             aria-modal="true"
             aria-labelledby="launch-alert-title"
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
+            animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 12 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full max-w-[480px] bg-surface-card rounded-2xl shadow-xl overflow-hidden"
           >
