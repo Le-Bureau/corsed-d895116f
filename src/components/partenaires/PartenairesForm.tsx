@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { CONTACT } from "@/lib/contact";
 import { PartenairesSuccess } from "./PartenairesSuccess";
+import { Honeypot, isHoneypotFilled, PrivacyNotice } from "@/components/forms/FormPrivacy";
 
 const labelBase =
   "block text-[11px] font-mono font-semibold uppercase tracking-[0.18em] text-text-muted mb-2";
@@ -115,9 +116,25 @@ const PartenairesForm = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: PartnerFormData) => {
+  const scrollToConfirmation = () => {
+    requestAnimationFrame(() => {
+      document
+        .getElementById("candidature")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  const onSubmit = async (data: PartnerFormData, event?: React.BaseSyntheticEvent) => {
+    if (isHoneypotFilled(event?.target)) {
+      setSubmissionData(data);
+      setSubmitted(true);
+      scrollToConfirmation();
+      return;
+    }
     try {
+      const id = crypto.randomUUID();
       const { error } = await supabase.from("partner_applications").insert({
+        id,
         full_name: data.fullName,
         email: data.email,
         phone: data.phone,
@@ -133,6 +150,7 @@ const PartenairesForm = () => {
         .invoke("notify-lead", {
           body: {
             type: "partner",
+            id,
             payload: {
               fullName: data.fullName,
               email: data.email,
@@ -146,7 +164,7 @@ const PartenairesForm = () => {
 
       setSubmissionData(data);
       setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollToConfirmation();
     } catch (err) {
       console.error("Partner application error:", err);
       toast.error(
@@ -191,6 +209,7 @@ const PartenairesForm = () => {
           noValidate
           className="max-w-[920px] mx-auto rounded-3xl overflow-hidden bg-surface-card border border-border-subtle shadow-soft-lg"
         >
+          <Honeypot />
           {/* HEADER */}
           <div className="px-6 md:px-10 pt-10 md:pt-12 pb-8 border-b border-border-subtle">
             <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-surface-bg border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-4">
@@ -293,6 +312,7 @@ const PartenairesForm = () => {
             </button>
           </div>
         </form>
+        <PrivacyNotice className="max-w-[920px] mx-auto mt-4 px-2 text-center" />
       </div>
     </section>
   );

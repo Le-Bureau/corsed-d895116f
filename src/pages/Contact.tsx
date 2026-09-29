@@ -16,6 +16,7 @@ import ContactInfoCards from "@/components/contact/ContactInfoCards";
 import ContactSuccess from "@/components/contact/ContactSuccess";
 import { SEO } from "@/components/seo/SEO";
 import { CONTACT } from "@/lib/contact";
+import { Honeypot, isHoneypotFilled, PrivacyNotice } from "@/components/forms/FormPrivacy";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
@@ -36,9 +37,17 @@ const Contact = () => {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (data: ContactFormData, event?: React.BaseSyntheticEvent) => {
+    if (isHoneypotFilled(event?.target)) {
+      setSubmissionData(data);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     try {
+      const id = crypto.randomUUID();
       const { error } = await supabase.from("contact_submissions").insert({
+        id,
         full_name: data.fullName,
         email: data.email,
         phone: data.phone || null,
@@ -52,6 +61,7 @@ const Contact = () => {
         .invoke("notify-lead", {
           body: {
             type: "contact",
+            id,
             payload: {
               fullName: data.fullName,
               email: data.email,
@@ -149,7 +159,9 @@ const ContactSection = ({
             noValidate
             className="relative z-10"
           >
+            <Honeypot />
             <ContactForm />
+            <PrivacyNotice className="mt-4 px-2 text-center" />
           </form>
         )}
 

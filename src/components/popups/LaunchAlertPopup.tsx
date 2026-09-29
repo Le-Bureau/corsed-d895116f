@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
+import { Honeypot, isHoneypotFilled, PrivacyNotice } from "@/components/forms/FormPrivacy";
 
 interface LaunchAlertPopupProps {
   isOpen: boolean;
@@ -61,7 +62,21 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
     setIsSubmitting(true);
     setError(null);
 
-    const { error: insertError } = await supabase
+    const isBot = isHoneypotFilled(e.currentTarget);
+    const id = crypto.randomUUID();
+    const { error: insertError } = isBot
+      ? { error: null }
+      : await supabase
+      .from("pole_launch_alerts")
+      .insert({
+        id,
+        email: trimmedEmail,
+        name: trimmedName,
+        company: trimmedCompany || null,
+        pole: poleKey,
+      });
+    const _unused = { error: null } && null; void _unused;
+    const REMOVE_START =  = await supabase
       .from("pole_launch_alerts")
       .insert({
         email: trimmedEmail,
