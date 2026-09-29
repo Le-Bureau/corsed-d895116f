@@ -50,7 +50,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   const imageY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, transition: { duration: 0 } },
     visible: {
       opacity: 1,
       transition: {
@@ -61,7 +61,9 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
   };
 
   const itemVariants: Variants = {
-    hidden: reduced ? { opacity: 0 } : { opacity: 0, y: 36 },
+    hidden: reduced
+      ? { opacity: 0, transition: { duration: 0 } }
+      : { opacity: 0, y: 36, transition: { duration: 0 } },
     visible: reduced
       ? { opacity: 1, transition: { duration: 0.2 } }
       : { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
@@ -83,7 +85,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
           ref={imageRevealRef}
           initial={false}
           animate={imageIsVisible ? (reduced ? { opacity: 1 } : { opacity: 1, y: 0 }) : reduced ? { opacity: 0 } : { opacity: 0, y: 36 }}
-          transition={{ duration: 0.6, ease: EASE }}
+          transition={imageIsVisible ? { duration: 0.6, ease: EASE } : { duration: 0 }}
           className="lg:[direction:ltr] relative"
         >
           <div
@@ -149,7 +151,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
           <motion.div
             ref={contentRevealRef}
             variants={containerVariants}
-            initial="hidden"
+            initial={false}
             animate={contentIsVisible ? "visible" : "hidden"}
             className="relative z-10 pl-8 border-l-2"
             style={{ borderColor: color }}
