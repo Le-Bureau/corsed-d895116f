@@ -20,11 +20,11 @@ import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/ment
 import { Route as PublicPartenairesRouteImport } from './routes/_public/partenaires'
 import { Route as PublicPolitiqueConfidentialiteRouteImport } from './routes/_public/politique-confidentialite'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminProfilRouteImport } from './routes/admin/profil'
 import { Route as PublicBlogIndexRouteImport } from './routes/_public/blog/index'
 import { Route as PublicBlogSlugRouteImport } from './routes/_public/blog/$slug'
+import { Route as AdminBlogIndexRouteImport } from './routes/admin/blog/index'
 import { Route as AdminBlogNewRouteImport } from './routes/admin/blog.new'
 import { Route as PublicPoleSlugIndexRouteImport } from './routes/_public/pole/$slug/index'
 import { Route as PublicPoleSlugSubSlugRouteImport } from './routes/_public/pole/$slug/$subSlug'
@@ -85,11 +85,6 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminBlogRoute = AdminBlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => AdminRoute,
-} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -110,10 +105,15 @@ const PublicBlogSlugRoute = PublicBlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => PublicRoute,
 } as any)
+const AdminBlogIndexRoute = AdminBlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBlogNewRoute = AdminBlogNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => AdminBlogRoute,
+  id: '/blog/new',
+  path: '/blog/new',
+  getParentRoute: () => AdminRoute,
 } as any)
 const PublicPoleSlugIndexRoute = PublicPoleSlugIndexRouteImport.update({
   id: '/pole/$slug/',
@@ -126,9 +126,9 @@ const PublicPoleSlugSubSlugRoute = PublicPoleSlugSubSlugRouteImport.update({
   getParentRoute: () => PublicRoute,
 } as any)
 const AdminBlogIdEditRoute = AdminBlogIdEditRouteImport.update({
-  id: '/$id/edit',
-  path: '/$id/edit',
-  getParentRoute: () => AdminBlogRoute,
+  id: '/blog/$id/edit',
+  path: '/blog/$id/edit',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -141,13 +141,13 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
-  '/admin/blog': typeof AdminBlogRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/profil': typeof AdminProfilRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/$slug': typeof PublicBlogSlugRoute
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/blog/': typeof PublicBlogIndexRoute
+  '/admin/blog/': typeof AdminBlogIndexRoute
   '/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
   '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
   '/pole/$slug/': typeof PublicPoleSlugIndexRoute
@@ -160,7 +160,6 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
-  '/admin/blog': typeof AdminBlogRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/profil': typeof AdminProfilRoute
   '/': typeof PublicIndexRoute
@@ -168,6 +167,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof PublicBlogSlugRoute
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/blog': typeof PublicBlogIndexRoute
+  '/admin/blog': typeof AdminBlogIndexRoute
   '/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
   '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
   '/pole/$slug': typeof PublicPoleSlugIndexRoute
@@ -183,7 +183,6 @@ export interface FileRoutesById {
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
   '/_public/partenaires': typeof PublicPartenairesRoute
   '/_public/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
-  '/admin/blog': typeof AdminBlogRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/profil': typeof AdminProfilRoute
   '/_public/': typeof PublicIndexRoute
@@ -191,6 +190,7 @@ export interface FileRoutesById {
   '/_public/blog/$slug': typeof PublicBlogSlugRoute
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/_public/blog/': typeof PublicBlogIndexRoute
+  '/admin/blog/': typeof AdminBlogIndexRoute
   '/_public/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
   '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
   '/_public/pole/$slug/': typeof PublicPoleSlugIndexRoute
@@ -207,13 +207,13 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/partenaires'
     | '/politique-confidentialite'
-    | '/admin/blog'
     | '/admin/login'
     | '/admin/profil'
     | '/admin/'
     | '/blog/$slug'
     | '/admin/blog/new'
     | '/blog/'
+    | '/admin/blog/'
     | '/pole/$slug/$subSlug'
     | '/admin/blog/$id/edit'
     | '/pole/$slug/'
@@ -226,7 +226,6 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/partenaires'
     | '/politique-confidentialite'
-    | '/admin/blog'
     | '/admin/login'
     | '/admin/profil'
     | '/'
@@ -234,6 +233,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/admin/blog/new'
     | '/blog'
+    | '/admin/blog'
     | '/pole/$slug/$subSlug'
     | '/admin/blog/$id/edit'
     | '/pole/$slug'
@@ -248,7 +248,6 @@ export interface FileRouteTypes {
     | '/_public/mentions-legales'
     | '/_public/partenaires'
     | '/_public/politique-confidentialite'
-    | '/admin/blog'
     | '/admin/login'
     | '/admin/profil'
     | '/_public/'
@@ -256,6 +255,7 @@ export interface FileRouteTypes {
     | '/_public/blog/$slug'
     | '/admin/blog/new'
     | '/_public/blog/'
+    | '/admin/blog/'
     | '/_public/pole/$slug/$subSlug'
     | '/admin/blog/$id/edit'
     | '/_public/pole/$slug/'
@@ -347,13 +347,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/blog': {
-      id: '/admin/blog'
-      path: '/blog'
-      fullPath: '/admin/blog'
-      preLoaderRoute: typeof AdminBlogRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -382,12 +375,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicBlogSlugRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/admin/blog/': {
+      id: '/admin/blog/'
+      path: '/blog'
+      fullPath: '/admin/blog/'
+      preLoaderRoute: typeof AdminBlogIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/blog/new': {
       id: '/admin/blog/new'
-      path: '/new'
+      path: '/blog/new'
       fullPath: '/admin/blog/new'
       preLoaderRoute: typeof AdminBlogNewRouteImport
-      parentRoute: typeof AdminBlogRoute
+      parentRoute: typeof AdminRoute
     }
     '/_public/pole/$slug/': {
       id: '/_public/pole/$slug/'
@@ -405,10 +405,10 @@ declare module '@tanstack/react-router' {
     }
     '/admin/blog/$id/edit': {
       id: '/admin/blog/$id/edit'
-      path: '/$id/edit'
+      path: '/blog/$id/edit'
       fullPath: '/admin/blog/$id/edit'
       preLoaderRoute: typeof AdminBlogIdEditRouteImport
-      parentRoute: typeof AdminBlogRoute
+      parentRoute: typeof AdminRoute
     }
   }
 }
@@ -442,32 +442,22 @@ const PublicRouteChildren: PublicRouteChildren = {
 const PublicRouteWithChildren =
   PublicRoute._addFileChildren(PublicRouteChildren)
 
-interface AdminBlogRouteChildren {
-  AdminBlogNewRoute: typeof AdminBlogNewRoute
-  AdminBlogIdEditRoute: typeof AdminBlogIdEditRoute
-}
-
-const AdminBlogRouteChildren: AdminBlogRouteChildren = {
-  AdminBlogNewRoute: AdminBlogNewRoute,
-  AdminBlogIdEditRoute: AdminBlogIdEditRoute,
-}
-
-const AdminBlogRouteWithChildren = AdminBlogRoute._addFileChildren(
-  AdminBlogRouteChildren,
-)
-
 interface AdminRouteChildren {
-  AdminBlogRoute: typeof AdminBlogRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminProfilRoute: typeof AdminProfilRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminBlogNewRoute: typeof AdminBlogNewRoute
+  AdminBlogIndexRoute: typeof AdminBlogIndexRoute
+  AdminBlogIdEditRoute: typeof AdminBlogIdEditRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
-  AdminBlogRoute: AdminBlogRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminProfilRoute: AdminProfilRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminBlogNewRoute: AdminBlogNewRoute,
+  AdminBlogIndexRoute: AdminBlogIndexRoute,
+  AdminBlogIdEditRoute: AdminBlogIdEditRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
