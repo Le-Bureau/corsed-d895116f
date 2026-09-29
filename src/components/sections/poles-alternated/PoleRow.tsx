@@ -219,7 +219,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                 className="flex items-center gap-6 mb-9"
               >
                 <motion.div
-                  whileHover={reduced ? undefined : { scale: 1.05 }}
+                  {...(reduced ? {} : { whileHover: { scale: 1.05 } })}
                   transition={{ type: "spring", stiffness: 300, damping: 18 }}
                   className="font-serif italic font-normal leading-none tracking-[-0.02em] text-[clamp(56px,6vw,76px)] flex-shrink-0 origin-left cursor-default flex items-start"
                   style={{ color, fontFamily: "'Fraunces', 'Playfair Display', Georgia, serif" }}

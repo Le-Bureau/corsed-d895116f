@@ -7,7 +7,7 @@ import type { BlogPostFormValues } from "@/lib/admin/blogPostSchema";
 interface UpdateArgs {
   id: string;
   values: BlogPostFormValues;
-  previousSlug?: string;
+  previousSlug?: string | undefined;
 }
 
 export const useUpdateBlogPost = () => {

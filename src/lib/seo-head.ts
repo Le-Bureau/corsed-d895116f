@@ -11,7 +11,7 @@ export interface SeoHeadOptions {
   title: string;
   description: string;
   canonicalPath?: string;
-  ogImage?: string;
+  ogImage?: string | undefined;
   ogType?: "website" | "article";
   noindex?: boolean;
   jsonLd?: JsonLd | JsonLd[];

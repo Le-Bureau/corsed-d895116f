@@ -4,7 +4,7 @@ import { formatBlogDate } from "@/lib/blogHelpers";
 interface Props {
   author: BlogAuthor | null;
   publishedAt: string | null;
-  readingTimeMinutes?: number;
+  readingTimeMinutes?: number | undefined;
   size?: "sm" | "md" | "lg";
   showFullName?: boolean;
   short?: boolean;
@@ -29,7 +29,7 @@ const BlogAuthorMeta = ({
   const parts = author.name.split(" ");
   const display = showFullName
     ? author.name
-    : `${parts[0][0]}. ${parts.slice(1).join(" ")}`;
+    : `${parts[0]?.[0] ?? ""}. ${parts.slice(1).join(" ")}`;
 
   return (
     <>

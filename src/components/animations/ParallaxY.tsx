@@ -19,7 +19,7 @@ const ParallaxY = ({ children, className, distance = 80 }: Props) => {
 
   return (
     <div ref={ref} className={className}>
-      <motion.div style={reduced ? undefined : { y }}>{children}</motion.div>
+      <motion.div {...(reduced ? {} : { style: { y } })}>{children}</motion.div>
     </div>
   );
 };

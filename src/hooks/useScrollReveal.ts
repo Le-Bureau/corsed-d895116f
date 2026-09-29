@@ -44,7 +44,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLElement>({
 
     observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) reveal();
+        if (entry?.isIntersecting) reveal();
       },
       {
         root: null,

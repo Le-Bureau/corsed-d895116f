@@ -13,7 +13,7 @@ const WhyCard = ({ reason, delay = 0 }: Props) => {
   return (
     <FadeInWhenVisible delay={delay}>
       <motion.article
-        whileHover={reduced ? undefined : { y: -4 }}
+        {...(reduced ? {} : { whileHover: { y: -4 } })}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="hover-border-card group relative p-7 lg:p-10 rounded-3xl bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg transition-all duration-300 ease-out h-full overflow-hidden flex flex-col"
       >

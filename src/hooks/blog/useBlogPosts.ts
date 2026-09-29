@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { mapPost, type PostRow } from "./mappers";
 import type { BlogPost } from "@/types/blog";
 
-const fetchAllPublishedPosts = async (): Promise<BlogPost[]> => {
+export const fetchAllPublishedPosts = async (): Promise<BlogPost[]> => {
   const { data, error } = await supabase
     .from("blog_posts")
     .select(`*, author:blog_authors(*), category:blog_categories(*)`)
@@ -22,7 +22,7 @@ export const useAllBlogPosts = () =>
   });
 
 interface Options {
-  categorySlug?: string;
+  categorySlug?: string | undefined;
 }
 
 export const useBlogPosts = ({ categorySlug }: Options = {}) => {

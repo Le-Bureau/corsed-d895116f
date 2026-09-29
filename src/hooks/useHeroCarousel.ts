@@ -80,7 +80,7 @@ export function useHeroCarousel(): UseHeroCarousel {
 
   return {
     currentIndex,
-    currentPole: POLES[currentIndex],
+    currentPole: POLES[currentIndex] ?? POLES[0]!,
     direction,
     goToNext,
     goToPrev,

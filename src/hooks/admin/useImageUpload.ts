@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface Options {
   folder: "covers" | "heroes" | "inline-images" | "avatars" | "gallery-images";
-  postId?: string;
+  postId?: string | undefined;
 }
 
 const MAX_BYTES = 5 * 1024 * 1024; // 5 MB

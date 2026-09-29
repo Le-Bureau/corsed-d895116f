@@ -14,7 +14,7 @@ import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
-const POLE_META: Record<string, string> = {
+export const POLE_META: Record<string, string> = {
   nettoyage:
     "Nettoyage par drone en Corse : façades, toitures, panneaux photovoltaïques. Intervention rapide, sans échafaudage ni nacelle, sans immobilisation de site.",
   diagnostic:

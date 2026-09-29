@@ -27,6 +27,7 @@ const BlogPost = () => {
       const t = setTimeout(() => setCopied(false), 1500);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, [copied]);
 
   // ARTICLE_VIEWED — fire once per mounted post

@@ -1,8 +1,8 @@
 interface Props {
   title: string;
   excerpt: string;
-  metaTitle?: string | null;
-  metaDescription?: string | null;
+  metaTitle?: string | null | undefined;
+  metaDescription?: string | null | undefined;
   slug: string;
 }
 

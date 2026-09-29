@@ -17,7 +17,7 @@ interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onInsert: (snippet: string) => void;
-  postId?: string;
+  postId?: string | undefined;
 }
 
 const buildSnippet = (url: string, alt: string, caption: string, wide: boolean) => {

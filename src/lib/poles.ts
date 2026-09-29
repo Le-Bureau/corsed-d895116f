@@ -67,10 +67,10 @@ export interface Pole {
   heroImageAlt?: string;
   heroPoleNumber?: string;
   heroPitch?: string;
-  whyDroneItems?: WhyDroneItem[];
-  processSteps?: ProcessStep[];
-  useCases?: UseCase[];
-  poleFAQ?: PoleFAQItem[];
+  whyDroneItems?: WhyDroneItem[] | undefined;
+  processSteps?: ProcessStep[] | undefined;
+  useCases?: UseCase[] | undefined;
+  poleFAQ?: PoleFAQItem[] | undefined;
   finalCTATitle?: string;
   finalCTASubtitle?: string;
   finalCTAButtonLabel?: string;
