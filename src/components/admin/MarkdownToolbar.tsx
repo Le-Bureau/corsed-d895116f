@@ -25,7 +25,7 @@ interface Props {
   textareaRef: RefObject<HTMLTextAreaElement>;
   value: string;
   onChange: (next: string) => void;
-  postId?: string;
+  postId?: string | undefined;
 }
 
 interface ToolDef {

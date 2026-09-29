@@ -16,7 +16,7 @@ interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onInsert: (snippet: string) => void;
-  postId?: string;
+  postId?: string | undefined;
 }
 
 interface SlotState {
