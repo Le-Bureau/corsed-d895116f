@@ -26,6 +26,7 @@ import "@fontsource/playfair-display/600.css";
 import "@fontsource/playfair-display/700.css";
 
 import { AuthProvider } from "@/contexts/AuthContext";
+import { MotionConfig } from "motion/react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -191,6 +192,7 @@ function RootComponent() {
   }, []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <TooltipProvider>
@@ -206,6 +208,7 @@ function RootComponent() {
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
+    </MotionConfig>
   );
 }
 

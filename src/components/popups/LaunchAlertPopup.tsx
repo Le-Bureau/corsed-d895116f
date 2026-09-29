@@ -1,7 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { X, ArrowRight, Check } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { POLES } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
@@ -14,6 +14,7 @@ interface LaunchAlertPopupProps {
 }
 
 export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupProps) {
+  const reduced = useReducedMotion();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
