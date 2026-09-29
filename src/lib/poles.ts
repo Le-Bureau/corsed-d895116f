@@ -69,7 +69,7 @@ export interface Pole {
   heroPitch?: string;
   whyDroneItems?: WhyDroneItem[] | undefined;
   processSteps?: ProcessStep[] | undefined;
-  useCases?: UseCase[];
+  useCases?: UseCase[] | undefined;
   poleFAQ?: PoleFAQItem[];
   finalCTATitle?: string;
   finalCTASubtitle?: string;

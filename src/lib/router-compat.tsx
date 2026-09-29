@@ -28,7 +28,7 @@ function parseTo(to: string): {
   search?: Record<string, string> | undefined;
   hash?: string | undefined;
 } {
-  const [beforeHash, hashStr] = (to ?? "").split("#");
+  const [beforeHash = "", hashStr] = (to ?? "").split("#");
   const [pathname, searchStr] = beforeHash.split("?");
   return {
     // react-router keeps the current path for search-only ("?a=1") and
@@ -62,8 +62,8 @@ export function useNavigate(): NavigateFn {
       search: search as never,
       state: options?.state as never,
     };
-    if (hash !== undefined) navOptions.hash = hash;
-    if (options?.replace !== undefined) navOptions.replace = options.replace;
+    if (hash !== undefined) navOptions["hash"] = hash;
+    if (options?.replace !== undefined) navOptions["replace"] = options.replace;
     tsNav(navOptions as never);
   }, [tsNav, router]) as NavigateFn;
 }
@@ -119,7 +119,7 @@ export function useSearchParams(): [URLSearchParams, (init: URLSearchParams | Re
         to: live.pathname,
         search: searchObj as never,
       };
-      if (opts?.replace !== undefined) navOptions.replace = opts.replace;
+      if (opts?.replace !== undefined) navOptions["replace"] = opts.replace;
       nav(navOptions as never);
     },
     [nav, router],
@@ -146,12 +146,12 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     search: search as never,
     state: state as never,
   };
-  if (hash !== undefined) linkProps.hash = hash;
-  if (replace !== undefined) linkProps.replace = replace;
+  if (hash !== undefined) linkProps["hash"] = hash;
+  if (replace !== undefined) linkProps["replace"] = replace;
   return (
     <TSLink
       ref={ref as never}
-      {...(linkProps as never)}
+      {...(linkProps as Record<string, unknown>)}
       {...((rest ?? {}) as Record<string, unknown>)}
     >
       {children}
@@ -168,9 +168,9 @@ export function Navigate({ to, replace, state }: { to: string; replace?: boolean
     search: search as never,
     state: state as never,
   };
-  if (hash !== undefined) navProps.hash = hash;
-  if (replace !== undefined) navProps.replace = replace;
-  return <TSNavigate {...(navProps as never)} />;
+  if (hash !== undefined) navProps["hash"] = hash;
+  if (replace !== undefined) navProps["replace"] = replace;
+  return <TSNavigate {...(navProps as Record<string, unknown>)} />;
 }
 
 // ---------- Outlet ----------

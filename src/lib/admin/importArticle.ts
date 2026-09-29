@@ -146,7 +146,7 @@ export async function validateImport(
 
   let fm: Record<string, unknown>;
   try {
-    const parsedYaml = parseYaml(fmMatch[1]);
+    const parsedYaml = parseYaml(fmMatch[1] ?? "");
     fm = (parsedYaml ?? {}) as Record<string, unknown>;
     if (typeof fm !== "object" || Array.isArray(fm)) {
       throw new Error("le frontmatter doit être un objet clé/valeur");
