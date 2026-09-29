@@ -34,7 +34,7 @@ const TargetProfilesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {PARTNER_PROFILES.map(({ icon: Icon, label }) => (
             <FadeInWhenVisible key={label}>
-              <div className="h-full flex items-center gap-4 rounded-2xl p-6 bg-surface-card border border-border-subtle shadow-soft-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-md hover:border-logo-base/40">
+              <div className="h-full flex items-center gap-4 rounded-2xl p-6 bg-surface-card border border-border-subtle shadow-soft-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-md hover:border-logo-base/40 motion-reduce:transform-none">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-logo-base/10 border border-logo-base/25 text-logo-base-deep flex-shrink-0">
                   <Icon className="w-5 h-5" strokeWidth={1.75} aria-hidden="true" />
                 </div>

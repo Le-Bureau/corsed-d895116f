@@ -97,7 +97,7 @@ const PoleFinalCTA = ({ pole }: Props) => {
                   <>
                     <span>{label}</span>
                     <ArrowRight
-                      className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                      className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none"
                       strokeWidth={2.5}
                       aria-hidden="true"
                     />

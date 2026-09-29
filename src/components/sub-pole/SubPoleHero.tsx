@@ -90,7 +90,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to={`/contact?expertise=${pole.key}`}
-              className="group inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none"
+              className="group inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none motion-reduce:transform-none"
               style={{
                 background: "var(--pole-color)",
                 boxShadow:
@@ -98,7 +98,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
               }}
             >
               Obtenir un devis
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
             </Link>
             {showProcessAnchor && (
               <a

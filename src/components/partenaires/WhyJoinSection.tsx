@@ -33,7 +33,7 @@ const WhyJoinSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PARTNER_BENEFITS.map(({ icon: Icon, title, description }) => (
             <FadeInWhenVisible key={title}>
-              <article className="group relative h-full overflow-hidden rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">
+              <article className="group relative h-full overflow-hidden rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg motion-reduce:transform-none">
                 <div className="relative inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 bg-logo-base/10 border border-logo-base/25 text-logo-base-deep">
                   <Icon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
                 </div>

@@ -22,10 +22,10 @@ const InfoCard = ({
     href={href}
     target={external ? "_blank" : undefined}
     rel={external ? "noreferrer noopener" : undefined}
-    className="group relative block overflow-hidden rounded-2xl border border-border-subtle bg-surface-card shadow-soft-md p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg hover:border-logo-base/40"
+    className="group relative block overflow-hidden rounded-2xl border border-border-subtle bg-surface-card shadow-soft-md p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg hover:border-logo-base/40 motion-reduce:transform-none"
   >
     <div className="relative">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-logo-base/25 bg-logo-base/10 transition-all duration-300 group-hover:scale-105">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-logo-base/25 bg-logo-base/10 transition-all duration-300 group-hover:scale-105 motion-reduce:transform-none">
         <Icon className="h-[18px] w-[18px] text-logo-base-deep" strokeWidth={2} />
       </div>
 

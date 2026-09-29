@@ -90,7 +90,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
         >
           <div
             ref={imageRef}
-            className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-elevated shadow-soft-lg group transition-all duration-700 ease-out hover:scale-[1.01]"
+            className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-surface-elevated shadow-soft-lg group transition-all duration-700 ease-out hover:scale-[1.01] motion-reduce:transform-none"
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow = `var(--shadow-xl), 0 24px 60px rgba(${colorRgb}, 0.18)`;
             }}
@@ -104,7 +104,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                 alt={`${pole.label} par drone — illustration Corse Drone`}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transform-none"
                 style={
                   pole.mobileImagePosition
                     ? { objectPosition: pole.mobileImagePosition }
@@ -124,7 +124,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                     ? { objectPosition: pole.mobileImagePosition }
                     : {}),
                 }}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.13]"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.13] motion-reduce:transform-none"
               />
             )}
             <div

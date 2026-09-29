@@ -64,7 +64,7 @@ const CTAFinalSection = () => {
         >
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-white text-surface-darker text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-white text-surface-darker text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
             style={{
               boxShadow:
                 "0 0 0 1px rgba(168,192,212,0.4), 0 0 32px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.25)",

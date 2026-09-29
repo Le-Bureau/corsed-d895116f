@@ -43,7 +43,7 @@ const ExpertiseItem = ({ expertise }: Props) => {
       >
         <ArrowRight
           className={`w-4 h-4 lg:w-[18px] lg:h-[18px] transition-transform duration-300 ease-out ${
-            reduced ? "" : "group-hover:translate-x-0.5"
+            reduced ? "" : "group-hover:translate-x-0.5 motion-reduce:transform-none"
           }`}
         />
       </span>

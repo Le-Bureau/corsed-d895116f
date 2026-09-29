@@ -117,7 +117,7 @@ const PoleHero = ({ pole }: Props) => {
             <button
               type="button"
               onClick={() => setIsAlertOpen(true)}
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto motion-reduce:transform-none"
               style={{
                 boxShadow:
                   "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
@@ -125,14 +125,14 @@ const PoleHero = ({ pole }: Props) => {
             >
               {ctaLabel}
               <ArrowRight
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none"
                 style={{ color: "var(--pole-color)" }}
               />
             </button>
           ) : (
             <Link
               to={ctaHref}
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white text-text-primary font-semibold text-[15px] px-7 py-4 sm:py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none whitespace-nowrap w-full sm:w-auto motion-reduce:transform-none"
               style={{
                 boxShadow:
                   "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.25), 0 8px 24px rgba(var(--pole-color-rgb), 0.18)",
@@ -140,7 +140,7 @@ const PoleHero = ({ pole }: Props) => {
             >
               {ctaLabel}
               <ArrowRight
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none"
                 style={{ color: "var(--pole-color)" }}
               />
             </Link>
@@ -150,11 +150,11 @@ const PoleHero = ({ pole }: Props) => {
             <a
               href="#sous-services"
               onClick={(e) => handleAnchor(e, "sous-services")}
-              className="group inline-flex items-center justify-center gap-2 rounded-full font-medium text-[14px] sm:text-[15px] px-7 py-2 sm:py-3.5 whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none text-text-primary sm:bg-white/55 sm:backdrop-blur-md sm:border sm:border-white/80 sm:shadow-[0_1px_2px_rgba(10,10,15,0.04),inset_0_1px_0_rgba(255,255,255,0.9)] sm:hover:bg-white/75"
+              className="group inline-flex items-center justify-center gap-2 rounded-full font-medium text-[14px] sm:text-[15px] px-7 py-2 sm:py-3.5 whitespace-nowrap transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none text-text-primary sm:bg-white/55 sm:backdrop-blur-md sm:border sm:border-white/80 sm:shadow-[0_1px_2px_rgba(10,10,15,0.04),inset_0_1px_0_rgba(255,255,255,0.9)] sm:hover:bg-white/75 motion-reduce:transform-none"
             >
               Voir les sous-services
               <ArrowDown
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5"
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transform-none"
                 style={{ color: "var(--pole-color)" }}
                 aria-hidden="true"
               />

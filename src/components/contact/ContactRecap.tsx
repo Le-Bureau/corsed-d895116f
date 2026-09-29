@@ -187,7 +187,7 @@ const ContactRecap = () => {
               <>
                 Envoyer ma demande
                 <Send
-                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transform-none"
                   style={{
                     color: "var(--contact-accent, var(--logo-base))",
                     transition: "color 600ms ease-out, transform 0.3s ease",

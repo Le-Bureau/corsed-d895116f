@@ -112,23 +112,23 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
           >
             <Link
               to="/contact"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-text-on-dark px-8 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5 w-full sm:w-auto"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-text-on-dark px-8 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5 w-full sm:w-auto motion-reduce:transform-none"
             >
               Demander un devis
               <ArrowRight
                 size={16}
-                className="transition-transform duration-200 group-hover:translate-x-1"
+                className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
               />
             </Link>
             <Link
               to={`/pole/${pole.slug}`}
-              className="group inline-flex items-center justify-center sm:justify-start gap-2 text-[14px] sm:text-[15px] font-medium text-text-on-dark py-3 px-6 rounded-full border border-white/40 sm:border-0 sm:py-4 sm:px-8 sm:glass-light sm:hover:bg-white/[0.14] transition-all duration-200 sm:hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center sm:justify-start gap-2 text-[14px] sm:text-[15px] font-medium text-text-on-dark py-3 px-6 rounded-full border border-white/40 sm:border-0 sm:py-4 sm:px-8 sm:glass-light sm:hover:bg-white/[0.14] transition-all duration-200 sm:hover:-translate-y-0.5 motion-reduce:transform-none"
               style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
             >
               Découvrir le pôle
               <ArrowRight
                 size={16}
-                className="transition-transform duration-200 group-hover:translate-x-1"
+                className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
               />
             </Link>
           </motion.div>

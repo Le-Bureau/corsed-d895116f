@@ -61,14 +61,14 @@ const FooterCtaBlock = () => {
         <motion.div variants={make(12, 0.3)} className="flex-shrink-0 flex flex-wrap gap-3">
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-text-on-dark px-7 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 rounded-full bg-text-on-dark px-7 py-4 text-[15px] font-semibold text-surface-darker transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transform-none"
           >
             Demander un devis
             <ArrowRight size={16} />
           </Link>
           <a
             href={CONTACT.phoneLink}
-            className="glass-light hover:bg-white/[0.14] inline-flex items-center rounded-full px-7 py-4 text-[15px] font-medium text-text-on-dark transition-all duration-200 hover:-translate-y-0.5"
+            className="glass-light hover:bg-white/[0.14] inline-flex items-center rounded-full px-7 py-4 text-[15px] font-medium text-text-on-dark transition-all duration-200 hover:-translate-y-0.5 motion-reduce:transform-none"
           >
             {CONTACT.phone}
           </a>

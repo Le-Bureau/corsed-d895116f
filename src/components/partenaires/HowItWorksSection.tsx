@@ -35,7 +35,7 @@ const HowItWorksSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
           {PARTNER_STEPS.map(({ number, icon: Icon, title, description }) => (
             <FadeInWhenVisible key={number}>
-              <article className="h-full rounded-3xl p-6 lg:p-7 bg-surface-card border border-border-subtle shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">
+              <article className="h-full rounded-3xl p-6 lg:p-7 bg-surface-card border border-border-subtle shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg motion-reduce:transform-none">
                 <div className="font-mono text-[11px] tracking-[0.22em] uppercase text-logo-base-deep mb-5">
                   {number}
                 </div>

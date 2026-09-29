@@ -79,7 +79,7 @@ const PoleSubServices = ({ pole }: Props) => {
               const Icon = (s.iconName && ICON_MAP[s.iconName]) || Sparkles;
               return (
                 <FadeInWhenVisible key={s.slug || s.name}>
-                  <div className="group relative p-7 lg:p-8 h-full bg-surface-card rounded-2xl border border-border-subtle transition-all duration-300 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-soft-lg motion-reduce:hover:transform-none">
+                  <div className="group relative p-7 lg:p-8 h-full bg-surface-card rounded-2xl border border-border-subtle transition-all duration-300 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-soft-lg motion-reduce:hover:transform-none motion-reduce:transform-none">
                     <div
                       className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
                       style={{
@@ -152,7 +152,7 @@ const PoleSubServices = ({ pole }: Props) => {
             const href = s.slug ? `/pole/${pole.key}/${s.slug}` : undefined;
 
             const inner = (
-              <article className="hover-border-card group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
+              <article className="hover-border-card group relative h-full rounded-3xl p-8 bg-surface-card border border-border-subtle shadow-soft-md hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:hover:transform-none motion-reduce:transform-none" style={{ ["--accent-color" as never]: "var(--pole-color)" }}>
                 <div className="font-mono text-[11px] tracking-[0.18em] uppercase mb-6 text-text-muted">
                   <span style={{ color: "var(--pole-color)" }}>{num}</span> / {totalStr}
                 </div>
@@ -170,7 +170,7 @@ const PoleSubServices = ({ pole }: Props) => {
                     style={{ color: "var(--pole-color)" }}
                   >
                     Découvrir
-                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
                   </span>
                 )}
               </article>

@@ -62,11 +62,11 @@ const PartnersContent = () => {
         <Link
           to="/partenaires"
           aria-label="En savoir plus sur le programme partenaires"
-          className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-logo-base-deep text-white text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
+          className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-logo-base-deep text-white text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
           style={{ boxShadow: "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)" }}
         >
           En savoir plus
-          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transform-none" />
         </Link>
       </motion.div>
     </StaggerChildren>

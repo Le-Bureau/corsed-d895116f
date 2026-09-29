@@ -74,20 +74,20 @@ const PartenairesHero = () => {
           <a
             href="#candidature"
             onClick={(event) => handleAnchorClick(event, "candidature")}
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-logo-base-deep text-white font-semibold text-[15px] px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap motion-reduce:transform-none"
             style={{
               boxShadow:
                 "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)",
             }}
           >
             Nous rejoindre
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
           </a>
 
           <a
             href="#fonctionnement"
             onClick={(event) => handleAnchorClick(event, "fonctionnement")}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default bg-transparent text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 hover:bg-surface-card hover:border-text-primary hover:-translate-y-0.5 whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-border-default bg-transparent text-text-primary font-medium text-[15px] px-7 py-3.5 transition-all duration-300 hover:bg-surface-card hover:border-text-primary hover:-translate-y-0.5 whitespace-nowrap motion-reduce:transform-none"
           >
             Comment ça marche
           </a>

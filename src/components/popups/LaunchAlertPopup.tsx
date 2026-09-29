@@ -267,7 +267,7 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                     >
                       {isSubmitting ? "Envoi..." : "Me prévenir"}
                       {!isSubmitting && (
-                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={2.5} />
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" strokeWidth={2.5} />
                       )}
                     </button>
 

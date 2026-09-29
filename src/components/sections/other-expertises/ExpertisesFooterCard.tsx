@@ -16,7 +16,7 @@ const ExpertisesFooterCard = () => {
         </div>
         <Link
           to="/contact"
-          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-logo-base-deep text-white text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 flex-shrink-0"
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-logo-base-deep text-white text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 flex-shrink-0 motion-reduce:transform-none"
           style={{ boxShadow: "0 0 0 1px rgba(168,192,212,0.4), 0 8px 28px rgba(168,192,212,0.30)" }}
         >
           Demander un devis
