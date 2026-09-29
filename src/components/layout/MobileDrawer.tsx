@@ -18,7 +18,6 @@ interface Props {
 const NAV_LINKS = [
   { label: "Partenaires", to: "/partenaires" },
   { label: "Blog", to: "/blog" },
-  { label: "À propos", to: "/#about" },
   { label: "Contact", to: "/contact" },
 ];
 
