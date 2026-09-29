@@ -22,7 +22,7 @@ export const useAllBlogPosts = () =>
   });
 
 interface Options {
-  categorySlug?: string;
+  categorySlug?: string | undefined;
 }
 
 export const useBlogPosts = ({ categorySlug }: Options = {}) => {

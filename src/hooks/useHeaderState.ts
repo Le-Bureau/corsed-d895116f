@@ -89,7 +89,7 @@ export function useHeaderState(): HeaderState {
         }
       }
       if (!chosen) chosen = sections[0] ?? null;
-      setActiveBg(readBg(chosen));
+      if (chosen) setActiveBg(readBg(chosen));
     };
 
     pickInitial();
