@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_public/pole/$slug/")({
     const pole = POLES.find((p) => p.key === params.slug);
     if (!pole) {
       return seoHead({
-        title: "Corse Drone",
+        title: "Page introuvable",
         description: "Solutions professionnelles par drone en Corse.",
         canonicalPath: "/",
         noindex: true,
