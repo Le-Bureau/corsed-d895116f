@@ -175,6 +175,7 @@ export type Database = {
           id: string
           message: string
           metadata: Json
+          notified: boolean
           phone: string | null
           request_type: string
           rgpd_consent: boolean
@@ -187,6 +188,7 @@ export type Database = {
           id?: string
           message: string
           metadata?: Json
+          notified?: boolean
           phone?: string | null
           request_type: string
           rgpd_consent?: boolean
@@ -199,6 +201,7 @@ export type Database = {
           id?: string
           message?: string
           metadata?: Json
+          notified?: boolean
           phone?: string | null
           request_type?: string
           rgpd_consent?: boolean
@@ -214,6 +217,7 @@ export type Database = {
           id: string
           message: string
           metadata: Json
+          notified: boolean
           phone: string
           profession: string
           rgpd_consent: boolean
@@ -226,6 +230,7 @@ export type Database = {
           id?: string
           message: string
           metadata?: Json
+          notified?: boolean
           phone: string
           profession: string
           rgpd_consent?: boolean
@@ -238,6 +243,7 @@ export type Database = {
           id?: string
           message?: string
           metadata?: Json
+          notified?: boolean
           phone?: string
           profession?: string
           rgpd_consent?: boolean
@@ -252,6 +258,7 @@ export type Database = {
           email: string
           id: string
           name: string
+          notified: boolean
           pole: string
           status: string
         }
@@ -261,6 +268,7 @@ export type Database = {
           email: string
           id?: string
           name: string
+          notified?: boolean
           pole: string
           status?: string
         }
@@ -270,6 +278,7 @@ export type Database = {
           email?: string
           id?: string
           name?: string
+          notified?: boolean
           pole?: string
           status?: string
         }
