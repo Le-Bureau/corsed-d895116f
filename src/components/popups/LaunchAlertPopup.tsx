@@ -201,10 +201,11 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                   </h2>
                   <p className="text-[14px] text-text-secondary leading-relaxed mb-6">
                     Le pôle {pole.label} arrive bientôt. Laissez-nous votre email,
-                    on vous écrit dès qu'il est dispo.
+                    on vous écrit dès son lancement.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-3.5">
+                    <Honeypot />
                     <div>
                       <label htmlFor="lap-name" className="block text-[12px] font-medium text-text-secondary mb-1.5">
                         Nom
@@ -274,6 +275,8 @@ export function LaunchAlertPopup({ isOpen, onClose, poleKey }: LaunchAlertPopupP
                     <p className="text-[11px] text-text-muted text-center pt-1">
                       Pas de spam. Un seul email au lancement.
                     </p>
+
+                    <PrivacyNotice className="text-center" />
                   </form>
                 </>
               )}
