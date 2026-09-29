@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion
 import { ChevronDown, X } from "lucide-react";
 import HeaderLogo from "./HeaderLogo";
 import { POLES } from "@/lib/poles";
+import { EXPERTISES } from "@/lib/expertises";
 import { cn } from "@/lib/utils";
 import { useLenis } from "@/components/SmoothScrollProvider";
 
@@ -246,10 +247,14 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                   className="overflow-hidden pl-5"
                                 >
                                   {pole.subServices.map((sub) =>
-                                    sub.slug && !pole.isInDevelopment ? (
+                                    sub.slug ? (
                                       <li key={sub.slug ?? sub.name}>
                                         <Link
-                                          to={`/pole/${pole.slug}/${sub.slug}`}
+                                          to={
+                                            pole.isInDevelopment
+                                              ? `/pole/${pole.slug}#sous-services`
+                                              : `/pole/${pole.slug}/${sub.slug}`
+                                          }
                                           onClick={onClose}
                                           className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                                         >
@@ -279,20 +284,22 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                           </li>
                         );
                       })}
-                      <li>
-                        <Link
-                          to="/expertises"
-                          onClick={onClose}
-                          className="flex items-center gap-3 py-3 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-                        >
-                          <span
-                            className="h-2 w-2 rounded-full"
-                            style={{ backgroundColor: "var(--logo-base)" }}
-                            aria-hidden
-                          />
-                          Autres expertises
-                        </Link>
-                      </li>
+                      {EXPERTISES.map((e) => (
+                        <li key={e.key}>
+                          <Link
+                            to={`/contact?expertise=${e.slug}`}
+                            onClick={onClose}
+                            className="flex items-center gap-3 py-3 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+                          >
+                            <span
+                              className="h-2 w-2 rounded-full"
+                              style={{ backgroundColor: "var(--logo-base)" }}
+                              aria-hidden
+                            />
+                            {e.label}
+                          </Link>
+                        </li>
+                      ))}
                     </motion.ul>
                   )}
                 </AnimatePresence>
