@@ -1,15 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import PoleDetail, { POLE_META } from "@/pages/PoleDetail";
 import { seoHead } from "@/lib/seo-head";
 import { POLES } from "@/lib/poles";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 export const Route = createFileRoute("/_public/pole/$slug/")({
+  loader: ({ params }) => {
+    if (!POLES.some((p) => p.key === params.slug)) {
+      throw notFound();
+    }
+  },
   head: ({ params }) => {
     const pole = POLES.find((p) => p.key === params.slug);
     if (!pole) {
       return seoHead({
-        title: "Corse Drone",
+        title: "Page introuvable",
         description: "Solutions professionnelles par drone en Corse.",
         canonicalPath: "/",
         noindex: true,

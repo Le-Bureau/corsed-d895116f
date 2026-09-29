@@ -9,6 +9,7 @@ export const Route = createFileRoute("/_public/expertises")({
       description:
         "Toutes les expertises drone de Corse Drone : nettoyage, diagnostic, agriculture, transport et prestations sur devis en Corse.",
       canonicalPath: "/expertises",
+      noindex: true,
     }),
   component: Expertises,
 });

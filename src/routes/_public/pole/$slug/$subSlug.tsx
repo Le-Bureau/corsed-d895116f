@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import SubPoleDetail from "@/pages/SubPoleDetail";
 import { seoHead } from "@/lib/seo-head";
 import { POLES } from "@/lib/poles";
@@ -6,12 +6,19 @@ import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { SUB_POLE_META, LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
+  loader: ({ params }) => {
+    const pole = POLES.some((p) => p.key === params.slug);
+    const content = SUB_POLE_CONTENT[params.slug]?.[params.subSlug];
+    if (!pole || !content) {
+      throw notFound();
+    }
+  },
   head: ({ params }) => {
     const pole = POLES.find((p) => p.key === params.slug);
     const content = SUB_POLE_CONTENT[params.slug]?.[params.subSlug];
     if (!pole || !content) {
       return seoHead({
-        title: "Corse Drone",
+        title: "Page introuvable",
         description: "Solutions professionnelles par drone en Corse.",
         canonicalPath: "/",
         noindex: true,

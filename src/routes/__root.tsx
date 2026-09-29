@@ -37,6 +37,7 @@ import { Link } from "@/lib/router-compat";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { POLES } from "@/lib/poles";
+import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { reportLovableError } from "@/lib/lovable-error-reporting";
 
 const PlausibleTracker = () => {
@@ -45,7 +46,25 @@ const PlausibleTracker = () => {
 };
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  head: ({ matches }) => {
+    // No leaf route matched → the notFoundComponent is rendering (true 404).
+    // Pole routes with an unknown slug also render the 404 (their loader
+    // throws notFound, which skips their own head), so detect them here.
+    const leaf = matches[matches.length - 1] as
+      | { routeId?: string; params?: Record<string, string> }
+      | undefined;
+    const leafParams = leaf?.params ?? {};
+    const invalidPole =
+      (leaf?.routeId === "/_public/pole/$slug/" ||
+        leaf?.routeId === "/_public/pole/$slug/$subSlug") &&
+      (!POLES.some((p) => p.key === leafParams["slug"]) ||
+        (leaf.routeId === "/_public/pole/$slug/$subSlug" &&
+          !SUB_POLE_CONTENT[leafParams["slug"] ?? ""]?.[
+            leafParams["subSlug"] ?? ""
+          ]));
+    const isNotFound =
+      matches.every((m) => m.routeId === "__root__") || invalidPole;
+    return {
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -54,7 +73,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "google-site-verification",
         content: "47fAdsNz7GQ2Lstj9DsprFSm-1C2iXooIw5x6N12m70",
       },
-      { title: "Corse Drone | Nettoyage, Agriculture & Transport par drone" },
+      {
+        title: isNotFound
+          ? "Page introuvable | Corse Drone"
+          : "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+      },
+      ...(isNotFound ? [{ name: "robots", content: "noindex, nofollow" }] : []),
       {
         name: "description",
         content:
@@ -129,7 +153,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
       },
     ],
-  }),
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFound,
