@@ -81,9 +81,9 @@ const launchAlertSchema = z.object({
 });
 
 const bodySchema = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("contact"), payload: contactSchema }),
-  z.object({ type: z.literal("partner"), payload: partnerSchema }),
-  z.object({ type: z.literal("launch-alert"), payload: launchAlertSchema }),
+  z.object({ type: z.literal("contact"), id: z.string().uuid().optional(), payload: contactSchema }),
+  z.object({ type: z.literal("partner"), id: z.string().uuid().optional(), payload: partnerSchema }),
+  z.object({ type: z.literal("launch-alert"), id: z.string().uuid().optional(), payload: launchAlertSchema }),
 ]);
 
 type Built = { subject: string; text: string; replyTo: string };
@@ -155,6 +155,32 @@ function buildLaunchAlert(p: z.infer<typeof launchAlertSchema>): Built {
   return { subject, text: lines.join("\n"), replyTo: p.email };
 }
 
+const TABLES: Record<string, string> = {
+  contact: "contact_submissions",
+  partner: "partner_applications",
+  "launch-alert": "pole_launch_alerts",
+};
+
+async function markNotified(type: string, id: string) {
+  const url = Deno.env.get("SUPABASE_URL");
+  const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!url || !key) {
+    console.error("notify-lead: cannot mark notified, missing env");
+    return;
+  }
+  const res = await fetch(`${url}/rest/v1/${TABLES[type]}?id=eq.${id}`, {
+    method: "PATCH",
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify({ notified: true }),
+  });
+  if (!res.ok) console.error(`notify-lead: mark notified failed [${res.status}]: ${await res.text()}`);
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -166,6 +192,12 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
 
+  const fail = (reason: string, status: number, extra: Record<string, unknown> = {}) =>
+    new Response(JSON.stringify({ ok: false, error: reason, ...extra }), {
+      status,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
   try {
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -174,14 +206,14 @@ Deno.serve(async (req) => {
 
     if (rateLimited(ip)) {
       console.warn(`notify-lead: rate limited ip=${ip}`);
-      return ok({ skipped: "rate_limited" });
+      return fail("rate_limited", 429);
     }
 
     const json = await req.json().catch(() => null);
     const parsed = bodySchema.safeParse(json);
     if (!parsed.success) {
       console.error("notify-lead: invalid body", parsed.error.flatten());
-      return ok({ skipped: "invalid_body" });
+      return fail("invalid_body", 400);
     }
 
     let built: Built;
@@ -193,7 +225,7 @@ Deno.serve(async (req) => {
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY_1") ?? Deno.env.get("RESEND_API_KEY");
     if (!LOVABLE_API_KEY || !RESEND_API_KEY) {
       console.error("notify-lead: missing API keys (LOVABLE_API_KEY or RESEND_API_KEY_1)");
-      return ok({ skipped: "missing_keys" });
+      return fail("missing_keys", 500);
     }
 
     const res = await fetch(`${GATEWAY_URL}/emails`, {
@@ -215,13 +247,14 @@ Deno.serve(async (req) => {
     const respText = await res.text();
     if (!res.ok) {
       console.error(`notify-lead: Resend error [${res.status}]: ${respText}`);
-      return ok({ skipped: "send_failed", status: res.status });
+      return fail("send_failed", 502, { status: res.status });
     }
 
     console.log(`notify-lead: sent type=${parsed.data.type}`);
+    if (parsed.data.id) await markNotified(parsed.data.type, parsed.data.id);
     return ok({ sent: true });
   } catch (err) {
     console.error("notify-lead: unexpected error", err);
-    return ok({ skipped: "exception" });
+    return fail("exception", 500);
   }
 });
