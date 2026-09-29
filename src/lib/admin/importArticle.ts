@@ -176,7 +176,7 @@ export async function validateImport(
     errors.push({ field: "content", message: "Contenu vide après le frontmatter." });
   }
 
-  const status = fm.status as string | undefined;
+  const status = fm["status"] as string | undefined;
   if (status && status !== "draft" && status !== "published") {
     errors.push({
       field: "status",
@@ -185,12 +185,12 @@ export async function validateImport(
   }
 
   let category: BlogCategory | undefined;
-  if (typeof fm.category === "string" && fm.category.trim()) {
-    category = categories.find((c) => c.slug === fm.category);
+  if (typeof fm["category"] === "string" && fm["category"].trim()) {
+    category = categories.find((c) => c.slug === fm["category"]);
     if (!category) {
       errors.push({
         field: "category",
-        message: `Catégorie inconnue : '${fm.category}'. Catégories disponibles : ${categories
+        message: `Catégorie inconnue : '${fm["category"]}'. Catégories disponibles : ${categories
           .map((c) => c.slug)
           .join(", ")}.`,
       });
@@ -198,12 +198,12 @@ export async function validateImport(
   }
 
   let author: BlogAuthor | undefined;
-  if (typeof fm.author === "string" && fm.author.trim()) {
-    author = authors.find((a) => a.initials === fm.author);
+  if (typeof fm["author"] === "string" && fm["author"].trim()) {
+    author = authors.find((a) => a.initials === fm["author"]);
     if (!author) {
       errors.push({
         field: "author",
-        message: `Auteur inconnu : '${fm.author}'. Initiales disponibles : ${authors
+        message: `Auteur inconnu : '${fm["author"]}'. Initiales disponibles : ${authors
           .map((a) => a.initials)
           .join(", ")}.`,
       });
@@ -211,12 +211,12 @@ export async function validateImport(
   }
 
   const featured_on_home =
-    fm.featured_on_home === undefined
+    fm["featured_on_home"] === undefined
       ? false
-      : coerceBool(fm.featured_on_home, "featured_on_home", errors);
+      : coerceBool(fm["featured_on_home"], "featured_on_home", errors);
 
-  const coverRaw = typeof fm.cover_image_url === "string" ? fm.cover_image_url.trim() : "";
-  const heroRaw = typeof fm.hero_image_url === "string" ? fm.hero_image_url.trim() : "";
+  const coverRaw = typeof fm["cover_image_url"] === "string" ? fm["cover_image_url"].trim() : "";
+  const heroRaw = typeof fm["hero_image_url"] === "string" ? fm["hero_image_url"].trim() : "";
   if (coverRaw && !isValidUrl(coverRaw)) {
     warnings.push("URL de cover_image_url invalide, à corriger dans l'éditeur.");
   }
@@ -229,21 +229,21 @@ export async function validateImport(
   }
 
   const parsedArticle: ParsedArticle = {
-    title: String(fm.title).trim(),
-    slug: String(fm.slug).trim(),
-    excerpt: String(fm.excerpt).trim(),
+    title: String(fm["title"]).trim(),
+    slug: String(fm["slug"]).trim(),
+    excerpt: String(fm["excerpt"]).trim(),
     content_md: content,
-    category_slug: String(fm.category),
-    author_initials: String(fm.author),
+    category_slug: String(fm["category"]),
+    author_initials: String(fm["author"]),
     status: status as "draft" | "published",
     featured_on_home,
     cover_image_url: coverRaw && isValidUrl(coverRaw) ? coverRaw : null,
     hero_image_url: heroRaw && isValidUrl(heroRaw) ? heroRaw : null,
     meta_title:
-      typeof fm.meta_title === "string" && fm.meta_title.trim() ? fm.meta_title.trim() : null,
+      typeof fm["meta_title"] === "string" && fm["meta_title"].trim() ? fm["meta_title"].trim() : null,
     meta_description:
-      typeof fm.meta_description === "string" && fm.meta_description.trim()
-        ? fm.meta_description.trim()
+      typeof fm["meta_description"] === "string" && fm["meta_description"].trim()
+        ? fm["meta_description"].trim()
         : null,
   };
 
