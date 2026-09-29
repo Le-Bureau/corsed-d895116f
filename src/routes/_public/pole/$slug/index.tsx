@@ -1,10 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import PoleDetail, { POLE_META } from "@/pages/PoleDetail";
 import { seoHead } from "@/lib/seo-head";
 import { POLES } from "@/lib/poles";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 export const Route = createFileRoute("/_public/pole/$slug/")({
+  loader: ({ params }) => {
+    if (!POLES.some((p) => p.key === params.slug)) {
+      throw notFound();
+    }
+  },
   head: ({ params }) => {
     const pole = POLES.find((p) => p.key === params.slug);
     if (!pole) {

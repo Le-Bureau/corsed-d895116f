@@ -8,7 +8,6 @@ const SITE_URL = "https://corse-drone.com";
 const STATIC_PATHS = [
   "/",
   "/blog",
-  "/expertises",
   "/partenaires",
   "/contact",
   "/mentions-legales",
