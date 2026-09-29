@@ -10,6 +10,7 @@ const HeroNavButtons = ({ currentIndex, onPrev, onNext }: HeroNavButtonsProps) =
   const total = POLES.length;
   const prevPole = POLES[(currentIndex - 1 + total) % total];
   const nextPole = POLES[(currentIndex + 1) % total];
+  if (!prevPole || !nextPole) return null;
 
   const textShadow = "0 1px 3px rgba(0,0,0,0.5), 0 0 12px rgba(0,0,0,0.35)";
 

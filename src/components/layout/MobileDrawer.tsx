@@ -160,7 +160,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
             >
               {/* Pôles accordion */}
               <motion.div
-                variants={reduced ? undefined : sectionItem}
+                {...(reduced ? {} : { variants: sectionItem })}
                 className="border-b border-border-subtle py-4"
               >
                 <button
@@ -303,7 +303,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
               {NAV_LINKS.map((link) => (
                 <motion.div
                   key={link.to}
-                  variants={reduced ? undefined : sectionItem}
+                  {...(reduced ? {} : { variants: sectionItem })}
                   className="border-b border-border-subtle py-4"
                 >
                   <Link
