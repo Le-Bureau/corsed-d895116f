@@ -46,7 +46,8 @@ const PlausibleTracker = () => {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: ({ matches }) => {
-    const isNotFound = matches.some((m) => m.status === "notFound");
+    // No leaf route matched → the notFoundComponent is rendering (true 404).
+    const isNotFound = matches.every((m) => m.routeId === "__root__");
     return {
     meta: [
       { charSet: "utf-8" },
