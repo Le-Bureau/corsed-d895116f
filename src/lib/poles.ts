@@ -70,7 +70,7 @@ export interface Pole {
   whyDroneItems?: WhyDroneItem[] | undefined;
   processSteps?: ProcessStep[] | undefined;
   useCases?: UseCase[] | undefined;
-  poleFAQ?: PoleFAQItem[];
+  poleFAQ?: PoleFAQItem[] | undefined;
   finalCTATitle?: string;
   finalCTASubtitle?: string;
   finalCTAButtonLabel?: string;
