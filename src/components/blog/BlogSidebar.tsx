@@ -74,7 +74,7 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
       </div>
 
       <div className="sidebar-footer">
-        <a href="#" aria-disabled>
+        <a href="/rss.xml">
           <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
             <path d="M4 4a16 16 0 0 1 16 16" />
             <path d="M4 11a9 9 0 0 1 9 9" />
@@ -82,10 +82,9 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
           </svg>
           Flux RSS
         </a>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
+        <button
+          type="button"
+          onClick={() => {
             trackEvent(Events.NEWSLETTER_INTEREST, { source: "sidebar" });
             toast("Bientôt disponible — restez à l'écoute");
           }}
@@ -95,7 +94,7 @@ const BlogSidebar = ({ categories, counts, total, search, onSearchChange }: Prop
             <polyline points="22,6 12,13 2,6" />
           </svg>
           Newsletter&nbsp;
-        </a>
+        </button>
       </div>
     </aside>
   );

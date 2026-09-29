@@ -630,7 +630,8 @@ html.lenis body {
   flex-direction: column;
   gap: 8px;
 }
-.blog-scope .sidebar-footer a {
+.blog-scope .sidebar-footer a,
+.blog-scope .sidebar-footer button {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -639,8 +640,14 @@ html.lenis body {
   color: var(--blog-text-muted);
   border-radius: 6px;
   transition: background 0.16s ease, color 0.16s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
 }
-.blog-scope .sidebar-footer a:hover {
+.blog-scope .sidebar-footer a:hover,
+.blog-scope .sidebar-footer button:hover {
   color: var(--blog-text);
   background: var(--blog-bg-elevated);
 }

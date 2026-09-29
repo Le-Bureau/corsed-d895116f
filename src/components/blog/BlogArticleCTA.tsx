@@ -25,7 +25,7 @@ const BlogArticleCTA = ({
               <polyline points="12,5 19,12 12,19" />
             </svg>
           </Link>
-          <Link className="btn-secondary" to="/expertises">
+          <Link className="btn-secondary" to="/blog">
             Voir nos réalisations
           </Link>
         </div>

@@ -112,11 +112,15 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
               <div className="flex flex-col gap-0.5 mt-1">
                 {pole.subServices && pole.subServices.length > 0
                   ? pole.subServices.map((sub) =>
-                      sub.slug && !pole.isInDevelopment ? (
+                      sub.slug ? (
                         <Link
                           key={sub.name}
                           role="menuitem"
-                          to={`/pole/${pole.slug}/${sub.slug}`}
+                          to={
+                            pole.isInDevelopment
+                              ? `/pole/${pole.slug}#sous-services`
+                              : `/pole/${pole.slug}/${sub.slug}`
+                          }
                           onClick={onClose}
                           className="group/sublink flex items-center gap-2.5 py-2 px-2 -mx-2 rounded-lg text-[13px] text-text-secondary hover:bg-black/[0.02] transition-all duration-150 focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black/15"
                           onMouseEnter={(e) => {

@@ -247,7 +247,11 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
                   .map((sub) => (
                     <Link
                       key={sub.slug}
-                      to={`/pole/${pole.key}/${sub.slug}`}
+                      to={
+                        pole.isInDevelopment
+                          ? `/pole/${pole.key}#sous-services`
+                          : `/pole/${pole.key}/${sub.slug}`
+                      }
                       className="group/sub relative flex items-center justify-between py-4 border-b border-border-subtle last:border-b-0 text-text-primary text-base font-medium tracking-[-0.015em] transition-all duration-250 ease-out hover:pl-2 outline-hidden focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm"
                       style={
                         {
