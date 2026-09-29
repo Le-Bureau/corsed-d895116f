@@ -45,7 +45,9 @@ const PlausibleTracker = () => {
 };
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  head: ({ matches }) => {
+    const isNotFound = matches.some((m) => m.status === "notFound");
+    return {
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -54,7 +56,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "google-site-verification",
         content: "47fAdsNz7GQ2Lstj9DsprFSm-1C2iXooIw5x6N12m70",
       },
-      { title: "Corse Drone | Nettoyage, Agriculture & Transport par drone" },
+      {
+        title: isNotFound
+          ? "Page introuvable | Corse Drone"
+          : "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+      },
+      ...(isNotFound ? [{ name: "robots", content: "noindex, nofollow" }] : []),
       {
         name: "description",
         content:
