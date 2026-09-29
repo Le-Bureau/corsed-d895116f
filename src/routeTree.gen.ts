@@ -25,8 +25,8 @@ import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminProfilRouteImport } from './routes/admin/profil'
 import { Route as PublicBlogIndexRouteImport } from './routes/_public/blog/index'
 import { Route as PublicBlogSlugRouteImport } from './routes/_public/blog/$slug'
-import { Route as PublicPoleSlugRouteImport } from './routes/_public/pole/$slug'
 import { Route as AdminBlogNewRouteImport } from './routes/admin/blog.new'
+import { Route as PublicPoleSlugIndexRouteImport } from './routes/_public/pole/$slug/index'
 import { Route as PublicPoleSlugSubSlugRouteImport } from './routes/_public/pole/$slug/$subSlug'
 import { Route as AdminBlogIdEditRouteImport } from './routes/admin/blog.$id.edit'
 
@@ -110,20 +110,20 @@ const PublicBlogSlugRoute = PublicBlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => PublicRoute,
 } as any)
-const PublicPoleSlugRoute = PublicPoleSlugRouteImport.update({
-  id: '/pole/$slug',
-  path: '/pole/$slug',
-  getParentRoute: () => PublicRoute,
-} as any)
 const AdminBlogNewRoute = AdminBlogNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => AdminBlogRoute,
 } as any)
+const PublicPoleSlugIndexRoute = PublicPoleSlugIndexRouteImport.update({
+  id: '/pole/$slug/',
+  path: '/pole/$slug/',
+  getParentRoute: () => PublicRoute,
+} as any)
 const PublicPoleSlugSubSlugRoute = PublicPoleSlugSubSlugRouteImport.update({
-  id: '/$subSlug',
-  path: '/$subSlug',
-  getParentRoute: () => PublicPoleSlugRoute,
+  id: '/pole/$slug/$subSlug',
+  path: '/pole/$slug/$subSlug',
+  getParentRoute: () => PublicRoute,
 } as any)
 const AdminBlogIdEditRoute = AdminBlogIdEditRouteImport.update({
   id: '/$id/edit',
@@ -146,11 +146,11 @@ export interface FileRoutesByFullPath {
   '/admin/profil': typeof AdminProfilRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/$slug': typeof PublicBlogSlugRoute
-  '/pole/$slug': typeof PublicPoleSlugRouteWithChildren
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/blog/': typeof PublicBlogIndexRoute
   '/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
   '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
+  '/pole/$slug/': typeof PublicPoleSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/rss.xml': typeof RssDotxmlRoute
@@ -166,11 +166,11 @@ export interface FileRoutesByTo {
   '/': typeof PublicIndexRoute
   '/admin': typeof AdminIndexRoute
   '/blog/$slug': typeof PublicBlogSlugRoute
-  '/pole/$slug': typeof PublicPoleSlugRouteWithChildren
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/blog': typeof PublicBlogIndexRoute
   '/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
   '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
+  '/pole/$slug': typeof PublicPoleSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -189,11 +189,11 @@ export interface FileRoutesById {
   '/_public/': typeof PublicIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/_public/blog/$slug': typeof PublicBlogSlugRoute
-  '/_public/pole/$slug': typeof PublicPoleSlugRouteWithChildren
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/_public/blog/': typeof PublicBlogIndexRoute
   '/_public/pole/$slug/$subSlug': typeof PublicPoleSlugSubSlugRoute
   '/admin/blog/$id/edit': typeof AdminBlogIdEditRoute
+  '/_public/pole/$slug/': typeof PublicPoleSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -212,11 +212,11 @@ export interface FileRouteTypes {
     | '/admin/profil'
     | '/admin/'
     | '/blog/$slug'
-    | '/pole/$slug'
     | '/admin/blog/new'
     | '/blog/'
     | '/pole/$slug/$subSlug'
     | '/admin/blog/$id/edit'
+    | '/pole/$slug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/rss.xml'
@@ -232,11 +232,11 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/blog/$slug'
-    | '/pole/$slug'
     | '/admin/blog/new'
     | '/blog'
     | '/pole/$slug/$subSlug'
     | '/admin/blog/$id/edit'
+    | '/pole/$slug'
   id:
     | '__root__'
     | '/_public'
@@ -254,11 +254,11 @@ export interface FileRouteTypes {
     | '/_public/'
     | '/admin/'
     | '/_public/blog/$slug'
-    | '/_public/pole/$slug'
     | '/admin/blog/new'
     | '/_public/blog/'
     | '/_public/pole/$slug/$subSlug'
     | '/admin/blog/$id/edit'
+    | '/_public/pole/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -382,13 +382,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicBlogSlugRouteImport
       parentRoute: typeof PublicRoute
     }
-    '/_public/pole/$slug': {
-      id: '/_public/pole/$slug'
-      path: '/pole/$slug'
-      fullPath: '/pole/$slug'
-      preLoaderRoute: typeof PublicPoleSlugRouteImport
-      parentRoute: typeof PublicRoute
-    }
     '/admin/blog/new': {
       id: '/admin/blog/new'
       path: '/new'
@@ -396,12 +389,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogNewRouteImport
       parentRoute: typeof AdminBlogRoute
     }
+    '/_public/pole/$slug/': {
+      id: '/_public/pole/$slug/'
+      path: '/pole/$slug'
+      fullPath: '/pole/$slug/'
+      preLoaderRoute: typeof PublicPoleSlugIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/pole/$slug/$subSlug': {
       id: '/_public/pole/$slug/$subSlug'
-      path: '/$subSlug'
+      path: '/pole/$slug/$subSlug'
       fullPath: '/pole/$slug/$subSlug'
       preLoaderRoute: typeof PublicPoleSlugSubSlugRouteImport
-      parentRoute: typeof PublicPoleSlugRoute
+      parentRoute: typeof PublicRoute
     }
     '/admin/blog/$id/edit': {
       id: '/admin/blog/$id/edit'
@@ -413,18 +413,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface PublicPoleSlugRouteChildren {
-  PublicPoleSlugSubSlugRoute: typeof PublicPoleSlugSubSlugRoute
-}
-
-const PublicPoleSlugRouteChildren: PublicPoleSlugRouteChildren = {
-  PublicPoleSlugSubSlugRoute: PublicPoleSlugSubSlugRoute,
-}
-
-const PublicPoleSlugRouteWithChildren = PublicPoleSlugRoute._addFileChildren(
-  PublicPoleSlugRouteChildren,
-)
-
 interface PublicRouteChildren {
   PublicContactRoute: typeof PublicContactRoute
   PublicExpertisesRoute: typeof PublicExpertisesRoute
@@ -433,8 +421,9 @@ interface PublicRouteChildren {
   PublicPolitiqueConfidentialiteRoute: typeof PublicPolitiqueConfidentialiteRoute
   PublicIndexRoute: typeof PublicIndexRoute
   PublicBlogSlugRoute: typeof PublicBlogSlugRoute
-  PublicPoleSlugRoute: typeof PublicPoleSlugRouteWithChildren
   PublicBlogIndexRoute: typeof PublicBlogIndexRoute
+  PublicPoleSlugSubSlugRoute: typeof PublicPoleSlugSubSlugRoute
+  PublicPoleSlugIndexRoute: typeof PublicPoleSlugIndexRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
@@ -445,8 +434,9 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicPolitiqueConfidentialiteRoute: PublicPolitiqueConfidentialiteRoute,
   PublicIndexRoute: PublicIndexRoute,
   PublicBlogSlugRoute: PublicBlogSlugRoute,
-  PublicPoleSlugRoute: PublicPoleSlugRouteWithChildren,
   PublicBlogIndexRoute: PublicBlogIndexRoute,
+  PublicPoleSlugSubSlugRoute: PublicPoleSlugSubSlugRoute,
+  PublicPoleSlugIndexRoute: PublicPoleSlugIndexRoute,
 }
 
 const PublicRouteWithChildren =
