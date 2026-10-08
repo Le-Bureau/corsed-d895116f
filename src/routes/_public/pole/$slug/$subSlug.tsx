@@ -11,6 +11,7 @@ const SUB_POLE_TITLES: Record<string, string> = {
   "panneaux-solaires": "Nettoyage de panneaux solaires par drone en Corse",
   thermique: "Thermographie par drone en Corse",
   visuel: "Inspection visuelle par drone en Corse",
+  photogrammetrie: "Photogrammétrie par drone en Corse",
 };
 
 export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({

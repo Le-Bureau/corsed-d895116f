@@ -1,6 +1,8 @@
 export type Expertise = {
   key: string;
   slug: string;
+  // Dedicated page; otherwise the link goes to the contact form.
+  href?: string;
   index: string;
   title: string;
   description: string;
@@ -10,6 +12,7 @@ export const OTHER_EXPERTISES: Expertise[] = [
   {
     key: "releve-3d",
     slug: "releve-3d",
+    href: "/pole/diagnostic/photogrammetrie",
     index: "01",
     title: "Relevé 3D",
     description:

@@ -287,7 +287,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                       {EXPERTISES.map((e) => (
                         <li key={e.key}>
                           <Link
-                            to={`/contact?expertise=${e.slug}`}
+                            to={e.href ?? `/contact?expertise=${e.slug}`}
                             onClick={onClose}
                             className="flex items-center gap-3 py-3 text-[15px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                           >

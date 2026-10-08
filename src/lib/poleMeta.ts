@@ -12,6 +12,8 @@ export const SUB_POLE_META: Record<string, string> = {
     "Thermographie aérienne par drone en Corse. Détection ponts thermiques, infiltrations, hotspots photovoltaïques. Caméra UHR 1280x1024. Rapport sous 7 jours.",
   visuel:
     "Inspection aérienne haute précision par drone en Corse. Détection fissures, défauts étanchéité. Zoom 112x sur toitures, façades, ouvrages d'art. Devis gratuit.",
+  photogrammetrie:
+    "Photogrammétrie par drone en Corse. Orthophotos, nuages de points et modèles 3D géoréférencés au centimètre. Topographie, cubatures, façades. Devis sous 48h.",
 };
 
 // Canonical @id for the LocalBusiness JSON-LD entity, reused across

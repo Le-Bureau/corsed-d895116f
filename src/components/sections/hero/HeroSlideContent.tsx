@@ -79,7 +79,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
       aria-live="polite"
       className="absolute inset-0 z-10 flex items-center max-md:items-end max-md:pb-[18vh]"
     >
-      <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)]">
+      <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)] lg:pl-[clamp(170px,11vw,180px)] lg:pr-[clamp(170px,11vw,180px)]">
         <div className="w-full max-w-[780px]">
           {/* Compensating spacer for eyebrow moved to title track (md+ only).
               Masqué en même temps que la pastille dans HeroCarousel.tsx — réactiver

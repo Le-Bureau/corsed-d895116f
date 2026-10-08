@@ -97,7 +97,7 @@ const Footer = () => {
               <ul className="flex flex-col gap-3">
                 {EXPERTISES.map((e) => (
                   <li key={e.key}>
-                    <Link to={`/contact?expertise=${e.slug}`} className={`block ${linkBase}`}>
+                    <Link to={e.href ?? `/contact?expertise=${e.slug}`} className={`block ${linkBase}`}>
                       {e.label}
                     </Link>
                   </li>

@@ -60,6 +60,9 @@ export interface SubFAQItem {
 export interface SubPoleContent {
   heroEyebrow: string;
   heroTitle: string;
+  // Optional animated title: `before` + rotating word + `after`.
+  // heroTitle stays the plain version (SEO, alt text, structured data).
+  heroTitleTypewriter?: { before: string; words: string[]; after: string };
   heroPitch: string;
   heroImage?: string;
   heroImageAlt: string;
@@ -398,6 +401,87 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       ],
       finalCTATitle: "Une inspection à programmer ?",
       finalCTASubtitle: "Devis sous 48h, intervention sous 10 jours, rapport livré sous 72h.",
+      finalCTAButtonLabel: "Demander un devis",
+    },
+    photogrammetrie: {
+      heroEyebrow: "Diagnostic · photogrammétrie",
+      heroTitle: "Votre site, mesuré au centimètre.",
+      heroTitleTypewriter: {
+        before: "Votre ",
+        words: ["site", "terrain", "bâtiment", "chantier", "ouvrage", "patrimoine"],
+        after: ", mesuré au centimètre.",
+      },
+      heroPitch:
+        "Photogrammétrie aérienne par drone : orthophotos, modèles 3D et nuages de points géoréférencés. Une précision topographique, des milliers de points mesurés, partout en Corse.",
+      heroImageAlt: "Drone équipé d'un capteur photogrammétrique en vol au-dessus d'un site",
+      stats: [
+        { value: "45", unit: "MP", labelStrong: "Capteur plein format", labelMuted: "DJI Zenmuse P1, obturateur mécanique" },
+        { value: "3", unit: "cm", labelStrong: "Précision horizontale", labelMuted: "positionnement RTK, sans points d'appui" },
+        { value: "3", unit: "km²", labelStrong: "Couverts en un vol", labelMuted: "là où un relevé au sol prend des jours" },
+      ],
+      whyEyebrow: "Pourquoi la photogrammétrie",
+      whyTitle: "Des milliers de photos, un seul modèle mesurable.",
+      whyIntro:
+        "La photogrammétrie reconstruit un terrain ou un bâtiment en 3D à partir de centaines de photos prises sous des angles différents. Chaque pixel devient une mesure. Là où un géomètre relève quelques centaines de points au sol, le drone en capte des millions, en quelques heures, sans arpenter le terrain. En Corse, c'est l'outil idéal pour les reliefs escarpés, les sites isolés, le littoral et le bâti ancien.",
+      whyItems: [
+        { title: "Précision", description: "Géoréférencement centimétrique grâce au RTK. Distances, surfaces et volumes mesurables directement sur le modèle." },
+        { title: "Exhaustivité", description: "Tout le site est capté, pas seulement les points relevés. Ce qui n'a pas été mesuré le jour J reste mesurable plus tard." },
+        { title: "Rapidité", description: "Plusieurs hectares en un vol. Terrain accidenté, falaise ou toiture : aucune zone n'est inaccessible." },
+        { title: "Compatibilité", description: "Livrables aux formats standards (GeoTIFF, LAS, OBJ, DXF), directement exploitables dans vos logiciels de CAO et SIG." },
+      ],
+      formulas: [],
+      domainesEyebrow: "Domaines d'application",
+      domainesTitle: "Une donnée mesurable pour chaque métier.",
+      domaines: [
+        { iconName: "MountainSnow", category: "Topographie", title: "Topographie et terrassement", description: "Modèle numérique de terrain, courbes de niveau, profils en long et en travers. Une base fiable pour concevoir vos VRD, terrassements et aménagements, même en terrain escarpé.", highlightLabel: "MNT / MNS", highlightDescription: "courbes de niveau et profils" },
+        { iconName: "Factory", category: "Carrières", title: "Carrières et stocks", description: "Calcul de cubatures sur carrières, stocks de granulats et remblais. Suivi des volumes extraits mois après mois, sans arrêter l'exploitation ni exposer de personnel.", highlightLabel: "Cubatures", highlightDescription: "volumes calculés au m³ près" },
+        { iconName: "Building2", category: "Architecture", title: "Bâtiments et façades", description: "Modèle 3D texturé de l'existant pour architectes et bureaux d'études. Pour les relevés de façades, nous travaillons avec l'agence Le Bureau, qui restitue le modèle en plans et élévations exploitables.", highlightLabel: "Le Bureau", highlightDescription: "partenaire relevés de façades" },
+        { iconName: "Landmark", category: "Patrimoine", title: "Patrimoine et monuments", description: "Tours génoises, églises, citadelles : une numérisation 3D fidèle pour documenter, étudier et préparer une restauration, sans échafaudage ni contact avec l'édifice.", highlightLabel: "Zone ABF", highlightDescription: "sans emprise ni contact" },
+        { iconName: "Layers", category: "Urbanisme", title: "Urbanisme et collectivités", description: "Orthophotos à jour pour PLU, projets d'aménagement, suivi du trait de côte ou gestion du domaine public. Une image plus récente et plus précise que les fonds de plan disponibles.", highlightLabel: "Orthophoto", highlightDescription: "résolution centimétrique, à jour" },
+        { iconName: "FileText", category: "Chantier", title: "Suivi de chantier et expertise", description: "Relevés successifs pour comparer l'avancement, contrôler les terrassements ou documenter un état des lieux. Une trace mesurable et datée, opposable en cas de litige.", highlightLabel: "Avant / après", highlightDescription: "comparaison mesurée dans le temps" },
+      ],
+      processSteps: [
+        { number: "ÉTAPE 01", title: "Plan de vol", description: "Étude du site, définition de la résolution attendue, du recouvrement et des axes de vol. Points de contrôle au sol si la précision demandée l'exige." },
+        { number: "ÉTAPE 02", title: "Captation", description: "Vol automatisé avec le capteur DJI Zenmuse P1 en positionnement RTK. Prises de vues verticales et obliques pour reconstruire terrain et volumes. Quelques heures sur site." },
+        { number: "ÉTAPE 03", title: "Traitement et livraison", description: "Calcul photogrammétrique, contrôle de précision et export aux formats de vos outils : orthophoto, nuage de points, maillage 3D, MNT. Livraison sous 5 à 10 jours ouvrés." },
+      ],
+      techItems: [
+        { title: "Le capteur P1", description: "Capteur plein format 45 MP à obturateur mécanique : des images nettes même en vol, sans déformation. La base d'un modèle précis.", spec: "45 MP · plein format · 4,4 µm" },
+        { title: "Le géoréférencement RTK", description: "Chaque photo est positionnée en temps réel au centimètre. Moins de points d'appui à poser au sol, donc moins de temps sur site.", spec: "3 cm horizontal · 5 cm vertical" },
+        { title: "Les livrables", description: "Orthophoto géoréférencée, nuage de points dense, modèle 3D texturé, MNT et courbes de niveau, dans les formats standards du marché.", spec: "GeoTIFF · LAS · OBJ · DXF" },
+      ],
+      compareTitle: "De plusieurs jours à quelques heures",
+      compareSubtitle: "Comparatif pour le relevé topographique d'un terrain de 5 hectares en Corse.",
+      compareCols: [
+        { isOurs: true, badge: "MÉTHODE moderne", title: "Photogrammétrie drone", rows: [
+          { label: "Temps sur site", value: "2 à 3 heures" },
+          { label: "Points mesurés", value: "Plusieurs millions" },
+          { label: "Couverture", value: "100%" },
+          { label: "Livrable 3D", value: "Inclus" },
+        ]},
+        { badge: "MÉTHODE ALTERNATIVE", title: "Scanner laser terrestre", rows: [
+          { label: "Temps sur site", value: "1 à 2 jours" },
+          { label: "Stations au sol", value: "Nombreuses" },
+          { label: "Couverture", value: "Zones visibles du sol" },
+          { label: "Livrable 3D", value: "Inclus" },
+        ]},
+        { badge: "MÉTHODE TRADITIONNELLE", title: "Géomètre au sol", rows: [
+          { label: "Temps sur site", value: "2 à 4 jours" },
+          { label: "Points mesurés", value: "Quelques centaines" },
+          { label: "Couverture", value: "Points relevés" },
+          { label: "Livrable 3D", value: "Non" },
+        ]},
+      ],
+      compareDisclaimer: "Comparatif indicatif, basé sur les pratiques constatées en France. Devis personnalisé sur demande.",
+      faq: [
+        { question: "Quelle précision peut-on attendre ?", answer: "Avec le capteur DJI Zenmuse P1 et le positionnement RTK, la précision atteint environ 3 cm en horizontal et 5 cm en vertical sans points d'appui. Pour les projets plus exigeants, nous ajoutons des points de contrôle au sol." },
+        { question: "Quels livrables recevez-vous ?", answer: "Selon le besoin : orthophoto géoréférencée (GeoTIFF), nuage de points dense (LAS), modèle 3D texturé (OBJ), modèle numérique de terrain, courbes de niveau et calculs de volumes. Les fichiers s'ouvrent dans les logiciels de CAO, BIM et SIG courants." },
+        { question: "La photogrammétrie remplace-t-elle un géomètre ?", answer: "Elle le complète. Le drone capte en quelques heures ce qui prendrait des jours au sol, avec une couverture totale. Pour les actes à valeur foncière (bornage, division), l'intervention d'un géomètre-expert reste nécessaire." },
+        { question: "Réalisez-vous des plans de façades ?", answer: "Oui. Pour les relevés de façades, nous travaillons en partenariat avec l'agence Le Bureau, à Bastia, qui restitue le modèle photogrammétrique en plans et élévations exploitables par les architectes et bureaux d'études." },
+        { question: "Faut-il des conditions météo particulières ?", answer: "Un vent inférieur à 30 km/h, pas de pluie et une lumière homogène. Un ciel légèrement couvert est même idéal : il limite les ombres portées. Si les conditions ne sont pas réunies, la mission est reportée sans frais." },
+      ],
+      finalCTATitle: "Un site à relever ?",
+      finalCTASubtitle: "Devis sous 48h. Livrables aux formats de vos outils.",
       finalCTAButtonLabel: "Demander un devis",
     },
   },

@@ -1,6 +1,7 @@
 import { Link } from "@/lib/router-compat";
 import { ArrowRight } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
+import TypewriterWords from "@/components/animations/TypewriterWords";
 import { useLenis } from "@/components/SmoothScrollProvider";
 import type { Pole } from "@/lib/poles";
 import type { SubPoleContent } from "@/lib/sub-poles";
@@ -79,7 +80,21 @@ const SubPoleHero = ({ content, pole }: Props) => {
             className="font-display font-semibold tracking-[-0.04em] leading-[1.02] text-text-primary mb-6"
             style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
           >
-            {content.heroTitle}
+            {content.heroTitleTypewriter ? (
+              <>
+                <span className="sr-only">{content.heroTitle}</span>
+                <span aria-hidden="true">
+                  {content.heroTitleTypewriter.before}
+                  <TypewriterWords
+                    words={content.heroTitleTypewriter.words}
+                    style={{ color: "var(--pole-color)" }}
+                  />
+                  {content.heroTitleTypewriter.after}
+                </span>
+              </>
+            ) : (
+              content.heroTitle
+            )}
           </h1>
           <p
             className="text-text-secondary mx-auto leading-relaxed mb-10 max-w-[760px]"

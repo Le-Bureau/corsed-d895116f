@@ -226,14 +226,14 @@ export const POLES: Pole[] = [
     tintColor: "#FBE5E5",
     title: "L'œil aérien qui voit l'invisible",
     subtitle:
-      "Inspection thermique et visuelle haute précision. Identification rapide des défauts, rapports exploitables pour vos décisions techniques et vos assurances.",
+      "Thermographie, inspection visuelle et photogrammétrie haute précision. Défauts identifiés, sites mesurés, rapports exploitables pour vos décisions techniques et vos assurances.",
     statLabel: "Délai moyen",
     statValue: "48h",
     statDetail: "de livraison du rapport détaillé",
     comingSoon: false,
-    pitch: "Inspection aérienne et thermique haute précision de vos bâtiments et installations. Identification rapide des défauts, rapports exploitables pour vos décisions techniques et vos assurances.",
+    pitch: "Inspection aérienne, thermique et photogrammétrique de vos bâtiments, sites et installations. Identification rapide des défauts, relevés 3D mesurables, rapports exploitables pour vos décisions techniques et vos assurances.",
     description:
-      "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
+      "Thermographie, inspection visuelle et photogrammétrie haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations, et relevés 3D mesurables au centimètre. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
     highlights: [
       "Caméra thermique infrarouge",
       "Rapport sous 48h",
@@ -242,13 +242,14 @@ export const POLES: Pole[] = [
     subServices: [
       { name: "Diagnostic thermique", slug: "thermique" },
       { name: "Inspection visuelle", slug: "visuel" },
+      { name: "Photogrammétrie", slug: "photogrammetrie" },
     ],
     heroImage: diagnosticImg.url,
     showcaseImage: diagnosticShowcase,
     isInDevelopment: false,
     heroPoleNumber: "PÔLE 02",
     heroPitch:
-      "Inspection thermique et visuelle haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
+      "Thermographie, inspection visuelle et photogrammétrie haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations, et relevés 3D mesurables au centimètre. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
     whyDroneItems: DIAGNOSTIC_WHY,
     processSteps: DIAGNOSTIC_PROCESS,
     useCases: DIAGNOSTIC_USE_CASES,

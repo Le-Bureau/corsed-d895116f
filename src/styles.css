@@ -441,6 +441,11 @@ html.lenis body {
   100% { transform: scale(2.5); opacity: 0; }
 }
 
+@keyframes typewriter-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 @keyframes devPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }

@@ -18,7 +18,7 @@ export const POLE_META: Record<string, string> = {
   nettoyage:
     "Nettoyage par drone en Corse : façades, toitures, panneaux photovoltaïques. Intervention rapide, sans échafaudage ni nacelle, sans immobilisation de site.",
   diagnostic:
-    "Diagnostic et inspection par drone en Corse : relevés thermiques et visuels haute précision. Rapports exploitables sous 48h pour assurances et études techniques.",
+    "Diagnostic par drone en Corse : thermographie, inspection visuelle et photogrammétrie. Rapports et relevés 3D exploitables pour assurances et études techniques.",
   agriculture:
     "Agriculture de précision par drone en Corse : épandage ciblé, traitement phytosanitaire, analyses multispectrales. Optimisez vos rendements parcelle par parcelle.",
   transport:
