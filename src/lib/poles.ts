@@ -204,7 +204,7 @@ const TRANSPORT_WHY: WhyDroneItem[] = [
 
 const TRANSPORT_PROCESS: ProcessStep[] = [
   { number: "ÉTAPE 01", title: "Étude de faisabilité", description: "Masse et volume des charges, distance, dénivelé, zones de décollage et de dépose. On vous dit franchement si le drone est le bon outil, ou si l'hélicoptère reste plus adapté." },
-  { number: "ÉTAPE 02", title: "Autorisations", description: "Le FlyCart 100 vole en catégorie spécifique : analyse de risque SORA et autorisation de la DGAC (DSAC) à notre charge, dérogations préfectorales si nécessaire (prévoir environ 30 jours)." },
+  { number: "ÉTAPE 02", title: "Autorisations", description: "Le FlyCart 100 vole en catégorie spécifique : analyse de risque SORA et autorisation de la DGAC (DSAC) à notre charge, dérogations préfectorales si nécessaire. On lance ces démarches dès la validation de votre projet." },
   { number: "ÉTAPE 03", title: "Préparation du site", description: "Zones de chargement et de dépose balisées et sécurisées, intégration de l'opération à votre PPSPS ou plan de prévention, conditionnement et pesée des charges." },
   { number: "ÉTAPE 04", title: "Rotations", description: "Vols aller-retour, dépose au treuil sans atterrissage, recharge des batteries entre deux rotations. Le chantier continue pendant ce temps." },
   { number: "ÉTAPE 05", title: "Compte-rendu", description: "Nombre de rotations, masses livrées, conditions de vol : un relevé exploitable pour votre suivi de chantier." },
@@ -341,8 +341,50 @@ export const POLES: Pole[] = [
         slug: "approvisionnement-zones-isolees",
         category: "Logistique territoriale",
         description:
-          "Refuges du GR20, bergeries, parcelles de montagne, zones non aménagées. Réapprovisionnement régulier ou ponctuel pour exploitations agricoles, sylvicoles et pastorales.",
+          "Bergeries d'estive, parcelles de montagne, zones sans piste carrossable. Aliments, bouteilles de gaz, matériel de clôture, pièces de rechange et vivres, en rotations régulières ou ponctuelles.",
         iconName: "Mountain",
+      },
+      {
+        name: "Refuges de montagne",
+        category: "Parc et gardiens",
+        description:
+          "Matériaux d'entretien, panneaux solaires, batteries, pièces de citernes et de sanitaires. Montée du matériel avant l'ouverture, redescente à la fermeture, réassort et dépannage en cours de saison.",
+        iconName: "Tent",
+      },
+      {
+        name: "Ouvrages techniques et réseaux",
+        category: "Eau, énergie, télécoms",
+        description:
+          "Pièces et outillage pour pylônes, antennes, stations de mesure, captages et réservoirs d'eau situés hors du réseau routier.",
+        iconName: "RadioTower",
+      },
+      {
+        name: "Patrimoine isolé",
+        category: "Restauration",
+        description:
+          "Tours génoises, chapelles, sentiers, murets : matériaux de restauration déposés au pied de l'ouvrage, sans ouvrir de piste temporaire.",
+        iconName: "Landmark",
+      },
+      {
+        name: "Évacuation et redescente",
+        category: "Déchets et matériel usagé",
+        description:
+          "Déchets de chantier, matériel usagé, charges qui n'ont rien à faire en montagne : redescendus au fil de l'avancement plutôt qu'en une seule grosse opération.",
+        iconName: "Recycle",
+      },
+      {
+        name: "Logistique d'urgence",
+        category: "Appui après intempéries",
+        description:
+          "Approvisionnement de sites coupés après des intempéries ou un éboulement, en appui des moyens existants, dès que la météo le permet.",
+        iconName: "LifeBuoy",
+      },
+      {
+        name: "Sites privés inaccessibles",
+        category: "Particuliers",
+        description:
+          "Maison, terrain ou villa sans accès véhicule, en montagne ou sur le littoral escarpé : matériaux et équipements livrés au point de dépose.",
+        iconName: "House",
       },
     ],
     heroImage: transportImg,

@@ -12,6 +12,12 @@ import {
   Mountain,
   MoveVertical,
   Sparkles,
+  Tent,
+  RadioTower,
+  Landmark,
+  Recycle,
+  LifeBuoy,
+  House,
   type LucideIcon,
 } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
@@ -32,6 +38,12 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Target,
   Mountain,
   MoveVertical,
+  Tent,
+  RadioTower,
+  Landmark,
+  Recycle,
+  LifeBuoy,
+  House,
 };
 
 const PoleSubServices = ({ pole }: Props) => {
