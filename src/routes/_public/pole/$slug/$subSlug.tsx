@@ -74,6 +74,19 @@ export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
             },
           ],
         },
+        ...(content.faq.length
+          ? [
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: content.faq.map((f) => ({
+                  "@type": "Question",
+                  name: f.question,
+                  acceptedAnswer: { "@type": "Answer", text: f.answer },
+                })),
+              },
+            ]
+          : []),
       ],
     });
   },

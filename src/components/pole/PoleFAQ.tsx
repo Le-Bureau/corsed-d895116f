@@ -76,7 +76,7 @@ const PoleFAQ = ({ items }: Props) => {
                 }}
               >
                 <summary className="cursor-pointer list-none flex items-center justify-between gap-4 px-6 py-5 font-display text-[16px] font-semibold text-text-primary tracking-[-0.01em] transition-colors duration-200 [&::-webkit-details-marker]:hidden">
-                  <span>{question}</span>
+                  <h3 className="font-[inherit] text-[inherit]">{question}</h3>
                   <ChevronDown
                     className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open/accordion:rotate-180"
                     strokeWidth={2}
