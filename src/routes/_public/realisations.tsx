@@ -3,10 +3,27 @@ import Realisations from "@/pages/Realisations";
 import { seoHead } from "@/lib/seo-head";
 import { REALISATIONS } from "@/lib/realisations";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
+import { supabase } from "@/integrations/supabase/client";
 
 const SITE_URL = "https://corse-drone.com";
 
 export const Route = createFileRoute("/_public/realisations")({
+  // Covers are read from the linked articles so that images optimised from
+  // the admin ("Optimiser les images") are picked up without a redeploy.
+  loader: async () => {
+    const { data } = await supabase
+      .from("blog_posts")
+      .select("slug, cover_image_url")
+      .in(
+        "slug",
+        REALISATIONS.map((r) => r.articleSlug),
+      );
+    const covers: Record<string, string> = {};
+    for (const row of data ?? []) {
+      if (row.cover_image_url) covers[row.slug] = row.cover_image_url;
+    }
+    return { covers };
+  },
   head: () =>
     seoHead({
       title: "Réalisations drone en Corse",

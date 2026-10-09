@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { useLoaderData } from "@tanstack/react-router";
 import { Link } from "@/lib/router-compat";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import { POLES } from "@/lib/poles";
@@ -105,6 +106,7 @@ const RealisationCard = ({ r, index }: { r: Realisation; index: number }) => {
 };
 
 const Realisations = () => {
+  const { covers } = useLoaderData({ from: "/_public/realisations" });
   return (
     <main className="bg-surface-bg text-text-primary">
       <section
@@ -146,7 +148,11 @@ const Realisations = () => {
       <section aria-label="Liste des réalisations" className="pb-24 lg:pb-32">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-10 flex flex-col gap-8 lg:gap-10">
           {REALISATIONS.map((r, i) => (
-            <RealisationCard key={r.slug} r={r} index={i} />
+            <RealisationCard
+              key={r.slug}
+              r={{ ...r, image: covers[r.articleSlug] ?? r.image }}
+              index={i}
+            />
           ))}
 
           <FadeInWhenVisible>
