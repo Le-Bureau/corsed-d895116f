@@ -1,3 +1,4 @@
+import { Link } from "@/lib/router-compat";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import type { SubPoleContent } from "@/lib/sub-poles";
 
@@ -44,7 +45,13 @@ const SubPoleTool = ({ content }: Props) => {
             </h2>
             {content.toolIntro && (
               <p className="text-text-secondary leading-relaxed text-[17px] mt-6">
-                {content.toolIntro}
+                {content.toolIntro}{" "}
+                <Link
+                  to="/outils"
+                  className="font-semibold text-text-primary underline decoration-border-subtle underline-offset-4"
+                >
+                  Découvrir nos outils
+                </Link>
               </p>
             )}
           </div>

@@ -117,6 +117,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/outils" className={`block ${linkBase}`}>
+                    Nos outils : Axio et Spectra
+                  </Link>
+                </li>
+                <li>
                   <Link to="/drone-bastia-haute-corse" className={`block ${linkBase}`}>
                     Bastia et Haute-Corse
                   </Link>
