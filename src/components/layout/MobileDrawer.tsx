@@ -3,7 +3,7 @@ import { Link, useLocation } from "@/lib/router-compat";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import { ChevronDown, X } from "lucide-react";
 import HeaderLogo from "./HeaderLogo";
-import { POLES, subServiceHref } from "@/lib/poles";
+import { POLES, menuSubServices, subServiceHref } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 import { cn } from "@/lib/utils";
 import { useLenis } from "@/components/SmoothScrollProvider";
@@ -28,7 +28,7 @@ const POLE_ITEMS = POLES.map((p) => ({
   label: p.label,
   slug: p.slug,
   color: p.baseColorOnDark,
-  subServices: p.subServices,
+  subServices: menuSubServices(p),
   isInDevelopment: p.isInDevelopment,
 }));
 
@@ -247,7 +247,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                   }
                                   className="overflow-hidden pl-5"
                                 >
-                                  {pole.subServices.filter((sub) => sub.slug).map((sub) =>
+                                  {pole.subServices.map((sub) =>
                                     sub.slug ? (
                                       <li key={sub.slug ?? sub.name}>
                                         <Link

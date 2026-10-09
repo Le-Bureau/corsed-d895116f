@@ -8,7 +8,7 @@ import {
   useTransform,
   type Variants,
 } from "motion/react";
-import { Pole, subServiceHref } from "@/lib/poles";
+import { Pole, menuSubServices, subServiceHref } from "@/lib/poles";
 import AnimatedStatValue from "@/components/animations/AnimatedStatValue";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -244,8 +244,7 @@ const PoleRow = ({ pole, index, isReversed }: Props) => {
 
             {hasLinkedSubServices ? (
               <motion.div variants={itemVariants} className="flex flex-col">
-                {pole.subServices
-                  .filter((s) => s.slug)
+                {menuSubServices(pole)
                   .map((sub) => (
                     <Link
                       key={sub.slug}

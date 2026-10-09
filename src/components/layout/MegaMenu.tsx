@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "@/lib/router-compat";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
-import { POLES, subServiceHref } from "@/lib/poles";
+import { POLES, menuSubServices, subServiceHref } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
 import { useUIBanner } from "@/contexts/UIBannerContext";
 
@@ -111,7 +111,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
 
               <div className="flex flex-col gap-0.5 mt-1">
                 {pole.subServices && pole.subServices.length > 0
-                  ? pole.subServices.filter((sub) => sub.slug).map((sub) =>
+                  ? menuSubServices(pole).map((sub) =>
                       sub.slug ? (
                         <Link
                           key={sub.name}
