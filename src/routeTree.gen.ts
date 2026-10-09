@@ -15,6 +15,7 @@ import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicContactRouteImport } from './routes/_public/contact'
+import { Route as PublicDroneAjaccioCorseDuSudRouteImport } from './routes/_public/drone-ajaccio-corse-du-sud'
 import { Route as PublicDroneBastiaHauteCorseRouteImport } from './routes/_public/drone-bastia-haute-corse'
 import { Route as PublicExpertisesRouteImport } from './routes/_public/expertises'
 import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
@@ -61,6 +62,12 @@ const PublicContactRoute = PublicContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicDroneAjaccioCorseDuSudRoute =
+  PublicDroneAjaccioCorseDuSudRouteImport.update({
+    id: '/drone-ajaccio-corse-du-sud',
+    path: '/drone-ajaccio-corse-du-sud',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicDroneBastiaHauteCorseRoute =
   PublicDroneBastiaHauteCorseRouteImport.update({
     id: '/drone-bastia-haute-corse',
@@ -150,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/contact': typeof PublicContactRoute
+  '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/expertises': typeof PublicExpertisesRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
@@ -171,6 +179,7 @@ export interface FileRoutesByTo {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/contact': typeof PublicContactRoute
+  '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/expertises': typeof PublicExpertisesRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
@@ -196,6 +205,7 @@ export interface FileRoutesById {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_public/contact': typeof PublicContactRoute
+  '/_public/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/_public/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/_public/expertises': typeof PublicExpertisesRoute
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
@@ -222,6 +232,7 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/sitemap.xml'
     | '/contact'
+    | '/drone-ajaccio-corse-du-sud'
     | '/drone-bastia-haute-corse'
     | '/expertises'
     | '/mentions-legales'
@@ -243,6 +254,7 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/sitemap.xml'
     | '/contact'
+    | '/drone-ajaccio-corse-du-sud'
     | '/drone-bastia-haute-corse'
     | '/expertises'
     | '/mentions-legales'
@@ -267,6 +279,7 @@ export interface FileRouteTypes {
     | '/rss.xml'
     | '/sitemap.xml'
     | '/_public/contact'
+    | '/_public/drone-ajaccio-corse-du-sud'
     | '/_public/drone-bastia-haute-corse'
     | '/_public/expertises'
     | '/_public/mentions-legales'
@@ -335,6 +348,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof PublicContactRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/drone-ajaccio-corse-du-sud': {
+      id: '/_public/drone-ajaccio-corse-du-sud'
+      path: '/drone-ajaccio-corse-du-sud'
+      fullPath: '/drone-ajaccio-corse-du-sud'
+      preLoaderRoute: typeof PublicDroneAjaccioCorseDuSudRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/drone-bastia-haute-corse': {
@@ -454,6 +474,7 @@ declare module '@tanstack/react-router' {
 
 interface PublicRouteChildren {
   PublicContactRoute: typeof PublicContactRoute
+  PublicDroneAjaccioCorseDuSudRoute: typeof PublicDroneAjaccioCorseDuSudRoute
   PublicDroneBastiaHauteCorseRoute: typeof PublicDroneBastiaHauteCorseRoute
   PublicExpertisesRoute: typeof PublicExpertisesRoute
   PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
@@ -469,6 +490,7 @@ interface PublicRouteChildren {
 
 const PublicRouteChildren: PublicRouteChildren = {
   PublicContactRoute: PublicContactRoute,
+  PublicDroneAjaccioCorseDuSudRoute: PublicDroneAjaccioCorseDuSudRoute,
   PublicDroneBastiaHauteCorseRoute: PublicDroneBastiaHauteCorseRoute,
   PublicExpertisesRoute: PublicExpertisesRoute,
   PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
