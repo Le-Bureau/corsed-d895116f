@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "@/lib/router-compat";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
-import { POLES } from "@/lib/poles";
+import { POLES, subServiceHref } from "@/lib/poles";
 import { hexToRgb } from "@/lib/utils";
 import { useUIBanner } from "@/contexts/UIBannerContext";
 
@@ -116,11 +116,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
                         <Link
                           key={sub.name}
                           role="menuitem"
-                          to={
-                            pole.isInDevelopment
-                              ? `/pole/${pole.slug}#sous-services`
-                              : `/pole/${pole.slug}/${sub.slug}`
-                          }
+                          to={subServiceHref(pole, sub)}
                           onClick={onClose}
                           className="group/sublink flex items-center gap-2.5 py-2 px-2 -mx-2 rounded-lg text-[13px] text-text-secondary hover:bg-black/[0.02] transition-all duration-150 focus:outline-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black/15"
                           onMouseEnter={(e) => {

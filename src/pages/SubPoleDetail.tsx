@@ -15,13 +15,12 @@ import SubPoleCompare from "@/components/sub-pole/SubPoleCompare";
 import PoleProcess from "@/components/pole/PoleProcess";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
+import DevBanner from "@/components/pole/DevBanner";
 
 export default function SubPoleDetail() {
   const { slug, subSlug } = useParams<{ slug: string; subSlug: string }>();
   const pole = POLES.find((p) => p.key === slug);
   if (!pole) return <Navigate to="/" replace />;
-
-  if (pole.isInDevelopment) return <Navigate to={`/pole/${slug}`} replace />;
 
   const content = SUB_POLE_CONTENT[slug || ""]?.[subSlug || ""];
   if (!content) return <Navigate to={`/pole/${slug}`} replace />;
@@ -39,7 +38,10 @@ export default function SubPoleDetail() {
   };
 
   return (
-    <main className="min-h-screen bg-surface-bg" style={styleVars}>
+    <main
+      className={`min-h-screen bg-surface-bg ${pole.isInDevelopment ? "pt-8" : ""}`}
+      style={styleVars}
+    >
       <SEO
         title={content.seoTitle}
         description={
@@ -96,6 +98,7 @@ export default function SubPoleDetail() {
           },
         ]}
       />
+      {pole.isInDevelopment && <DevBanner />}
       <SubPoleHero content={content} pole={pole} />
       <SubPoleStats stats={content.stats} />
       <SubPoleWhyTraiter content={content} />

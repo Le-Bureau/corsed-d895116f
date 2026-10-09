@@ -12,6 +12,9 @@ export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 export interface PoleSubService {
   name: string;
   slug?: string;
+  // True when /pole/<pole>/<slug> has its own page, even while the pole is
+  // in development (otherwise links fall back to the #sous-services anchor).
+  hasPage?: boolean;
   description?: string;
   category?: string;
   iconName?: string;
@@ -221,6 +224,11 @@ const TRANSPORT_FAQ: PoleFAQItem[] = [
   { question: "Quand le service sera-t-il disponible ?", answer: "Le pôle transport est en préparation. Inscrivez-vous pour être prévenu du lancement : les premiers clients bénéficieront de conditions privilégiées, et on peut déjà étudier la faisabilité de votre projet." },
 ];
 
+export const subServiceHref = (pole: Pole, sub: PoleSubService) =>
+  pole.isInDevelopment && !sub.hasPage
+    ? `/pole/${pole.slug}#sous-services`
+    : `/pole/${pole.slug}/${sub.slug}`;
+
 export const POLES: Pole[] = [
   {
     key: "nettoyage",
@@ -347,7 +355,18 @@ export const POLES: Pole[] = [
         iconName: "Mountain",
       },
       {
-        name: "Refuges de montagne",
+        name: "Alternative à l'hélicoptère",
+        slug: "alternative-helicoptere",
+        hasPage: true,
+        category: "Drone ou hélico ?",
+        description:
+          "Pour les charges de moins de 100 kg et les rotations répétées, le drone évite de mobiliser un hélicoptère. Dépose au treuil, sans aire d'atterrissage.",
+        iconName: "Plane",
+      },
+      {
+        name: "Ravitaillement de refuges",
+        slug: "refuges",
+        hasPage: true,
         category: "Parc et gardiens",
         description:
           "Matériaux d'entretien, panneaux solaires, batteries, pièces de citernes et de sanitaires. Montée du matériel avant l'ouverture, redescente à la fermeture, réassort et dépannage en cours de saison.",

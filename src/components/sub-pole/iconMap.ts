@@ -10,6 +10,13 @@ import {
   Sun,
   Sprout,
   FileText,
+  Tent,
+  Mountain,
+  Wrench,
+  Recycle,
+  RadioTower,
+  Droplets,
+  LifeBuoy,
   type LucideIcon,
 } from "lucide-react";
 
@@ -25,6 +32,13 @@ const ICONS: Record<string, LucideIcon> = {
   Sun,
   Sprout,
   FileText,
+  Tent,
+  Mountain,
+  Wrench,
+  Recycle,
+  RadioTower,
+  Droplets,
+  LifeBuoy,
 };
 
 export function getIcon(name: string): LucideIcon {
