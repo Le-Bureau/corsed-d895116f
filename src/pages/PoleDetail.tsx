@@ -13,6 +13,7 @@ import PoleUseCases from "@/components/pole/PoleUseCases";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
 import TransportFlyCart from "@/components/pole/TransportFlyCart";
+import AgricultureT100 from "@/components/pole/AgricultureT100";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
 export const POLE_META: Record<string, string> = {
@@ -21,7 +22,7 @@ export const POLE_META: Record<string, string> = {
   diagnostic:
     "Diagnostic par drone en Corse : thermographie, inspection visuelle et photogrammétrie. Rapports et relevés 3D exploitables pour assurances et études techniques.",
   agriculture:
-    "Agriculture de précision par drone en Corse : épandage ciblé, traitement phytosanitaire, analyses multispectrales. Optimisez vos rendements parcelle par parcelle.",
+    "Agriculture de précision par drone en Corse : cartographie multispectrale, épandage et semis avec le DJI Agras T100. Vigne, agrumes, oliviers, parcelles en pente.",
   transport:
     "Transport par drone en Corse avec le DJI FlyCart 100 : jusqu'à 100 kg par rotation, dépose au treuil sans atterrir. Chantiers isolés, refuges, montagne.",
 };
@@ -72,6 +73,7 @@ export default function PoleDetail() {
         <PoleWhyDrone items={pole.whyDroneItems} />
       )}
       {pole.key === "transport" && <TransportFlyCart />}
+      {pole.key === "agriculture" && <AgricultureT100 />}
       {pole.subServices && pole.subServices.length > 0 && (
         <PoleSubServices pole={pole} />
       )}

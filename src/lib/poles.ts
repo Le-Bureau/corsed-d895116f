@@ -237,6 +237,52 @@ export const menuSubServices = (pole: Pole) => {
   return withPage.length > 0 ? withPage : linked;
 };
 
+// Agriculture: DJI Agras T100 (ag.dji.com/t100/specs), DJI Mavic 3
+// Multispectral (ag.dji.com/mavic-3-m/specs), drone spraying rules from the
+// ministry notice of 10/06/2026 (loi 2025-365, texts of 29 May 2026).
+const AGRI_WHY: WhyDroneItem[] = [
+  {
+    iconName: "ScanEye",
+    title: "Voir l'invisible",
+    description:
+      "Une plante traduit son état dans le proche infrarouge avant que l'œil ne le voie. La cartographie multispectrale révèle les zones qui décrochent, à l'échelle de la parcelle.",
+  },
+  {
+    iconName: "Mountain",
+    title: "Fait pour la pente",
+    description:
+      "Vignes en coteaux, terrasses, vergers en relief : le drone intervient là où le tracteur peine ou ne passe pas, sans risque de renversement.",
+  },
+  {
+    iconName: "Footprints",
+    title: "Zéro tassement",
+    description:
+      "Aucun passage d'engin sur la parcelle : pas d'ornières, pas de compaction du sol, intervention possible sur terrain humide.",
+  },
+  {
+    iconName: "Crosshair",
+    title: "Précision RTK",
+    description:
+      "Positionnement centimétrique en RTK : des cartes superposables d'un passage à l'autre, et des apports placés là où la carte l'indique.",
+  },
+];
+
+const AGRI_PROCESS: ProcessStep[] = [
+  { number: "ÉTAPE 01", title: "Votre question", description: "Culture, parcelles, problème observé ou objectif (irrigation, vigueur, apports) : on définit ensemble ce que la mission doit mesurer ou faire." },
+  { number: "ÉTAPE 02", title: "Plan de vol et autorisations", description: "Plan de vol adapté au relief et à la résolution utile. Les drones lourds volent en catégorie spécifique, sur autorisation de la DGAC, à notre charge." },
+  { number: "ÉTAPE 03", title: "Vol", description: "Captation multispectrale, épandage ou semis, au bon moment de la saison et dans la bonne fenêtre météo." },
+  { number: "ÉTAPE 04", title: "Traitement des données", description: "Orthomosaïques, cartes d'indices de végétation, zones homogènes : des couches géoréférencées exportables vers vos outils." },
+  { number: "ÉTAPE 05", title: "Restitution", description: "Lecture claire des résultats. La décision agronomique reste la vôtre et celle de vos conseillers : on fournit une donnée fiable, pas un diagnostic magique." },
+];
+
+const AGRI_FAQ: PoleFAQItem[] = [
+  { question: "Que mesure une cartographie multispectrale ?", answer: "La réflectance de la végétation dans quatre bandes (vert, rouge, red edge, proche infrarouge). On en tire des indices comme le NDVI ou le NDRE, qui cartographient la vigueur et les hétérogénéités d'une parcelle, et aident à repérer un stress hydrique avant qu'il ne se voie." },
+  { question: "Quelle surface peut-on cartographier ?", answer: "Le constructeur annonce jusqu'à 200 ha par vol pour son drone multispectral, dans ses conditions de test. La surface réelle dépend de la résolution demandée, du relief et de la météo : sur de la vigne, où l'on veut voir le rang, on vole plus bas et on couvre moins." },
+  { question: "Peut-on traiter la vigne par drone en Corse ?", answer: "Depuis les textes du 29 mai 2026, la pulvérisation par drone est autorisée par dérogation sur les parcelles en pente d'au moins 20 %, les bananeraies et les vignes-mères conduites au sol, uniquement avec des produits de biocontrôle, utilisables en agriculture biologique ou à faible risque inscrits sur la liste drone. Il faut une autorisation du préfet de région, du matériel anti-dérive agréé, et respecter 20 m des lieux habités. Nous proposerons ce service dès que toutes ces conditions seront réunies." },
+  { question: "L'épandage d'engrais et le semis sont-ils concernés ?", answer: "L'interdiction de pulvérisation aérienne vise les produits phytopharmaceutiques. L'épandage d'engrais et le semis de couverts n'en relèvent pas, mais le vol reste soumis à une autorisation de la DGAC, comme toute opération avec un drone lourd." },
+  { question: "Quel drone utilisez-vous ?", answer: "Un drone multispectral DJI pour la cartographie, et le DJI Agras T100 pour l'épandage, le semis et le levage : réservoir d'épandage de 150 L, jusqu'à 400 kg/min selon le constructeur, levage jusqu'à 100 kg." },
+];
+
 export const POLES: Pole[] = [
   {
     key: "nettoyage",
@@ -442,18 +488,18 @@ export const POLES: Pole[] = [
     tintColor: "#E6EDE5",
     title: "La précision au mètre carré",
     subtitle:
-      "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Optimisez vos rendements et allégez votre charge de travail, parcelle par parcelle.",
-    statLabel: "Cartographie",
-    statValue: "250ha",
-    statDetail: "cartographiés par jour\nen vol multispectral",
+      "Cartographie multispectrale, épandage et semis par drone. Lisez vos parcelles, intervenez là où il faut, sans passage de tracteur.",
+    statLabel: "Multispectral",
+    statValue: "4",
+    statDetail: "bandes spectrales\nvert, rouge, red edge, proche infrarouge",
     comingSoon: true,
-    pitch: "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
+    pitch: "Lisez vos parcelles comme jamais : cartographie multispectrale de la vigueur et du stress hydrique, puis épandage et semis ciblés avec le DJI Agras T100, adaptés au terroir corse.",
     description:
-      "Épandage ciblé, traitement phytosanitaire contrôlé, analyses multispectrales. Une approche adaptée au terroir corse qui optimise vos rendements tout en allégeant votre charge de travail et votre empreinte écologique.",
+      "Cartographie multispectrale, épandage et semis par drone. Une approche adaptée au terroir corse, aux parcelles en pente et aux cahiers des charges AOP, sans tassement des sols.",
     highlights: [
-      "Précision GPS centimétrique",
-      "Adapté au terroir corse",
-      "Bilan carbone réduit",
+      "Précision RTK centimétrique",
+      "Parcelles en pente",
+      "Sans passage de tracteur",
     ],
     subServices: [
       {
@@ -461,7 +507,7 @@ export const POLES: Pole[] = [
         slug: "cartographie-multispectrale",
         category: "Diagnostic / Aide à la décision",
         description:
-          "Survol et analyse NDVI de vos parcelles. Détection précoce du stress hydrique, des carences en azote et des hétérogénéités de vigueur. Rapports et cartes shapefile exportables vers vos outils d'agriculture de précision.",
+          "Quatre bandes (vert, rouge, red edge, proche infrarouge) et cartes d'indices de végétation (NDVI, NDRE) géoréférencées en RTK. Vigueur, hétérogénéités, stress hydrique : des cartes exploitables par vous et vos conseillers.",
         iconName: "Satellite",
       },
       {
@@ -469,7 +515,7 @@ export const POLES: Pole[] = [
         slug: "epandage-precision",
         category: "Action / Réduction des intrants",
         description:
-          "Engrais granulés, fertilisants, amendements minéraux. Application à dose variable selon vos cartes de prescription. Réservoir 150L, débit jusqu'à 400 kg/min.",
+          "Engrais granulés et amendements, appliqués selon vos cartes de prescription. Réservoir d'épandage de 150 L, jusqu'à 400 kg/min (données constructeur DJI Agras T100).",
         iconName: "Droplets",
       },
       {
@@ -481,11 +527,19 @@ export const POLES: Pole[] = [
         iconName: "Sprout",
       },
       {
+        name: "Traitements en biocontrôle",
+        slug: "traitements-biocontrole",
+        category: "À venir, cadre réglementaire 2026",
+        description:
+          "Produits de biocontrôle, utilisables en agriculture biologique ou à faible risque autorisés pour le drone, sur parcelles en pente d'au moins 20 %. Sur autorisation du préfet de région, dès que toutes les conditions seront réunies.",
+        iconName: "Shield",
+      },
+      {
         name: "Blanchiment de serre",
         slug: "blanchiment-serre",
         category: "Régulation thermique",
         description:
-          "Application de produits de blanchiment ou déblanchiment pour réguler la luminosité et la température. Amélioration du climat et de la productivité sous serre.",
+          "Application de produits d'ombrage ou de déblanchiment, hors produits phytopharmaceutiques, pour réguler la luminosité et la température sous serre.",
         iconName: "Sun",
       },
       {
@@ -493,7 +547,7 @@ export const POLES: Pole[] = [
         slug: "transport-levage-agricole",
         category: "Logistique zones isolées",
         description:
-          "Acheminement de matériel jusqu'à 100 kg vers exploitations isolées, parcelles en montagne, refuges et bergeries. Treuil jusqu'à 30 m, dépose précise sans atterrissage.",
+          "Levage jusqu'à 100 kg avec l'Agras T100 (câble de 10 m, 10 à 15 m recommandés) vers parcelles en montagne, bergeries et exploitations isolées.",
         iconName: "Package",
       },
     ],
@@ -502,14 +556,14 @@ export const POLES: Pole[] = [
     isInDevelopment: true,
     heroPoleNumber: "PÔLE 04",
     heroPitch:
-      "Optimisez vos rendements et allégez votre charge de travail. Épandage ciblé de semis, traitement phytosanitaire contrôlé et analyses multispectrales des parcelles, adaptés au terroir corse.",
-    whyDroneItems: undefined,
-    processSteps: undefined,
+      "Lisez vos parcelles comme jamais : cartographie multispectrale de la vigueur et du stress hydrique, puis épandage et semis ciblés avec le DJI Agras T100, adaptés au terroir corse.",
+    whyDroneItems: AGRI_WHY,
+    processSteps: AGRI_PROCESS,
     useCases: undefined,
-    poleFAQ: undefined,
+    poleFAQ: AGRI_FAQ,
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
-    stat: { value: "250", unit: "ha", labelStrong: "cartographiés par jour", labelMuted: "en un seul vol multispectral" },
+    stat: { value: "4", unit: "bandes", labelStrong: "spectrales en multispectral", labelMuted: "vert, rouge, red edge, proche infrarouge" },
   },
 ];
