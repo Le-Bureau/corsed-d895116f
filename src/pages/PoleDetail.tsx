@@ -23,7 +23,7 @@ export const POLE_META: Record<string, string> = {
   agriculture:
     "Agriculture de précision par drone en Corse : épandage ciblé, traitement phytosanitaire, analyses multispectrales. Optimisez vos rendements parcelle par parcelle.",
   transport:
-    "Transport par drone en Corse avec le DJI FlyCart 100 : jusqu'à 100 kg par rotation, dépose au treuil sans atterrir. Chantiers isolés, refuges, montagne.",
+    "Transport par drone en Corse avec le DJI FlyCart 100 : jusqu'à 85 kg par rotation, dépose au treuil sans atterrir. Chantiers isolés, refuges, montagne.",
 };
 
 export default function PoleDetail() {
