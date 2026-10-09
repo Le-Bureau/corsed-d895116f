@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "@/lib/router-compat";
-import { Plus, Upload } from "lucide-react";
+import { ImageDown, Plus, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +21,7 @@ import { useBlogAuthors } from "@/hooks/blog/useBlogAuthors";
 import { useDeleteBlogPost } from "@/hooks/admin/useDeleteBlogPost";
 import type { BlogPost } from "@/types/blog";
 import ImportArticleDialog from "@/components/admin/ImportArticleDialog";
+import OptimizeImagesDialog from "@/components/admin/OptimizeImagesDialog";
 
 const AdminBlogList = () => {
   const { data: posts, isLoading } = useAdminBlogPosts();
@@ -34,6 +35,7 @@ const AdminBlogList = () => {
   const [authorId, setAuthorId] = useState("all");
   const [toDelete, setToDelete] = useState<BlogPost | null>(null);
   const [importOpen, setImportOpen] = useState(false);
+  const [optimizeOpen, setOptimizeOpen] = useState(false);
 
   const counts = useMemo(() => {
     const drafts = posts?.filter((p) => p.status === "draft").length ?? 0;
@@ -79,6 +81,10 @@ const AdminBlogList = () => {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => setOptimizeOpen(true)} disabled={!posts?.length}>
+            <ImageDown className="h-4 w-4" />
+            Optimiser les images
+          </Button>
           <Button variant="outline" onClick={() => setImportOpen(true)}>
             <Upload className="h-4 w-4" />
             Importer
@@ -148,6 +154,7 @@ const AdminBlogList = () => {
       </AlertDialog>
 
       <ImportArticleDialog open={importOpen} onOpenChange={setImportOpen} />
+      <OptimizeImagesDialog open={optimizeOpen} onOpenChange={setOptimizeOpen} posts={posts ?? []} />
     </div>
   );
 };
