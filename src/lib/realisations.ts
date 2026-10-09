@@ -63,7 +63,8 @@ export const REALISATIONS: Realisation[] = [
       { value: "6 h", label: "de vol effectif" },
     ],
     image: `${STORAGE}/covers/unassigned/f0df5fd1-8799-4e24-b582-635d1ab98dc1.webp`,
-    imageAlt: "Drone pulvérisant un fixateur sur l'ancienne usine d'amiante de Canari",
+    imageAlt:
+      "Drone pulvérisant un fixateur sur l'ancienne usine d'amiante de Canari",
     articleSlug: "canari-fixation-amiante-drone-terelian-vinci",
   },
 ];

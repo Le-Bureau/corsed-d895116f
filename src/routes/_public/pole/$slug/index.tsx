@@ -23,21 +23,37 @@ export const Route = createFileRoute("/_public/pole/$slug/")({
     return seoHead({
       title: `${pole.label} par drone en Corse`,
       description:
-        POLE_META[pole.key] || (pole.heroPitch || pole.pitch || "").slice(0, 160),
+        POLE_META[pole.key] ||
+        (pole.heroPitch || pole.pitch || "").slice(0, 160),
       canonicalPath: `/pole/${pole.key}`,
       ogImage: pole.showcaseImage
         ? `https://corse-drone.com${pole.showcaseImage}`
         : undefined,
-      jsonLd: {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        serviceType: pole.label,
-        name: `${pole.label} par drone, Corse Drone`,
-        description: pole.heroPitch || pole.pitch,
-        provider: { "@id": LOCAL_BUSINESS_ID },
-        areaServed: { "@type": "AdministrativeArea", name: "Corse" },
-        url: `https://corse-drone.com/pole/${pole.key}`,
-      },
+      jsonLd: [
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: pole.label,
+          name: `${pole.label} par drone, Corse Drone`,
+          description: pole.heroPitch || pole.pitch,
+          provider: { "@id": LOCAL_BUSINESS_ID },
+          areaServed: { "@type": "AdministrativeArea", name: "Corse" },
+          url: `https://corse-drone.com/pole/${pole.key}`,
+        },
+        ...(pole.poleFAQ?.length
+          ? [
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: pole.poleFAQ.map((f) => ({
+                  "@type": "Question",
+                  name: f.question,
+                  acceptedAnswer: { "@type": "Answer", text: f.answer },
+                })),
+              },
+            ]
+          : []),
+      ],
     });
   },
   component: PoleDetail,

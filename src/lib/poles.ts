@@ -174,6 +174,51 @@ const DIAGNOSTIC_FAQ: PoleFAQItem[] = [
   { question: "Vos certifications STS couvrent-elles ma mission ?", answer: "Corse Drone opère avec STS-01 et STS-02 délivrées par la DGAC, couvrant la quasi-totalité du territoire corse. Drone DJI Matrice 4T classé C2 (vol jusqu'à 5m des personnes)." },
 ];
 
+// Transport figures come from DJI's FlyCart 100 spec sheet (dji.com/flycart-100/specs).
+const TRANSPORT_WHY: WhyDroneItem[] = [
+  {
+    iconName: "ArrowDownToLine",
+    title: "Dépose au treuil, sans se poser",
+    description:
+      "Treuil de 30 mètres avec pesée intégrée : la charge descend au point exact, même sur une crête, un toit ou une zone sans aire d'atterrissage.",
+  },
+  {
+    iconName: "Weight",
+    title: "Jusqu'à 100 kg par rotation",
+    description:
+      "100 kg sur les trajets courts, 85 kg sur les trajets jusqu'à 12 km. Matériaux, outillage, vivres ou matériel technique, en rotations répétées.",
+  },
+  {
+    iconName: "BatteryCharging",
+    title: "Des rotations qui s'enchaînent",
+    description:
+      "Batteries rechargées de 30 à 95 % en 9 minutes sur site. Pas d'hélicoptère à faire venir, pas de créneau à attendre pour quelques centaines de kilos.",
+  },
+  {
+    iconName: "ShieldCheck",
+    title: "Sécurité embarquée",
+    description:
+      "Parachute intégré, radars, LiDAR et caméras de détection d'obstacles. Chaque mission est couverte par une analyse de risque validée par la DGAC.",
+  },
+];
+
+const TRANSPORT_PROCESS: ProcessStep[] = [
+  { number: "ÉTAPE 01", title: "Étude de faisabilité", description: "Masse et volume des charges, distance, dénivelé, zones de décollage et de dépose. On vous dit franchement si le drone est le bon outil, ou si l'hélicoptère reste plus adapté." },
+  { number: "ÉTAPE 02", title: "Autorisations", description: "Le FlyCart 100 vole en catégorie spécifique : analyse de risque SORA et autorisation de la DGAC (DSAC) à notre charge, dérogations préfectorales si nécessaire (prévoir environ 30 jours)." },
+  { number: "ÉTAPE 03", title: "Préparation du site", description: "Zones de chargement et de dépose balisées et sécurisées, intégration de l'opération à votre PPSPS ou plan de prévention, conditionnement et pesée des charges." },
+  { number: "ÉTAPE 04", title: "Rotations", description: "Vols aller-retour, dépose au treuil sans atterrissage, recharge des batteries entre deux rotations. Le chantier continue pendant ce temps." },
+  { number: "ÉTAPE 05", title: "Compte-rendu", description: "Nombre de rotations, masses livrées, conditions de vol : un relevé exploitable pour votre suivi de chantier." },
+];
+
+const TRANSPORT_FAQ: PoleFAQItem[] = [
+  { question: "Quelle charge un drone peut-il transporter ?", answer: "Notre DJI FlyCart 100 emporte jusqu'à 100 kg par rotation sur les trajets courts, et 85 kg en configuration longue distance (jusqu'à 12 km). La charge réelle dépend du dénivelé, de l'altitude et de la météo du jour : on la calcule pour chaque mission." },
+  { question: "Le drone remplace-t-il l'hélicoptère ?", answer: "Pas toujours. L'hélicoptère reste imbattable pour les charges de plusieurs centaines de kilos d'un seul tenant. Le drone est pertinent pour des volumes répartis en charges de moins de 100 kg, des rotations répétées, ou quand mobiliser un hélicoptère est disproportionné." },
+  { question: "Quelles autorisations faut-il ?", answer: "Un drone de cette taille vole obligatoirement en catégorie spécifique, avec une analyse de risque SORA et une autorisation délivrée par la DGAC. C'est à notre charge. De votre côté, l'opération est intégrée à vos documents de prévention (PPSPS, plan de prévention) et la zone de dépose est sécurisée." },
+  { question: "Et si la météo se dégrade ?", answer: "Le FlyCart 100 décolle et atterrit avec un vent jusqu'à 12 m/s, de -20 à 40 °C, et résiste à la pluie (IP55). Au-delà, on reporte : la décision se prend le jour même, sur place, et la sécurité passe avant le planning." },
+  { question: "Quels types de charges ?", answer: "Matériaux et outillage de chantier, sacs de mortier, pièces techniques, vivres et matériel de refuge, approvisionnement de bergeries ou d'exploitations isolées. Les matières dangereuses font l'objet d'une étude spécifique." },
+  { question: "Quand le service sera-t-il disponible ?", answer: "Le pôle transport est en préparation. Inscrivez-vous pour être prévenu du lancement : les premiers clients bénéficieront de conditions privilégiées, et on peut déjà étudier la faisabilité de votre projet." },
+];
+
 export const POLES: Pole[] = [
   {
     key: "nettoyage",
@@ -278,9 +323,9 @@ export const POLES: Pole[] = [
     description:
       "Acheminement de matériel vers les zones difficiles d'accès. Une alternative à l'hélicoptère, plus rapide, plus précise, moins coûteuse pour vos chantiers isolés en moyenne montagne ou sur sites côtiers escarpés.",
     highlights: [
-      "Charge utile 100kg",
-      "Zones inaccessibles",
-      "Coût divisé vs hélicoptère",
+      "Jusqu'à 100 kg par rotation",
+      "Treuil 30 m, dépose sans se poser",
+      "Complément à l'hélicoptère",
     ],
     subServices: [
       {
@@ -288,7 +333,7 @@ export const POLES: Pole[] = [
         slug: "livraison-btp",
         category: "Logistique chantier",
         description:
-          "Acheminement de matériaux, outillage et pièces vers les chantiers en zones difficiles d'accès. Alternative économique à l'hélicoptère pour les charges jusqu'à 100 kg.",
+          "Acheminement de matériaux, outillage et pièces vers les chantiers en zones difficiles d'accès. Dépose au treuil jusqu'à 100 kg par rotation, sans attendre un créneau d'hélicoptère.",
         iconName: "HardHat",
       },
       {
@@ -296,7 +341,7 @@ export const POLES: Pole[] = [
         slug: "approvisionnement-zones-isolees",
         category: "Logistique territoriale",
         description:
-          "Refuges, bergeries, parcelles de montagne, zones non aménagées. Réapprovisionnement régulier ou ponctuel pour exploitations agricoles, sylvicoles et pastorales.",
+          "Refuges du GR20, bergeries, parcelles de montagne, zones non aménagées. Réapprovisionnement régulier ou ponctuel pour exploitations agricoles, sylvicoles et pastorales.",
         iconName: "Mountain",
       },
     ],
@@ -306,15 +351,15 @@ export const POLES: Pole[] = [
     isInDevelopment: true,
     heroPoleNumber: "PÔLE 03",
     heroPitch:
-      "Une nouvelle approche de la logistique aérienne. Nos drones assurent le transport de matériel vers les zones difficiles d'accès, en complément ou alternative à l'hélicoptère.",
-    whyDroneItems: undefined,
-    processSteps: undefined,
+      "Une nouvelle approche de la logistique aérienne. Notre DJI FlyCart 100 achemine jusqu'à 100 kg de matériel par rotation vers les zones difficiles d'accès, en complément de l'hélicoptère.",
+    whyDroneItems: TRANSPORT_WHY,
+    processSteps: TRANSPORT_PROCESS,
     useCases: undefined,
-    poleFAQ: undefined,
+    poleFAQ: TRANSPORT_FAQ,
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
-    stat: { value: "100", unit: "kg", labelStrong: "de charge utile transportée", labelMuted: "par rotation" },
+    stat: { value: "100", unit: "kg", labelStrong: "de charge utile par rotation", labelMuted: "avec le DJI FlyCart 100" },
   },
   {
     key: "agriculture",
@@ -377,7 +422,7 @@ export const POLES: Pole[] = [
         slug: "transport-levage-agricole",
         category: "Logistique zones isolées",
         description:
-          "Acheminement de matériel jusqu'à 100 kg vers exploitations isolées, parcelles en montagne, refuges et bergeries. Câble de levage 10-15m, dépose précise sans atterrissage.",
+          "Acheminement de matériel jusqu'à 100 kg vers exploitations isolées, parcelles en montagne, refuges et bergeries. Treuil jusqu'à 30 m, dépose précise sans atterrissage.",
         iconName: "Package",
       },
     ],
