@@ -5,15 +5,6 @@ import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { SUB_POLE_META, LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
 
-const SUB_POLE_TITLES: Record<string, string> = {
-  toitures: "Nettoyage de toiture par drone en Corse",
-  facades: "Nettoyage de façade par drone en Corse",
-  "panneaux-solaires": "Nettoyage de panneaux solaires par drone en Corse",
-  thermique: "Thermographie par drone en Corse",
-  visuel: "Inspection visuelle par drone en Corse",
-  photogrammetrie: "Photogrammétrie par drone en Corse",
-};
-
 export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
   loader: ({ params }) => {
     const pole = POLES.some((p) => p.key === params.slug);
@@ -34,7 +25,7 @@ export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
       });
     }
     return seoHead({
-      title: SUB_POLE_TITLES[params.subSlug] || content.heroTitle,
+      title: content.seoTitle,
       description:
         SUB_POLE_META[params.subSlug] || (content.heroPitch || "").slice(0, 160),
       canonicalPath: `/pole/${params.slug}/${params.subSlug}`,
@@ -47,8 +38,8 @@ export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
         {
           "@context": "https://schema.org",
           "@type": "Service",
-          serviceType: content.heroTitle,
-          name: content.heroTitle,
+          serviceType: content.seoTitle,
+          name: content.seoTitle,
           description: content.heroPitch,
           provider: { "@id": LOCAL_BUSINESS_ID },
           areaServed: { "@type": "AdministrativeArea", name: "Corse" },
@@ -78,7 +69,7 @@ export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
             {
               "@type": "ListItem",
               position: 3,
-              name: content.heroTitle,
+              name: content.seoTitle,
               item: `https://corse-drone.com/pole/${params.slug}/${params.subSlug}`,
             },
           ],

@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         title: isNotFound
           ? "Page introuvable | Corse Drone"
-          : "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+          : "Corse Drone | Drone professionnel en Corse",
       },
       ...(isNotFound ? [{ name: "robots", content: "noindex, nofollow" }] : []),
       {
         name: "description",
         content:
-          "Corse Drone MCG : solutions professionnelles par drone en Corse. Nettoyage de toitures, façades et panneaux solaires, data agricole et transport. Devis gratuit.",
+          "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
       { name: "author", content: "Corse Drone" },
       { property: "og:type", content: "website" },
@@ -92,22 +92,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:url", content: "https://corse-drone.com/" },
       {
         property: "og:title",
-        content: "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+        content: "Corse Drone | Drone professionnel en Corse",
       },
       {
         property: "og:description",
         content:
-          "Corse Drone MCG : solutions professionnelles par drone en Corse. Nettoyage de toitures, façades et panneaux solaires, data agricole et transport. Devis gratuit.",
+          "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+        content: "Corse Drone | Drone professionnel en Corse",
       },
       {
         name: "twitter:description",
         content:
-          "Corse Drone MCG : solutions professionnelles par drone en Corse. Nettoyage de toitures, façades et panneaux solaires, data agricole et transport. Devis gratuit.",
+          "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
     ],
     links: [

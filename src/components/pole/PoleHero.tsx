@@ -98,7 +98,10 @@ const PoleHero = ({ pole }: Props) => {
           className="relative z-10 font-display font-semibold tracking-[-0.035em] leading-[0.98] mb-6 max-w-[1080px] text-[44px] sm:text-[56px] lg:text-[clamp(56px,8vw,112px)]"
           style={{ color: "var(--pole-color)" }}
         >
-          {pole.label}
+          {pole.label}{" "}
+          <span className="block mt-3 font-display text-text-primary tracking-[-0.01em] text-[22px] sm:text-[26px] lg:text-[32px] leading-tight">
+            par drone en Corse
+          </span>
         </h1>
 
         {pole.pitch && (

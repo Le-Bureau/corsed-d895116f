@@ -59,9 +59,12 @@ export interface SubFAQItem {
 
 export interface SubPoleContent {
   heroEyebrow: string;
+  // Service + place: rendered as the page H1 and used for <title> and
+  // structured data. heroTitle is the tagline displayed under it.
+  seoTitle: string;
   heroTitle: string;
   // Optional animated title: `before` + rotating word + `after`.
-  // heroTitle stays the plain version (SEO, alt text, structured data).
+  // heroTitle stays the plain version (screen readers, alt text).
   heroTitleTypewriter?: { before: string; words: string[]; after: string };
   heroPitch: string;
   heroImage?: string;
@@ -99,6 +102,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
   nettoyage: {
     toitures: {
       heroEyebrow: "Nettoyage · toitures",
+      seoTitle: "Nettoyage et démoussage de toiture par drone en Corse",
       heroTitle: "Une toiture saine, des années gagnées.",
       heroPitch:
         "Démoussage et nettoyage de toitures par drone. Traitement préventif anti-mousse, eau basse pression, sans monter sur le toit. Intervention partout en Corse, de la villa au patrimoine.",
@@ -145,6 +149,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
     },
     facades: {
       heroEyebrow: "Nettoyage · façades",
+      seoTitle: "Nettoyage de façade par drone en Corse",
       heroTitle: "Une façade propre, un patrimoine préservé.",
       heroPitch:
         "Nettoyage de façades par drone basse & haute pression. Enduits, pierre, béton, bardage. Sans échafaudage, sans nacelle, sans perturbation. Partout en Corse, de la villa à l'immeuble.",
@@ -191,6 +196,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
     },
     "panneaux-solaires": {
       heroEyebrow: "Nettoyage · panneaux solaires",
+      seoTitle: "Nettoyage de panneaux solaires par drone en Corse",
       heroTitle: "Des panneaux propres, une production restaurée.",
       heroPitch:
         "Nettoyage professionnel de vos panneaux photovoltaïques par drone. Eau osmosée pure, basse pression, sans risque pour les cellules. Intervention partout en Corse, de la villa à la centrale.",
@@ -239,6 +245,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
   diagnostic: {
     thermique: {
       heroEyebrow: "Diagnostic · thermique",
+      seoTitle: "Thermographie par drone en Corse",
       heroTitle: "La thermographie voit ce que l'œil ne voit pas.",
       heroPitch:
         "Identifiez déperditions de chaleur, défauts d'isolation et pannes de panneaux photovoltaïques depuis les airs. Rapport technique exploitable, partout en Corse.",
@@ -322,6 +329,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
     },
     visuel: {
       heroEyebrow: "Diagnostic · visuel",
+      seoTitle: "Inspection visuelle par drone en Corse",
       heroTitle: "Voir ce que l'œil ne voit pas.",
       heroPitch:
         "Inspection visuelle par drone haute définition des bâtiments difficiles d'accès. Toitures, façades, infrastructures industrielles et patrimoine : un rapport précis, livré en 48 à 72h, sans nacelle ni cordistes.",
@@ -405,6 +413,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
     },
     photogrammetrie: {
       heroEyebrow: "Diagnostic · photogrammétrie",
+      seoTitle: "Photogrammétrie par drone en Corse",
       heroTitle: "Votre site, mesuré au centimètre.",
       heroTitleTypewriter: {
         before: "Votre ",
