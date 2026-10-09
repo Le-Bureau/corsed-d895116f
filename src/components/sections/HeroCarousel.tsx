@@ -184,7 +184,7 @@ const HeroCarousel = () => {
           Mirrors HeroSlideContent's full layout (eyebrow + title + pitch + mb-12 + CTAs)
           with invisible spacers so flex items-center aligns the title slot
           exactly with HeroSlideContent's title slot. */}
-      <div className="absolute inset-0 z-20 flex items-center pointer-events-none max-md:items-end max-md:pb-[18vh]">
+      <div className="absolute inset-0 z-20 flex items-center pointer-events-none max-md:items-end max-md:pb-[18vh] md:max-xl:items-end md:max-xl:pb-[clamp(104px,13vh,150px)]">
         <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)] lg:pl-[clamp(170px,11vw,180px)] lg:pr-[clamp(170px,11vw,180px)]">
           <div className="w-full max-w-[780px]">
             {/* Pole pill eyebrow — temporairement masquée (à réactiver en retirant `hidden`
@@ -320,7 +320,10 @@ const HeroCarousel = () => {
                 + CTAs stacked (2 × ~3.4rem + gap 0.75rem ≈ 7.5rem).
                 md+: subtitle (~3 lines ≈ 5.25rem) + mb-12 (3rem) + CTAs row (≈ 3.125rem). */}
             <div aria-hidden="true" className="md:hidden" style={{ height: "7.5rem" }} />
-            <div aria-hidden="true" className="hidden md:block" style={{ height: "calc(5.25rem + 3rem + 3.125rem)" }} />
+            <div aria-hidden="true" className="hidden xl:block [@media(max-height:760px)]:xl:hidden" style={{ height: "calc(5.25rem + 3rem + 3.125rem)" }} />
+            <div aria-hidden="true" className="hidden md:max-xl:block [@media(max-height:760px)]:md:hidden" style={{ height: "calc(4.5rem + 2rem + 3.125rem)" }} />
+            {/* Short screens hide the subtitle: only the CTA row remains below the title. */}
+            <div aria-hidden="true" className="hidden [@media(max-height:760px)]:md:block" style={{ height: "3.125rem" }} />
           </div>
         </div>
       </div>
