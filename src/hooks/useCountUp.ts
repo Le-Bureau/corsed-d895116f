@@ -23,10 +23,17 @@ export function useCountUp({
   threshold = 0.4,
 }: UseCountUpOptions) {
   const computedDuration = duration ?? computeAdaptiveDuration(end);
-  const [value, setValue] = useState(0);
+  // Start at the final value so the server-rendered HTML (what crawlers read)
+  // shows the real figure; the client rewinds to 0 before animating.
+  const [value, setValue] = useState(end);
   const [hasStarted, setHasStarted] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!prefersReducedMotion && !hasStarted) setValue(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (hasStarted || !elementRef.current) return;

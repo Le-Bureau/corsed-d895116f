@@ -99,7 +99,7 @@ const Header = () => {
             aria-label="Corse Drone, Accueil"
           >
             <span className="font-display text-[15px] font-bold tracking-[-0.02em] text-black/80 transition-colors duration-300 hover:text-black">
-              CORSE DRONE · MCG
+              CORSE DRONE
             </span>
           </Link>
 

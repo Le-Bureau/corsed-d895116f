@@ -49,9 +49,9 @@ const Footer = () => {
               </p>
 
               <p className="text-xs leading-relaxed text-text-on-dark-muted">
-                SAS Corse Drone Services
+                {CONTACT.name}
                 <br />
-                7 Cours Favale, 20200 Bastia
+                {CONTACT.streetAddress}, {CONTACT.postalCode} {CONTACT.city}
               </p>
 
               <div className="flex gap-2 mt-2">
@@ -149,14 +149,14 @@ const Footer = () => {
               <div className="flex flex-col gap-1">
                 <span className={contactLabel}>Adresse</span>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=7+Cours+Favale+Bastia"
+                  href={CONTACT.mapsLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={contactValue}
                 >
-                  7 Cours Favale
+                  {CONTACT.streetAddress}
                   <br />
-                  20200 Bastia, Corse
+                  {CONTACT.postalCode} {CONTACT.city}, Corse
                 </a>
               </div>
 
@@ -188,7 +188,7 @@ const Footer = () => {
         <FadeInWhenVisible delay={0.4}>
           <div className="flex flex-wrap justify-between items-center gap-6 py-6 md:py-8 border-t border-white/[0.08] text-xs text-text-on-dark-muted">
             <div className="flex flex-wrap items-center gap-6">
-              <span>© 2026 Corse Drone Services</span>
+              <span>© 2026 {CONTACT.name}</span>
               <span aria-hidden>·</span>
               <Link to="/mentions-legales" className="hover:text-text-on-dark transition-colors">
                 Mentions légales

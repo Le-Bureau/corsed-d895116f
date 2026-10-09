@@ -37,7 +37,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src={content.heroImage}
-            alt={`${content.heroTitle} par drone, Corse Drone`}
+            alt={`${content.seoTitle}, Corse Drone`}
             className="w-full h-full object-cover"
             style={{ objectPosition: "center" }}
             loading="eager"
@@ -67,16 +67,20 @@ const SubPoleHero = ({ content, pole }: Props) => {
 
       <div className="relative z-[5] max-w-[1100px] mx-auto px-5 sm:px-10 text-center">
         <FadeInWhenVisible>
-          <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-8">
+          {/* The pill carries the H1 (service + place); the big tagline below is
+              presentational so the H1 says what the page is about. */}
+          <h1
+            id="sub-pole-hero-title"
+            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-8"
+          >
             <span
-              className="w-1.5 h-1.5 rounded-full"
+              className="w-1.5 h-1.5 shrink-0 rounded-full"
               style={{ background: "var(--pole-color)" }}
               aria-hidden="true"
             />
-            {content.heroEyebrow}
-          </span>
-          <h1
-            id="sub-pole-hero-title"
+            {content.seoTitle}
+          </h1>
+          <p
             className="font-display font-semibold tracking-[-0.04em] leading-[1.02] text-text-primary mb-6"
             style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
           >
@@ -106,7 +110,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
             ) : (
               content.heroTitle
             )}
-          </h1>
+          </p>
           <p
             className="text-text-secondary mx-auto leading-relaxed mb-10 max-w-[760px]"
             style={{ fontSize: "clamp(16px, 1.4vw, 19px)" }}

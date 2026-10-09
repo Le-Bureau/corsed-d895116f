@@ -41,7 +41,7 @@ export default function SubPoleDetail() {
   return (
     <main className="min-h-screen bg-surface-bg" style={styleVars}>
       <SEO
-        title={`${content.heroTitle} par drone`}
+        title={content.seoTitle}
         description={
           SUB_POLE_META[subSlug || ""] ||
           (content.heroPitch || "").slice(0, 160)
@@ -58,8 +58,8 @@ export default function SubPoleDetail() {
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            serviceType: content.heroTitle,
-            name: content.heroTitle,
+            serviceType: content.seoTitle,
+            name: content.seoTitle,
             description: content.heroPitch,
             provider: { "@id": LOCAL_BUSINESS_ID },
             areaServed: { "@type": "AdministrativeArea", name: "Corse" },
@@ -89,7 +89,7 @@ export default function SubPoleDetail() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: content.heroTitle,
+                name: content.seoTitle,
                 item: `https://corse-drone.com/pole/${slug}/${subSlug}`,
               },
             ],

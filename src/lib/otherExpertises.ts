@@ -19,17 +19,9 @@ export const OTHER_EXPERTISES: Expertise[] = [
       "Cartographie aérienne haute précision pour topographie, urbanisme, et études de site.",
   },
   {
-    key: "prises-de-vue",
-    slug: "prises-de-vue",
-    index: "02",
-    title: "Prises de vue",
-    description:
-      "Photo et vidéo aérienne en 4K pour communication, immobilier, événementiel, audiovisuel.",
-  },
-  {
     key: "suivi-chantier",
     slug: "suivi-chantier",
-    index: "03",
+    index: "02",
     title: "Suivi de chantier",
     description:
       "Documentation aérienne périodique de l'avancement de vos travaux pour reporting et archivage.",

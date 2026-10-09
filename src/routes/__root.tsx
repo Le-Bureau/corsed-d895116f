@@ -35,8 +35,7 @@ import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { usePlausibleTracking } from "@/hooks/usePlausibleTracking";
 import { Link } from "@/lib/router-compat";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import NotFoundPage from "@/components/layout/NotFoundPage";
 import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { reportLovableError } from "@/lib/lovable-error-reporting";
@@ -77,13 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         title: isNotFound
           ? "Page introuvable | Corse Drone"
-          : "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+          : "Corse Drone | Drone professionnel en Corse",
       },
       ...(isNotFound ? [{ name: "robots", content: "noindex, nofollow" }] : []),
       {
         name: "description",
         content:
-          "Corse Drone MCG : solutions professionnelles par drone en Corse. Nettoyage de toitures, façades et panneaux solaires, data agricole et transport. Devis gratuit.",
+          "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
       { name: "author", content: "Corse Drone" },
       { property: "og:type", content: "website" },
@@ -92,22 +91,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:url", content: "https://corse-drone.com/" },
       {
         property: "og:title",
-        content: "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+        content: "Corse Drone | Drone professionnel en Corse",
       },
       {
         property: "og:description",
         content:
-          "Corse Drone MCG : solutions professionnelles par drone en Corse. Nettoyage de toitures, façades et panneaux solaires, data agricole et transport. Devis gratuit.",
+          "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Corse Drone | Nettoyage, Agriculture & Transport par drone",
+        content: "Corse Drone | Drone professionnel en Corse",
       },
       {
         name: "twitter:description",
         content:
-          "Corse Drone MCG : solutions professionnelles par drone en Corse. Nettoyage de toitures, façades et panneaux solaires, data agricole et transport. Devis gratuit.",
+          "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
     ],
     links: [
@@ -158,7 +157,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   },
   shellComponent: RootShell,
   component: RootComponent,
-  notFoundComponent: NotFound,
+  notFoundComponent: NotFoundPage,
   errorComponent: RootErrorComponent,
 });
 
@@ -212,34 +211,6 @@ function RootComponent() {
   );
 }
 
-function NotFound() {
-  return (
-    <div className="min-h-screen flex flex-col bg-surface-bg">
-      <Header />
-      <main className="flex-1 flex items-center justify-center px-6 py-24 text-center">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-text-secondary">
-            Erreur 404
-          </p>
-          <h1 className="mt-3 font-display text-4xl md:text-5xl text-text-primary">
-            Page introuvable
-          </h1>
-          <p className="mt-4 text-text-secondary max-w-md mx-auto">
-            La page que vous cherchez n'existe pas ou a été déplacée.
-          </p>
-          <Link
-            to="/"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-pole-nettoyage px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
-          >
-            Retour à l'accueil
-          </Link>
-        </div>
-      </main>
-      <Footer />
-    </div>
-  );
-}
-
 function RootErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   const router = useRouter();
 
@@ -265,7 +236,7 @@ function RootErrorComponent({ error, reset }: { error: unknown; reset: () => voi
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-full bg-pole-nettoyage px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
+            className="inline-flex items-center justify-center rounded-full bg-pole-nettoyage-base px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
           >
             Réessayer
           </button>
