@@ -20,6 +20,10 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 2,
+      // Let scrollable elements (textareas, modals, lists) scroll natively
+      // instead of Lenis hijacking the wheel to scroll the page.
+      allowNestedScroll: true,
+      prevent: (node) => node.closest("textarea, select") !== null,
     });
     lenisRef.current = instance;
     setLenis(instance);

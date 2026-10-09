@@ -1232,6 +1232,31 @@ html.lenis body {
   margin-top: 36px !important;
   scroll-margin-top: 100px;
 }
+/* Markdown tables: scroll horizontally on small screens instead of overflowing */
+.blog-scope .article-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #292524;
+}
+.blog-scope .article-content th,
+.blog-scope .article-content td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #e7e5e4;
+  text-align: left;
+  vertical-align: top;
+  min-width: 120px;
+}
+.blog-scope .article-content th {
+  font-weight: 600;
+  color: #1c1917;
+  border-bottom: 2px solid #d6d3d1;
+  white-space: nowrap;
+}
+.blog-scope .article-content tbody tr:nth-child(even) td { background: #fafaf9; }
 .blog-scope .article-content ul,
 .blog-scope .article-content ol {
   padding-left: 24px;

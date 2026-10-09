@@ -64,6 +64,15 @@ const AGRICULTURE: BlogServiceLink = {
     "Analyse multispectrale, traitements ciblés : on étudie votre exploitation pour vous proposer la méthode adaptée. Devis sous 48h.",
 };
 
+const TRANSPORT: BlogServiceLink = {
+  poleKey: "transport",
+  href: "/pole/transport",
+  serviceLabel: "Découvrir le pôle transport",
+  title: "Un site isolé à approvisionner ?",
+  description:
+    "Refuges, chantiers en altitude, bergeries : le pôle transport ouvre en 2027. Parlez-nous de votre besoin dès maintenant pour préparer les premières missions.",
+};
+
 export const BLOG_SERVICE_LINKS: Record<string, BlogServiceLink> = {
   "nettoyage-toiture-drone-corse": NETTOYAGE_TOITURES,
   "nettoyage-panneaux-solaires-drone-corse": NETTOYAGE_PANNEAUX,
@@ -73,4 +82,5 @@ export const BLOG_SERVICE_LINKS: Record<string, BlogServiceLink> = {
   "diagnostic-thermique-drone-corse": DIAGNOSTIC_THERMIQUE,
   "inspection-toiture-drone-cab-bastia": DIAGNOSTIC_VISUEL,
   "imagerie-multispectrale-par-drone-ce-quelle-apporte-aux-cultures-corses": AGRICULTURE,
+  "transport-materiel-drone-corse-2027": TRANSPORT,
 };

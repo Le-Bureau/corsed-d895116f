@@ -514,7 +514,7 @@ const AdminBlogEditor = () => {
                         setPreviewModalOpen(true);
                       }
                     }}
-                    className="min-h-[500px] font-mono text-sm rounded-t-none w-full"
+                    className="min-h-[500px] h-[75vh] resize-y overflow-y-auto font-mono text-sm rounded-t-none w-full"
                   />
                 </div>
               )}
