@@ -81,7 +81,7 @@ const Outils = () => {
               "radial-gradient(ellipse at 80% 70%, rgba(80,130,172,0.12) 0%, transparent 55%)",
           }}
         />
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
+        <div className="hero-enter max-w-[1280px] mx-auto px-5 sm:px-10">
           <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-logo-base" aria-hidden="true" />
             Nos outils
