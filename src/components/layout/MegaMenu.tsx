@@ -111,7 +111,7 @@ const MegaMenu = ({ open, onClose, triggerRef, onMouseEnter, onMouseLeave }: Pro
 
               <div className="flex flex-col gap-0.5 mt-1">
                 {pole.subServices && pole.subServices.length > 0
-                  ? pole.subServices.map((sub) =>
+                  ? pole.subServices.filter((sub) => sub.slug).map((sub) =>
                       sub.slug ? (
                         <Link
                           key={sub.name}

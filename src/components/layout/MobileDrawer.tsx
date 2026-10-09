@@ -247,7 +247,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                   }
                                   className="overflow-hidden pl-5"
                                 >
-                                  {pole.subServices.map((sub) =>
+                                  {pole.subServices.filter((sub) => sub.slug).map((sub) =>
                                     sub.slug ? (
                                       <li key={sub.slug ?? sub.name}>
                                         <Link
