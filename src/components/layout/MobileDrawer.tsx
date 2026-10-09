@@ -3,7 +3,7 @@ import { Link, useLocation } from "@/lib/router-compat";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import { ChevronDown, X } from "lucide-react";
 import HeaderLogo from "./HeaderLogo";
-import { POLES } from "@/lib/poles";
+import { POLES, subServiceHref } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 import { cn } from "@/lib/utils";
 import { useLenis } from "@/components/SmoothScrollProvider";
@@ -251,11 +251,7 @@ const MobileDrawer = ({ open, onClose, triggerRef }: Props) => {
                                     sub.slug ? (
                                       <li key={sub.slug ?? sub.name}>
                                         <Link
-                                          to={
-                                            pole.isInDevelopment
-                                              ? `/pole/${pole.slug}#sous-services`
-                                              : `/pole/${pole.slug}/${sub.slug}`
-                                          }
+                                          to={subServiceHref(POLES.find((p) => p.key === pole.key)!, sub)}
                                           onClick={onClose}
                                           className="block py-2 text-[14px] text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-md"
                                         >

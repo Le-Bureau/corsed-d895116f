@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "@/lib/router-compat";
+import { LaunchAlertPopup } from "@/components/popups/LaunchAlertPopup";
 import { ArrowRight } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import TypewriterWords from "@/components/animations/TypewriterWords";
@@ -13,6 +15,7 @@ interface Props {
 
 const SubPoleHero = ({ content, pole }: Props) => {
   const lenis = useLenis();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const showProcessAnchor = !!content.processSteps && content.processSteps.length > 0;
 
   const handleAnchor = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -119,7 +122,12 @@ const SubPoleHero = ({ content, pole }: Props) => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to={`/contact?expertise=${pole.key}`}
+              to={pole.isInDevelopment ? "#" : `/contact?expertise=${pole.key}`}
+              onClick={(e: React.MouseEvent) => {
+                if (!pole.isInDevelopment) return;
+                e.preventDefault();
+                setIsAlertOpen(true);
+              }}
               className="group inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none motion-reduce:transform-none"
               style={{
                 background: "var(--pole-color)",
@@ -127,7 +135,7 @@ const SubPoleHero = ({ content, pole }: Props) => {
                   "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.35), 0 8px 24px rgba(var(--pole-color-rgb), 0.25)",
               }}
             >
-              Obtenir un devis
+              {pole.isInDevelopment ? "Être prévenu du lancement" : "Obtenir un devis"}
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
             </Link>
             {showProcessAnchor && (
@@ -142,6 +150,13 @@ const SubPoleHero = ({ content, pole }: Props) => {
           </div>
         </FadeInWhenVisible>
       </div>
+      {pole.isInDevelopment && (
+        <LaunchAlertPopup
+          isOpen={isAlertOpen}
+          onClose={() => setIsAlertOpen(false)}
+          poleKey={pole.key}
+        />
+      )}
     </section>
   );
 };

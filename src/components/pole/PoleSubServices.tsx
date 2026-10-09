@@ -18,10 +18,11 @@ import {
   Recycle,
   LifeBuoy,
   House,
+  Plane,
   type LucideIcon,
 } from "lucide-react";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
-import type { Pole } from "@/lib/poles";
+import { subServiceHref, type Pole } from "@/lib/poles";
 
 interface Props {
   pole: Pole;
@@ -44,6 +45,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Recycle,
   LifeBuoy,
   House,
+  Plane,
 };
 
 const PoleSubServices = ({ pole }: Props) => {
@@ -114,6 +116,16 @@ const PoleSubServices = ({ pole }: Props) => {
                       <p className="text-text-secondary text-[14px] leading-relaxed">
                         {s.description}
                       </p>
+                    )}
+                    {s.hasPage && s.slug && (
+                      <Link
+                        to={subServiceHref(pole, s)}
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold after:absolute after:inset-0 after:rounded-2xl"
+                        style={{ color: "var(--pole-color)" }}
+                      >
+                        Voir la page
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+                      </Link>
                     )}
                   </div>
                 </FadeInWhenVisible>

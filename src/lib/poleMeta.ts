@@ -12,6 +12,10 @@ export const SUB_POLE_META: Record<string, string> = {
     "Thermographie aérienne par drone en Corse. Détection ponts thermiques, infiltrations, hotspots photovoltaïques. Caméra UHR 1280x1024. Rapport en 48 à 72h.",
   visuel:
     "Inspection aérienne haute précision par drone en Corse. Détection fissures, défauts étanchéité. Zoom 112x sur toitures, façades, ouvrages d'art. Devis gratuit.",
+  refuges:
+    "Ravitaillement de refuges par drone en Corse : vivres, gaz, matériel et déchets, jusqu'à 100 kg par rotation au treuil. GR20, Mare a Mare, bergeries d'estive.",
+  "alternative-helicoptere":
+    "Transport par drone en Corse, alternative à l'hélicoptère pour les charges jusqu'à 100 kg. Dépose au treuil sans atterrir, chantiers isolés, montagne, littoral.",
   photogrammetrie:
     "Photogrammétrie par drone en Corse. Orthophotos, nuages de points et modèles 3D géoréférencés au centimètre. Topographie, cubatures, façades. Devis sous 48h.",
 };

@@ -1,5 +1,6 @@
 import spectraThermique from "@/assets/tools/spectra-thermique.jpg";
 import axioVisuel from "@/assets/tools/axio-visuel.webp";
+import { TRANSPORT_SUB_POLES } from "@/lib/sub-poles-transport";
 
 export interface SubPoleStat {
   prefix?: string;
@@ -99,6 +100,7 @@ export interface SubPoleContent {
 }
 
 export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = {
+  transport: TRANSPORT_SUB_POLES,
   nettoyage: {
     toitures: {
       heroEyebrow: "Nettoyage · toitures",
