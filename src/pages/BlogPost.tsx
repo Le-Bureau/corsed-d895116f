@@ -10,6 +10,7 @@ import BlogRelatedPosts from "@/components/blog/BlogRelatedPosts";
 import BlogPostSkeleton from "@/components/blog/skeletons/BlogPostSkeleton";
 import { useBlogPost } from "@/hooks/blog/useBlogPost";
 import { formatBlogDate } from "@/lib/blogHelpers";
+import { BLOG_SERVICE_LINKS } from "@/lib/blogServiceLinks";
 import { Events, trackEvent } from "@/lib/analytics";
 
 const BlogPost = () => {
@@ -211,7 +212,7 @@ const BlogPost = () => {
         </div>
       </div>
 
-      <BlogArticleCTA />
+      <BlogArticleCTA service={BLOG_SERVICE_LINKS[post.slug]} />
       <BlogRelatedPosts
         currentPostId={post.id}
         currentSlug={post.slug}

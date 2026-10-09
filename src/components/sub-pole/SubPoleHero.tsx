@@ -83,13 +83,24 @@ const SubPoleHero = ({ content, pole }: Props) => {
             {content.heroTitleTypewriter ? (
               <>
                 <span className="sr-only">{content.heroTitle}</span>
-                <span aria-hidden="true">
-                  {content.heroTitleTypewriter.before}
-                  <TypewriterWords
-                    words={content.heroTitleTypewriter.words}
-                    style={{ color: "var(--pole-color)" }}
-                  />
-                  {content.heroTitleTypewriter.after}
+                {/* Every variant is stacked invisibly in the same grid cell so the
+                    title keeps the height of its longest version while typing. */}
+                <span aria-hidden="true" className="grid">
+                  {content.heroTitleTypewriter.words.map((w) => (
+                    <span key={w} className="invisible col-start-1 row-start-1">
+                      {content.heroTitleTypewriter!.before}
+                      {w}
+                      {content.heroTitleTypewriter!.after}
+                    </span>
+                  ))}
+                  <span className="col-start-1 row-start-1">
+                    {content.heroTitleTypewriter.before}
+                    <TypewriterWords
+                      words={content.heroTitleTypewriter.words}
+                      style={{ color: "var(--pole-color)" }}
+                    />
+                    {content.heroTitleTypewriter.after}
+                  </span>
                 </span>
               </>
             ) : (

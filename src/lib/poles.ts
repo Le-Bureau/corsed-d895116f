@@ -149,10 +149,10 @@ const NETTOYAGE_FAQ: PoleFAQItem[] = [
 ];
 
 const DIAGNOSTIC_WHY: WhyDroneItem[] = [
-  { iconName: "Eye", title: "Voir l'invisible", description: "Caméra thermique radiométrique et zoom optique 10× : déperditions, microfissures, hotspots détectés depuis le sol." },
+  { iconName: "Eye", title: "Voir l'invisible", description: "Caméra thermique radiométrique et zoom jusqu'à 112× : déperditions, microfissures, hotspots détectés depuis le sol." },
   { iconName: "ShieldCheck", title: "Zéro risque humain", description: "Aucun personnel en hauteur. Pas de cordistes, pas de nacelle. Risque de chute éliminé." },
   { iconName: "FileText", title: "Rapport opposable", description: "Document PDF géoréférencé et horodaté, exploitable en assemblée générale, par votre assureur ou pour des subventions." },
-  { iconName: "Clock", title: "Délai 48-72h", description: "Vol terrain en 2-3 heures, livraison du rapport en moins de trois jours. Là où une expertise classique prend 1 à 2 semaines." },
+  { iconName: "Clock", title: "Délai 48-72h", description: "Vol terrain en 2-3 heures, rapport livré en 48 à 72h pour une maison, sous 7 jours pour un grand site. Là où une expertise classique prend 1 à 2 semaines." },
 ];
 
 const DIAGNOSTIC_PROCESS: ProcessStep[] = [
@@ -227,16 +227,16 @@ export const POLES: Pole[] = [
     title: "L'œil aérien qui voit l'invisible",
     subtitle:
       "Thermographie, inspection visuelle et photogrammétrie haute précision. Défauts identifiés, sites mesurés, rapports exploitables pour vos décisions techniques et vos assurances.",
-    statLabel: "Délai moyen",
-    statValue: "48h",
-    statDetail: "de livraison du rapport détaillé",
+    statLabel: "Délai du rapport",
+    statValue: "48-72h",
+    statDetail: "pour une maison individuelle",
     comingSoon: false,
     pitch: "Inspection aérienne, thermique et photogrammétrique de vos bâtiments, sites et installations. Identification rapide des défauts, relevés 3D mesurables, rapports exploitables pour vos décisions techniques et vos assurances.",
     description:
       "Thermographie, inspection visuelle et photogrammétrie haute précision. Identification rapide des défauts d'isolation, fissures, infiltrations, et relevés 3D mesurables au centimètre. Rapports exploitables pour vos décisions techniques et vos déclarations d'assurance.",
     highlights: [
       "Caméra thermique infrarouge",
-      "Rapport sous 48h",
+      "Rapport sous 72h",
       "Accès difficile résolu",
     ],
     subServices: [
@@ -257,7 +257,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Une inspection à programmer ?",
     finalCTASubtitle: "Devis gratuit, intervention sous 10 jours, rapport sous 72h.",
     finalCTAButtonLabel: "Demander un devis",
-    stat: { value: "48", unit: "h", labelStrong: "délai moyen de livraison", labelMuted: "du rapport d'inspection détaillé" },
+    stat: { value: "72", unit: "h", labelStrong: "délai maximum du rapport", labelMuted: "pour une maison, 7 jours pour un grand site" },
   },
   {
     key: "agriculture",

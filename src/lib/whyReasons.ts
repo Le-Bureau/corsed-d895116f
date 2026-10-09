@@ -18,7 +18,7 @@ export const WHY_REASONS: Reason[] = [
   {
     key: "fast",
     statValue: "48h",
-    statQualifier: "délai moyen d'intervention",
+    statQualifier: "délai moyen de livraison du rendu",
     title: "Intervention rapide",
     description:
       "Pas de montage, pas de démontage. Le drone arrive, travaille, repart. Votre site reste opérationnel.",

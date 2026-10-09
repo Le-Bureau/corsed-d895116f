@@ -40,7 +40,9 @@ export const Route = createFileRoute("/_public/pole/$slug/$subSlug")({
       canonicalPath: `/pole/${params.slug}/${params.subSlug}`,
       ogImage: content.heroImage
         ? `https://corse-drone.com${content.heroImage}`
-        : undefined,
+        : pole.showcaseImage
+          ? `https://corse-drone.com${pole.showcaseImage}`
+          : undefined,
       jsonLd: [
         {
           "@context": "https://schema.org",

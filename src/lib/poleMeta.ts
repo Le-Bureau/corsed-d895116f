@@ -9,7 +9,7 @@ export const SUB_POLE_META: Record<string, string> = {
   "panneaux-solaires":
     "Nettoyage de panneaux photovoltaïques par drone en Corse. Restaure jusqu'à 30 pourcent de rendement. Eau osmosée, sans abrasion. Devis gratuit et rapide.",
   thermique:
-    "Thermographie aérienne par drone en Corse. Détection ponts thermiques, infiltrations, hotspots photovoltaïques. Caméra UHR 1280x1024. Rapport sous 7 jours.",
+    "Thermographie aérienne par drone en Corse. Détection ponts thermiques, infiltrations, hotspots photovoltaïques. Caméra UHR 1280x1024. Rapport en 48 à 72h.",
   visuel:
     "Inspection aérienne haute précision par drone en Corse. Détection fissures, défauts étanchéité. Zoom 112x sur toitures, façades, ouvrages d'art. Devis gratuit.",
   photogrammetrie:

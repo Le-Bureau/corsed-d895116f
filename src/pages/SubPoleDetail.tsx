@@ -50,7 +50,9 @@ export default function SubPoleDetail() {
         ogImage={
           content.heroImage
             ? `https://corse-drone.com${content.heroImage}`
-            : undefined
+            : pole.showcaseImage
+              ? `https://corse-drone.com${pole.showcaseImage}`
+              : undefined
         }
         jsonLd={[
           {

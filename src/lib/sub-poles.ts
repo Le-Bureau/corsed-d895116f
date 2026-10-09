@@ -121,7 +121,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       formulas: [
         { category: "Protection", title: "Protection hydrofuge", description: "6 à 8 mois après le nettoyage, nous revenons appliquer un traitement hydrofuge. Ce bouclier invisible repousse l'eau et les salissures pour une protection durable de 5 ans et plus.", features: ["Bouclier invisible hydrofuge", "Repousse l'eau et les salissures", "Protection durable 5+ ans", "Espacement des entretiens ultérieurs"] },
         { badge: "Recommandé", isHighlighted: true, category: "Le plus demandé", title: "Démoussage complet et traitement", description: "Intervention complète en trois phases : pulvérisation d'un produit curatif, rinçage contrôlé, puis application d'un hydrofuge protecteur pour prolonger l'effet 5 ans et plus.", features: ["Produits anti-mousse professionnels", "Basse pression, préservation des tuiles", "Application d'hydrofuge protecteur", "Photos avant/après incluses"] },
-        { category: "Ponctuel", title: "Inspection technique et/ou thermique", description: "Pour évaluer l'état de votre toiture et déterminer le niveau de démoussage ou traitement nécessaire avant intervention.", features: ["Inspection visuelle haute résolution", "Détection fissures et tuiles déplacées", "Rapport PDF sous 48h", "Recommandations personnalisées"] },
+        { category: "Ponctuel", title: "Inspection technique et/ou thermique", description: "Pour évaluer l'état de votre toiture et déterminer le niveau de démoussage ou traitement nécessaire avant intervention.", features: ["Inspection visuelle haute résolution", "Détection fissures et tuiles déplacées", "Rapport PDF sous 48 à 72h", "Recommandations personnalisées"] },
       ],
       domainesEyebrow: "Domaines d'application",
       domainesTitle: "Adapté à chaque type de toiture.",
@@ -167,7 +167,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       formulas: [
         { category: "Protection", title: "Protection hydrofuge", description: "6 à 8 mois après le nettoyage, nous revenons appliquer un traitement hydrofuge. Ce bouclier invisible repousse l'eau et les salissures pour une protection durable de 5 ans et plus.", features: ["Bouclier invisible hydrofuge", "Repousse l'eau et les salissures", "Protection durable 5+ ans", "Espacement des entretiens ultérieurs"] },
         { badge: "Recommandé", isHighlighted: true, category: "Le plus demandé", title: "Nettoyage professionnel", description: "Intervention complète en 2 phases : pulvérisation d'un traitement anti-biofilm adapté au support, puis rinçage contrôlé. 24h sans pluie nécessaires pour une efficacité optimale.", features: ["Traitement adapté au support", "Basse ou haute pression selon cas", "Préservation de l'intégrité structurelle", "Photos avant/après incluses"] },
-        { category: "Ponctuel", title: "Inspection technique", description: "Avant toute intervention, nous pouvons effectuer une inspection visuelle pour identifier les zones fragilisées, microfissures ou encrassements avancés.", features: ["Inspection visuelle haute résolution", "Cartographie des zones critiques", "Rapport PDF sous 48h", "Recommandations adaptées au support"] },
+        { category: "Ponctuel", title: "Inspection technique", description: "Avant toute intervention, nous pouvons effectuer une inspection visuelle pour identifier les zones fragilisées, microfissures ou encrassements avancés.", features: ["Inspection visuelle haute résolution", "Cartographie des zones critiques", "Rapport PDF sous 48 à 72h", "Recommandations adaptées au support"] },
       ],
       domainesEyebrow: "Domaines d'application",
       domainesTitle: "Adapté à chaque type de façade.",
@@ -213,7 +213,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       formulas: [
         { category: "Récurrent", title: "Contrat d'entretien annuel", description: "Formule sur-mesure avec interventions programmées selon votre exposition géographique et vos contraintes d'exploitation.", features: ["1 à 3 passages par an selon besoin", "Tarif préférentiel vs intervention ponctuelle", "Rapport annuel de performance", "Alertes si anomalie détectée"] },
         { badge: "Recommandé", isHighlighted: true, category: "Le plus demandé", title: "Nettoyage à l'eau osmosée", description: "Intervention complète en deux phases : pré-traitement des dépôts tenaces puis rinçage à l'eau osmosée pure, sans traces ni résidus.", features: ["Eau déminéralisée, sans produit chimique", "Basse pression, préservation des modules", "Intervention en une seule passe", "Photos avant/après incluses"] },
-        { category: "Ponctuel", title: "Inspection technique et thermique", description: "Pour identifier l'état de votre installation et déterminer si un nettoyage ou une intervention plus poussée est nécessaire.", features: ["Inspection visuelle haute résolution", "Option thermographie (hotspots, cellules)", "Rapport PDF sous 48h", "Recommandations personnalisées"] },
+        { category: "Ponctuel", title: "Inspection technique et thermique", description: "Pour identifier l'état de votre installation et déterminer si un nettoyage ou une intervention plus poussée est nécessaire.", features: ["Inspection visuelle haute résolution", "Option thermographie (hotspots, cellules)", "Rapport PDF sous 48 à 72h", "Recommandations personnalisées"] },
       ],
       domainesEyebrow: "Domaines d'application",
       domainesTitle: "Pour toute installation photovoltaïque.",
@@ -271,7 +271,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       ],
       processSteps: [
         { number: "ÉTAPE 01", title: "Vol thermique", description: "Captation par drone DJI Matrice 4T équipé d'une caméra radiométrique haute résolution. Survol complet de la zone avec prises de vues verticales et obliques. 2 à 3 heures sur site." },
-        { number: "ÉTAPE 02", title: "Analyse des anomalies", description: "Traitement des données, identification et localisation précise des défauts. Chaque anomalie est isolée, géoréférencée et annotée avec son interprétation technique. Sous 48 à 72h." },
+        { number: "ÉTAPE 02", title: "Analyse des anomalies", description: "Traitement des données, identification et localisation précise des défauts. Chaque anomalie est isolée, géoréférencée et annotée avec son interprétation technique. Sous 48 à 72h, jusqu'à 7 jours pour un grand site." },
         { number: "ÉTAPE 03", title: "Rapport exploitable", description: "Document PDF complet avec images thermiques annotées, préconisations priorisées et recommandations d'intervention claires. 15 à 40 pages." },
       ],
       techItems: [
@@ -317,19 +317,19 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { question: "Vos certifications STS couvrent-elles ma mission ?", answer: "Corse Drone opère avec STS-01 et STS-02 délivrées par la DGAC, couvrant la quasi-totalité du territoire corse. Drone DJI Matrice 4T classé C2, vol jusqu'à 5m des personnes. Pour zones sensibles, plan de vol spécifique avec préavis 10 jours." },
       ],
       finalCTATitle: "Un audit thermique à programmer ?",
-      finalCTASubtitle: "Préavis légal 10 jours. Rapport sous 72h après intervention.",
+      finalCTASubtitle: "Préavis légal 10 jours. Rapport sous 48 à 72h, 7 jours pour un grand site.",
       finalCTAButtonLabel: "Demander un devis",
     },
     visuel: {
       heroEyebrow: "Diagnostic · visuel",
       heroTitle: "Voir ce que l'œil ne voit pas.",
       heroPitch:
-        "Inspection visuelle par drone haute définition des bâtiments difficiles d'accès. Toitures, façades, infrastructures industrielles et patrimoine : un rapport précis, livré en 48h, sans nacelle ni cordistes.",
+        "Inspection visuelle par drone haute définition des bâtiments difficiles d'accès. Toitures, façades, infrastructures industrielles et patrimoine : un rapport précis, livré en 48 à 72h, sans nacelle ni cordistes.",
       heroImageAlt: "Drone effectuant une inspection visuelle",
       stats: [
         { value: "120+", unit: "m", labelStrong: "hauteur inspectable", labelMuted: "avant demande via dossier" },
         { value: "5 000", unit: "m²/jour", labelStrong: "Surface couverte", labelMuted: "inspection complète en une mission" },
-        { value: "48", unit: "h", labelStrong: "Délai de livraison moyen", labelMuted: "du rapport technique détaillé" },
+        { value: "72", unit: "h", labelStrong: "Délai de rapport maximum", labelMuted: "pour une maison, 7 jours pour un grand site" },
       ],
       whyEyebrow: "Pourquoi le drone",
       whyTitle: "L'œil nu, le drone : un écart considérable.",
@@ -337,8 +337,8 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Inspecter une toiture, une façade ou un ouvrage en hauteur, c'est historiquement mobiliser des moyens lourds : nacelle élévatrice avec opérateur, cordistes certifiés. Coûteux, contraignants, parfois dangereux. Le drone change radicalement la donne : même niveau de détail, en une fraction du temps, sans personnel en hauteur.",
       whyItems: [
         { title: "Sécurité", description: "Zéro personnel en hauteur. Aucun point d'ancrage ni déploiement de matériel lourd. Risque humain éliminé." },
-        { title: "Rapidité", description: "5 à 10 fois plus rapide qu'une inspection par cordiste. Une toiture de villa inspectée en moins d'une heure, rapport livré en 48h." },
-        { title: "Précision", description: "Images 4K avec zoom optique. Microfissures, joints dégradés, corrosion naissante : les défauts millimétriques sont détectés." },
+        { title: "Rapidité", description: "5 à 10 fois plus rapide qu'une inspection par cordiste. Une toiture de villa inspectée en moins d'une heure, rapport livré en 48 à 72h." },
+        { title: "Précision", description: "Images 4K avec zoom jusqu'à 112×. Microfissures, joints dégradés, corrosion naissante : les défauts millimétriques sont détectés." },
         { title: "Traçabilité", description: "Rapport géoréférencé et horodaté. Chaque anomalie cartographiée, documentée, opposable. Réutilisable pour AG, assurance ou travaux." },
       ],
       formulas: [],
@@ -347,14 +347,14 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       domaines: [
         { iconName: "Building2", category: "Copropriétés", title: "Syndics et copropriétés", description: "Constat avant AG, préparation de ravalement décennal, état des lieux des parties communes en toiture, suivi de l'évolution de défauts d'une année sur l'autre.", highlightLabel: "1 journée", highlightDescription: "pour un immeuble complet" },
         { iconName: "Factory", category: "Industrie", title: "Bâtiments industriels et commerciaux", description: "Cheminées, silos, hangars, entrepôts logistiques, structures métalliques. Inspection complète sans interruption de production ni immobilisation de site.", highlightLabel: "Zéro arrêt", highlightDescription: "d'activité ni de production" },
-        { iconName: "Home", category: "Transaction", title: "Particuliers et transaction", description: "Avant acquisition immobilière, avant ravalement ou rénovation. Vérification de l'état réel d'une toiture ou d'une façade pour négocier ou chiffrer en connaissance de cause.", highlightLabel: "Aide décision", highlightDescription: "rapport sous 48h pour négocier" },
+        { iconName: "Home", category: "Transaction", title: "Particuliers et transaction", description: "Avant acquisition immobilière, avant ravalement ou rénovation. Vérification de l'état réel d'une toiture ou d'une façade pour négocier ou chiffrer en connaissance de cause.", highlightLabel: "Aide décision", highlightDescription: "rapport sous 72h pour négocier" },
         { iconName: "Building", category: "Hôtellerie", title: "Hôtellerie et résidences touristiques", description: "Inspection hors-saison des hôtels, résidences de tourisme, villages vacances. Détection préventive des défauts avant l'ouverture estivale. Documentation pour assurance.", highlightLabel: "Oct à Avril", highlightDescription: "fenêtre d'intervention idéale" },
         { iconName: "Landmark", category: "Patrimoine", title: "Patrimoine public et collectivités", description: "Églises, clochers, édifices historiques, bâtiments publics. Inspection respectueuse en zone ABF et secteurs sauvegardés, sans échafaudage ni impact visuel.", highlightLabel: "Zone ABF", highlightDescription: "compatible et sans emprise au sol" },
         { iconName: "FileText", category: "Expertise", title: "Expertise et dossiers d'assurance", description: "Documentation de sinistres post-tempête, constat d'infiltrations, expertise contradictoire. Rapport opposable géoréférencé et horodaté pour dossiers d'indemnisation.", highlightLabel: "Opposable", highlightDescription: "preuves géoréférencées et horodatées" },
       ],
       processSteps: [
         { number: "ÉTAPE 01", title: "Vol d'inspection", description: "Couverture complète 4K par drone DJI. Captation verticale et oblique de toutes les façades et de la toiture selon un plan de vol optimisé. 2 à 3 heures sur site." },
-        { number: "ÉTAPE 02", title: "Analyse des anomalies", description: "Traitement des données, identification et géolocalisation précise des défauts. Chaque anomalie est isolée, catégorisée et annotée. Sous 48 à 72h." },
+        { number: "ÉTAPE 02", title: "Analyse des anomalies", description: "Traitement des données, identification et géolocalisation précise des défauts. Chaque anomalie est isolée, catégorisée et annotée. Sous 48 à 72h, jusqu'à 7 jours pour un grand site." },
         { number: "ÉTAPE 03", title: "Rapport exploitable", description: "Document PDF complet avec images annotées, cartographie des anomalies, préconisations de travaux priorisées. 15 à 40 pages." },
       ],
       compareTitle: "De 1 semaine à 1 journée",
@@ -381,7 +381,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       ],
       compareDisclaimer: "Comparatif indicatif, basé sur les pratiques constatées en France. Devis personnalisé sur demande.",
       techItems: [
-        { title: "Catalogue d'inspection", description: "Fissures structurelles, étanchéité défaillante, éléments déplacés, corrosion, décollements, dégâts climatiques : tous les défauts visibles sont détectés et documentés.", spec: "Résolution 4K + zoom optique 10×" },
+        { title: "Catalogue d'inspection", description: "Fissures structurelles, étanchéité défaillante, éléments déplacés, corrosion, décollements, dégâts climatiques : tous les défauts visibles sont détectés et documentés.", spec: "Résolution 4K + zoom jusqu'à 112×" },
         { title: "Précision GPS", description: "Chaque anomalie est géoréférencée avec une précision centimétrique pour faciliter la localisation des travaux ultérieurs.", spec: "≤ 5 cm de géoréférencement" },
         { title: "Rapport complet", description: "Document PDF détaillé avec cartographie des anomalies, images annotées, interprétations techniques et préconisations de travaux priorisées.", spec: "15 à 40 pages détaillées" },
       ],
@@ -395,7 +395,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       toolImageHeight: 873,
       faq: [
         { question: "Quels types d'anomalies détectez-vous ?", answer: "Microfissures et fissures traversantes, joints dégradés, étanchéité défaillante, tuiles cassées ou glissées, ardoises manquantes, ferrailles apparentes, corrosion, décollements d'enduits, peintures cloquées, dégâts climatiques, et plus encore." },
-        { question: "Quelle est la précision des images ?", answer: "Résolution 4K avec zoom optique 10× et précision GPS de l'ordre du centimètre. Les microfissures, joints dégradés et corrosion naissante sont détectables." },
+        { question: "Quelle est la précision des images ?", answer: "Résolution 4K avec zoom jusqu'à 112× et précision GPS de l'ordre du centimètre. Les microfissures, joints dégradés et corrosion naissante sont détectables." },
         { question: "Le rapport est-il opposable juridiquement ?", answer: "Oui. Chaque anomalie est géoréférencée et horodatée, ce qui rend le rapport opposable et utilisable pour des dossiers d'assurance, expertises contradictoires ou justifications de subventions." },
         { question: "Sur quelle hauteur pouvez-vous intervenir ?", answer: "Jusqu'à 120 mètres en vol standard. Au-delà, un dépôt de plan de vol spécifique est nécessaire avec un préavis de 10 jours." },
       ],
