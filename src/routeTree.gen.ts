@@ -19,6 +19,7 @@ import { Route as PublicDroneAjaccioCorseDuSudRouteImport } from './routes/_publ
 import { Route as PublicDroneBastiaHauteCorseRouteImport } from './routes/_public/drone-bastia-haute-corse'
 import { Route as PublicExpertisesRouteImport } from './routes/_public/expertises'
 import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
+import { Route as PublicOutilsRouteImport } from './routes/_public/outils'
 import { Route as PublicPartenairesRouteImport } from './routes/_public/partenaires'
 import { Route as PublicPolitiqueConfidentialiteRouteImport } from './routes/_public/politique-confidentialite'
 import { Route as PublicRealisationsRouteImport } from './routes/_public/realisations'
@@ -82,6 +83,11 @@ const PublicExpertisesRoute = PublicExpertisesRouteImport.update({
 const PublicMentionsLegalesRoute = PublicMentionsLegalesRouteImport.update({
   id: '/mentions-legales',
   path: '/mentions-legales',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicOutilsRoute = PublicOutilsRouteImport.update({
+  id: '/outils',
+  path: '/outils',
   getParentRoute: () => PublicRoute,
 } as any)
 const PublicPartenairesRoute = PublicPartenairesRouteImport.update({
@@ -161,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/expertises': typeof PublicExpertisesRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/outils': typeof PublicOutilsRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
   '/realisations': typeof PublicRealisationsRoute
@@ -183,6 +190,7 @@ export interface FileRoutesByTo {
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/expertises': typeof PublicExpertisesRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/outils': typeof PublicOutilsRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
   '/realisations': typeof PublicRealisationsRoute
@@ -209,6 +217,7 @@ export interface FileRoutesById {
   '/_public/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/_public/expertises': typeof PublicExpertisesRoute
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/_public/outils': typeof PublicOutilsRoute
   '/_public/partenaires': typeof PublicPartenairesRoute
   '/_public/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
   '/_public/realisations': typeof PublicRealisationsRoute
@@ -236,6 +245,7 @@ export interface FileRouteTypes {
     | '/drone-bastia-haute-corse'
     | '/expertises'
     | '/mentions-legales'
+    | '/outils'
     | '/partenaires'
     | '/politique-confidentialite'
     | '/realisations'
@@ -258,6 +268,7 @@ export interface FileRouteTypes {
     | '/drone-bastia-haute-corse'
     | '/expertises'
     | '/mentions-legales'
+    | '/outils'
     | '/partenaires'
     | '/politique-confidentialite'
     | '/realisations'
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/_public/drone-bastia-haute-corse'
     | '/_public/expertises'
     | '/_public/mentions-legales'
+    | '/_public/outils'
     | '/_public/partenaires'
     | '/_public/politique-confidentialite'
     | '/_public/realisations'
@@ -376,6 +388,13 @@ declare module '@tanstack/react-router' {
       path: '/mentions-legales'
       fullPath: '/mentions-legales'
       preLoaderRoute: typeof PublicMentionsLegalesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/outils': {
+      id: '/_public/outils'
+      path: '/outils'
+      fullPath: '/outils'
+      preLoaderRoute: typeof PublicOutilsRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/partenaires': {
@@ -478,6 +497,7 @@ interface PublicRouteChildren {
   PublicDroneBastiaHauteCorseRoute: typeof PublicDroneBastiaHauteCorseRoute
   PublicExpertisesRoute: typeof PublicExpertisesRoute
   PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
+  PublicOutilsRoute: typeof PublicOutilsRoute
   PublicPartenairesRoute: typeof PublicPartenairesRoute
   PublicPolitiqueConfidentialiteRoute: typeof PublicPolitiqueConfidentialiteRoute
   PublicRealisationsRoute: typeof PublicRealisationsRoute
@@ -494,6 +514,7 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicDroneBastiaHauteCorseRoute: PublicDroneBastiaHauteCorseRoute,
   PublicExpertisesRoute: PublicExpertisesRoute,
   PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
+  PublicOutilsRoute: PublicOutilsRoute,
   PublicPartenairesRoute: PublicPartenairesRoute,
   PublicPolitiqueConfidentialiteRoute: PublicPolitiqueConfidentialiteRoute,
   PublicRealisationsRoute: PublicRealisationsRoute,
