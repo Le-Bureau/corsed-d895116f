@@ -3,10 +3,10 @@ import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 // Manufacturer figures, from dji.com/flycart-100/specs (Universal Edition).
 const SPECS = [
   {
-    value: "85",
+    value: "100",
     unit: "kg",
-    label: "de charge utile",
-    detail: "en exploitation normale (bi-batterie)",
+    label: "de charge utile max",
+    detail: "85 kg en exploitation courante",
   },
   {
     value: "12",
@@ -43,7 +43,7 @@ const SPECS = [
 const COMPARISON: Array<{ criterion: string; drone: string; heli: string }> = [
   {
     criterion: "Charge par rotation",
-    drone: "Jusqu'à 85 kg",
+    drone: "Jusqu'à 100 kg (85 kg en courant)",
     heli: "Plusieurs centaines de kilos",
   },
   {
@@ -97,6 +97,14 @@ const TransportFlyCart = () => {
               isolés, sites côtiers escarpés. Chiffres constructeur, la charge
               réelle de chaque mission est calculée selon le dénivelé et la
               météo.
+            </p>
+            <p className="mt-6 inline-flex items-center gap-3 rounded-full border border-border-subtle bg-white px-4 py-2 shadow-soft-sm font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-text-primary">
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--pole-color)" }}
+                aria-hidden="true"
+              />
+              Autorisation DGAC (SORA) en cours d'instruction
             </p>
           </div>
         </FadeInWhenVisible>
