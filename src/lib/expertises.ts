@@ -19,14 +19,6 @@ export const EXPERTISES: Expertise[] = [
       "Cartographie aérienne haute précision et orthophotos géoréférencées.",
   },
   {
-    key: "prises-de-vue",
-    label: "Prises de vue aériennes",
-    slug: "prises-de-vue",
-    tagline: "Photo & vidéo",
-    description:
-      "Photos et vidéos haute qualité pour immobilier, tourisme, événementiel.",
-  },
-  {
     key: "suivi-chantier",
     label: "Suivi de chantier",
     slug: "suivi-chantier",
