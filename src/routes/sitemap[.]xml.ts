@@ -10,6 +10,7 @@ const STATIC_PATHS = [
   "/blog",
   "/realisations",
   "/drone-bastia-haute-corse",
+  "/drone-ajaccio-corse-du-sud",
   "/partenaires",
   "/contact",
   "/mentions-legales",

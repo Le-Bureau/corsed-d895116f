@@ -122,6 +122,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/drone-ajaccio-corse-du-sud" className={`block ${linkBase}`}>
+                    Ajaccio et Corse-du-Sud
+                  </Link>
+                </li>
+                <li>
                   <Link to="/partenaires" className={`block ${linkBase}`}>
                     Programme partenaires
                   </Link>
