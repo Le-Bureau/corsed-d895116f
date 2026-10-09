@@ -184,9 +184,9 @@ const TRANSPORT_WHY: WhyDroneItem[] = [
   },
   {
     iconName: "Weight",
-    title: "Jusqu'à 100 kg par rotation",
+    title: "85 kg par rotation, pour de vrai",
     description:
-      "100 kg sur les trajets courts, 85 kg sur les trajets jusqu'à 12 km. Matériaux, outillage, vivres ou matériel technique, en rotations répétées.",
+      "On annonce la charge emportée en exploitation normale, sur des trajets jusqu'à 12 km, pas un maximum théorique. Matériaux, outillage, vivres ou matériel technique, en rotations répétées.",
   },
   {
     iconName: "BatteryCharging",
@@ -211,8 +211,10 @@ const TRANSPORT_PROCESS: ProcessStep[] = [
 ];
 
 const TRANSPORT_FAQ: PoleFAQItem[] = [
-  { question: "Quelle charge un drone peut-il transporter ?", answer: "Notre DJI FlyCart 100 emporte jusqu'à 100 kg par rotation sur les trajets courts, et 85 kg en configuration longue distance (jusqu'à 12 km). La charge réelle dépend du dénivelé, de l'altitude et de la météo du jour : on la calcule pour chaque mission." },
-  { question: "Le drone remplace-t-il l'hélicoptère ?", answer: "Pas toujours. L'hélicoptère reste imbattable pour les charges de plusieurs centaines de kilos d'un seul tenant. Le drone est pertinent pour des volumes répartis en charges de moins de 100 kg, des rotations répétées, ou quand mobiliser un hélicoptère est disproportionné." },
+  { question: "Quelle charge un drone peut-il transporter ?", answer: "Notre DJI FlyCart 100 emporte jusqu'à 85 kg par rotation en exploitation normale (deux batteries, jusqu'à 12 km). Le constructeur annonce 100 kg en mono-batterie, mais réserve ce mode aux situations d'urgence : on ne le vend donc pas. La charge réelle dépend du dénivelé, de l'altitude et de la météo du jour, et on la calcule pour chaque mission." },
+  { question: "Un drone cargo peut-il voler avec une simple certification STS ?", answer: "Non. Les scénarios standard européens STS-01 et STS-02 sont réservés aux drones de classe C5 ou C6 de moins de 25 kg. Un drone cargo lourd comme le FlyCart 100 (170 kg au décollage) relève obligatoirement d'une autorisation spécifique délivrée par la DGAC après une analyse de risque SORA. Quel que soit l'opérateur, demandez-lui l'autorisation qui couvre votre mission." },
+  { question: "Pourquoi un treuil plutôt qu'un crochet ?", answer: "Avec un treuil de 30 mètres, le drone reste en vol stationnaire au-dessus du point de dépose et descend la charge jusqu'au sol. Pas besoin d'aire d'atterrissage, de terrain plat ni de dégagement : on livre sur une pente, une crête, une terrasse de refuge ou au pied d'un pylône. La pesée intégrée vérifie la masse avant chaque vol." },
+  { question: "Le drone remplace-t-il l'hélicoptère ?", answer: "Pas toujours. L'hélicoptère reste imbattable pour les charges de plusieurs centaines de kilos d'un seul tenant. Le drone est pertinent pour des volumes répartis en charges de moins de 85 kg, des rotations répétées, ou quand mobiliser un hélicoptère est disproportionné." },
   { question: "Quelles autorisations faut-il ?", answer: "Un drone de cette taille vole obligatoirement en catégorie spécifique, avec une analyse de risque SORA et une autorisation délivrée par la DGAC. C'est à notre charge. De votre côté, l'opération est intégrée à vos documents de prévention (PPSPS, plan de prévention) et la zone de dépose est sécurisée." },
   { question: "Et si la météo se dégrade ?", answer: "Le FlyCart 100 décolle et atterrit avec un vent jusqu'à 12 m/s, de -20 à 40 °C, et résiste à la pluie (IP55). Au-delà, on reporte : la décision se prend le jour même, sur place, et la sécurité passe avant le planning." },
   { question: "Quels types de charges ?", answer: "Matériaux et outillage de chantier, sacs de mortier, pièces techniques, vivres et matériel de refuge, approvisionnement de bergeries ou d'exploitations isolées. Les matières dangereuses font l'objet d'une étude spécifique." },
@@ -314,16 +316,16 @@ export const POLES: Pole[] = [
     tintColor: "#FEF5E1",
     title: "La logistique aérienne nouvelle génération",
     subtitle:
-      "Acheminement de matériel vers les zones difficiles d'accès. Une alternative à l'hélicoptère, plus rapide, plus précise, moins coûteuse pour vos chantiers isolés.",
+      "Acheminement de matériel vers les zones difficiles d'accès. Dépose au treuil, sans atterrir, pour vos chantiers isolés, refuges et sites sans piste.",
     statLabel: "Charge utile",
-    statValue: "100kg",
+    statValue: "85kg",
     statDetail: "par rotation de drone cargo",
     comingSoon: true,
     pitch: "Une nouvelle approche de la logistique aérienne. Nos drones assurent le transport de matériel vers les zones difficiles d'accès, en complément ou alternative à l'hélicoptère.",
     description:
       "Acheminement de matériel vers les zones difficiles d'accès. Une alternative à l'hélicoptère, plus rapide, plus précise, moins coûteuse pour vos chantiers isolés en moyenne montagne ou sur sites côtiers escarpés.",
     highlights: [
-      "Jusqu'à 100 kg par rotation",
+      "85 kg par rotation",
       "Treuil 30 m, dépose sans se poser",
       "Complément à l'hélicoptère",
     ],
@@ -333,7 +335,7 @@ export const POLES: Pole[] = [
         slug: "livraison-btp",
         category: "Logistique chantier",
         description:
-          "Acheminement de matériaux, outillage et pièces vers les chantiers en zones difficiles d'accès. Dépose au treuil jusqu'à 100 kg par rotation, sans attendre un créneau d'hélicoptère.",
+          "Acheminement de matériaux, outillage et pièces vers les chantiers en zones difficiles d'accès. Dépose au treuil jusqu'à 85 kg par rotation, sans attendre un créneau d'hélicoptère.",
         iconName: "HardHat",
       },
       {
@@ -393,7 +395,7 @@ export const POLES: Pole[] = [
     isInDevelopment: true,
     heroPoleNumber: "PÔLE 03",
     heroPitch:
-      "Une nouvelle approche de la logistique aérienne. Notre DJI FlyCart 100 achemine jusqu'à 100 kg de matériel par rotation vers les zones difficiles d'accès, en complément de l'hélicoptère.",
+      "Une nouvelle approche de la logistique aérienne. Notre DJI FlyCart 100 achemine jusqu'à 85 kg de matériel par rotation vers les zones difficiles d'accès, en complément de l'hélicoptère.",
     whyDroneItems: TRANSPORT_WHY,
     processSteps: TRANSPORT_PROCESS,
     useCases: undefined,
@@ -401,7 +403,7 @@ export const POLES: Pole[] = [
     finalCTATitle: "Service en préparation.",
     finalCTASubtitle: "Inscrivez-vous pour être informé du lancement et obtenir des conditions privilégiées.",
     finalCTAButtonLabel: "Être prévenu du lancement",
-    stat: { value: "100", unit: "kg", labelStrong: "de charge utile par rotation", labelMuted: "avec le DJI FlyCart 100" },
+    stat: { value: "85", unit: "kg", labelStrong: "de charge utile par rotation", labelMuted: "avec le DJI FlyCart 100" },
   },
   {
     key: "agriculture",
@@ -464,7 +466,7 @@ export const POLES: Pole[] = [
         slug: "transport-levage-agricole",
         category: "Logistique zones isolées",
         description:
-          "Acheminement de matériel jusqu'à 100 kg vers exploitations isolées, parcelles en montagne, refuges et bergeries. Treuil jusqu'à 30 m, dépose précise sans atterrissage.",
+          "Acheminement de matériel jusqu'à 85 kg vers exploitations isolées, parcelles en montagne, refuges et bergeries. Treuil jusqu'à 30 m, dépose précise sans atterrissage.",
         iconName: "Package",
       },
     ],

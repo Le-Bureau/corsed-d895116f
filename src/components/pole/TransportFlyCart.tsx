@@ -3,10 +3,10 @@ import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 // Manufacturer figures, from dji.com/flycart-100/specs (Universal Edition).
 const SPECS = [
   {
-    value: "100",
+    value: "85",
     unit: "kg",
-    label: "charge utile max",
-    detail: "85 kg en bi-batterie",
+    label: "de charge utile",
+    detail: "en exploitation normale (bi-batterie)",
   },
   {
     value: "12",
@@ -43,7 +43,7 @@ const SPECS = [
 const COMPARISON: Array<{ criterion: string; drone: string; heli: string }> = [
   {
     criterion: "Charge par rotation",
-    drone: "Jusqu'à 100 kg",
+    drone: "Jusqu'à 85 kg",
     heli: "Plusieurs centaines de kilos",
   },
   {
