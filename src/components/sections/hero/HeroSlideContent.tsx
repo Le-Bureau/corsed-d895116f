@@ -77,7 +77,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
       animate="center"
       exit="exit"
       aria-live="polite"
-      className="absolute inset-0 z-10 flex items-center max-md:items-end max-md:pb-[18vh]"
+      className="absolute inset-0 z-10 flex items-center max-md:items-end max-md:pb-[18vh] md:max-xl:items-end md:max-xl:pb-[clamp(104px,13vh,150px)]"
     >
       <div className="w-full px-5 md:pl-[clamp(120px,11vw,180px)] md:pr-[clamp(120px,11vw,180px)] lg:pl-[clamp(170px,11vw,180px)] lg:pr-[clamp(170px,11vw,180px)]">
         <div className="w-full max-w-[780px]">
@@ -100,7 +100,7 @@ const HeroSlideContent = ({ pole, index, direction }: HeroSlideContentProps) => 
           {/* Subtitle */}
           <motion.p
             variants={childVariants}
-            className="text-lg leading-relaxed text-text-on-dark-muted max-w-[580px] mt-4 md:mt-0 mb-12 hidden md:block [@media(max-height:760px)]:md:hidden"
+            className="text-lg leading-relaxed text-text-on-dark-muted max-w-[580px] mt-4 md:mt-0 mb-12 hidden md:block md:max-xl:text-base md:max-xl:leading-[1.5rem] md:max-xl:mb-8 md:max-xl:max-w-[520px] [@media(max-height:760px)]:md:hidden"
           >
             {pole.subtitle}
           </motion.p>
