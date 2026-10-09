@@ -229,6 +229,14 @@ export const subServiceHref = (pole: Pole, sub: PoleSubService) =>
     ? `/pole/${pole.slug}#sous-services`
     : `/pole/${pole.slug}/${sub.slug}`;
 
+// Sub-services listed in menus: when a pole has dedicated pages, only those
+// are shown (the rest stay on the pole page); otherwise every linked one.
+export const menuSubServices = (pole: Pole) => {
+  const linked = pole.subServices.filter((s) => s.slug);
+  const withPage = linked.filter((s) => s.hasPage);
+  return withPage.length > 0 ? withPage : linked;
+};
+
 export const POLES: Pole[] = [
   {
     key: "nettoyage",
