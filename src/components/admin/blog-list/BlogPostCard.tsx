@@ -26,6 +26,9 @@ const BlogPostCard = ({ post, onDelete }: Props) => {
           <img
             src={post.coverImageUrl}
             alt=""
+            width={64}
+            height={48}
+            decoding="async"
             className="h-14 w-20 rounded object-cover bg-muted shrink-0"
             loading="lazy"
           />
@@ -51,7 +54,7 @@ const BlogPostCard = ({ post, onDelete }: Props) => {
           </div>
           <p className="text-xs text-muted-foreground font-mono truncate mt-0.5">/{post.slug}</p>
         </div>
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger
             className="h-8 w-8 inline-flex items-center justify-center rounded text-muted-foreground hover:text-foreground hover:bg-foreground/5 shrink-0"
             aria-label="Actions"

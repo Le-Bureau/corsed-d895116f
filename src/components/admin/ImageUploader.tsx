@@ -113,7 +113,7 @@ const ImageUploader = ({ value, onChange, folder, postId, helperText }: Props) =
               <span className="text-sm text-foreground">Cliquer ou déposer une image</span>
               <span className="text-xs text-muted-foreground inline-flex items-center gap-1">
                 <ImageIcon className="h-3 w-3" />
-                JPG, PNG, WEBP — 5 Mo max
+                JPG, PNG, WEBP — compressée automatiquement
               </span>
             </>
           )}

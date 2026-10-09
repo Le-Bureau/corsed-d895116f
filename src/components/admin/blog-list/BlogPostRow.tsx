@@ -27,6 +27,9 @@ const BlogPostRow = ({ post, onDelete }: Props) => {
             <img
               src={post.coverImageUrl}
               alt=""
+              width={64}
+              height={48}
+              decoding="async"
               className="h-12 w-16 rounded object-cover bg-muted shrink-0"
               loading="lazy"
             />
@@ -88,7 +91,7 @@ const BlogPostRow = ({ post, onDelete }: Props) => {
         {dateStr ? formatBlogDate(dateStr) : "—"}
       </td>
       <td className="py-3 pl-3 pr-4 w-10">
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger
             className="h-8 w-8 inline-flex items-center justify-center rounded text-muted-foreground hover:text-foreground hover:bg-foreground/5"
             aria-label="Actions"

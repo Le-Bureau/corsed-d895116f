@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import Lenis from "lenis";
+import { useRouterState } from "@tanstack/react-router";
 
 const LenisContext = createContext<Lenis | null>(null);
 
@@ -10,8 +11,14 @@ export function useLenis() {
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  // The admin is a work tool: native scrolling, and no permanent rAF loop
+  // competing with menus, dialogs and the editor.
+  const isAdmin = useRouterState({
+    select: (st) => st.location.pathname.startsWith("/admin"),
+  });
 
   useEffect(() => {
+    if (isAdmin) return;
     // Reduced motion: no Lenis — native scrolling (useLenis() returns null,
     // callers fall back to native scrollIntoView / scrollTo).
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
@@ -41,7 +48,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       lenisRef.current = null;
       setLenis(null);
     };
-  }, []);
+  }, [isAdmin]);
 
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

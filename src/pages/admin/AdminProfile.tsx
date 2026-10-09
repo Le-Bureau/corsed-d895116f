@@ -248,7 +248,7 @@ const AdminProfile = () => {
                     onChange={field.onChange}
                     folder="avatars"
                     postId={author.id}
-                    helperText="Carrée recommandée, JPG/PNG/WEBP, max 5 Mo."
+                    helperText="Carrée recommandée, JPG/PNG/WEBP, compressée automatiquement."
                   />
                 </div>
               )}
