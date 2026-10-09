@@ -19,6 +19,7 @@ import { Route as PublicExpertisesRouteImport } from './routes/_public/expertise
 import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
 import { Route as PublicPartenairesRouteImport } from './routes/_public/partenaires'
 import { Route as PublicPolitiqueConfidentialiteRouteImport } from './routes/_public/politique-confidentialite'
+import { Route as PublicRealisationsRouteImport } from './routes/_public/realisations'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminProfilRouteImport } from './routes/admin/profil'
@@ -80,6 +81,11 @@ const PublicPolitiqueConfidentialiteRoute =
     path: '/politique-confidentialite',
     getParentRoute: () => PublicRoute,
   } as any)
+const PublicRealisationsRoute = PublicRealisationsRouteImport.update({
+  id: '/realisations',
+  path: '/realisations',
+  getParentRoute: () => PublicRoute,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
+  '/realisations': typeof PublicRealisationsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/profil': typeof AdminProfilRoute
   '/admin/': typeof AdminIndexRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
+  '/realisations': typeof PublicRealisationsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/profil': typeof AdminProfilRoute
   '/': typeof PublicIndexRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
   '/_public/partenaires': typeof PublicPartenairesRoute
   '/_public/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
+  '/_public/realisations': typeof PublicRealisationsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/profil': typeof AdminProfilRoute
   '/_public/': typeof PublicIndexRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/partenaires'
     | '/politique-confidentialite'
+    | '/realisations'
     | '/admin/login'
     | '/admin/profil'
     | '/admin/'
@@ -226,6 +236,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/partenaires'
     | '/politique-confidentialite'
+    | '/realisations'
     | '/admin/login'
     | '/admin/profil'
     | '/'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/_public/mentions-legales'
     | '/_public/partenaires'
     | '/_public/politique-confidentialite'
+    | '/_public/realisations'
     | '/admin/login'
     | '/admin/profil'
     | '/_public/'
@@ -340,6 +352,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicPolitiqueConfidentialiteRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/realisations': {
+      id: '/_public/realisations'
+      path: '/realisations'
+      fullPath: '/realisations'
+      preLoaderRoute: typeof PublicRealisationsRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -419,6 +438,7 @@ interface PublicRouteChildren {
   PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
   PublicPartenairesRoute: typeof PublicPartenairesRoute
   PublicPolitiqueConfidentialiteRoute: typeof PublicPolitiqueConfidentialiteRoute
+  PublicRealisationsRoute: typeof PublicRealisationsRoute
   PublicIndexRoute: typeof PublicIndexRoute
   PublicBlogSlugRoute: typeof PublicBlogSlugRoute
   PublicBlogIndexRoute: typeof PublicBlogIndexRoute
@@ -432,6 +452,7 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
   PublicPartenairesRoute: PublicPartenairesRoute,
   PublicPolitiqueConfidentialiteRoute: PublicPolitiqueConfidentialiteRoute,
+  PublicRealisationsRoute: PublicRealisationsRoute,
   PublicIndexRoute: PublicIndexRoute,
   PublicBlogSlugRoute: PublicBlogSlugRoute,
   PublicBlogIndexRoute: PublicBlogIndexRoute,
