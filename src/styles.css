@@ -1611,3 +1611,20 @@ html.lenis body {
     margin-top: 4px; width: 100%; justify-content: center;
   }
 }
+
+/* Staggered entrance for static page heroes (eyebrow, title, text, CTAs).
+   Plain CSS so it runs from the server-rendered HTML, before hydration. */
+@keyframes heroEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-enter > * {
+  animation: heroEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-enter > *:nth-child(2) { animation-delay: 0.08s; }
+.hero-enter > *:nth-child(3) { animation-delay: 0.16s; }
+.hero-enter > *:nth-child(4) { animation-delay: 0.24s; }
+.hero-enter > *:nth-child(5) { animation-delay: 0.32s; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter > * { animation: none; }
+}

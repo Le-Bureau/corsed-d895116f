@@ -47,7 +47,7 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
               "radial-gradient(ellipse at 80% 70%, rgba(80,130,172,0.12) 0%, transparent 55%)",
           }}
         />
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
+        <div className="hero-enter max-w-[1280px] mx-auto px-5 sm:px-10">
           <Eyebrow>{area.eyebrow}</Eyebrow>
           <h1
             id="local-title"
