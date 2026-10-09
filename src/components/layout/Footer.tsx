@@ -117,6 +117,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/drone-bastia-haute-corse" className={`block ${linkBase}`}>
+                    Bastia et Haute-Corse
+                  </Link>
+                </li>
+                <li>
                   <Link to="/partenaires" className={`block ${linkBase}`}>
                     Programme partenaires
                   </Link>

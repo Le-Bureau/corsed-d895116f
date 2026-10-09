@@ -9,6 +9,7 @@ const STATIC_PATHS = [
   "/",
   "/blog",
   "/realisations",
+  "/drone-bastia-haute-corse",
   "/partenaires",
   "/contact",
   "/mentions-legales",
