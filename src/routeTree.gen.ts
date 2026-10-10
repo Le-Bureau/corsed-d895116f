@@ -17,6 +17,9 @@ import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicContactRouteImport } from './routes/_public/contact'
 import { Route as PublicDroneAjaccioCorseDuSudRouteImport } from './routes/_public/drone-ajaccio-corse-du-sud'
 import { Route as PublicDroneBastiaHauteCorseRouteImport } from './routes/_public/drone-bastia-haute-corse'
+import { Route as PublicDroneCalviBalagneRouteImport } from './routes/_public/drone-calvi-balagne'
+import { Route as PublicDroneCorteCentreCorseRouteImport } from './routes/_public/drone-corte-centre-corse'
+import { Route as PublicDronePortoVecchioExtremeSudRouteImport } from './routes/_public/drone-porto-vecchio-extreme-sud'
 import { Route as PublicExpertisesRouteImport } from './routes/_public/expertises'
 import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
 import { Route as PublicOutilsRouteImport } from './routes/_public/outils'
@@ -73,6 +76,23 @@ const PublicDroneBastiaHauteCorseRoute =
   PublicDroneBastiaHauteCorseRouteImport.update({
     id: '/drone-bastia-haute-corse',
     path: '/drone-bastia-haute-corse',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const PublicDroneCalviBalagneRoute = PublicDroneCalviBalagneRouteImport.update({
+  id: '/drone-calvi-balagne',
+  path: '/drone-calvi-balagne',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicDroneCorteCentreCorseRoute =
+  PublicDroneCorteCentreCorseRouteImport.update({
+    id: '/drone-corte-centre-corse',
+    path: '/drone-corte-centre-corse',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const PublicDronePortoVecchioExtremeSudRoute =
+  PublicDronePortoVecchioExtremeSudRouteImport.update({
+    id: '/drone-porto-vecchio-extreme-sud',
+    path: '/drone-porto-vecchio-extreme-sud',
     getParentRoute: () => PublicRoute,
   } as any)
 const PublicExpertisesRoute = PublicExpertisesRouteImport.update({
@@ -165,6 +185,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof PublicContactRoute
   '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
+  '/drone-calvi-balagne': typeof PublicDroneCalviBalagneRoute
+  '/drone-corte-centre-corse': typeof PublicDroneCorteCentreCorseRoute
+  '/drone-porto-vecchio-extreme-sud': typeof PublicDronePortoVecchioExtremeSudRoute
   '/expertises': typeof PublicExpertisesRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/outils': typeof PublicOutilsRoute
@@ -188,6 +211,9 @@ export interface FileRoutesByTo {
   '/contact': typeof PublicContactRoute
   '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
+  '/drone-calvi-balagne': typeof PublicDroneCalviBalagneRoute
+  '/drone-corte-centre-corse': typeof PublicDroneCorteCentreCorseRoute
+  '/drone-porto-vecchio-extreme-sud': typeof PublicDronePortoVecchioExtremeSudRoute
   '/expertises': typeof PublicExpertisesRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/outils': typeof PublicOutilsRoute
@@ -215,6 +241,9 @@ export interface FileRoutesById {
   '/_public/contact': typeof PublicContactRoute
   '/_public/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/_public/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
+  '/_public/drone-calvi-balagne': typeof PublicDroneCalviBalagneRoute
+  '/_public/drone-corte-centre-corse': typeof PublicDroneCorteCentreCorseRoute
+  '/_public/drone-porto-vecchio-extreme-sud': typeof PublicDronePortoVecchioExtremeSudRoute
   '/_public/expertises': typeof PublicExpertisesRoute
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
   '/_public/outils': typeof PublicOutilsRoute
@@ -243,6 +272,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/drone-ajaccio-corse-du-sud'
     | '/drone-bastia-haute-corse'
+    | '/drone-calvi-balagne'
+    | '/drone-corte-centre-corse'
+    | '/drone-porto-vecchio-extreme-sud'
     | '/expertises'
     | '/mentions-legales'
     | '/outils'
@@ -266,6 +298,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/drone-ajaccio-corse-du-sud'
     | '/drone-bastia-haute-corse'
+    | '/drone-calvi-balagne'
+    | '/drone-corte-centre-corse'
+    | '/drone-porto-vecchio-extreme-sud'
     | '/expertises'
     | '/mentions-legales'
     | '/outils'
@@ -292,6 +327,9 @@ export interface FileRouteTypes {
     | '/_public/contact'
     | '/_public/drone-ajaccio-corse-du-sud'
     | '/_public/drone-bastia-haute-corse'
+    | '/_public/drone-calvi-balagne'
+    | '/_public/drone-corte-centre-corse'
+    | '/_public/drone-porto-vecchio-extreme-sud'
     | '/_public/expertises'
     | '/_public/mentions-legales'
     | '/_public/outils'
@@ -374,6 +412,27 @@ declare module '@tanstack/react-router' {
       path: '/drone-bastia-haute-corse'
       fullPath: '/drone-bastia-haute-corse'
       preLoaderRoute: typeof PublicDroneBastiaHauteCorseRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/drone-calvi-balagne': {
+      id: '/_public/drone-calvi-balagne'
+      path: '/drone-calvi-balagne'
+      fullPath: '/drone-calvi-balagne'
+      preLoaderRoute: typeof PublicDroneCalviBalagneRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/drone-corte-centre-corse': {
+      id: '/_public/drone-corte-centre-corse'
+      path: '/drone-corte-centre-corse'
+      fullPath: '/drone-corte-centre-corse'
+      preLoaderRoute: typeof PublicDroneCorteCentreCorseRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/drone-porto-vecchio-extreme-sud': {
+      id: '/_public/drone-porto-vecchio-extreme-sud'
+      path: '/drone-porto-vecchio-extreme-sud'
+      fullPath: '/drone-porto-vecchio-extreme-sud'
+      preLoaderRoute: typeof PublicDronePortoVecchioExtremeSudRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/expertises': {
@@ -495,6 +554,9 @@ interface PublicRouteChildren {
   PublicContactRoute: typeof PublicContactRoute
   PublicDroneAjaccioCorseDuSudRoute: typeof PublicDroneAjaccioCorseDuSudRoute
   PublicDroneBastiaHauteCorseRoute: typeof PublicDroneBastiaHauteCorseRoute
+  PublicDroneCalviBalagneRoute: typeof PublicDroneCalviBalagneRoute
+  PublicDroneCorteCentreCorseRoute: typeof PublicDroneCorteCentreCorseRoute
+  PublicDronePortoVecchioExtremeSudRoute: typeof PublicDronePortoVecchioExtremeSudRoute
   PublicExpertisesRoute: typeof PublicExpertisesRoute
   PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
   PublicOutilsRoute: typeof PublicOutilsRoute
@@ -512,6 +574,10 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicContactRoute: PublicContactRoute,
   PublicDroneAjaccioCorseDuSudRoute: PublicDroneAjaccioCorseDuSudRoute,
   PublicDroneBastiaHauteCorseRoute: PublicDroneBastiaHauteCorseRoute,
+  PublicDroneCalviBalagneRoute: PublicDroneCalviBalagneRoute,
+  PublicDroneCorteCentreCorseRoute: PublicDroneCorteCentreCorseRoute,
+  PublicDronePortoVecchioExtremeSudRoute:
+    PublicDronePortoVecchioExtremeSudRoute,
   PublicExpertisesRoute: PublicExpertisesRoute,
   PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
   PublicOutilsRoute: PublicOutilsRoute,

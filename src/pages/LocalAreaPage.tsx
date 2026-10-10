@@ -108,28 +108,30 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
         </div>
       </section>
 
-      {/* Climate */}
-      <section aria-labelledby="local-climate" className="py-20 lg:py-28">
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
-          <FadeInWhenVisible>
-            <div className="max-w-[760px] mb-12">
-              <Eyebrow>Le terrain</Eyebrow>
-              <H2 id="local-climate">{area.climateTitle}</H2>
-              <p className="text-[17px] leading-[1.65] text-text-secondary">{area.climateIntro}</p>
+      {/* Climate: optional, only where we speak from field experience */}
+      {area.climate && area.climate.length > 0 && (
+        <section aria-labelledby="local-climate" className="py-20 lg:py-28">
+          <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
+            <FadeInWhenVisible>
+              <div className="max-w-[760px] mb-12">
+                <Eyebrow>Le terrain</Eyebrow>
+                <H2 id="local-climate">{area.climateTitle}</H2>
+                <p className="text-[17px] leading-[1.65] text-text-secondary">{area.climateIntro}</p>
+              </div>
+            </FadeInWhenVisible>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {area.climate.map((c) => (
+                <FadeInWhenVisible key={c.title}>
+                  <div className="h-full rounded-2xl bg-surface-card border border-border-subtle shadow-soft-sm p-7">
+                    <h3 className="font-display text-[20px] font-semibold tracking-[-0.02em] mb-2">{c.title}</h3>
+                    <p className="text-[15px] leading-[1.65] text-text-secondary">{c.text}</p>
+                  </div>
+                </FadeInWhenVisible>
+              ))}
             </div>
-          </FadeInWhenVisible>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {area.climate.map((c) => (
-              <FadeInWhenVisible key={c.title}>
-                <div className="h-full rounded-2xl bg-surface-card border border-border-subtle shadow-soft-sm p-7">
-                  <h3 className="font-display text-[20px] font-semibold tracking-[-0.02em] mb-2">{c.title}</h3>
-                  <p className="text-[15px] leading-[1.65] text-text-secondary">{c.text}</p>
-                </div>
-              </FadeInWhenVisible>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* References */}
       <section aria-labelledby="local-refs" className="py-20 lg:py-28 bg-surface-elevated">
@@ -197,7 +199,16 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
           <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {area.areas.map((a) => (
               <div key={a.zone} className="rounded-2xl bg-surface-card border border-border-subtle shadow-soft-sm p-6">
-                <dt className="font-display text-[18px] font-semibold tracking-[-0.02em] mb-2">{a.zone}</dt>
+                <dt className="font-display text-[18px] font-semibold tracking-[-0.02em] mb-2">
+                  {a.href ? (
+                    <Link to={a.href} className="group inline-flex items-center gap-1.5 hover:text-logo-base-deep transition-colors">
+                      {a.zone}
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" aria-hidden="true" />
+                    </Link>
+                  ) : (
+                    a.zone
+                  )}
+                </dt>
                 <dd className="text-[15px] leading-[1.6] text-text-secondary">{a.towns}</dd>
               </div>
             ))}

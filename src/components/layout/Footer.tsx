@@ -132,6 +132,21 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/drone-porto-vecchio-extreme-sud" className={`block ${linkBase}`}>
+                    Porto-Vecchio et Extrême-Sud
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/drone-calvi-balagne" className={`block ${linkBase}`}>
+                    Calvi et Balagne
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/drone-corte-centre-corse" className={`block ${linkBase}`}>
+                    Corte et centre Corse
+                  </Link>
+                </li>
+                <li>
                   <Link to="/partenaires" className={`block ${linkBase}`}>
                     Programme partenaires
                   </Link>
