@@ -36,11 +36,11 @@ export const REALISATIONS: Realisation[] = [
     serviceHref: "/pole/diagnostic/visuel",
     title: "Deux bâtiments publics inspectés en une journée",
     summary:
-      "Un équipement sportif et un bâtiment technique, sans nacelle ni cordiste. Chaque anomalie est classée par criticité et localisée sur plan pour arbitrer le budget d'entretien.",
+      "Un équipement sportif et un bâtiment technique, sans nacelle ni cordiste. Chaque point relevé est classé par priorité et localisé sur le modèle 3D pour piloter le budget d'entretien.",
     figures: [
       { value: "2", label: "bâtiments publics" },
       { value: "1", label: "journée sur site" },
-      { value: "22", label: "anomalies relevées" },
+      { value: "3D", label: "modèle livré sur Axio" },
     ],
     image: `${STORAGE}/covers/028313bb-6839-4531-9ec4-21d6278ac038/096489b2-ea08-40d1-bf0e-0eb85073133d.webp`,
     imageAlt: "Inspection de toiture par drone pour la CAB à Bastia",

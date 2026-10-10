@@ -50,7 +50,7 @@ const CAB_REF: LocalReference = {
   place: "Bastia",
   client: "Communauté d'Agglomération de Bastia",
   title: "Deux bâtiments publics inspectés en une journée",
-  figures: "22 anomalies relevées, classées et localisées",
+  figures: "Toitures couvertes à 100 %, modèle 3D livré",
   href: "/blog/inspection-toiture-drone-cab-bastia",
 };
 
