@@ -1,4 +1,4 @@
-import spectraThermique from "@/assets/tools/spectra-thermique.jpg";
+import spectraThermiqueAsset from "@/assets/tools/spectra-thermique.webp.asset.json";
 import axioVisuel from "@/assets/tools/axio-visuel.webp";
 import { TRANSPORT_SUB_POLES } from "@/lib/sub-poles-transport";
 
@@ -292,10 +292,10 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       toolTitle: "Chaque anomalie,",
       toolTitleAccent: "localisée.",
       toolIntro: "Spectra est notre plateforme d'analyse thermique. Chaque point chaud détecté est numéroté, classé par niveau de criticité et positionné sur l'orthomosaïque du site. Vous recevez le rapport PDF, l'orthophoto et un export JSON exploitable par vos équipes de maintenance.",
-      toolImage: spectraThermique,
+      toolImage: spectraThermiqueAsset.url,
       toolImageAlt: "Interface Spectra affichant l'orthomosaïque thermique d'une centrale photovoltaïque et ses anomalies localisées",
-      toolImageWidth: 1413,
-      toolImageHeight: 790,
+      toolImageWidth: 1920,
+      toolImageHeight: 1092,
       compareTitle: "De 15 jours à 3 heures",
       compareSubtitle: "Comparatif pour l'inspection d'une villa R+2 en Corse (façades et toiture).",
       compareCols: [
