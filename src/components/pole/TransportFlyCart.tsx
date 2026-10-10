@@ -157,7 +157,7 @@ const TransportFlyCart = () => {
                 <tr className="border-b border-border-subtle bg-surface-elevated">
                   <th
                     scope="col"
-                    className="sr-only sm:not-sr-only px-5 py-4 font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-text-muted"
+                    className="hidden sm:table-cell px-5 py-4 font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-text-muted"
                   >
                     Critère
                   </th>

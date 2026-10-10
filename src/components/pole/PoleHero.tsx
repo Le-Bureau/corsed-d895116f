@@ -106,9 +106,9 @@ const PoleHero = ({ pole }: Props) => {
 
         {pole.pitch && (
           <p
-            className="font-display font-semibold tracking-[-0.01em] mb-10 max-w-[820px] text-text-primary"
+            className="text-text-secondary leading-relaxed mb-10 max-w-[760px]"
             style={{
-              fontSize: "clamp(20px, 2.2vw, 30px)",
+              fontSize: "clamp(16px, 1.4vw, 19px)",
             }}
           >
             {pole.pitch}
