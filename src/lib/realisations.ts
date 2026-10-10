@@ -1,4 +1,5 @@
 import type { PoleKey } from "@/lib/poles";
+import spectraThermique from "@/assets/tools/spectra-thermique.webp";
 
 export interface RealisationFigure {
   value: string;
@@ -18,7 +19,8 @@ export interface Realisation {
   figures: RealisationFigure[];
   image: string;
   imageAlt: string;
-  articleSlug: string;
+  // Blog write-up. Optional: a mission can be listed before its article is published.
+  articleSlug?: string;
 }
 
 const STORAGE =
@@ -45,6 +47,29 @@ export const REALISATIONS: Realisation[] = [
     image: `${STORAGE}/covers/028313bb-6839-4531-9ec4-21d6278ac038/096489b2-ea08-40d1-bf0e-0eb85073133d.webp`,
     imageAlt: "Inspection de toiture par drone pour la CAB à Bastia",
     articleSlug: "inspection-toiture-drone-cab-bastia",
+  },
+  {
+    slug: "tenergie-thermographie-centrale",
+    client: "Tenergie",
+    location: "Propriano, Corse-du-Sud",
+    date: "Juin 2026",
+    pole: "diagnostic",
+    service: "Thermographie photovoltaïque",
+    serviceHref: "/pole/diagnostic/thermique",
+    title: "Une centrale solaire au sol inspectée en une heure de vol",
+    summary:
+      "Inspection thermographique de chaque module d'une centrale au sol, en pleine production. Les anomalies sont classées par priorité et positionnées sur l'orthomosaïque dans Spectra pour guider la maintenance.",
+    figures: [
+      { value: "1 MWc", label: "centrale au sol" },
+      { value: "1 h", label: "de vol sur site" },
+      { value: "½ j", label: "de traitement des données" },
+    ],
+    // Fallback until the article has its own cover image.
+    image: spectraThermique,
+    imageAlt: "Orthomosaïque thermique d'une centrale photovoltaïque au sol dans Spectra",
+    // Article still in draft: add
+    // articleSlug: "inspection-thermique-centrale-photovoltaique-tenergie-propriano"
+    // once it is published.
   },
   {
     slug: "canari-fixation-amiante",

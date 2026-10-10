@@ -16,7 +16,7 @@ export const Route = createFileRoute("/_public/realisations")({
       .select("slug, cover_image_url")
       .in(
         "slug",
-        REALISATIONS.map((r) => r.articleSlug),
+        REALISATIONS.flatMap((r) => (r.articleSlug ? [r.articleSlug] : [])),
       );
     const covers: Record<string, string> = {};
     for (const row of data ?? []) {
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/_public/realisations")({
     seoHead({
       title: "Réalisations drone en Corse",
       description:
-        "Nos missions drone en Corse, chiffres à l'appui : inspection de toitures pour la CAB à Bastia, fixation amiante à Canari avec Térélian (Vinci).",
+        "Nos missions drone en Corse, chiffres à l'appui : toitures de la CAB à Bastia, centrale solaire Tenergie, fixation amiante à Canari avec Térélian (Vinci).",
       canonicalPath: "/realisations",
       ogImage: REALISATIONS[0]?.image,
       jsonLd: {
@@ -43,7 +43,9 @@ export const Route = createFileRoute("/_public/realisations")({
             "@type": "ListItem",
             position: i + 1,
             name: r.title,
-            url: `${SITE_URL}/blog/${r.articleSlug}`,
+            url: r.articleSlug
+              ? `${SITE_URL}/blog/${r.articleSlug}`
+              : `${SITE_URL}/realisations`,
           })),
         },
       },

@@ -81,17 +81,19 @@ const RealisationCard = ({ r, index }: { r: Realisation; index: number }) => {
           </dl>
 
           <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Link
-              to={`/blog/${r.articleSlug}`}
-              className="group inline-flex items-center gap-2 rounded-full text-white font-semibold text-[15px] px-6 py-3 transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
-              style={{ background: "var(--card-color)" }}
-            >
-              Lire le retour de mission
-              <ArrowRight
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none"
-                aria-hidden="true"
-              />
-            </Link>
+            {r.articleSlug && (
+              <Link
+                to={`/blog/${r.articleSlug}`}
+                className="group inline-flex items-center gap-2 rounded-full text-white font-semibold text-[15px] px-6 py-3 transition-transform duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
+                style={{ background: "var(--card-color)" }}
+              >
+                Lire le retour de mission
+                <ArrowRight
+                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none"
+                  aria-hidden="true"
+                />
+              </Link>
+            )}
             <Link
               to={r.serviceHref}
               className="text-sm font-semibold text-text-primary underline decoration-border-subtle underline-offset-4 hover:decoration-[var(--card-color)]"
@@ -150,7 +152,7 @@ const Realisations = () => {
           {REALISATIONS.map((r, i) => (
             <RealisationCard
               key={r.slug}
-              r={{ ...r, image: covers[r.articleSlug] ?? r.image }}
+              r={{ ...r, image: (r.articleSlug && covers[r.articleSlug]) || r.image }}
               index={i}
             />
           ))}
