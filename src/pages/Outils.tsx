@@ -2,7 +2,7 @@ import { ArrowRight, Check, Lock } from "lucide-react";
 import { Link } from "@/lib/router-compat";
 import FadeInWhenVisible from "@/components/animations/FadeInWhenVisible";
 import axioVisuel from "@/assets/tools/axio-visuel.webp";
-import spectraThermique from "@/assets/tools/spectra-thermique.jpg";
+import spectraThermiqueAsset from "@/assets/tools/spectra-thermique.webp.asset.json";
 
 interface Tool {
   key: string;
@@ -54,10 +54,10 @@ const TOOLS: Tool[] = [
       "Anomalies classées et localisées sur l'orthomosaïque",
       "Rapport PDF, orthophoto et export JSON",
     ],
-    image: spectraThermique,
+    image: spectraThermiqueAsset.url,
     imageAlt: "Interface Spectra : orthomosaïque thermique d'une installation avec points chauds classés",
-    imageWidth: 1413,
-    imageHeight: 790,
+    imageWidth: 1920,
+    imageHeight: 1092,
     service: [
       { label: "Thermographie", href: "/pole/diagnostic/thermique" },
       { label: "Panneaux solaires", href: "/pole/nettoyage/panneaux-solaires" },
