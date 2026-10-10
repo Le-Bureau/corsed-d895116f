@@ -81,6 +81,7 @@ export const BLOG_SERVICE_LINKS: Record<string, BlogServiceLink> = {
   "canari-fixation-amiante-drone-terelian-vinci": NETTOYAGE,
   "diagnostic-thermique-drone-corse": DIAGNOSTIC_THERMIQUE,
   "inspection-toiture-drone-cab-bastia": DIAGNOSTIC_VISUEL,
+  "inspection-thermique-centrale-photovoltaique-tenergie-propriano": DIAGNOSTIC_THERMIQUE,
   "imagerie-multispectrale-par-drone-ce-quelle-apporte-aux-cultures-corses": AGRICULTURE,
   "transport-materiel-drone-corse-2027": TRANSPORT,
 };

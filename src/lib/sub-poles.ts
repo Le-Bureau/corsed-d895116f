@@ -1,4 +1,4 @@
-import spectraThermiqueAsset from "@/assets/tools/spectra-thermique.webp.asset.json";
+import spectraThermique from "@/assets/tools/spectra-thermique.webp";
 import axioVisuel from "@/assets/tools/axio-visuel.webp";
 import { TRANSPORT_SUB_POLES } from "@/lib/sub-poles-transport";
 
@@ -292,10 +292,10 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       toolTitle: "Chaque anomalie,",
       toolTitleAccent: "localisée.",
       toolIntro: "Spectra est notre plateforme d'analyse thermique. Chaque point chaud détecté est numéroté, classé par niveau de criticité et positionné sur l'orthomosaïque du site. Vous recevez le rapport PDF, l'orthophoto et un export JSON exploitable par vos équipes de maintenance.",
-      toolImage: spectraThermiqueAsset.url,
+      toolImage: spectraThermique,
       toolImageAlt: "Interface Spectra affichant l'orthomosaïque thermique d'une centrale photovoltaïque et ses anomalies localisées",
-      toolImageWidth: 1920,
-      toolImageHeight: 1092,
+      toolImageWidth: 2000,
+      toolImageHeight: 1137,
       compareTitle: "De 15 jours à 3 heures",
       compareSubtitle: "Comparatif pour l'inspection d'une villa R+2 en Corse (façades et toiture).",
       compareCols: [
@@ -401,8 +401,8 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       toolIntro: "Axio est notre plateforme d'inspection visuelle. Le bâtiment est restitué en modèle 3D navigable et chaque anomalie relevée est épinglée à sa position exacte sur l'ouvrage. Vous recevez le rapport PDF et un accès au modèle.",
       toolImage: axioVisuel,
       toolImageAlt: "Interface Axio affichant le modèle 3D d'un bâtiment et ses anomalies positionnées",
-      toolImageWidth: 1617,
-      toolImageHeight: 873,
+      toolImageWidth: 2000,
+      toolImageHeight: 1152,
       faq: [
         { question: "Quels types d'anomalies détectez-vous ?", answer: "Microfissures et fissures traversantes, joints dégradés, étanchéité défaillante, tuiles cassées ou glissées, ardoises manquantes, ferrailles apparentes, corrosion, décollements d'enduits, peintures cloquées, dégâts climatiques, et plus encore." },
         { question: "Quelle est la précision des images ?", answer: "Résolution 4K avec zoom jusqu'à 112× et précision GPS de l'ordre du centimètre. Les microfissures, joints dégradés et corrosion naissante sont détectables." },
