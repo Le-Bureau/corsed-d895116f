@@ -2,10 +2,27 @@ import { isValidElement, useEffect, useMemo, useRef, useState, type ReactNode } 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import rehypeSanitize, { defaultSchema, type Options as SanitizeSchema } from "rehype-sanitize";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import type { TocItem } from "./BlogTOC";
 import { slugify } from "@/lib/blogHelpers";
+
+/**
+ * Le Markdown des articles peut contenir du HTML (figures, grilles d'images,
+ * encadrés). rehype-raw l'interprète ; rehype-sanitize retire ensuite tout ce
+ * qui pourrait exécuter du code (script, iframe, on*=, javascript:…) en ne
+ * gardant que les balises et attributs utilisés par nos snippets d'éditeur.
+ */
+const sanitizeSchema: SanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [...(defaultSchema.tagNames ?? []), "figure", "figcaption"],
+  attributes: {
+    ...defaultSchema.attributes,
+    "*": [...(defaultSchema.attributes?.["*"] ?? []), "className"],
+    img: [...(defaultSchema.attributes?.img ?? []), "loading", "width", "height"],
+  },
+};
 
 interface Props {
   markdown: string;
@@ -115,7 +132,7 @@ const BlogContent = ({ markdown }: Props) => {
       <article ref={rootRef} className="article-content">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
+          rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
           components={components}
         >
           {markdown}
