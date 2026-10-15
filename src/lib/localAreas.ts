@@ -1,7 +1,10 @@
 // Local landing pages (/drone-bastia-haute-corse, /drone-ajaccio-corse-du-sud,
 // /drone-porto-vecchio-extreme-sud, /drone-calvi-balagne, /drone-corte-centre-corse).
 // Only facts already established on the site (services, references,
-// regulation): no invented delays, prices or travel times.
+// regulation): no invented delays, prices or travel times. Prices come from
+// src/lib/prices.ts, set by Corse Drone.
+
+import { faqPriceZone } from "@/lib/prices";
 
 export interface LocalReference {
   place: string;
@@ -145,6 +148,8 @@ export const LOCAL_AREAS: Record<LocalAreaKey, LocalArea> = {
       { label: "Démoussage de toiture à Bastia", href: "/demoussage-toiture-bastia" },
       { label: "Inspection de toiture à Bastia", href: "/inspection-toiture-bastia" },
       { label: "Nettoyage de panneaux solaires à Bastia", href: "/nettoyage-panneaux-solaires-bastia" },
+      { label: "Thermographie de bâtiments à Bastia", href: "/thermographie-batiment-bastia" },
+      { label: "Démoussage de toiture à Saint-Florent", href: "/demoussage-toiture-saint-florent" },
       { label: "Fixation d'amiante par drone", href: "/pole/nettoyage/fixation-amiante" },
     ],
     areaServed: [
@@ -233,9 +238,14 @@ export const LOCAL_AREAS: Record<LocalAreaKey, LocalArea> = {
       DELAY_FAQ,
       { question: "Pouvez-vous préparer une villa avant la saison ?", answer: "Oui : nettoyage de toiture, de façade ou de panneaux solaires, sans nacelle ni échafaudage dans le jardin. Contactez-nous tôt au printemps pour caler l'intervention avant l'arrivée des locataires ou des clients." },
       { question: "Intervenez-vous sur les installations solaires de l'Extrême-Sud ?", answer: "Oui : nettoyage des panneaux et inspection thermographique selon la méthodologie IEC TS 62446-3, sur toitures, ombrières et centrales au sol. Les deux peuvent être couplés dans une même intervention." },
+      { question: "Combien coûte une intervention dans l'Extrême-Sud ?", answer: faqPriceZone("2A") },
+      { question: "Inspectez-vous les hôtels et résidences avant la saison ?", answer: "Oui : inspection hors saison des hôtels, résidences de tourisme et villages vacances, pour repérer les défauts avant l'ouverture et documenter l'état du bâtiment pour l'assurance." },
     ],
     ctaTitle: "Un chantier à Porto-Vecchio ou dans l'Extrême-Sud ?",
     breadcrumb: "Porto-Vecchio et Extrême-Sud",
+    detailPages: [
+      { label: "Nettoyage de façade à Porto-Vecchio", href: "/nettoyage-facade-porto-vecchio" },
+    ],
     areaServed: [
       { type: "City", name: "Porto-Vecchio" },
       { type: "City", name: "Bonifacio" },
@@ -274,6 +284,9 @@ export const LOCAL_AREAS: Record<LocalAreaKey, LocalArea> = {
     ],
     ctaTitle: "Un chantier à Calvi ou en Balagne ?",
     breadcrumb: "Calvi et Balagne",
+    detailPages: [
+      { label: "Démoussage de toiture à Saint-Florent", href: "/demoussage-toiture-saint-florent" },
+    ],
     areaServed: [
       { type: "City", name: "Calvi" },
       { type: "City", name: "L'Île-Rousse" },

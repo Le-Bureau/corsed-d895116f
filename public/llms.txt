@@ -51,6 +51,9 @@ Les rapports d'inspection sont livrés sur deux plateformes développées en int
 - [Démoussage de toiture à Ajaccio](https://corse-drone.com/demoussage-toiture-ajaccio)
 - [Nettoyage de panneaux solaires à Ajaccio](https://corse-drone.com/nettoyage-panneaux-solaires-ajaccio)
 - [Thermographie photovoltaïque à Propriano](https://corse-drone.com/thermographie-photovoltaique-propriano)
+- [Thermographie de bâtiments à Bastia](https://corse-drone.com/thermographie-batiment-bastia)
+- [Démoussage de toiture à Saint-Florent](https://corse-drone.com/demoussage-toiture-saint-florent)
+- [Nettoyage de façade à Porto-Vecchio](https://corse-drone.com/nettoyage-facade-porto-vecchio)
 
 ## Par type de client
 

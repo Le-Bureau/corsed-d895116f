@@ -3,9 +3,9 @@
 // already established on the site: the method and products from our articles,
 // real references, regulated zones. No descriptive prose about the place.
 
-import type { LocalReference } from "@/lib/localAreas";
+import { CANARI_REF, type LocalReference } from "@/lib/localAreas";
 import type { RelatedArticle } from "@/lib/relatedContent";
-import { FAQ_PRICE_SOLAR, faqPriceRoof } from "@/lib/prices";
+import { FAQ_PRICE_SOLAR, faqPriceFacade, faqPriceRoof, minTTC } from "@/lib/prices";
 
 export interface LocalServicePageData {
   path: string;
@@ -282,6 +282,126 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
     ctaTitle: "Des panneaux à nettoyer à Bastia ?",
   },
   {
+    path: "/thermographie-batiment-bastia",
+    city: "Bastia",
+    zonePath: "/drone-bastia-haute-corse",
+    zoneLabel: "Bastia et Haute-Corse",
+    pole: "diagnostic",
+    serviceHref: "/pole/diagnostic/thermique",
+    serviceLabel: "Thermographie par drone",
+    h1: "Thermographie de bâtiments à Bastia",
+    metaTitle: "Thermographie de bâtiments par drone à Bastia",
+    metaDescription:
+      "Thermographie de bâtiments par drone à Bastia : ponts thermiques, défauts d'isolation et infiltrations, en saison de chauffe. Rapport dans Spectra.",
+    intro:
+      "Nous réalisons la thermographie des bâtiments par drone à Bastia et dans le Grand Bastia : immeubles et copropriétés, bâtiments publics, locaux d'activité, toitures-terrasses. La caméra radiométrique repère les ponts thermiques, les défauts d'isolation et les infiltrations, sans nacelle ni échafaudage.",
+    methodTitle: "Ce que la caméra révèle, et quand",
+    method: [
+      {
+        title: "Ponts thermiques et isolation",
+        text: "Jonctions entre structure et isolation, encadrements, balcons, planchers ; isolation tassée, déchirée ou mal posée ; fuites d'air aux menuiseries et aux joints.",
+      },
+      {
+        title: "Infiltrations d'eau",
+        text: "Sur les toitures-terrasses, les zones humides gardent la chaleur plus longtemps que les zones sèches. Nous volons en début de nuit pour les distinguer.",
+      },
+      {
+        title: "La bonne fenêtre",
+        text: "En saison de chauffe, d'octobre à mars, avec au moins 10 °C d'écart entre l'intérieur et l'extérieur : tôt le matin, par temps couvert ou après le coucher du soleil.",
+      },
+      {
+        title: "Rapport dans Spectra",
+        text: "Images thermiques annotées, anomalies localisées sur le bâtiment et conditions de prise de vue documentées : un rapport interprétable et défendable.",
+      },
+    ],
+    localTitle: "À Bastia",
+    local: [
+      "Copropriétés : la thermographie aide à préparer un plan pluriannuel de travaux et à prioriser les rénovations.",
+      "Bâtiments publics : écoles, mairies, gymnases et salles polyvalentes, avant de programmer des travaux.",
+      "Le centre-ville et les abords de l'aéroport de Bastia-Poretta sont des zones réglementées : nous vérifions chaque adresse et faisons les déclarations nécessaires.",
+      DELAY,
+    ],
+    towns:
+      "Bastia, Ville-di-Pietrabugno, San-Martino-di-Lota, Santa-Maria-di-Lota, Furiani, Biguglia, Borgo",
+    reference: CAB,
+    referenceTitle: "Une référence à Bastia",
+    faq: [
+      {
+        question: "Peut-on faire une thermographie de bâtiment en été ?",
+        answer:
+          "Non : il faut au moins 10 °C d'écart entre l'intérieur chauffé et l'extérieur. Si vous nous la demandez en août, nous vous proposerons une date en saison de chauffe, entre octobre et mars.",
+      },
+      {
+        question: "La thermographie remplace-t-elle un DPE ?",
+        answer:
+          "Non. Le DPE repose sur des calculs normés, pas sur de l'imagerie thermique. La thermographie localise les anomalies ; le dimensionnement des travaux relève d'un bureau d'études thermique.",
+      },
+      {
+        question: "Travaillez-vous pour des bureaux d'études ?",
+        answer:
+          "Oui, en sous-traitance de captation : nous fournissons des images thermiques calibrées et documentées, et le bureau d'études garde l'analyse pour son client.",
+      },
+      {
+        question: "Combien coûte une thermographie de bâtiment ?",
+        answer:
+          "Sur devis, selon la surface, la hauteur, le nombre de bâtiments et le rapport attendu. Décrivez-nous le bâtiment et l'objectif : nous vous dirons aussi si la thermographie est la bonne méthode.",
+      },
+    ],
+    articles: [
+      {
+        slug: "diagnostic-thermique-drone-corse",
+        label: "Thermographie par drone : ce qu'elle révèle, ses limites",
+      },
+    ],
+    ctaTitle: "Un bâtiment à diagnostiquer à Bastia ?",
+  },
+  {
+    path: "/demoussage-toiture-saint-florent",
+    city: "Saint-Florent",
+    zonePath: "/drone-bastia-haute-corse",
+    zoneLabel: "Bastia et Haute-Corse",
+    pole: "nettoyage",
+    serviceHref: "/pole/nettoyage/toitures",
+    serviceLabel: "Nettoyage et démoussage de toiture",
+    h1: "Démoussage de toiture à Saint-Florent",
+    metaTitle: "Démoussage de toiture à Saint-Florent et dans le Nebbio",
+    metaDescription:
+      "Démoussage de toiture par drone à Saint-Florent et dans le Nebbio : traitement fongicide, hydrofuge en option, sans échafaudage. Base voisine, à Ogliastro.",
+    intro:
+      "Nous démoussons et traitons les toitures par drone à Saint-Florent et dans tout le Nebbio, de Patrimonio à Oletta et jusqu'aux villages du Haut-Nebbio. Notre base d'Ogliastro est à quelques communes au nord, sur la côte ouest du Cap Corse. Le traitement est pulvérisé depuis les airs : pas d'échafaudage, personne ne marche sur les tuiles.",
+    methodTitle: "Comment on traite votre toiture",
+    method: TOITURE_METHOD,
+    localTitle: "Dans le Nebbio",
+    local: [
+      "Maisons de village et toitures anciennes : le traitement est pulvérisé sans marcher sur la toiture, ce qui évite de casser les tuiles ou de déplacer les lauzes.",
+      `Le Nebbio est voisin de notre base : en Haute-Corse, le minimum de ${minTTC("2B")} comprend le déplacement.`,
+      "Avant chaque mission, nous vérifions l'adresse sur la carte des restrictions de vol et faisons les déclarations nécessaires.",
+      DELAY,
+    ],
+    towns:
+      "Saint-Florent, Patrimonio, Farinole, Barbaggio, Oletta, Poggio-d'Oletta, Olmeta-di-Tuda, Vallecalle, Santo-Pietro-di-Tenda, San-Gavino-di-Tenda, Murato, Rapale, Pieve, Sorio, Rutali",
+    reference: CANARI_REF,
+    referenceTitle: "Notre mission de pulvérisation la plus proche",
+    faq: [
+      {
+        question: "Combien coûte un démoussage de toiture à Saint-Florent ?",
+        answer: faqPriceRoof("2B"),
+      },
+      {
+        question: "Intervenez-vous dans les villages du Haut-Nebbio ?",
+        answer:
+          "Oui : Murato, Rapale, Santo-Pietro-di-Tenda et tous les villages du Nebbio, pas seulement le littoral. Le traitement se fait depuis les airs, sans accès au toit.",
+      },
+      {
+        question: "Le traitement abîme-t-il les vieilles toitures ?",
+        answer:
+          "Non : personne ne monte sur le toit, et le produit comme la pression sont adaptés au support, tuiles anciennes ou lauzes.",
+      },
+    ],
+    articles: TOITURE_ARTICLES,
+    ctaTitle: "Une toiture à démousser dans le Nebbio ?",
+  },
+  {
     path: "/demoussage-toiture-ajaccio",
     city: "Ajaccio",
     zonePath: "/drone-ajaccio-corse-du-sud",
@@ -448,6 +568,74 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
       },
     ],
     ctaTitle: "Une installation solaire à contrôler dans le Valinco ?",
+  },
+  {
+    path: "/nettoyage-facade-porto-vecchio",
+    city: "Porto-Vecchio",
+    zonePath: "/drone-porto-vecchio-extreme-sud",
+    zoneLabel: "Porto-Vecchio et Extrême-Sud",
+    pole: "nettoyage",
+    serviceHref: "/pole/nettoyage/facades",
+    serviceLabel: "Nettoyage de façade",
+    h1: "Nettoyage de façade à Porto-Vecchio",
+    metaTitle: "Nettoyage de façade par drone à Porto-Vecchio",
+    metaDescription:
+      "Nettoyage de façades par drone à Porto-Vecchio et dans l'Extrême-Sud : villas, hôtels, résidences, sans échafaudage ni nacelle. Traitement adapté au support.",
+    intro:
+      "Nous nettoyons les façades par drone à Porto-Vecchio et dans l'Extrême-Sud : villas, résidences de tourisme, hôtels et immeubles. Le drone pulvérise le traitement à 1 ou 2 mètres de la façade, sans échafaudage ni nacelle dans le jardin.",
+    methodTitle: "Comment on nettoie votre façade",
+    method: [
+      {
+        title: "Produit adapté au support",
+        text: "Eau adoucie pour la pierre, traitement anti-biofilm biodégradable pour les enduits, produits compatibles avec les matériaux anciens.",
+      },
+      {
+        title: "Traitement puis rinçage",
+        text: "Le traitement anti-biofilm est pulvérisé, puis la façade est rincée de façon contrôlée. Il faut 24 heures sans pluie après l'intervention.",
+      },
+      {
+        title: "Distance et pression",
+        text: "Le télépilote garde le drone à 1 ou 2 mètres de la façade et adapte la pression au support et aux ouvertures.",
+      },
+      {
+        title: "Hydrofuge en option",
+        text: "6 à 8 mois après le nettoyage, un traitement hydrofuge repousse l'eau et les salissures pendant 5 ans et plus.",
+      },
+    ],
+    localTitle: "À Porto-Vecchio",
+    local: [
+      "Villas et résidences de tourisme : prévoyez l'intervention au printemps, avant l'arrivée des locataires ou des clients.",
+      "Les missions dans l'Extrême-Sud sont planifiées à l'avance et regroupées par secteur, pour limiter les déplacements depuis notre base du Cap Corse.",
+      "Les abords de l'aéroport de Figari Sud-Corse sont une zone réglementée : nous vérifions chaque adresse et faisons les déclarations nécessaires.",
+      DELAY,
+    ],
+    towns:
+      "Porto-Vecchio, Lecci, Sainte-Lucie-de-Porto-Vecchio, Pinarellu, Conca, Zonza, Sotta, Figari, Bonifacio",
+    reference: TENERGIE,
+    referenceTitle: "Une référence en Corse-du-Sud",
+    faq: [
+      {
+        question: "Combien coûte un nettoyage de façade à Porto-Vecchio ?",
+        answer: faqPriceFacade("2A"),
+      },
+      {
+        question: "À quelle fréquence nettoyer une façade en bord de mer ?",
+        answer:
+          "Tous les 3 à 5 ans pour une façade exposée au sel marin, tous les 5 à 10 ans pour une façade abritée.",
+      },
+      {
+        question: "Faut-il quitter la maison pendant le nettoyage ?",
+        answer:
+          "Non. Le périmètre de sécurité au sol est limité et la maison reste occupée : il suffit de fermer les fenêtres du niveau traité.",
+      },
+      {
+        question: "Nettoyez-vous la pierre et le granite ?",
+        answer:
+          "Oui, avec une approche adaptée : eau adoucie ou produits compatibles avec les matériaux anciens, pour la pierre de taille, les moellons et le granite.",
+      },
+    ],
+    articles: [],
+    ctaTitle: "Une façade à nettoyer à Porto-Vecchio ?",
   },
 ];
 
