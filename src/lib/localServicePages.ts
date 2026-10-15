@@ -5,7 +5,7 @@
 
 import type { LocalReference } from "@/lib/localAreas";
 import type { RelatedArticle } from "@/lib/relatedContent";
-import { faqPriceRoof, faqPriceSolar } from "@/lib/prices";
+import { FAQ_PRICE_SOLAR, faqPriceRoof } from "@/lib/prices";
 
 export interface LocalServicePageData {
   path: string;
@@ -270,7 +270,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
       },
       {
         question: "Combien coûte le nettoyage de panneaux solaires à Bastia ?",
-        answer: faqPriceSolar("2B"),
+        answer: FAQ_PRICE_SOLAR,
       },
       {
         question: "À partir de quelle surface le drone est-il intéressant ?",
@@ -364,7 +364,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
       },
       {
         question: "Combien coûte le nettoyage de panneaux solaires à Ajaccio ?",
-        answer: faqPriceSolar("2A"),
+        answer: FAQ_PRICE_SOLAR,
       },
       {
         question: "Pouvez-vous aussi contrôler l'installation ?",
