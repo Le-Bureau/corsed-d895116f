@@ -37,6 +37,15 @@ const NETTOYAGE: BlogServiceLink = {
     "Toitures, façades, panneaux photovoltaïques : le drone intervient sans échafaudage ni immobilisation de site. Devis sous 48h.",
 };
 
+const FIXATION_AMIANTE: BlogServiceLink = {
+  poleKey: "nettoyage",
+  href: "/pole/nettoyage/fixation-amiante",
+  serviceLabel: "Découvrir la fixation d'amiante",
+  title: "Un chantier amianté à sécuriser ?",
+  description:
+    "Fixation de fibres par drone, équipe au sol en zone verte, compte-rendu complet. Analyse de faisabilité à partir de la localisation, de la surface et du calendrier.",
+};
+
 const DIAGNOSTIC_THERMIQUE: BlogServiceLink = {
   poleKey: "diagnostic",
   href: "/pole/diagnostic/thermique",
@@ -77,8 +86,8 @@ export const BLOG_SERVICE_LINKS: Record<string, BlogServiceLink> = {
   "nettoyage-toiture-drone-corse": NETTOYAGE_TOITURES,
   "nettoyage-panneaux-solaires-drone-corse": NETTOYAGE_PANNEAUX,
   "sable-sahara-panneaux-solaires-corse": NETTOYAGE_PANNEAUX,
-  "fixation-amiante-drone-corse": NETTOYAGE,
-  "canari-fixation-amiante-drone-terelian-vinci": NETTOYAGE,
+  "fixation-amiante-drone-corse": FIXATION_AMIANTE,
+  "canari-fixation-amiante-drone-terelian-vinci": FIXATION_AMIANTE,
   "diagnostic-thermique-drone-corse": DIAGNOSTIC_THERMIQUE,
   "inspection-toiture-drone-cab-bastia": DIAGNOSTIC_VISUEL,
   "inspection-thermique-centrale-photovoltaique-tenergie-propriano": DIAGNOSTIC_THERMIQUE,

@@ -14,7 +14,10 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicBtpDesamiantageRouteImport } from './routes/_public/btp-desamiantage'
+import { Route as PublicCollectivitesRouteImport } from './routes/_public/collectivites'
 import { Route as PublicContactRouteImport } from './routes/_public/contact'
+import { Route as PublicCoproprietesSyndicsRouteImport } from './routes/_public/coproprietes-syndics'
 import { Route as PublicDemoussageToitureAjaccioRouteImport } from './routes/_public/demoussage-toiture-ajaccio'
 import { Route as PublicDemoussageToitureBastiaRouteImport } from './routes/_public/demoussage-toiture-bastia'
 import { Route as PublicDroneAjaccioCorseDuSudRouteImport } from './routes/_public/drone-ajaccio-corse-du-sud'
@@ -26,6 +29,7 @@ import { Route as PublicDronePlaineOrientaleRouteImport } from './routes/_public
 import { Route as PublicDronePortoVecchioExtremeSudRouteImport } from './routes/_public/drone-porto-vecchio-extreme-sud'
 import { Route as PublicDroneProprianoValincoRouteImport } from './routes/_public/drone-propriano-valinco'
 import { Route as PublicExpertisesRouteImport } from './routes/_public/expertises'
+import { Route as PublicExploitantsSolairesRouteImport } from './routes/_public/exploitants-solaires'
 import { Route as PublicInspectionToitureBastiaRouteImport } from './routes/_public/inspection-toiture-bastia'
 import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
 import { Route as PublicNettoyagePanneauxSolairesAjaccioRouteImport } from './routes/_public/nettoyage-panneaux-solaires-ajaccio'
@@ -71,11 +75,27 @@ const PublicIndexRoute = PublicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicBtpDesamiantageRoute = PublicBtpDesamiantageRouteImport.update({
+  id: '/btp-desamiantage',
+  path: '/btp-desamiantage',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicCollectivitesRoute = PublicCollectivitesRouteImport.update({
+  id: '/collectivites',
+  path: '/collectivites',
+  getParentRoute: () => PublicRoute,
+} as any)
 const PublicContactRoute = PublicContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicCoproprietesSyndicsRoute =
+  PublicCoproprietesSyndicsRouteImport.update({
+    id: '/coproprietes-syndics',
+    path: '/coproprietes-syndics',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicDemoussageToitureAjaccioRoute =
   PublicDemoussageToitureAjaccioRouteImport.update({
     id: '/demoussage-toiture-ajaccio',
@@ -139,6 +159,12 @@ const PublicExpertisesRoute = PublicExpertisesRouteImport.update({
   path: '/expertises',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicExploitantsSolairesRoute =
+  PublicExploitantsSolairesRouteImport.update({
+    id: '/exploitants-solaires',
+    path: '/exploitants-solaires',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicInspectionToitureBastiaRoute =
   PublicInspectionToitureBastiaRouteImport.update({
     id: '/inspection-toiture-bastia',
@@ -251,7 +277,10 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/btp-desamiantage': typeof PublicBtpDesamiantageRoute
+  '/collectivites': typeof PublicCollectivitesRoute
   '/contact': typeof PublicContactRoute
+  '/coproprietes-syndics': typeof PublicCoproprietesSyndicsRoute
   '/demoussage-toiture-ajaccio': typeof PublicDemoussageToitureAjaccioRoute
   '/demoussage-toiture-bastia': typeof PublicDemoussageToitureBastiaRoute
   '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
@@ -263,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/drone-porto-vecchio-extreme-sud': typeof PublicDronePortoVecchioExtremeSudRoute
   '/drone-propriano-valinco': typeof PublicDroneProprianoValincoRoute
   '/expertises': typeof PublicExpertisesRoute
+  '/exploitants-solaires': typeof PublicExploitantsSolairesRoute
   '/inspection-toiture-bastia': typeof PublicInspectionToitureBastiaRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/nettoyage-panneaux-solaires-ajaccio': typeof PublicNettoyagePanneauxSolairesAjaccioRoute
@@ -287,7 +317,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/btp-desamiantage': typeof PublicBtpDesamiantageRoute
+  '/collectivites': typeof PublicCollectivitesRoute
   '/contact': typeof PublicContactRoute
+  '/coproprietes-syndics': typeof PublicCoproprietesSyndicsRoute
   '/demoussage-toiture-ajaccio': typeof PublicDemoussageToitureAjaccioRoute
   '/demoussage-toiture-bastia': typeof PublicDemoussageToitureBastiaRoute
   '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
@@ -299,6 +332,7 @@ export interface FileRoutesByTo {
   '/drone-porto-vecchio-extreme-sud': typeof PublicDronePortoVecchioExtremeSudRoute
   '/drone-propriano-valinco': typeof PublicDroneProprianoValincoRoute
   '/expertises': typeof PublicExpertisesRoute
+  '/exploitants-solaires': typeof PublicExploitantsSolairesRoute
   '/inspection-toiture-bastia': typeof PublicInspectionToitureBastiaRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
   '/nettoyage-panneaux-solaires-ajaccio': typeof PublicNettoyagePanneauxSolairesAjaccioRoute
@@ -327,7 +361,10 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/rss.xml': typeof RssDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_public/btp-desamiantage': typeof PublicBtpDesamiantageRoute
+  '/_public/collectivites': typeof PublicCollectivitesRoute
   '/_public/contact': typeof PublicContactRoute
+  '/_public/coproprietes-syndics': typeof PublicCoproprietesSyndicsRoute
   '/_public/demoussage-toiture-ajaccio': typeof PublicDemoussageToitureAjaccioRoute
   '/_public/demoussage-toiture-bastia': typeof PublicDemoussageToitureBastiaRoute
   '/_public/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
@@ -339,6 +376,7 @@ export interface FileRoutesById {
   '/_public/drone-porto-vecchio-extreme-sud': typeof PublicDronePortoVecchioExtremeSudRoute
   '/_public/drone-propriano-valinco': typeof PublicDroneProprianoValincoRoute
   '/_public/expertises': typeof PublicExpertisesRoute
+  '/_public/exploitants-solaires': typeof PublicExploitantsSolairesRoute
   '/_public/inspection-toiture-bastia': typeof PublicInspectionToitureBastiaRoute
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
   '/_public/nettoyage-panneaux-solaires-ajaccio': typeof PublicNettoyagePanneauxSolairesAjaccioRoute
@@ -368,7 +406,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/btp-desamiantage'
+    | '/collectivites'
     | '/contact'
+    | '/coproprietes-syndics'
     | '/demoussage-toiture-ajaccio'
     | '/demoussage-toiture-bastia'
     | '/drone-ajaccio-corse-du-sud'
@@ -380,6 +421,7 @@ export interface FileRouteTypes {
     | '/drone-porto-vecchio-extreme-sud'
     | '/drone-propriano-valinco'
     | '/expertises'
+    | '/exploitants-solaires'
     | '/inspection-toiture-bastia'
     | '/mentions-legales'
     | '/nettoyage-panneaux-solaires-ajaccio'
@@ -404,7 +446,10 @@ export interface FileRouteTypes {
   to:
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/btp-desamiantage'
+    | '/collectivites'
     | '/contact'
+    | '/coproprietes-syndics'
     | '/demoussage-toiture-ajaccio'
     | '/demoussage-toiture-bastia'
     | '/drone-ajaccio-corse-du-sud'
@@ -416,6 +461,7 @@ export interface FileRouteTypes {
     | '/drone-porto-vecchio-extreme-sud'
     | '/drone-propriano-valinco'
     | '/expertises'
+    | '/exploitants-solaires'
     | '/inspection-toiture-bastia'
     | '/mentions-legales'
     | '/nettoyage-panneaux-solaires-ajaccio'
@@ -443,7 +489,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/rss.xml'
     | '/sitemap.xml'
+    | '/_public/btp-desamiantage'
+    | '/_public/collectivites'
     | '/_public/contact'
+    | '/_public/coproprietes-syndics'
     | '/_public/demoussage-toiture-ajaccio'
     | '/_public/demoussage-toiture-bastia'
     | '/_public/drone-ajaccio-corse-du-sud'
@@ -455,6 +504,7 @@ export interface FileRouteTypes {
     | '/_public/drone-porto-vecchio-extreme-sud'
     | '/_public/drone-propriano-valinco'
     | '/_public/expertises'
+    | '/_public/exploitants-solaires'
     | '/_public/inspection-toiture-bastia'
     | '/_public/mentions-legales'
     | '/_public/nettoyage-panneaux-solaires-ajaccio'
@@ -522,11 +572,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/btp-desamiantage': {
+      id: '/_public/btp-desamiantage'
+      path: '/btp-desamiantage'
+      fullPath: '/btp-desamiantage'
+      preLoaderRoute: typeof PublicBtpDesamiantageRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/collectivites': {
+      id: '/_public/collectivites'
+      path: '/collectivites'
+      fullPath: '/collectivites'
+      preLoaderRoute: typeof PublicCollectivitesRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/contact': {
       id: '/_public/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof PublicContactRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/coproprietes-syndics': {
+      id: '/_public/coproprietes-syndics'
+      path: '/coproprietes-syndics'
+      fullPath: '/coproprietes-syndics'
+      preLoaderRoute: typeof PublicCoproprietesSyndicsRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/demoussage-toiture-ajaccio': {
@@ -604,6 +675,13 @@ declare module '@tanstack/react-router' {
       path: '/expertises'
       fullPath: '/expertises'
       preLoaderRoute: typeof PublicExpertisesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/exploitants-solaires': {
+      id: '/_public/exploitants-solaires'
+      path: '/exploitants-solaires'
+      fullPath: '/exploitants-solaires'
+      preLoaderRoute: typeof PublicExploitantsSolairesRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/inspection-toiture-bastia': {
@@ -750,7 +828,10 @@ declare module '@tanstack/react-router' {
 }
 
 interface PublicRouteChildren {
+  PublicBtpDesamiantageRoute: typeof PublicBtpDesamiantageRoute
+  PublicCollectivitesRoute: typeof PublicCollectivitesRoute
   PublicContactRoute: typeof PublicContactRoute
+  PublicCoproprietesSyndicsRoute: typeof PublicCoproprietesSyndicsRoute
   PublicDemoussageToitureAjaccioRoute: typeof PublicDemoussageToitureAjaccioRoute
   PublicDemoussageToitureBastiaRoute: typeof PublicDemoussageToitureBastiaRoute
   PublicDroneAjaccioCorseDuSudRoute: typeof PublicDroneAjaccioCorseDuSudRoute
@@ -762,6 +843,7 @@ interface PublicRouteChildren {
   PublicDronePortoVecchioExtremeSudRoute: typeof PublicDronePortoVecchioExtremeSudRoute
   PublicDroneProprianoValincoRoute: typeof PublicDroneProprianoValincoRoute
   PublicExpertisesRoute: typeof PublicExpertisesRoute
+  PublicExploitantsSolairesRoute: typeof PublicExploitantsSolairesRoute
   PublicInspectionToitureBastiaRoute: typeof PublicInspectionToitureBastiaRoute
   PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
   PublicNettoyagePanneauxSolairesAjaccioRoute: typeof PublicNettoyagePanneauxSolairesAjaccioRoute
@@ -780,7 +862,10 @@ interface PublicRouteChildren {
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
+  PublicBtpDesamiantageRoute: PublicBtpDesamiantageRoute,
+  PublicCollectivitesRoute: PublicCollectivitesRoute,
   PublicContactRoute: PublicContactRoute,
+  PublicCoproprietesSyndicsRoute: PublicCoproprietesSyndicsRoute,
   PublicDemoussageToitureAjaccioRoute: PublicDemoussageToitureAjaccioRoute,
   PublicDemoussageToitureBastiaRoute: PublicDemoussageToitureBastiaRoute,
   PublicDroneAjaccioCorseDuSudRoute: PublicDroneAjaccioCorseDuSudRoute,
@@ -793,6 +878,7 @@ const PublicRouteChildren: PublicRouteChildren = {
     PublicDronePortoVecchioExtremeSudRoute,
   PublicDroneProprianoValincoRoute: PublicDroneProprianoValincoRoute,
   PublicExpertisesRoute: PublicExpertisesRoute,
+  PublicExploitantsSolairesRoute: PublicExploitantsSolairesRoute,
   PublicInspectionToitureBastiaRoute: PublicInspectionToitureBastiaRoute,
   PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
   PublicNettoyagePanneauxSolairesAjaccioRoute:

@@ -57,6 +57,7 @@ export const POLE_ARTICLES: Record<string, RelatedArticle[]> = {
 export const SUB_POLE_ARTICLES: Record<string, RelatedArticle[]> = {
   "nettoyage/toitures": [A.toiture, A.cab, A.amiante],
   "nettoyage/facades": [A.toiture, A.canari],
+  "nettoyage/fixation-amiante": [A.canari, A.amiante],
   "nettoyage/panneaux-solaires": [A.panneaux, A.sahara, A.thermique],
   "diagnostic/thermique": [A.thermique, A.panneaux],
   "diagnostic/visuel": [A.cab, A.toiture],
@@ -81,3 +82,5 @@ export const BLOG_LOCAL_PAGES: Record<string, { href: string; label: string }> =
       label: "Nos interventions en Corse-du-Sud",
     },
   };
+
+export { A as ARTICLES };

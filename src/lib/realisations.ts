@@ -78,7 +78,7 @@ export const REALISATIONS: Realisation[] = [
     date: "Mai 2026",
     pole: "nettoyage",
     service: "Fixation amiante par pulvérisation",
-    serviceHref: "/blog/fixation-amiante-drone-corse",
+    serviceHref: "/pole/nettoyage/fixation-amiante",
     title: "Fixation amiante sur l'ancienne usine de Canari",
     summary:
       "Fin de démantèlement d'un site ADEME à flanc de falaise. Le drone a traité les zones résiduelles les plus volatiles pendant que l'équipe restait en zone verte, à 200 mètres de tuyau.",

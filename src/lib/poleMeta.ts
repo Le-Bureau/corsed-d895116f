@@ -8,6 +8,8 @@ export const SUB_POLE_META: Record<string, string> = {
     "Nettoyage de façades par drone en Corse. Enduits, pierre, bardages métalliques et bois. Élimination pollution et dépôts organiques. Devis gratuit et rapide.",
   "panneaux-solaires":
     "Nettoyage de panneaux photovoltaïques par drone en Corse. Restaure jusqu'à 30 pourcent de rendement. Eau osmosée, sans abrasion. Devis gratuit et rapide.",
+  "fixation-amiante":
+    "Fixation d'amiante par drone en Corse : fixateur pulvérisé sur friches et toitures en fibrociment, équipe hors de la zone. Référence : Canari.",
   thermique:
     "Thermographie aérienne par drone en Corse. Détection ponts thermiques, infiltrations, hotspots photovoltaïques. Caméra UHR 1280x1024. Rapport en 48 à 72h.",
   visuel:

@@ -7,6 +7,7 @@ import { EXPERTISES } from "@/lib/expertises";
 import { CONTACT } from "@/lib/contact";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { LOCAL_AREAS, ZONE_ORDER } from "@/lib/localAreas";
+import { AUDIENCE_PAGES } from "@/lib/audiences";
 
 const ZONE_LINKS = ZONE_ORDER.map((k) => LOCAL_AREAS[k]);
 
@@ -147,6 +148,19 @@ const Footer = () => {
                   <li key={z.path}>
                     <Link to={z.path} className={`block ${linkBase}`}>
                       {z.breadcrumb}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="h-3" />
+
+              <h3 className={colTitle}>Pour qui</h3>
+              <ul className="flex flex-col gap-3">
+                {AUDIENCE_PAGES.map((a) => (
+                  <li key={a.path}>
+                    <Link to={a.path} className={`block ${linkBase}`}>
+                      {a.label}
                     </Link>
                   </li>
                 ))}

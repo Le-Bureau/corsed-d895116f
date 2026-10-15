@@ -4,6 +4,7 @@ import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { LOCAL_AREAS, ZONE_ORDER } from "@/lib/localAreas";
 import { LOCAL_SERVICE_PAGES } from "@/lib/localServicePages";
+import { AUDIENCE_PAGES } from "@/lib/audiences";
 
 const SITE_URL = "https://corse-drone.com";
 
@@ -17,6 +18,7 @@ const STATIC_PATHS = [
   "/zones-d-intervention",
   ...ZONE_ORDER.map((k) => LOCAL_AREAS[k].path),
   ...LOCAL_SERVICE_PAGES.map((p) => p.path),
+  ...AUDIENCE_PAGES.map((p) => p.path),
   "/partenaires",
   "/contact",
   "/mentions-legales",
