@@ -67,7 +67,7 @@ const TOOLS: Tool[] = [
 
 const Outils = () => {
   return (
-    <main className="bg-surface-bg text-text-primary">
+    <div className="bg-surface-bg text-text-primary">
       <section
         aria-labelledby="outils-title"
         className="relative isolate overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-24"
@@ -200,7 +200,7 @@ const Outils = () => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

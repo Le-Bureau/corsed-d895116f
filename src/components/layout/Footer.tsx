@@ -5,6 +5,13 @@ import BrandLogo from "./BrandLogo";
 import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 import { CONTACT } from "@/lib/contact";
+import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
+import { LOCAL_AREAS } from "@/lib/localAreas";
+
+// North to south.
+const ZONE_LINKS = (["bastia", "balagne", "corte", "sud", "portoVecchio"] as const).map(
+  (k) => LOCAL_AREAS[k],
+);
 
 const colTitle =
   "text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-1";
@@ -37,7 +44,7 @@ const Footer = () => {
 
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 sm:px-10 pt-16 md:pt-24">
         {/* Main grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[4fr_2fr_2fr_3fr] gap-10 lg:gap-16 pb-16 md:pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[3fr_3fr_2fr_2fr_3fr] gap-10 lg:gap-12 pb-16 md:pb-20">
           {/* COL 1 — BRAND */}
           <FadeInWhenVisible delay={0}>
             <div className="flex flex-col gap-6">
@@ -68,30 +75,53 @@ const Footer = () => {
             </div>
           </FadeInWhenVisible>
 
-          {/* COL 2 — POLES + EXPERTISES */}
+          {/* COL 2 — POLES, THEIR SERVICE PAGES, SUR DEVIS
+              Every service page is listed here: the header mega menu is only
+              built on click, so this column is how crawlers reach them. */}
           <FadeInWhenVisible delay={0.1}>
             <div className="flex flex-col gap-4">
-              <h3 className={colTitle}>Pôles d'expertise</h3>
-              <ul className="flex flex-col gap-3">
-                {POLES.map((p) => (
-                  <li key={p.key}>
-                    <Link to={`/pole/${p.slug}`} className={`flex items-center gap-2 ${linkBase}`}>
-                      <span
-                        className="h-1.5 w-1.5 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: p.baseColorOnDark ?? p.baseColorOnLight }}
-                      />
-                      <span>{p.label}</span>
-                      {p.comingSoon && (
-                        <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-semibold ml-1">
-                          Bientôt
-                        </span>
+              <h3 className={colTitle}>Pôles et services</h3>
+              <ul className="flex flex-col gap-4">
+                {POLES.map((p) => {
+                  const pages = Object.keys(SUB_POLE_CONTENT[p.key] ?? {});
+                  return (
+                    <li key={p.key} className="flex flex-col gap-2">
+                      <span className="flex items-center gap-2">
+                        <span
+                          className="h-1.5 w-1.5 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: p.baseColorOnDark ?? p.baseColorOnLight }}
+                          aria-hidden="true"
+                        />
+                        <Link to={`/pole/${p.slug}`} className={linkBase}>
+                          {p.label}
+                        </Link>
+                        {p.comingSoon && (
+                          <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-semibold">
+                            Bientôt
+                          </span>
+                        )}
+                      </span>
+                      {pages.length > 0 && (
+                        <ul className="flex flex-col gap-1.5 pl-3.5">
+                          {pages.map((sub) => (
+                            <li key={sub}>
+                              <Link
+                                to={`/pole/${p.slug}/${sub}`}
+                                className="block text-[13px] text-text-on-dark-muted/80 hover:text-text-on-dark transition-colors duration-200"
+                              >
+                                {p.subServices.find((x) => x.slug === sub)?.name ??
+                                  SUB_POLE_CONTENT[p.key]?.[sub]?.seoTitle}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       )}
-                    </Link>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
 
-              <div className="h-3" />
+              <div className="h-2" />
 
               <h3 className={colTitle}>Sur devis</h3>
               <ul className="flex flex-col gap-3">
@@ -106,7 +136,23 @@ const Footer = () => {
             </div>
           </FadeInWhenVisible>
 
-          {/* COL 3 — SOCIETE */}
+          {/* COL 3 — ZONES */}
+          <FadeInWhenVisible delay={0.15}>
+            <div className="flex flex-col gap-4">
+              <h3 className={colTitle}>Zones d'intervention</h3>
+              <ul className="flex flex-col gap-3">
+                {ZONE_LINKS.map((z) => (
+                  <li key={z.path}>
+                    <Link to={z.path} className={`block ${linkBase}`}>
+                      {z.breadcrumb}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeInWhenVisible>
+
+          {/* COL 4 — SOCIETE */}
           <FadeInWhenVisible delay={0.2}>
             <div className="flex flex-col gap-4">
               <h3 className={colTitle}>Société</h3>
@@ -122,28 +168,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/drone-bastia-haute-corse" className={`block ${linkBase}`}>
-                    Bastia et Haute-Corse
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/drone-ajaccio-corse-du-sud" className={`block ${linkBase}`}>
-                    Ajaccio et Corse-du-Sud
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/drone-porto-vecchio-extreme-sud" className={`block ${linkBase}`}>
-                    Porto-Vecchio et Extrême-Sud
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/drone-calvi-balagne" className={`block ${linkBase}`}>
-                    Calvi et Balagne
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/drone-corte-centre-corse" className={`block ${linkBase}`}>
-                    Corte et centre Corse
+                  <Link to="/blog" className={`block ${linkBase}`}>
+                    Blog
                   </Link>
                 </li>
                 <li>

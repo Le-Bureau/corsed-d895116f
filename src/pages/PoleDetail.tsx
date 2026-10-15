@@ -15,6 +15,9 @@ import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
 import TransportFlyCart from "@/components/pole/TransportFlyCart";
 import AgricultureT100 from "@/components/pole/AgricultureT100";
 import { LOCAL_BUSINESS_ID } from "@/lib/poleMeta";
+import RelatedLinks from "@/components/seo/RelatedLinks";
+import ZonesBlock from "@/components/seo/ZonesBlock";
+import { POLE_ARTICLES } from "@/lib/relatedContent";
 
 export const POLE_META: Record<string, string> = {
   nettoyage:
@@ -39,7 +42,7 @@ export default function PoleDetail() {
   } as React.CSSProperties;
 
   return (
-    <main
+    <div
       className={`min-h-screen bg-surface-bg ${pole.isInDevelopment ? "pt-8" : ""}`}
       style={styleVars}
     >
@@ -91,7 +94,19 @@ export default function PoleDetail() {
       {pole.poleFAQ && pole.poleFAQ.length > 0 && (
         <PoleFAQ items={pole.poleFAQ} />
       )}
+      <RelatedLinks
+        servicesTitle="Nos autres pôles"
+        services={[
+          ...POLES.filter((p) => p.key !== pole.key).map((p) => ({
+            label: `${p.label} par drone`,
+            href: `/pole/${p.slug}`,
+          })),
+          { label: "Nos réalisations", href: "/realisations" },
+        ]}
+        articles={POLE_ARTICLES[pole.key] ?? []}
+      />
+      <ZonesBlock />
       <PoleFinalCTA pole={pole} />
-    </main>
+    </div>
   );
 }

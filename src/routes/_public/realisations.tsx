@@ -24,13 +24,16 @@ export const Route = createFileRoute("/_public/realisations")({
     }
     return { covers };
   },
-  head: () =>
+  head: ({ loaderData }) =>
     seoHead({
       title: "Réalisations drone en Corse",
       description:
         "Nos missions drone en Corse, chiffres à l'appui : toitures de la CAB à Bastia, centrale solaire Tenergie, fixation amiante à Canari avec Térélian (Vinci).",
       canonicalPath: "/realisations",
-      ogImage: REALISATIONS[0]?.image,
+      ogImage:
+        (REALISATIONS[0]?.articleSlug &&
+          loaderData?.covers[REALISATIONS[0].articleSlug]) ||
+        REALISATIONS[0]?.image,
       jsonLd: {
         "@context": "https://schema.org",
         "@type": "CollectionPage",

@@ -110,7 +110,7 @@ const RealisationCard = ({ r, index }: { r: Realisation; index: number }) => {
 const Realisations = () => {
   const { covers } = useLoaderData({ from: "/_public/realisations" });
   return (
-    <main className="bg-surface-bg text-text-primary">
+    <div className="bg-surface-bg text-text-primary">
       <section
         aria-labelledby="realisations-title"
         className="relative isolate overflow-hidden pt-36 pb-16 lg:pt-44 lg:pb-20"
@@ -184,7 +184,7 @@ const Realisations = () => {
           </FadeInWhenVisible>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

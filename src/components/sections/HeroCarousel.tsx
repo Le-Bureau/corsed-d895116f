@@ -178,6 +178,9 @@ const HeroCarousel = () => {
 
       <div className="absolute top-24 md:top-28 left-1/2 -translate-x-1/2 xl:left-[clamp(24px,4vw,56px)] xl:translate-x-0 xl:top-24 z-20 pointer-events-none leading-none [@media(max-height:760px)]:top-16 [@media(max-height:760px)]:xl:top-16">
         <BrandLogo className="h-28 md:h-44 lg:h-32 xl:h-36 w-auto ml-0 block [@media(max-height:760px)]:h-20 [@media(max-height:760px)]:md:h-24 [@media(max-height:760px)]:lg:h-20 [@media(max-height:760px)]:xl:h-24" />
+        <h1 className="mt-3 font-mono text-[10px] md:text-[11px] font-semibold tracking-[0.26em] uppercase text-white/75 text-center xl:text-left whitespace-nowrap">
+          Drone professionnel en Corse
+        </h1>
       </div>
 
       {/* Title rotation track — all titles always mounted, animated together.

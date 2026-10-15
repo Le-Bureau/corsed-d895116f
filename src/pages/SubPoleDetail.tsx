@@ -16,6 +16,9 @@ import PoleProcess from "@/components/pole/PoleProcess";
 import PoleFAQ from "@/components/pole/PoleFAQ";
 import PoleFinalCTA from "@/components/pole/PoleFinalCTA";
 import DevBanner from "@/components/pole/DevBanner";
+import RelatedLinks from "@/components/seo/RelatedLinks";
+import ZonesBlock from "@/components/seo/ZonesBlock";
+import { SUB_POLE_ARTICLES } from "@/lib/relatedContent";
 
 export default function SubPoleDetail() {
   const { slug, subSlug } = useParams<{ slug: string; subSlug: string }>();
@@ -30,6 +33,19 @@ export default function SubPoleDetail() {
     "--pole-color-rgb": hexToRgb(pole.baseColorOnLight),
   } as React.CSSProperties;
 
+  const subName = (s: string) =>
+    pole.subServices.find((x) => x.slug === s)?.name ??
+    SUB_POLE_CONTENT[slug || ""]?.[s]?.seoTitle ??
+    s;
+  const crumbs = [
+    { label: "Accueil", href: "/" },
+    { label: pole.label, href: `/pole/${pole.slug}` },
+    { label: subName(subSlug || "") },
+  ];
+  const siblings = Object.keys(SUB_POLE_CONTENT[slug || ""] ?? {})
+    .filter((s) => s !== subSlug)
+    .map((s) => ({ label: subName(s), href: `/pole/${pole.slug}/${s}` }));
+
   const ctaPole = {
     ...pole,
     finalCTATitle: content.finalCTATitle,
@@ -38,7 +54,7 @@ export default function SubPoleDetail() {
   };
 
   return (
-    <main
+    <div
       className={`min-h-screen bg-surface-bg ${pole.isInDevelopment ? "pt-8" : ""}`}
       style={styleVars}
     >
@@ -99,7 +115,7 @@ export default function SubPoleDetail() {
         ]}
       />
       {pole.isInDevelopment && <DevBanner />}
-      <SubPoleHero content={content} pole={pole} />
+      <SubPoleHero content={content} pole={pole} breadcrumbs={crumbs} />
       <SubPoleStats stats={content.stats} />
       <SubPoleWhyTraiter content={content} />
       {content.formulas.length > 0 && <SubPoleFormules formulas={content.formulas} />}
@@ -122,7 +138,17 @@ export default function SubPoleDetail() {
         />
       )}
       <PoleFAQ items={content.faq} />
+      <RelatedLinks
+        servicesTitle={`Pôle ${pole.label.toLowerCase()}`}
+        services={[
+          { label: `Tout le pôle ${pole.label.toLowerCase()}`, href: `/pole/${pole.slug}` },
+          ...siblings,
+          { label: "Nos réalisations", href: "/realisations" },
+        ]}
+        articles={SUB_POLE_ARTICLES[`${slug}/${subSlug}`] ?? []}
+      />
+      <ZonesBlock />
       <PoleFinalCTA pole={ctaPole} />
-    </main>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ import { CONTACT } from "@/lib/contact";
 
 const Index = () => {
   return (
-    <main>
+    <div>
       <SEO
         title="Corse Drone | Drone professionnel en Corse"
         description="Nettoyage, diagnostic, agriculture, transport : 4 expertises drone pour les professionnels en Corse. Sans nacelle, sans échafaudage, sans immobilisation de site."
@@ -54,9 +54,6 @@ const Index = () => {
           sameAs: ["https://www.instagram.com/corsedrone/"],
         }}
       />
-      <h1 className="sr-only">
-        Corse Drone, services drones professionnels en Corse
-      </h1>
       <section data-header-bg="dark">
         <HeroCarousel />
       </section>
@@ -66,7 +63,7 @@ const Index = () => {
       <LatestArticlesSection />
       <PartnersSection />
       <CTAFinalSection />
-    </main>
+    </div>
   );
 };
 
