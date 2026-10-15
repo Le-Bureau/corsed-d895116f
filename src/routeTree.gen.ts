@@ -20,6 +20,7 @@ import { Route as PublicContactRouteImport } from './routes/_public/contact'
 import { Route as PublicCoproprietesSyndicsRouteImport } from './routes/_public/coproprietes-syndics'
 import { Route as PublicDemoussageToitureAjaccioRouteImport } from './routes/_public/demoussage-toiture-ajaccio'
 import { Route as PublicDemoussageToitureBastiaRouteImport } from './routes/_public/demoussage-toiture-bastia'
+import { Route as PublicDemoussageToitureSaintFlorentRouteImport } from './routes/_public/demoussage-toiture-saint-florent'
 import { Route as PublicDroneAjaccioCorseDuSudRouteImport } from './routes/_public/drone-ajaccio-corse-du-sud'
 import { Route as PublicDroneBastiaHauteCorseRouteImport } from './routes/_public/drone-bastia-haute-corse'
 import { Route as PublicDroneCalviBalagneRouteImport } from './routes/_public/drone-calvi-balagne'
@@ -32,12 +33,14 @@ import { Route as PublicExpertisesRouteImport } from './routes/_public/expertise
 import { Route as PublicExploitantsSolairesRouteImport } from './routes/_public/exploitants-solaires'
 import { Route as PublicInspectionToitureBastiaRouteImport } from './routes/_public/inspection-toiture-bastia'
 import { Route as PublicMentionsLegalesRouteImport } from './routes/_public/mentions-legales'
+import { Route as PublicNettoyageFacadePortoVecchioRouteImport } from './routes/_public/nettoyage-facade-porto-vecchio'
 import { Route as PublicNettoyagePanneauxSolairesAjaccioRouteImport } from './routes/_public/nettoyage-panneaux-solaires-ajaccio'
 import { Route as PublicNettoyagePanneauxSolairesBastiaRouteImport } from './routes/_public/nettoyage-panneaux-solaires-bastia'
 import { Route as PublicOutilsRouteImport } from './routes/_public/outils'
 import { Route as PublicPartenairesRouteImport } from './routes/_public/partenaires'
 import { Route as PublicPolitiqueConfidentialiteRouteImport } from './routes/_public/politique-confidentialite'
 import { Route as PublicRealisationsRouteImport } from './routes/_public/realisations'
+import { Route as PublicThermographieBatimentBastiaRouteImport } from './routes/_public/thermographie-batiment-bastia'
 import { Route as PublicThermographiePhotovoltaiqueProprianoRouteImport } from './routes/_public/thermographie-photovoltaique-propriano'
 import { Route as PublicZonesDInterventionRouteImport } from './routes/_public/zones-d-intervention'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
@@ -108,6 +111,12 @@ const PublicDemoussageToitureBastiaRoute =
     path: '/demoussage-toiture-bastia',
     getParentRoute: () => PublicRoute,
   } as any)
+const PublicDemoussageToitureSaintFlorentRoute =
+  PublicDemoussageToitureSaintFlorentRouteImport.update({
+    id: '/demoussage-toiture-saint-florent',
+    path: '/demoussage-toiture-saint-florent',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicDroneAjaccioCorseDuSudRoute =
   PublicDroneAjaccioCorseDuSudRouteImport.update({
     id: '/drone-ajaccio-corse-du-sud',
@@ -176,6 +185,12 @@ const PublicMentionsLegalesRoute = PublicMentionsLegalesRouteImport.update({
   path: '/mentions-legales',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicNettoyageFacadePortoVecchioRoute =
+  PublicNettoyageFacadePortoVecchioRouteImport.update({
+    id: '/nettoyage-facade-porto-vecchio',
+    path: '/nettoyage-facade-porto-vecchio',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicNettoyagePanneauxSolairesAjaccioRoute =
   PublicNettoyagePanneauxSolairesAjaccioRouteImport.update({
     id: '/nettoyage-panneaux-solaires-ajaccio',
@@ -209,6 +224,12 @@ const PublicRealisationsRoute = PublicRealisationsRouteImport.update({
   path: '/realisations',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicThermographieBatimentBastiaRoute =
+  PublicThermographieBatimentBastiaRouteImport.update({
+    id: '/thermographie-batiment-bastia',
+    path: '/thermographie-batiment-bastia',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicThermographiePhotovoltaiqueProprianoRoute =
   PublicThermographiePhotovoltaiqueProprianoRouteImport.update({
     id: '/thermographie-photovoltaique-propriano',
@@ -283,6 +304,7 @@ export interface FileRoutesByFullPath {
   '/coproprietes-syndics': typeof PublicCoproprietesSyndicsRoute
   '/demoussage-toiture-ajaccio': typeof PublicDemoussageToitureAjaccioRoute
   '/demoussage-toiture-bastia': typeof PublicDemoussageToitureBastiaRoute
+  '/demoussage-toiture-saint-florent': typeof PublicDemoussageToitureSaintFlorentRoute
   '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/drone-calvi-balagne': typeof PublicDroneCalviBalagneRoute
@@ -295,12 +317,14 @@ export interface FileRoutesByFullPath {
   '/exploitants-solaires': typeof PublicExploitantsSolairesRoute
   '/inspection-toiture-bastia': typeof PublicInspectionToitureBastiaRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/nettoyage-facade-porto-vecchio': typeof PublicNettoyageFacadePortoVecchioRoute
   '/nettoyage-panneaux-solaires-ajaccio': typeof PublicNettoyagePanneauxSolairesAjaccioRoute
   '/nettoyage-panneaux-solaires-bastia': typeof PublicNettoyagePanneauxSolairesBastiaRoute
   '/outils': typeof PublicOutilsRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
   '/realisations': typeof PublicRealisationsRoute
+  '/thermographie-batiment-bastia': typeof PublicThermographieBatimentBastiaRoute
   '/thermographie-photovoltaique-propriano': typeof PublicThermographiePhotovoltaiqueProprianoRoute
   '/zones-d-intervention': typeof PublicZonesDInterventionRoute
   '/admin/login': typeof AdminLoginRoute
@@ -323,6 +347,7 @@ export interface FileRoutesByTo {
   '/coproprietes-syndics': typeof PublicCoproprietesSyndicsRoute
   '/demoussage-toiture-ajaccio': typeof PublicDemoussageToitureAjaccioRoute
   '/demoussage-toiture-bastia': typeof PublicDemoussageToitureBastiaRoute
+  '/demoussage-toiture-saint-florent': typeof PublicDemoussageToitureSaintFlorentRoute
   '/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/drone-calvi-balagne': typeof PublicDroneCalviBalagneRoute
@@ -335,12 +360,14 @@ export interface FileRoutesByTo {
   '/exploitants-solaires': typeof PublicExploitantsSolairesRoute
   '/inspection-toiture-bastia': typeof PublicInspectionToitureBastiaRoute
   '/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/nettoyage-facade-porto-vecchio': typeof PublicNettoyageFacadePortoVecchioRoute
   '/nettoyage-panneaux-solaires-ajaccio': typeof PublicNettoyagePanneauxSolairesAjaccioRoute
   '/nettoyage-panneaux-solaires-bastia': typeof PublicNettoyagePanneauxSolairesBastiaRoute
   '/outils': typeof PublicOutilsRoute
   '/partenaires': typeof PublicPartenairesRoute
   '/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
   '/realisations': typeof PublicRealisationsRoute
+  '/thermographie-batiment-bastia': typeof PublicThermographieBatimentBastiaRoute
   '/thermographie-photovoltaique-propriano': typeof PublicThermographiePhotovoltaiqueProprianoRoute
   '/zones-d-intervention': typeof PublicZonesDInterventionRoute
   '/admin/login': typeof AdminLoginRoute
@@ -367,6 +394,7 @@ export interface FileRoutesById {
   '/_public/coproprietes-syndics': typeof PublicCoproprietesSyndicsRoute
   '/_public/demoussage-toiture-ajaccio': typeof PublicDemoussageToitureAjaccioRoute
   '/_public/demoussage-toiture-bastia': typeof PublicDemoussageToitureBastiaRoute
+  '/_public/demoussage-toiture-saint-florent': typeof PublicDemoussageToitureSaintFlorentRoute
   '/_public/drone-ajaccio-corse-du-sud': typeof PublicDroneAjaccioCorseDuSudRoute
   '/_public/drone-bastia-haute-corse': typeof PublicDroneBastiaHauteCorseRoute
   '/_public/drone-calvi-balagne': typeof PublicDroneCalviBalagneRoute
@@ -379,12 +407,14 @@ export interface FileRoutesById {
   '/_public/exploitants-solaires': typeof PublicExploitantsSolairesRoute
   '/_public/inspection-toiture-bastia': typeof PublicInspectionToitureBastiaRoute
   '/_public/mentions-legales': typeof PublicMentionsLegalesRoute
+  '/_public/nettoyage-facade-porto-vecchio': typeof PublicNettoyageFacadePortoVecchioRoute
   '/_public/nettoyage-panneaux-solaires-ajaccio': typeof PublicNettoyagePanneauxSolairesAjaccioRoute
   '/_public/nettoyage-panneaux-solaires-bastia': typeof PublicNettoyagePanneauxSolairesBastiaRoute
   '/_public/outils': typeof PublicOutilsRoute
   '/_public/partenaires': typeof PublicPartenairesRoute
   '/_public/politique-confidentialite': typeof PublicPolitiqueConfidentialiteRoute
   '/_public/realisations': typeof PublicRealisationsRoute
+  '/_public/thermographie-batiment-bastia': typeof PublicThermographieBatimentBastiaRoute
   '/_public/thermographie-photovoltaique-propriano': typeof PublicThermographiePhotovoltaiqueProprianoRoute
   '/_public/zones-d-intervention': typeof PublicZonesDInterventionRoute
   '/admin/login': typeof AdminLoginRoute
@@ -412,6 +442,7 @@ export interface FileRouteTypes {
     | '/coproprietes-syndics'
     | '/demoussage-toiture-ajaccio'
     | '/demoussage-toiture-bastia'
+    | '/demoussage-toiture-saint-florent'
     | '/drone-ajaccio-corse-du-sud'
     | '/drone-bastia-haute-corse'
     | '/drone-calvi-balagne'
@@ -424,12 +455,14 @@ export interface FileRouteTypes {
     | '/exploitants-solaires'
     | '/inspection-toiture-bastia'
     | '/mentions-legales'
+    | '/nettoyage-facade-porto-vecchio'
     | '/nettoyage-panneaux-solaires-ajaccio'
     | '/nettoyage-panneaux-solaires-bastia'
     | '/outils'
     | '/partenaires'
     | '/politique-confidentialite'
     | '/realisations'
+    | '/thermographie-batiment-bastia'
     | '/thermographie-photovoltaique-propriano'
     | '/zones-d-intervention'
     | '/admin/login'
@@ -452,6 +485,7 @@ export interface FileRouteTypes {
     | '/coproprietes-syndics'
     | '/demoussage-toiture-ajaccio'
     | '/demoussage-toiture-bastia'
+    | '/demoussage-toiture-saint-florent'
     | '/drone-ajaccio-corse-du-sud'
     | '/drone-bastia-haute-corse'
     | '/drone-calvi-balagne'
@@ -464,12 +498,14 @@ export interface FileRouteTypes {
     | '/exploitants-solaires'
     | '/inspection-toiture-bastia'
     | '/mentions-legales'
+    | '/nettoyage-facade-porto-vecchio'
     | '/nettoyage-panneaux-solaires-ajaccio'
     | '/nettoyage-panneaux-solaires-bastia'
     | '/outils'
     | '/partenaires'
     | '/politique-confidentialite'
     | '/realisations'
+    | '/thermographie-batiment-bastia'
     | '/thermographie-photovoltaique-propriano'
     | '/zones-d-intervention'
     | '/admin/login'
@@ -495,6 +531,7 @@ export interface FileRouteTypes {
     | '/_public/coproprietes-syndics'
     | '/_public/demoussage-toiture-ajaccio'
     | '/_public/demoussage-toiture-bastia'
+    | '/_public/demoussage-toiture-saint-florent'
     | '/_public/drone-ajaccio-corse-du-sud'
     | '/_public/drone-bastia-haute-corse'
     | '/_public/drone-calvi-balagne'
@@ -507,12 +544,14 @@ export interface FileRouteTypes {
     | '/_public/exploitants-solaires'
     | '/_public/inspection-toiture-bastia'
     | '/_public/mentions-legales'
+    | '/_public/nettoyage-facade-porto-vecchio'
     | '/_public/nettoyage-panneaux-solaires-ajaccio'
     | '/_public/nettoyage-panneaux-solaires-bastia'
     | '/_public/outils'
     | '/_public/partenaires'
     | '/_public/politique-confidentialite'
     | '/_public/realisations'
+    | '/_public/thermographie-batiment-bastia'
     | '/_public/thermographie-photovoltaique-propriano'
     | '/_public/zones-d-intervention'
     | '/admin/login'
@@ -614,6 +653,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicDemoussageToitureBastiaRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/demoussage-toiture-saint-florent': {
+      id: '/_public/demoussage-toiture-saint-florent'
+      path: '/demoussage-toiture-saint-florent'
+      fullPath: '/demoussage-toiture-saint-florent'
+      preLoaderRoute: typeof PublicDemoussageToitureSaintFlorentRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/drone-ajaccio-corse-du-sud': {
       id: '/_public/drone-ajaccio-corse-du-sud'
       path: '/drone-ajaccio-corse-du-sud'
@@ -698,6 +744,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicMentionsLegalesRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/nettoyage-facade-porto-vecchio': {
+      id: '/_public/nettoyage-facade-porto-vecchio'
+      path: '/nettoyage-facade-porto-vecchio'
+      fullPath: '/nettoyage-facade-porto-vecchio'
+      preLoaderRoute: typeof PublicNettoyageFacadePortoVecchioRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/nettoyage-panneaux-solaires-ajaccio': {
       id: '/_public/nettoyage-panneaux-solaires-ajaccio'
       path: '/nettoyage-panneaux-solaires-ajaccio'
@@ -738,6 +791,13 @@ declare module '@tanstack/react-router' {
       path: '/realisations'
       fullPath: '/realisations'
       preLoaderRoute: typeof PublicRealisationsRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/thermographie-batiment-bastia': {
+      id: '/_public/thermographie-batiment-bastia'
+      path: '/thermographie-batiment-bastia'
+      fullPath: '/thermographie-batiment-bastia'
+      preLoaderRoute: typeof PublicThermographieBatimentBastiaRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/thermographie-photovoltaique-propriano': {
@@ -834,6 +894,7 @@ interface PublicRouteChildren {
   PublicCoproprietesSyndicsRoute: typeof PublicCoproprietesSyndicsRoute
   PublicDemoussageToitureAjaccioRoute: typeof PublicDemoussageToitureAjaccioRoute
   PublicDemoussageToitureBastiaRoute: typeof PublicDemoussageToitureBastiaRoute
+  PublicDemoussageToitureSaintFlorentRoute: typeof PublicDemoussageToitureSaintFlorentRoute
   PublicDroneAjaccioCorseDuSudRoute: typeof PublicDroneAjaccioCorseDuSudRoute
   PublicDroneBastiaHauteCorseRoute: typeof PublicDroneBastiaHauteCorseRoute
   PublicDroneCalviBalagneRoute: typeof PublicDroneCalviBalagneRoute
@@ -846,12 +907,14 @@ interface PublicRouteChildren {
   PublicExploitantsSolairesRoute: typeof PublicExploitantsSolairesRoute
   PublicInspectionToitureBastiaRoute: typeof PublicInspectionToitureBastiaRoute
   PublicMentionsLegalesRoute: typeof PublicMentionsLegalesRoute
+  PublicNettoyageFacadePortoVecchioRoute: typeof PublicNettoyageFacadePortoVecchioRoute
   PublicNettoyagePanneauxSolairesAjaccioRoute: typeof PublicNettoyagePanneauxSolairesAjaccioRoute
   PublicNettoyagePanneauxSolairesBastiaRoute: typeof PublicNettoyagePanneauxSolairesBastiaRoute
   PublicOutilsRoute: typeof PublicOutilsRoute
   PublicPartenairesRoute: typeof PublicPartenairesRoute
   PublicPolitiqueConfidentialiteRoute: typeof PublicPolitiqueConfidentialiteRoute
   PublicRealisationsRoute: typeof PublicRealisationsRoute
+  PublicThermographieBatimentBastiaRoute: typeof PublicThermographieBatimentBastiaRoute
   PublicThermographiePhotovoltaiqueProprianoRoute: typeof PublicThermographiePhotovoltaiqueProprianoRoute
   PublicZonesDInterventionRoute: typeof PublicZonesDInterventionRoute
   PublicIndexRoute: typeof PublicIndexRoute
@@ -868,6 +931,8 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicCoproprietesSyndicsRoute: PublicCoproprietesSyndicsRoute,
   PublicDemoussageToitureAjaccioRoute: PublicDemoussageToitureAjaccioRoute,
   PublicDemoussageToitureBastiaRoute: PublicDemoussageToitureBastiaRoute,
+  PublicDemoussageToitureSaintFlorentRoute:
+    PublicDemoussageToitureSaintFlorentRoute,
   PublicDroneAjaccioCorseDuSudRoute: PublicDroneAjaccioCorseDuSudRoute,
   PublicDroneBastiaHauteCorseRoute: PublicDroneBastiaHauteCorseRoute,
   PublicDroneCalviBalagneRoute: PublicDroneCalviBalagneRoute,
@@ -881,6 +946,8 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicExploitantsSolairesRoute: PublicExploitantsSolairesRoute,
   PublicInspectionToitureBastiaRoute: PublicInspectionToitureBastiaRoute,
   PublicMentionsLegalesRoute: PublicMentionsLegalesRoute,
+  PublicNettoyageFacadePortoVecchioRoute:
+    PublicNettoyageFacadePortoVecchioRoute,
   PublicNettoyagePanneauxSolairesAjaccioRoute:
     PublicNettoyagePanneauxSolairesAjaccioRoute,
   PublicNettoyagePanneauxSolairesBastiaRoute:
@@ -889,6 +956,8 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicPartenairesRoute: PublicPartenairesRoute,
   PublicPolitiqueConfidentialiteRoute: PublicPolitiqueConfidentialiteRoute,
   PublicRealisationsRoute: PublicRealisationsRoute,
+  PublicThermographieBatimentBastiaRoute:
+    PublicThermographieBatimentBastiaRoute,
   PublicThermographiePhotovoltaiqueProprianoRoute:
     PublicThermographiePhotovoltaiqueProprianoRoute,
   PublicZonesDInterventionRoute: PublicZonesDInterventionRoute,

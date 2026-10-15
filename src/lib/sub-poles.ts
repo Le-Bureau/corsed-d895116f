@@ -304,7 +304,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         "Identifiez déperditions de chaleur, défauts d'isolation et pannes de panneaux photovoltaïques depuis les airs. Rapport technique exploitable, partout en Corse.",
       heroImageAlt: "Drone effectuant un diagnostic thermique",
       stats: [
-        { value: "-85%", unit: "", labelStrong: "de coût", labelMuted: "vs. échafaudage traditionnel" },
+        { value: "1", unit: "MWc", labelStrong: "inspecté en 1 h de vol", labelMuted: "centrale au sol Tenergie à Propriano" },
         { value: "2-3", unit: "h", labelStrong: "SUR SITE", labelMuted: "contre plusieurs jours habituellement" },
         { value: "0", unit: "", labelStrong: "NUISANCE CHANTIER", labelMuted: "sans arrêt d'activité ni accès bloqué" },
       ],

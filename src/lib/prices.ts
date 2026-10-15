@@ -41,7 +41,17 @@ export const FAQ_PRICE_SOLAR = `Pour une maison, ${SOLAR_HOUSE}. Pour les profes
 
 export const FAQ_PRICE_ROOF = faqPriceRoof();
 
-export const FAQ_PRICE_FACADE = `Pour un particulier, ${privateM2()}. Pour les professionnels, ${PRO_M2}. À titre de comparaison, ${NACELLE}. Le prix final dépend de l'accès et de l'état de la façade : ${QUOTE}.`;
+export const faqPriceFacade = (area?: PriceArea) =>
+  `Pour un particulier, ${privateM2(area)}. Pour les professionnels, ${PRO_M2}. À titre de comparaison, ${NACELLE}. Le prix final dépend de l'accès et de l'état de la façade : ${QUOTE}.`;
+
+export const FAQ_PRICE_FACADE = faqPriceFacade();
+
+/** Price summary for a zone page. */
+export const faqPriceZone = (area: PriceArea) =>
+  `Pour un particulier, les toitures et les façades coûtent ${privateM2(area)}. Le nettoyage des panneaux solaires d'une maison coûte ${SOLAR_HOUSE}. Pour les professionnels, ${PRO_M2}, jusqu'à 2 € HT pour le solaire. Les diagnostics sont chiffrés sur devis.`;
+
+/** Minimum per job for roofs and façades, with VAT at 20 %. */
+export const minTTC = (area: PriceArea) => `${eur(ttc(MIN_HT[area], 0.2))} € TTC`;
 
 export const FAQ_PRICE_SOLAR_PRO = `Le nettoyage coûte ${SOLAR_PRO}, avec un prix ferme dans le devis. La thermographie est chiffrée sur devis, selon la puissance et le type d'installation.`;
 
