@@ -1,15 +1,7 @@
 import { MapPin, ArrowRight } from "lucide-react";
 import { Link } from "@/lib/router-compat";
-import { LOCAL_AREAS } from "@/lib/localAreas";
+import { LOCAL_AREAS, ZONE_ORDER } from "@/lib/localAreas";
 
-// North to south, the order a Corsican reader expects.
-const ZONE_ORDER = [
-  "bastia",
-  "balagne",
-  "corte",
-  "sud",
-  "portoVecchio",
-] as const;
 
 interface Props {
   /** Path of the current page, left out of the list. */
@@ -42,7 +34,7 @@ const ZonesBlock = ({ exclude, title = "Nos zones d'intervention" }: Props) => {
           Basés à Ogliastro, dans le Cap Corse, nous intervenons dans toute
           l'île. Retrouvez ce que nous faisons près de chez vous.
         </p>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 list-none">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 list-none">
           {zones.map((z) => (
             <li key={z.path} className="list-none">
               <Link

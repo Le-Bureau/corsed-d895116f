@@ -2,19 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
+import { LOCAL_AREAS, ZONE_ORDER } from "@/lib/localAreas";
+import { LOCAL_SERVICE_PAGES } from "@/lib/localServicePages";
 
 const SITE_URL = "https://corse-drone.com";
 
+// Local pages come from their data files, so a new zone or service × city
+// page is listed without touching this file.
 const STATIC_PATHS = [
   "/",
   "/blog",
   "/realisations",
   "/outils",
-  "/drone-bastia-haute-corse",
-  "/drone-ajaccio-corse-du-sud",
-  "/drone-porto-vecchio-extreme-sud",
-  "/drone-calvi-balagne",
-  "/drone-corte-centre-corse",
+  "/zones-d-intervention",
+  ...ZONE_ORDER.map((k) => LOCAL_AREAS[k].path),
+  ...LOCAL_SERVICE_PAGES.map((p) => p.path),
   "/partenaires",
   "/contact",
   "/mentions-legales",
