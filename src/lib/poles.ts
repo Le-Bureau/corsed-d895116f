@@ -6,6 +6,7 @@ import nettoyageShowcase from "@/assets/poles/nettoyage.webp";
 import diagnosticShowcase from "@/assets/poles/diagnostic.webp";
 import agricultureShowcase from "@/assets/poles/agriculture.webp";
 import transportShowcase from "@/assets/poles/transport.webp";
+import { FAQ_PRICE_CLEANING } from "@/lib/prices";
 
 export type PoleKey = "nettoyage" | "diagnostic" | "agriculture" | "transport";
 
@@ -144,7 +145,7 @@ const NETTOYAGE_USE_CASES: UseCase[] = [
 ];
 
 const NETTOYAGE_FAQ: PoleFAQItem[] = [
-  { question: "Combien coûte un nettoyage par drone en Corse ?", answer: "Le tarif dépend de la surface totale, de l'état d'encrassement et de l'accessibilité du site. En moyenne, le nettoyage par drone est 30 à 50% moins cher que les méthodes traditionnelles car il ne nécessite pas de montage d'échafaudages ni de personnel travaillant en hauteur." },
+  { question: "Combien coûte un nettoyage par drone en Corse ?", answer: FAQ_PRICE_CLEANING },
   { question: "Le drone peut-il endommager mes surfaces ?", answer: "Absolument pas. C'est l'avantage majeur du drone. Il reste à une distance de sécurité (environ 2-3 mètres) du support. Aucun contact physique, donc aucun risque de casse, de rayure ou de dégradation des matériaux." },
   { question: "Quelle est la fréquence d'entretien recommandée ?", answer: "Pour une toiture : tous les 3 à 5 ans selon l'exposition. Pour une façade : tous les 5 à 10 ans. Pour des panneaux solaires : 1 à 2 fois par an selon l'environnement (poussière, oiseaux, marin)." },
   { question: "Intervenez-vous dans toute la Corse ?", answer: "Oui, nous couvrons la Haute-Corse (2B) et la Corse-du-Sud (2A). Nos équipes se déplacent d'Ajaccio à Bastia, en passant par Calvi, l'Île-Rousse, Corte, Porto-Vecchio et Propriano. Nous intervenons également dans les zones rurales et de montagne." },
