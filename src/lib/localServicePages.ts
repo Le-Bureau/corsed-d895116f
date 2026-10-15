@@ -5,6 +5,7 @@
 
 import type { LocalReference } from "@/lib/localAreas";
 import type { RelatedArticle } from "@/lib/relatedContent";
+import { FAQ_PRICE_ROOF, FAQ_PRICE_SOLAR } from "@/lib/prices";
 
 export interface LocalServicePageData {
   path: string;
@@ -134,8 +135,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
     faq: [
       {
         question: "Combien coûte un démoussage de toiture à Bastia ?",
-        answer:
-          "Le prix dépend de la surface, de l'accès et de la formule, traitement seul ou avec hydrofuge. Nous chiffrons chaque toiture sur photos, avec un prix ferme dans le devis.",
+        answer: FAQ_PRICE_ROOF,
       },
       {
         question: "À quelle période faire démousser sa toiture ?",
@@ -269,6 +269,10 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
           "Non : personne ne marche sur les modules et nous n'utilisons que des produits conformes aux recommandations des fabricants.",
       },
       {
+        question: "Combien coûte le nettoyage de panneaux solaires à Bastia ?",
+        answer: FAQ_PRICE_SOLAR,
+      },
+      {
         question: "À partir de quelle surface le drone est-il intéressant ?",
         answer:
           "En général à partir de 30 à 40 m² de panneaux, ou quand la toiture est difficile d'accès. En dessous, nous vous le disons franchement et vous orientons vers une autre méthode.",
@@ -304,8 +308,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
     faq: [
       {
         question: "Combien coûte un démoussage de toiture à Ajaccio ?",
-        answer:
-          "Le prix dépend de la surface, de l'accès et de la formule, traitement seul ou avec hydrofuge. Nous chiffrons chaque toiture sur photos, avec un prix ferme dans le devis.",
+        answer: FAQ_PRICE_ROOF,
       },
       {
         question:
@@ -358,6 +361,10 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
         question: "À quelle fréquence nettoyer ses panneaux ?",
         answer:
           "Une fois par an au minimum, en sortie d'hiver. Deux fois par an en bord de mer immédiat, en zone agricole ou quand l'inclinaison est faible (moins de 15°).",
+      },
+      {
+        question: "Combien coûte le nettoyage de panneaux solaires à Ajaccio ?",
+        answer: FAQ_PRICE_SOLAR,
       },
       {
         question: "Pouvez-vous aussi contrôler l'installation ?",

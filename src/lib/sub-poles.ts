@@ -1,6 +1,7 @@
 import spectraThermique from "@/assets/tools/spectra-thermique.webp";
 import axioVisuel from "@/assets/tools/axio-visuel.webp";
 import { TRANSPORT_SUB_POLES } from "@/lib/sub-poles-transport";
+import { FAQ_PRICE_FACADE, FAQ_PRICE_ROOF, FAQ_PRICE_SOLAR } from "@/lib/prices";
 
 export interface SubPoleStat {
   prefix?: string;
@@ -140,7 +141,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { iconName: "Landmark", category: "Public", title: "Patrimoine public et historique", description: "Églises, bâtiments communaux, édifices classés. Démarche respectueuse des contraintes patrimoniales, coordination avec les Architectes des Bâtiments de France si nécessaire.", highlightLabel: "Éligible", highlightDescription: "marchés publics et subventions" },
       ],
       faq: [
-        { question: "Combien coûte un nettoyage de toiture par drone en Corse ?", answer: "Le tarif dépend de la surface totale, de l'état d'encrassement et de l'accessibilité du site. En moyenne, le nettoyage par drone est 30 à 50% moins cher que les méthodes traditionnelles car il ne nécessite pas de montage d'échafaudages complexes ni de personnels travaillant en hauteur." },
+        { question: "Combien coûte un nettoyage de toiture par drone en Corse ?", answer: FAQ_PRICE_ROOF },
         { question: "Le drone peut-il endommager mes tuiles ?", answer: "Absolument pas. C'est l'avantage majeur du drone. Contrairement au couvreur qui doit marcher sur le toit, le drone reste à une distance de sécurité (environ 2-3 mètres). Il n'y a donc aucun contact physique, supprimant tout risque de casse de tuiles ou de dégradation des ardoises." },
         { question: "Quand faut-il réaliser un démoussage de toiture ?", answer: "Un démoussage est recommandé tous les 3 à 5 ans, selon l'exposition du toit à l'humidité et à la végétation. Les mousses retiennent l'eau, favorisent infiltrations et fissures, et accélèrent l'usure des matériaux. Un entretien régulier protège l'étanchéité et prolonge la durée de vie de la couverture." },
         { question: "Intervenez-vous dans toute la Corse ?", answer: "Oui, nous couvrons la Haute-Corse (2B) et la Corse-du-Sud (2A). Nos équipes se déplacent d'Ajaccio à Bastia, en passant par Calvi, l'Île-Rousse, Corte, Porto-Vecchio et Propriano. Nous intervenons également dans les zones rurales et de montagne." },
@@ -187,6 +188,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { iconName: "Store", category: "Hôtels & commerces", title: "Hôtels et commerces de ville", description: "Devantures de boutiques, façades d'hôtels, commerces en centre-ville. Intervention hors saison ou nocturne pour préserver l'activité et l'image de votre établissement.", highlightLabel: "Discret", highlightDescription: "intervention hors heures d'ouverture" },
       ],
       faq: [
+        { question: "Combien coûte un nettoyage de façade par drone en Corse ?", answer: FAQ_PRICE_FACADE },
         { question: "À quelle fréquence faut-il nettoyer une façade ?", answer: "Tous les 5 à 10 ans selon l'exposition. Une façade côtière exposée au sel marin nécessite un entretien plus fréquent (3 à 5 ans) qu'une façade abritée." },
         { question: "Quels produits utilisez-vous ?", answer: "Selon le support : eau adoucie pour les pierres, anti-biofilm biodégradable pour les enduits modernes, produits certifiés ABF pour les bâtiments classés. Toujours adaptés au matériau et à l'environnement." },
         { question: "Le drone peut-il s'approcher au plus près ?", answer: "Oui, jusqu'à 1-2 mètres de la façade. Le télépilote contrôle la distance pour assurer une pulvérisation efficace sans risque pour le support ni les ouvertures." },
@@ -234,6 +236,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { iconName: "Factory", category: "Industriel", title: "Bâtiments industriels", description: "Hangars, entrepôts et bâtiments industriels équipés en toiture ou ombrières de parking. Intervention sans arrêt d'activité, coordination avec vos équipes de maintenance.", highlightLabel: "Sans arrêt", highlightDescription: "d'activité ni de production" },
       ],
       faq: [
+        { question: "Combien coûte le nettoyage de panneaux solaires par drone ?", answer: FAQ_PRICE_SOLAR },
         { question: "À quelle fréquence faut-il nettoyer ses panneaux solaires en Corse ?", answer: "En Corse, un nettoyage des panneaux solaires est recommandé tous les 6 à 12 mois pour maintenir un bon niveau de production. Les installations en bord de mer ou fortement exposées au vent, au sel et aux poussières sahariennes perdent du rendement plus vite : visez plutôt un passage tous les 6 mois. Pour une installation abritée, un nettoyage annuel suffit généralement." },
         { question: "Le nettoyage abîme-t-il les panneaux ?", answer: "Absolument pas, le nettoyage se fait à basse pression, avec des produits adaptés ainsi que de l'eau osmosée, afin de préserver l'intégrité du verre, des cellules photovoltaïques et des joints." },
         { question: "Peut-on constater un gain de production après nettoyage ?", answer: "Un gain de production est immédiatement constaté après le nettoyage. Après environ un an sans entretien, le gain se situe souvent entre 10 et 15%. Sur des installations restées plusieurs années sans nettoyage, notamment en zones exposées au sel, poussières ou pollution, le gain peut atteindre 30 à 50%." },
@@ -285,6 +288,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { question: "Quelle surface peut-on traiter ?", answer: "À Canari, plus de 1 500 m² répartis sur 7 zones distinctes, en 6 heures de vol effectif sur 2 jours." },
         { question: "L'équipe au sol est-elle exposée ?", answer: "Non : grâce aux 200 mètres de tuyau, le pilote et l'équipe au sol restent en zone verte, à distance des zones traitées, pendant toute l'intervention." },
         { question: "Que contient le compte-rendu ?", answer: "Photos avant et après, plans des zones traitées, volumes appliqués et conditions d'intervention. Il est exploitable par le maître d'ouvrage et par tout contrôle ultérieur sur le chantier." },
+        { question: "Combien coûte une fixation d'amiante par drone ?", answer: "Sur devis, après un pré-diagnostic : surface et nombre de zones, accès, contraintes du chantier. À Canari, plus de 1 500 m² sur 7 zones ont demandé 6 heures de vol effectif sur 2 jours." },
       ],
       finalCTATitle: "Un chantier amianté à étudier ?",
       finalCTASubtitle: "Localisation, surface estimée, type de contamination, calendrier : nous revenons vers vous avec une analyse de faisabilité.",
@@ -371,6 +375,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { question: "Faut-il des conditions météo particulières ?", answer: "Oui : ΔT > 10°C entre intérieur/extérieur, vent < 30 km/h, ciel dégagé depuis 2h, absence de pluie dans les 12h précédentes. Si non réunies, mission reportée sans frais. Pour le photovoltaïque : irradiance > 600 W/m²." },
         { question: "Que contient le rapport final ?", answer: "PDF de 15 à 40 pages : cartographie thermique, zoom sur chaque anomalie avec image visuelle ET thermique, températures mesurées, interprétation technique (pont thermique, défaut d'isolation, infiltration, défaut cellule), préconisations priorisées." },
         { question: "Vos certifications STS couvrent-elles ma mission ?", answer: "Corse Drone opère avec STS-01 et STS-02 délivrées par la DGAC, couvrant la quasi-totalité du territoire corse. Drone DJI Matrice 4T classé C2, vol jusqu'à 5m des personnes. Pour zones sensibles, plan de vol spécifique avec préavis 10 jours." },
+        { question: "Combien coûte une thermographie par drone ?", answer: "Sur devis : le prix dépend du type et de la taille du site, du nombre de bâtiments ou de la puissance de l'installation, et du rapport attendu. Pour la centrale au sol de 1 MWc de Tenergie, il a fallu une heure de vol et une demi-journée de traitement des données." },
       ],
       finalCTATitle: "Un audit thermique à programmer ?",
       finalCTASubtitle: "Préavis légal 10 jours. Rapport sous 48 à 72h, 7 jours pour un grand site.",
@@ -455,6 +460,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { question: "Quelle est la précision des images ?", answer: "Résolution 4K avec zoom jusqu'à 112× et précision GPS de l'ordre du centimètre. Les microfissures, joints dégradés et corrosion naissante sont détectables." },
         { question: "Le rapport est-il opposable juridiquement ?", answer: "Oui. Chaque anomalie est géoréférencée et horodatée, ce qui rend le rapport opposable et utilisable pour des dossiers d'assurance, expertises contradictoires ou justifications de subventions." },
         { question: "Sur quelle hauteur pouvez-vous intervenir ?", answer: "Jusqu'à 120 mètres en vol standard. Au-delà, un dépôt de plan de vol spécifique est nécessaire avec un préavis de 10 jours." },
+        { question: "Combien coûte une inspection par drone ?", answer: "Sur devis : le prix dépend de la surface à inspecter, de l'accès et du livrable, rapport PDF ou maquette 3D consultable dans Axio. Pour la CAB, deux bâtiments publics ont été inspectés en une journée." },
       ],
       finalCTATitle: "Une inspection à programmer ?",
       finalCTASubtitle: "Devis sous 48h, intervention sous 10 jours, rapport livré sous 72h.",
@@ -537,6 +543,7 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
         { question: "La photogrammétrie remplace-t-elle un géomètre ?", answer: "Elle le complète. Le drone capte en quelques heures ce qui prendrait des jours au sol, avec une couverture totale. Pour les actes à valeur foncière (bornage, division), l'intervention d'un géomètre-expert reste nécessaire." },
         { question: "Réalisez-vous des plans de façades ?", answer: "Oui. Pour les relevés de façades, nous travaillons en partenariat avec l'agence Le Bureau, à Bastia, qui restitue le modèle photogrammétrique en plans et élévations exploitables par les architectes et bureaux d'études." },
         { question: "Faut-il des conditions météo particulières ?", answer: "Un vent inférieur à 30 km/h, pas de pluie et une lumière homogène. Un ciel légèrement couvert est même idéal : il limite les ombres portées. Si les conditions ne sont pas réunies, la mission est reportée sans frais." },
+        { question: "Combien coûte un relevé par photogrammétrie ?", answer: "Sur devis : le prix dépend de la surface à couvrir, de la précision demandée et des livrables (orthophoto, nuage de points, modèle 3D, cubatures)." },
       ],
       finalCTATitle: "Un site à relever ?",
       finalCTASubtitle: "Devis sous 48h. Livrables aux formats de vos outils.",

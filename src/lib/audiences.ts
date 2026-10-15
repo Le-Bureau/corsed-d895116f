@@ -9,6 +9,7 @@ import {
   type LocalReference,
 } from "@/lib/localAreas";
 import { DELAY } from "@/lib/localServicePages";
+import { FAQ_PRICE_SOLAR_PRO } from "@/lib/prices";
 import { ARTICLES as A, type RelatedArticle } from "@/lib/relatedContent";
 
 export interface AudienceService {
@@ -191,6 +192,10 @@ export const AUDIENCE_PAGES: AudiencePageData[] = [
         question: "Comment consulte-t-on les résultats ?",
         answer:
           "Dans Spectra, notre plateforme de rapports en ligne, avec un accès sécurisé : les anomalies sont positionnées sur l'orthomosaïque du site, avec le rapport PDF et un export pour la maintenance.",
+      },
+      {
+        question: "Combien coûte le nettoyage d'une installation professionnelle ?",
+        answer: FAQ_PRICE_SOLAR_PRO,
       },
       {
         question: "Le nettoyage par drone annule-t-il la garantie des panneaux ?",
