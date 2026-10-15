@@ -1528,6 +1528,17 @@ html.lenis body {
   transition: background 0.18s ease;
 }
 .blog-scope .btn-secondary:hover { background: rgba(252, 250, 247, 0.08); }
+.blog-scope .blog-cta p.blog-cta__local {
+  margin: 24px auto 0;
+  font-size: 14px;
+}
+.blog-scope .blog-cta__local a {
+  color: var(--blog-bg);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(252, 250, 247, 0.4);
+}
+.blog-scope .blog-cta__local a:hover { text-decoration-color: var(--blog-bg); }
 
 /* ─── RELATED ─── */
 .blog-scope .related {

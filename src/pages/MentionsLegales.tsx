@@ -41,7 +41,7 @@ export default function MentionsLegales() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-surface-bg">
+    <div className="min-h-screen bg-surface-bg">
       <SEO
         title="Mentions légales"
         description="Mentions légales de Corse Drone : éditeur, hébergeur, protection des données personnelles, propriété intellectuelle."
@@ -384,7 +384,7 @@ export default function MentionsLegales() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

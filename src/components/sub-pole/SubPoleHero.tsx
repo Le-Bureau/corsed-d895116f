@@ -7,13 +7,23 @@ import TypewriterWords from "@/components/animations/TypewriterWords";
 import { useLenis } from "@/components/SmoothScrollProvider";
 import type { Pole } from "@/lib/poles";
 import type { SubPoleContent } from "@/lib/sub-poles";
+import Breadcrumbs, { type Crumb } from "@/components/seo/Breadcrumbs";
 
 interface Props {
   content: SubPoleContent;
   pole: Pole;
+  breadcrumbs?: Crumb[];
 }
 
-const SubPoleHero = ({ content, pole }: Props) => {
+const primaryCtaClass =
+  "group inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none motion-reduce:transform-none";
+const primaryCtaStyle: React.CSSProperties = {
+  background: "var(--pole-color)",
+  boxShadow:
+    "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.35), 0 8px 24px rgba(var(--pole-color-rgb), 0.25)",
+};
+
+const SubPoleHero = ({ content, pole, breadcrumbs }: Props) => {
   const lenis = useLenis();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const showProcessAnchor = !!content.processSteps && content.processSteps.length > 0;
@@ -70,6 +80,9 @@ const SubPoleHero = ({ content, pole }: Props) => {
 
       <div className="relative z-[5] max-w-[1100px] mx-auto px-5 sm:px-10 text-center">
         <FadeInWhenVisible>
+          {breadcrumbs && (
+            <Breadcrumbs items={breadcrumbs} className="flex justify-center mb-6" />
+          )}
           {/* The pill carries the H1 (service + place); the big tagline below is
               presentational so the H1 says what the page is about. */}
           <h1
@@ -121,23 +134,28 @@ const SubPoleHero = ({ content, pole }: Props) => {
             {content.heroPitch}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to={pole.isInDevelopment ? "#" : `/contact?expertise=${pole.key}`}
-              onClick={(e: React.MouseEvent) => {
-                if (!pole.isInDevelopment) return;
-                e.preventDefault();
-                setIsAlertOpen(true);
-              }}
-              className="group inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-[15px] px-7 py-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 motion-reduce:hover:transform-none motion-reduce:transform-none"
-              style={{
-                background: "var(--pole-color)",
-                boxShadow:
-                  "0 0 0 1px rgba(var(--pole-color-rgb), 0.4), 0 0 24px rgba(var(--pole-color-rgb), 0.35), 0 8px 24px rgba(var(--pole-color-rgb), 0.25)",
-              }}
-            >
-              {pole.isInDevelopment ? "Être prévenu du lancement" : "Obtenir un devis"}
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
-            </Link>
+            {/* While the pole is in development the CTA opens the launch alert:
+                a button, not a link to "#" (which made the page link to itself). */}
+            {pole.isInDevelopment ? (
+              <button
+                type="button"
+                onClick={() => setIsAlertOpen(true)}
+                className={primaryCtaClass}
+                style={primaryCtaStyle}
+              >
+                Être prévenu du lancement
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
+              </button>
+            ) : (
+              <Link
+                to={`/contact?expertise=${pole.key}`}
+                className={primaryCtaClass}
+                style={primaryCtaStyle}
+              >
+                Obtenir un devis
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none" />
+              </Link>
+            )}
             {showProcessAnchor && (
               <a
                 href="#process"

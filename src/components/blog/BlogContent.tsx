@@ -20,7 +20,7 @@ const sanitizeSchema: SanitizeSchema = {
   attributes: {
     ...defaultSchema.attributes,
     "*": [...(defaultSchema.attributes?.["*"] ?? []), "className"],
-    img: [...(defaultSchema.attributes?.img ?? []), "loading", "width", "height"],
+    img: [...(defaultSchema.attributes?.["img"] ?? []), "loading", "width", "height"],
   },
 };
 
@@ -75,6 +75,11 @@ const BlogContent = ({ markdown }: Props) => {
         <h3 {...props} id={slugify(getNodeText(children))}>
           {children}
         </h3>
+      ),
+      // Lazy in the server HTML too: eager <img> get preloaded with the page,
+      // which made a gallery of full-size photos load before anything else.
+      img: ({ node: _node, ...props }: any) => (
+        <img {...props} loading="lazy" decoding="async" />
       ),
     }),
     [],

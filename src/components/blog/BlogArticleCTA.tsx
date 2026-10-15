@@ -3,9 +3,11 @@ import type { BlogServiceLink } from "@/lib/blogServiceLinks";
 
 interface Props {
   service?: BlogServiceLink | undefined;
+  /** Local page of the place where the mission happened (case studies). */
+  localPage?: { href: string; label: string } | undefined;
 }
 
-const BlogArticleCTA = ({ service }: Props) => {
+const BlogArticleCTA = ({ service, localPage }: Props) => {
   const eyebrow = "Un projet à étudier ?";
   const title = service?.title ?? "Discutons de votre projet drone";
   const description =
@@ -36,6 +38,11 @@ const BlogArticleCTA = ({ service }: Props) => {
             </Link>
           )}
         </div>
+        {localPage && (
+          <p className="blog-cta__local">
+            <Link to={localPage.href}>{localPage.label}</Link>
+          </p>
+        )}
       </div>
     </section>
   );

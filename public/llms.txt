@@ -1,0 +1,52 @@
+# Corse Drone
+
+> Opérateur de drones professionnels en Corse, basé à Ogliastro (Cap Corse, Haute-Corse). Nettoyage de toitures, façades et panneaux solaires, thermographie, inspection visuelle, photogrammétrie, fixation d'amiante, transport de charges et agriculture, dans toute la Corse (Haute-Corse et Corse-du-Sud).
+
+Coordonnées : Corse Drone, Marine d'Albo, 44 Strada di a Torra, 20217 Ogliastro. Téléphone 07 59 50 35 17. contact@corse-drone.com. Du lundi au vendredi, 9 h à 18 h.
+
+Les rapports d'inspection sont livrés sur deux plateformes développées en interne : Axio (inspection visuelle, maquette 3D en ligne) et Spectra (thermographie solaire et bâtiment).
+
+## Nettoyage
+
+- [Nettoyage par drone en Corse](https://corse-drone.com/pole/nettoyage) : toitures, façades et panneaux photovoltaïques, sans échafaudage ni nacelle.
+- [Nettoyage et démoussage de toiture](https://corse-drone.com/pole/nettoyage/toitures)
+- [Nettoyage de façade](https://corse-drone.com/pole/nettoyage/facades)
+- [Nettoyage de panneaux solaires](https://corse-drone.com/pole/nettoyage/panneaux-solaires)
+
+## Diagnostic
+
+- [Diagnostic par drone en Corse](https://corse-drone.com/pole/diagnostic)
+- [Thermographie par drone](https://corse-drone.com/pole/diagnostic/thermique) : bâtiments et centrales photovoltaïques, méthodologie IEC TS 62446-3.
+- [Inspection visuelle par drone](https://corse-drone.com/pole/diagnostic/visuel)
+- [Photogrammétrie par drone](https://corse-drone.com/pole/diagnostic/photogrammetrie)
+
+## Transport (en préparation)
+
+- [Transport par drone en Corse](https://corse-drone.com/pole/transport) : DJI FlyCart 100, jusqu'à 100 kg par rotation (85 kg en exploitation courante), autorisation DGAC (SORA) en cours d'instruction.
+- [Ravitaillement de refuges par drone](https://corse-drone.com/pole/transport/refuges)
+- [Alternative à l'hélicoptère](https://corse-drone.com/pole/transport/alternative-helicoptere)
+
+## Agriculture (en préparation)
+
+- [Agriculture par drone en Corse](https://corse-drone.com/pole/agriculture) : cartographie multispectrale, épandage et semis avec le DJI Agras T100.
+
+## Zones d'intervention
+
+- [Bastia et Haute-Corse](https://corse-drone.com/drone-bastia-haute-corse)
+- [Calvi et Balagne](https://corse-drone.com/drone-calvi-balagne)
+- [Corte et centre Corse](https://corse-drone.com/drone-corte-centre-corse)
+- [Ajaccio et Corse-du-Sud](https://corse-drone.com/drone-ajaccio-corse-du-sud)
+- [Porto-Vecchio et Extrême-Sud](https://corse-drone.com/drone-porto-vecchio-extreme-sud)
+
+## Références
+
+- [Réalisations](https://corse-drone.com/realisations) : inspection des toitures de deux bâtiments de la Communauté d'Agglomération de Bastia ; fixation d'amiante sur l'ancienne usine de Canari avec Térélian (groupe Vinci) ; thermographie d'une centrale solaire au sol de 1 MWc pour Tenergie à Propriano.
+- [Nos outils, Axio et Spectra](https://corse-drone.com/outils)
+
+## Articles
+
+- [Blog](https://corse-drone.com/blog) : méthodes, retours de mission et réglementation.
+
+## Contact
+
+- [Demander un devis](https://corse-drone.com/contact)

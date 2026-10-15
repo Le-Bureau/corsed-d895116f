@@ -42,7 +42,7 @@ export default function PolitiqueConfidentialite() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-surface-bg">
+    <div className="min-h-screen bg-surface-bg">
       <SEO
         title="Politique de confidentialité"
         description="Politique de confidentialité de Corse Drone : données collectées, finalités, durée de conservation, vos droits RGPD et comment les exercer."
@@ -561,7 +561,7 @@ export default function PolitiqueConfidentialite() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import { Link } from "@/lib/router-compat";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useLenis } from "@/components/SmoothScrollProvider";
@@ -80,6 +81,10 @@ const PoleHero = ({ pole }: Props) => {
       />
 
       <div className="relative z-[5] max-w-[1280px] mx-auto px-5 sm:px-10 w-full">
+        <Breadcrumbs
+          items={[{ label: "Accueil", href: "/" }, { label: pole.label }]}
+          className="mb-5"
+        />
         {/* Eyebrow */}
         <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-soft-sm border border-border-subtle font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-text-muted mb-8">
           <span

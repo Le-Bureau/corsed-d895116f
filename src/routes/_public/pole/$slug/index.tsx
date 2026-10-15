@@ -40,6 +40,14 @@ export const Route = createFileRoute("/_public/pole/$slug/")({
           areaServed: { "@type": "AdministrativeArea", name: "Corse" },
           url: `https://corse-drone.com/pole/${pole.key}`,
         },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://corse-drone.com/" },
+            { "@type": "ListItem", position: 2, name: pole.label, item: `https://corse-drone.com/pole/${pole.key}` },
+          ],
+        },
         ...(pole.poleFAQ?.length
           ? [
               {

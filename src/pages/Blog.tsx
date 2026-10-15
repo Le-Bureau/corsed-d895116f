@@ -84,14 +84,15 @@ const Blog = () => {
 
       <div className="blog-layout">
         <BlogSidebar
-          categories={categories}
+          // Empty categories are hidden: their filter pages had no article.
+          categories={categories.filter((c) => (counts[c.slug] ?? 0) > 0 || c.slug === catSlug)}
           counts={counts}
           total={total}
           search={search}
           onSearchChange={setSearch}
         />
 
-        <main>
+        <div>
           <section className="blog-hero">
             <h1>
               Le <em>journal</em> de bord
@@ -182,7 +183,7 @@ const Blog = () => {
               </section>
             </>
           )}
-        </main>
+        </div>
       </div>
     </div>
   );

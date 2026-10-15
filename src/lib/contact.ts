@@ -13,4 +13,9 @@ export const CONTACT = {
     "https://www.google.com/maps/search/?api=1&query=Marine+d%27Albo+44+Strada+di+a+Torra+20217+Ogliastro",
   opens: "09:00",
   closes: "18:00",
+  // Hamlet of Albo (OpenStreetMap). Replace with the Google Business pin if it differs.
+  geo: { latitude: 42.8097, longitude: 9.3364 },
+  // Paste the Google Business Profile link here (Maps "Partager" link):
+  // it is then added to the structured data of every page.
+  googleBusinessUrl: "" as string,
 } as const;

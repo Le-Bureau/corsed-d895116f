@@ -103,7 +103,7 @@ export const TRANSPORT_SUB_POLES: Record<string, SubPoleContent> = {
 
   "alternative-helicoptere": {
     heroEyebrow: "Transport · alternative à l'hélicoptère",
-    seoTitle: "Transport par drone, l'alternative à l'hélicoptère en Corse",
+    seoTitle: "Alternative à l'hélicoptère : le transport par drone en Corse",
     heroTitle: "Pas besoin d'un hélicoptère pour 80 kilos.",
     heroPitch:
       "Pour les charges de moins de 100 kg et les rotations répétées, le drone cargo évite de mobiliser un hélicoptère. Dépose au treuil, sans aire d'atterrissage, sur chantier, en montagne ou sur un site côtier escarpé.",

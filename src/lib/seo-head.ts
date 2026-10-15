@@ -7,6 +7,15 @@ const SITE_NAME = "Corse Drone";
 
 type JsonLd = Record<string, unknown>;
 
+const TITLE_MAX = 60;
+
+/** Appends " | Corse Drone" unless the title already names it or would get too long. */
+export const withBrand = (title: string): string => {
+  if (title.includes(SITE_NAME)) return title;
+  const branded = `${title} | ${SITE_NAME}`;
+  return branded.length <= TITLE_MAX ? branded : title;
+};
+
 export interface SeoHeadOptions {
   title: string;
   description: string;
@@ -30,9 +39,7 @@ export function seoHead({
   extraMeta = [],
   extraLinks = [],
 }: SeoHeadOptions) {
-  const fullTitle = title.includes(SITE_NAME)
-    ? title
-    : `${title} | ${SITE_NAME}`;
+  const fullTitle = withBrand(title);
   const canonical = `${SITE_URL}${canonicalPath}`;
   const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
@@ -79,7 +86,7 @@ const RSS_LINK = {
 export function blogIndexHead(activeCategoryName?: string | null) {
   const title = activeCategoryName
     ? `${activeCategoryName} | Blog | ${SITE_NAME}`
-    : `Blog | ${SITE_NAME}`;
+    : "Blog drone en Corse : méthodes et retours de mission";
   const description = activeCategoryName
     ? `Articles dans la catégorie ${activeCategoryName}, ${SITE_NAME}.`
     : BLOG_DEFAULT_DESC;
@@ -122,10 +129,7 @@ const countWords = (md: string): number => {
 
 export function blogPostHead(post: BlogPost) {
   const canonical = `${SITE_URL}/blog/${post.slug}`;
-  const titleBase = post.metaTitle?.trim() || `${post.title} | ${SITE_NAME}`;
-  const fullTitle = titleBase.includes(SITE_NAME)
-    ? titleBase
-    : `${titleBase} | ${SITE_NAME}`;
+  const fullTitle = withBrand(post.metaTitle?.trim() || post.title);
   const description = post.metaDescription?.trim() || post.excerpt;
   const ogImage = resolveOgImage(post.heroImageUrl ?? post.coverImageUrl);
 
@@ -138,12 +142,6 @@ export function blogPostHead(post: BlogPost) {
     { name: "Accueil", item: `${SITE_URL}/` },
     { name: "Blog", item: `${SITE_URL}/blog` },
   ];
-  if (category) {
-    breadcrumbItems.push({
-      name: category.name,
-      item: `${SITE_URL}/blog?cat=${category.slug}`,
-    });
-  }
   breadcrumbItems.push({ name: post.title, item: canonical });
 
   const blogPostingLd: JsonLd = {
@@ -157,11 +155,7 @@ export function blogPostHead(post: BlogPost) {
     author: author
       ? { "@type": "Person", name: author.name, jobTitle: author.role }
       : undefined,
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      "@id": LOCAL_BUSINESS_ID,
-    },
+    publisher: { "@id": LOCAL_BUSINESS_ID },
     mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
     articleSection: category?.name,
     wordCount: countWords(post.contentMd),

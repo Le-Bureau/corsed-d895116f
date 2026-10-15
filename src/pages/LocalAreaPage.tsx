@@ -5,6 +5,8 @@ import PoleFAQ from "@/components/pole/PoleFAQ";
 import { POLES } from "@/lib/poles";
 import { CONTACT } from "@/lib/contact";
 import { LOCAL_SERVICES, type LocalArea } from "@/lib/localAreas";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import ZonesBlock from "@/components/seo/ZonesBlock";
 
 const colorOf = (key: string) =>
   POLES.find((p) => p.key === key)?.baseColorOnLight ?? "#5082AC";
@@ -32,7 +34,7 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
   } as React.CSSProperties;
 
   return (
-    <main className="bg-surface-bg text-text-primary">
+    <div className="bg-surface-bg text-text-primary">
       {/* Hero */}
       <section
         aria-labelledby="local-title"
@@ -48,6 +50,10 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
           }}
         />
         <div className="hero-enter max-w-[1280px] mx-auto px-5 sm:px-10">
+          <Breadcrumbs
+            items={[{ label: "Accueil", href: "/" }, { label: area.breadcrumb }]}
+            className="mb-5"
+          />
           <Eyebrow>{area.eyebrow}</Eyebrow>
           <h1
             id="local-title"
@@ -220,6 +226,8 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
         <PoleFAQ items={area.faq} />
       </div>
 
+      <ZonesBlock exclude={area.path} title="Nos autres zones d'intervention" />
+
       {/* CTA */}
       <section aria-labelledby="local-cta" className="py-20 lg:py-28">
         <div className="max-w-[1280px] mx-auto px-5 sm:px-10">
@@ -241,7 +249,7 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

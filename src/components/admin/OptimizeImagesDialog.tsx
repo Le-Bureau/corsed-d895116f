@@ -22,8 +22,10 @@ import type { BlogPost } from "@/types/blog";
 const HEAVY_BYTES = 300 * 1024;
 const BUCKET_MARKER = "/storage/v1/object/public/blog-covers/";
 const MD_IMAGE = /!\[[^\]]*\]\(([^)\s]+)[^)]*\)/g;
+// Images inserted as HTML (gallery blocks: <div class="image-gallery"><figure><img src="…">).
+const HTML_IMAGE = /<img\b[^>]*\ssrc="([^"]+)"/g;
 
-type Kind = "cover" | "hero" | "inline";
+type Kind = "cover" | "hero" | "inline" | "gallery";
 
 interface Candidate {
   key: string;
@@ -39,12 +41,14 @@ const FOLDER: Record<Kind, ImageFolder> = {
   cover: "covers",
   hero: "heroes",
   inline: "inline-images",
+  gallery: "gallery-images",
 };
 
 const LABEL: Record<Kind, string> = {
   cover: "Couverture",
   hero: "Bannière",
   inline: "Image dans l'article",
+  gallery: "Galerie de l'article",
 };
 
 const fmt = (b: number | null | undefined) =>
@@ -65,6 +69,9 @@ const collect = (posts: BlogPost[]) => {
     add("cover", post.coverImageUrl);
     add("hero", post.heroImageUrl);
     for (const m of post.contentMd.matchAll(MD_IMAGE)) add("inline", m[1]);
+    for (const m of post.contentMd.matchAll(HTML_IMAGE)) {
+      add(m[1]?.includes("/gallery-images/") ? "gallery" : "inline", m[1]);
+    }
   }
   // The same file can appear twice (cover reused as hero): measure it once.
   return out.filter((c, i) => out.findIndex((o) => o.key === c.key) === i);
@@ -162,6 +169,7 @@ const OptimizeImagesDialog = ({ open, onOpenChange, posts }: Props) => {
         if (c.kind === "cover") update = { cover_image_url: newUrl };
         else if (c.kind === "hero") update = { hero_image_url: newUrl };
         else {
+          // inline and gallery images both live in the article body.
           const md = (content.get(c.post.id) ?? c.post.contentMd)
             .split(c.url)
             .join(newUrl);

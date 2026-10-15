@@ -39,6 +39,7 @@ import NotFoundPage from "@/components/layout/NotFoundPage";
 import { POLES } from "@/lib/poles";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
 import { reportLovableError } from "@/lib/lovable-error-reporting";
+import { SITE_ENTITY_LD } from "@/lib/siteEntity";
 
 const PlausibleTracker = () => {
   usePlausibleTracking();
@@ -98,6 +99,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Corse Drone : opérateur drone professionnel en Corse. Nettoyage de toitures, façades et panneaux solaires, diagnostic thermique, transport et agriculture. Devis gratuit.",
       },
+      { property: "og:image", content: "https://corse-drone.com/og-default.jpg" },
+      { name: "twitter:image", content: "https://corse-drone.com/og-default.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
@@ -144,6 +147,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(SITE_ENTITY_LD),
+      },
       {
         src: "https://plausible.io/js/pa-ehT06jIuzZdJtgLjr-mzZ.js",
         async: true,
