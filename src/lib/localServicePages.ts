@@ -5,7 +5,7 @@
 
 import type { LocalReference } from "@/lib/localAreas";
 import type { RelatedArticle } from "@/lib/relatedContent";
-import { FAQ_PRICE_ROOF, FAQ_PRICE_SOLAR } from "@/lib/prices";
+import { faqPriceRoof, faqPriceSolar } from "@/lib/prices";
 
 export interface LocalServicePageData {
   path: string;
@@ -135,7 +135,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
     faq: [
       {
         question: "Combien coûte un démoussage de toiture à Bastia ?",
-        answer: FAQ_PRICE_ROOF,
+        answer: faqPriceRoof("2B"),
       },
       {
         question: "À quelle période faire démousser sa toiture ?",
@@ -270,7 +270,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
       },
       {
         question: "Combien coûte le nettoyage de panneaux solaires à Bastia ?",
-        answer: FAQ_PRICE_SOLAR,
+        answer: faqPriceSolar("2B"),
       },
       {
         question: "À partir de quelle surface le drone est-il intéressant ?",
@@ -308,7 +308,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
     faq: [
       {
         question: "Combien coûte un démoussage de toiture à Ajaccio ?",
-        answer: FAQ_PRICE_ROOF,
+        answer: faqPriceRoof("2A"),
       },
       {
         question:
@@ -364,7 +364,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
       },
       {
         question: "Combien coûte le nettoyage de panneaux solaires à Ajaccio ?",
-        answer: FAQ_PRICE_SOLAR,
+        answer: faqPriceSolar("2A"),
       },
       {
         question: "Pouvez-vous aussi contrôler l'installation ?",
