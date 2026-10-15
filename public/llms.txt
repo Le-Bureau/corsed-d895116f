@@ -12,6 +12,7 @@ Les rapports d'inspection sont livrés sur deux plateformes développées en int
 - [Nettoyage et démoussage de toiture](https://corse-drone.com/pole/nettoyage/toitures)
 - [Nettoyage de façade](https://corse-drone.com/pole/nettoyage/facades)
 - [Nettoyage de panneaux solaires](https://corse-drone.com/pole/nettoyage/panneaux-solaires)
+- [Fixation d'amiante par drone](https://corse-drone.com/pole/nettoyage/fixation-amiante) : pulvérisation de fixateur, équipe au sol en zone verte. Référence : l'ancienne usine de Canari, avec Térélian (groupe Vinci).
 
 ## Diagnostic
 
@@ -50,6 +51,13 @@ Les rapports d'inspection sont livrés sur deux plateformes développées en int
 - [Démoussage de toiture à Ajaccio](https://corse-drone.com/demoussage-toiture-ajaccio)
 - [Nettoyage de panneaux solaires à Ajaccio](https://corse-drone.com/nettoyage-panneaux-solaires-ajaccio)
 - [Thermographie photovoltaïque à Propriano](https://corse-drone.com/thermographie-photovoltaique-propriano)
+
+## Par type de client
+
+- [Collectivités](https://corse-drone.com/collectivites) : inspection, thermographie, relevés 3D et entretien des bâtiments publics.
+- [Exploitants solaires](https://corse-drone.com/exploitants-solaires) : thermographie IEC TS 62446-3 et nettoyage des centrales et toitures solaires.
+- [BTP et désamiantage](https://corse-drone.com/btp-desamiantage) : fixation d'amiante, relevés 3D et inspection de chantiers.
+- [Copropriétés et syndics](https://corse-drone.com/coproprietes-syndics) : inspection, démoussage, façades et thermographie d'immeubles.
 
 ## Références
 

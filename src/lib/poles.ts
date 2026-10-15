@@ -307,6 +307,7 @@ export const POLES: Pole[] = [
       { name: "Nettoyage de toitures", slug: "toitures" },
       { name: "Nettoyage de façades", slug: "facades" },
       { name: "Panneaux photovoltaïques", slug: "panneaux-solaires" },
+      { name: "Fixation d'amiante", slug: "fixation-amiante" },
     ],
     heroImage: nettoyageImg,
     showcaseImage: nettoyageShowcase,

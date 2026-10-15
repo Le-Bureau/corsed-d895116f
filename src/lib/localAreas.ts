@@ -48,7 +48,7 @@ export const LOCAL_SERVICES = [
   { label: "Photogrammétrie", href: "/pole/diagnostic/photogrammetrie", pole: "diagnostic", text: "Orthophotos, modèles 3D et relevés géoréférencés au centimètre." },
 ] as const;
 
-const CAB_REF: LocalReference = {
+export const CAB_REF: LocalReference = {
   place: "Bastia",
   client: "Communauté d'Agglomération de Bastia",
   title: "Deux bâtiments publics inspectés en une journée",
@@ -56,7 +56,7 @@ const CAB_REF: LocalReference = {
   href: "/blog/inspection-toiture-drone-cab-bastia",
 };
 
-const CANARI_REF: LocalReference = {
+export const CANARI_REF: LocalReference = {
   place: "Canari, Cap Corse",
   client: "Térélian (groupe Vinci)",
   title: "Fixation amiante sur l'ancienne usine de Canari",
@@ -64,7 +64,7 @@ const CANARI_REF: LocalReference = {
   href: "/blog/canari-fixation-amiante-drone-terelian-vinci",
 };
 
-const TENERGIE_REF: LocalReference = {
+export const TENERGIE_REF: LocalReference = {
   place: "Propriano",
   client: "Tenergie",
   title: "Thermographie d'une centrale solaire au sol",
@@ -145,6 +145,7 @@ export const LOCAL_AREAS: Record<LocalAreaKey, LocalArea> = {
       { label: "Démoussage de toiture à Bastia", href: "/demoussage-toiture-bastia" },
       { label: "Inspection de toiture à Bastia", href: "/inspection-toiture-bastia" },
       { label: "Nettoyage de panneaux solaires à Bastia", href: "/nettoyage-panneaux-solaires-bastia" },
+      { label: "Fixation d'amiante par drone", href: "/pole/nettoyage/fixation-amiante" },
     ],
     areaServed: [
       { type: "City", name: "Bastia" },
@@ -348,6 +349,9 @@ export const LOCAL_AREAS: Record<LocalAreaKey, LocalArea> = {
     ],
     ctaTitle: "Un chantier dans le Cap Corse ?",
     breadcrumb: "Cap Corse",
+    detailPages: [
+      { label: "Fixation d'amiante par drone", href: "/pole/nettoyage/fixation-amiante" },
+    ],
     areaServed: [
       { type: "AdministrativeArea", name: "Cap Corse" },
       { type: "City", name: "Ogliastro" },

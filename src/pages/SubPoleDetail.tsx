@@ -20,6 +20,7 @@ import RelatedLinks from "@/components/seo/RelatedLinks";
 import ZonesBlock from "@/components/seo/ZonesBlock";
 import { SUB_POLE_ARTICLES } from "@/lib/relatedContent";
 import { localPagesForService } from "@/lib/localServicePages";
+import { audiencesForService } from "@/lib/audiences";
 
 export default function SubPoleDetail() {
   const { slug, subSlug } = useParams<{ slug: string; subSlug: string }>();
@@ -147,6 +148,10 @@ export default function SubPoleDetail() {
           ...localPagesForService(`/pole/${pole.slug}/${subSlug}`).map((p) => ({
             label: p.h1,
             href: p.path,
+          })),
+          ...audiencesForService(`/pole/${pole.slug}/${subSlug}`).map((a) => ({
+            label: a.linkLabel,
+            href: a.path,
           })),
           { label: "Nos réalisations", href: "/realisations" },
         ]}

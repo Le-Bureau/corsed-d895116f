@@ -243,6 +243,53 @@ export const SUB_POLE_CONTENT: Record<string, Record<string, SubPoleContent>> = 
       finalCTASubtitle: "Audit de production gratuit. Devis adapté à votre installation sous 48h.",
       finalCTAButtonLabel: "Demander un devis",
     },
+    "fixation-amiante": {
+      heroEyebrow: "Nettoyage · fixation d'amiante",
+      seoTitle: "Fixation d'amiante par drone en Corse",
+      heroTitle: "Fixer l'amiante sans exposer l'équipe.",
+      heroPitch:
+        "Pulvérisation de fixateur par drone sur les sites amiantés : friches industrielles, toitures en fibrociment, zones sinistrées. L'équipe au sol reste en zone verte pendant toute l'intervention. Notre référence : l'ancienne usine de Canari, avec Térélian (groupe Vinci).",
+      heroImageAlt: "Drone pulvérisant un fixateur sur un site amianté",
+      stats: [
+        { value: "1 500", unit: "m²", labelStrong: "fixés à Canari", labelMuted: "sur 7 zones, en 2 jours" },
+        { value: "200", unit: "m", labelStrong: "de tuyau", labelMuted: "l'équipe reste en zone verte" },
+        { value: "6", unit: "h", labelStrong: "de vol effectif", labelMuted: "pour traiter les 7 zones" },
+      ],
+      whyEyebrow: "Pourquoi le drone",
+      whyTitle: "Fixer les fibres sans entrer dans la zone.",
+      whyIntro:
+        "Sur un chantier amianté, la fixation se faisait jusqu'ici à pied : un opérateur équipé entre dans la zone avec une lance ou un pulvérisateur dorsal. Chaque heure passée sur place est une heure d'exposition potentielle, et les zones les plus difficiles (pentes, hauteurs, terrains instables) demandent nacelles, échafaudages et harnais. Le drone traite ces zones depuis les airs.",
+      whyItems: [
+        { title: "Équipe hors de la zone", description: "Avec 200 mètres de tuyau, le pilote et l'équipe au sol restent en zone verte, à distance des zones traitées." },
+        { title: "Zones difficiles", description: "Toitures en fibrociment à forte pente, hangars en hauteur, sites instables ou à flanc de falaise." },
+        { title: "Grandes surfaces", description: "À pied, quelques dizaines de mètres carrés par heure. Par drone, plusieurs centaines, sans pause de décontamination." },
+        { title: "Traçabilité", description: "Photos avant et après, plans des zones traitées, volumes appliqués et conditions d'intervention." },
+      ],
+      formulas: [],
+      domainesEyebrow: "Applications",
+      domainesTitle: "Les chantiers où le drone s'impose.",
+      domaines: [
+        { iconName: "Factory", category: "Industrie", title: "Sites industriels en fin de vie", description: "Anciennes usines, mines, friches en cours de démantèlement : fixation des résidus exposés à l'air libre après la déconstruction.", highlightLabel: "Référence", highlightDescription: "Canari, mai 2026" },
+        { iconName: "Home", category: "Toitures", title: "Toitures en fibrociment amianté", description: "Préparation à la dépose sur les hangars agricoles, bâtiments industriels, gymnases ou écoles construits avant 1997.", highlightLabel: "Avant 1997", highlightDescription: "bâtiments concernés" },
+        { iconName: "Recycle", category: "Friches", title: "Friches et zones polluées", description: "Sites à l'arrêt depuis longtemps, terrains accumulant des résidus amiantés, décharges contenant des matériaux à risque.", highlightLabel: "Sans exposition", highlightDescription: "de l'équipe au sol" },
+        { iconName: "LifeBuoy", category: "Sinistres", title: "Interventions après sinistre", description: "Sécurisation rapide de zones contaminées après une tempête, un incendie ou l'effondrement partiel d'un bâtiment amianté.", highlightLabel: "Rapide", highlightDescription: "sans entrer dans la zone" },
+      ],
+      processSteps: [
+        { number: "ÉTAPE 01", title: "Pré-diagnostic", description: "Visite ou analyse documentaire : zones à traiter, contraintes d'accès, conditions de vol et de pulvérisation. Nous validons la faisabilité et dimensionnons le dispositif." },
+        { number: "ÉTAPE 02", title: "Calibrage", description: "DJI Matrice 400 équipé de notre kit de pulvérisation, alimenté par une pompe au sol et 200 mètres de tuyau, pour garder l'équipe en zone verte." },
+        { number: "ÉTAPE 03", title: "Application", description: "Le drone survole les zones définies avec le donneur d'ordre, pulvérise le fixateur en couverture homogène et revient en zone verte pour le rechargement. Pression et débit sont adaptés au support." },
+        { number: "ÉTAPE 04", title: "Compte-rendu", description: "Photos avant et après, plans des zones traitées, volumes appliqués, conditions d'intervention : un rapport exploitable par le maître d'ouvrage et les contrôles ultérieurs." },
+      ],
+      faq: [
+        { question: "Le drone remplace-t-il l'entreprise de désamiantage ?", answer: "Non. Nous intervenons en lien avec le désamianteur et le maître d'ouvrage, sur les zones qu'ils définissent. À Canari, la mission a été menée en partenariat avec Térélian (groupe Vinci)." },
+        { question: "Quelle surface peut-on traiter ?", answer: "À Canari, plus de 1 500 m² répartis sur 7 zones distinctes, en 6 heures de vol effectif sur 2 jours." },
+        { question: "L'équipe au sol est-elle exposée ?", answer: "Non : grâce aux 200 mètres de tuyau, le pilote et l'équipe au sol restent en zone verte, à distance des zones traitées, pendant toute l'intervention." },
+        { question: "Que contient le compte-rendu ?", answer: "Photos avant et après, plans des zones traitées, volumes appliqués et conditions d'intervention. Il est exploitable par le maître d'ouvrage et par tout contrôle ultérieur sur le chantier." },
+      ],
+      finalCTATitle: "Un chantier amianté à étudier ?",
+      finalCTASubtitle: "Localisation, surface estimée, type de contamination, calendrier : nous revenons vers vous avec une analyse de faisabilité.",
+      finalCTAButtonLabel: "Demander une étude",
+    },
   },
   diagnostic: {
     thermique: {

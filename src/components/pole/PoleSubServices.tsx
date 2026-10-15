@@ -138,7 +138,11 @@ const PoleSubServices = ({ pole }: Props) => {
   }
 
   const gridCols =
-    total >= 3 ? "lg:grid-cols-3" : total === 2 ? "lg:grid-cols-2" : "lg:grid-cols-1";
+    total === 4 || total === 2
+      ? "lg:grid-cols-2"
+      : total >= 3
+        ? "lg:grid-cols-3"
+        : "lg:grid-cols-1";
 
   return (
     <section

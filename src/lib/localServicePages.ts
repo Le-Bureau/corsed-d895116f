@@ -31,7 +31,7 @@ export interface LocalServicePageData {
   ctaTitle: string;
 }
 
-const DELAY =
+export const DELAY =
   "Pour les opérations sous certification, la réglementation impose au moins 10 jours entre la demande de vol et l'intervention. Nous les intégrons d'office au planning.";
 
 const CAB: LocalReference = {
