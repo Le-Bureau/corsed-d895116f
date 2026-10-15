@@ -35,6 +35,8 @@ export interface LocalArea {
   ctaTitle: string;
   breadcrumb: string;
   areaServed: { type: "City" | "AdministrativeArea"; name: string }[];
+  /** Service × city pages of this area (/demoussage-toiture-bastia, …). */
+  detailPages?: { label: string; href: string }[];
 }
 
 export const LOCAL_SERVICES = [
@@ -75,7 +77,29 @@ const DELAY_FAQ = {
   answer: "Pour les opérations sous certification, la réglementation impose un délai minimum de 10 jours entre la demande de vol et son exécution. Nous l'intégrons d'office au planning, et nous établissons le devis dès que nous avons les éléments du site.",
 };
 
-export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" | "corte", LocalArea> = {
+export type LocalAreaKey =
+  | "bastia"
+  | "capCorse"
+  | "balagne"
+  | "corte"
+  | "plaineOrientale"
+  | "sud"
+  | "valinco"
+  | "portoVecchio";
+
+/** North to south, the order a Corsican reader expects. */
+export const ZONE_ORDER: LocalAreaKey[] = [
+  "capCorse",
+  "bastia",
+  "balagne",
+  "corte",
+  "plaineOrientale",
+  "sud",
+  "valinco",
+  "portoVecchio",
+];
+
+export const LOCAL_AREAS: Record<LocalAreaKey, LocalArea> = {
   bastia: {
     path: "/drone-bastia-haute-corse",
     eyebrow: "Zone d'intervention · Haute-Corse",
@@ -103,9 +127,9 @@ export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" |
       "Notre base est à Ogliastro, au cœur du Cap Corse. Voici les secteurs où nous intervenons le plus souvent, la liste n'est pas exhaustive.",
     areas: [
       { zone: "Agglomération de Bastia", towns: "Bastia, Ville-di-Pietrabugno, San-Martino-di-Lota, Santa-Maria-di-Lota, Furiani, Biguglia" },
-      { zone: "Cap Corse", towns: "Ogliastro, Canari, Nonza, Luri, Rogliano, Macinaggio, Erbalunga, Sisco, Pino" },
+      { zone: "Cap Corse", towns: "Ogliastro, Canari, Nonza, Luri, Rogliano, Macinaggio, Erbalunga, Sisco, Pino", href: "/drone-cap-corse" },
       { zone: "Nebbio et Balagne", towns: "Saint-Florent, Patrimonio, Oletta, L'Île-Rousse, Calvi, Algajola", href: "/drone-calvi-balagne" },
-      { zone: "Marana, Casinca et plaine orientale", towns: "Borgo, Lucciana, Vescovato, Moriani, Cervione, Aléria, Ghisonaccia" },
+      { zone: "Marana, Casinca et plaine orientale", towns: "Borgo, Lucciana, Vescovato, Moriani, Cervione, Aléria, Ghisonaccia", href: "/drone-plaine-orientale" },
       { zone: "Centre Corse", towns: "Corte, Ponte-Leccia, Castagniccia, Venaco", href: "/drone-corte-centre-corse" },
     ],
     faq: [
@@ -117,6 +141,11 @@ export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" |
     ],
     ctaTitle: "Un chantier à Bastia ou en Haute-Corse ?",
     breadcrumb: "Bastia et Haute-Corse",
+    detailPages: [
+      { label: "Démoussage de toiture à Bastia", href: "/demoussage-toiture-bastia" },
+      { label: "Inspection de toiture à Bastia", href: "/inspection-toiture-bastia" },
+      { label: "Nettoyage de panneaux solaires à Bastia", href: "/nettoyage-panneaux-solaires-bastia" },
+    ],
     areaServed: [
       { type: "City", name: "Bastia" },
       { type: "AdministrativeArea", name: "Haute-Corse" },
@@ -150,7 +179,7 @@ export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" |
       "Voici les secteurs de Corse-du-Sud où nous intervenons. Pour les sites éloignés, nous regroupons les missions pour limiter les déplacements. La liste n'est pas exhaustive.",
     areas: [
       { zone: "Pays ajaccien", towns: "Ajaccio, Porticcio, Bastelicaccia, Alata, Afa, Sarrola-Carcopino, Grosseto-Prugna" },
-      { zone: "Golfe de Valinco", towns: "Propriano, Olmeto, Porto Pollo, Serra-di-Ferro, Belvédère-Campomoro" },
+      { zone: "Golfe de Valinco", towns: "Propriano, Olmeto, Porto Pollo, Serra-di-Ferro, Belvédère-Campomoro", href: "/drone-propriano-valinco" },
       { zone: "Sartenais et Alta Rocca", towns: "Sartène, Levie, Zonza, Sainte-Lucie-de-Tallano" },
       { zone: "Extrême-Sud", towns: "Porto-Vecchio, Bonifacio, Figari, Lecci, Sainte-Lucie-de-Porto-Vecchio, Pianottoli-Caldarello", href: "/drone-porto-vecchio-extreme-sud" },
       { zone: "Côte ouest", towns: "Cargèse, Sagone, Vico, Piana" },
@@ -164,6 +193,10 @@ export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" |
     ],
     ctaTitle: "Un chantier à Ajaccio ou en Corse-du-Sud ?",
     breadcrumb: "Ajaccio et Corse-du-Sud",
+    detailPages: [
+      { label: "Démoussage de toiture à Ajaccio", href: "/demoussage-toiture-ajaccio" },
+      { label: "Nettoyage de panneaux solaires à Ajaccio", href: "/nettoyage-panneaux-solaires-ajaccio" },
+    ],
     areaServed: [
       { type: "City", name: "Ajaccio" },
       { type: "City", name: "Porto-Vecchio" },
@@ -191,7 +224,7 @@ export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" |
       { zone: "Porto-Vecchio et son golfe", towns: "Porto-Vecchio, Lecci, Sainte-Lucie-de-Porto-Vecchio, Pinarellu, Conca, Zonza" },
       { zone: "Bonifacio et le Sud", towns: "Bonifacio, Figari, Pianottoli-Caldarello, Monacia-d'Aullène, Sotta" },
       { zone: "Alta Rocca", towns: "Levie, Zonza, Quenza, Carbini, San-Gavino-di-Carbini" },
-      { zone: "Golfe de Valinco et Sartenais", towns: "Propriano, Sartène, Olmeto, Porto Pollo", href: "/drone-ajaccio-corse-du-sud" },
+      { zone: "Golfe de Valinco et Sartenais", towns: "Propriano, Sartène, Olmeto, Porto Pollo", href: "/drone-propriano-valinco" },
     ],
     faq: [
       { question: "Intervenez-vous à Porto-Vecchio et à Bonifacio ?", answer: "Oui. Corse Drone est basé à Ogliastro, dans le Cap Corse, et intervient dans toute la Corse. Pour l'Extrême-Sud, les missions sont planifiées à l'avance et nous regroupons les interventions d'un même secteur pour limiter les déplacements et leur coût." },
@@ -281,6 +314,124 @@ export const LOCAL_AREAS: Record<"bastia" | "sud" | "portoVecchio" | "balagne" |
     areaServed: [
       { type: "City", name: "Corte" },
       { type: "AdministrativeArea", name: "Haute-Corse" },
+    ],
+  },
+
+  capCorse: {
+    path: "/drone-cap-corse",
+    eyebrow: "Zone d'intervention · Cap Corse",
+    titleStart: "Drone professionnel",
+    titleAccent: "dans le Cap Corse.",
+    metaTitle: "Drone professionnel dans le Cap Corse",
+    metaDescription:
+      "Basés à Ogliastro, nous intervenons dans tout le Cap Corse : toitures et façades, panneaux solaires, thermographie, inspection et relevés 3D par drone.",
+    intro:
+      "Notre base est à Ogliastro, sur la côte ouest du Cap Corse. Nous intervenons dans tous les villages du Cap, de Nonza à Macinaggio et d'Erbalunga à Centuri : nettoyage de toitures et de façades, panneaux solaires, thermographie, inspection et relevés 3D. C'est aussi dans le Cap que nous avons mené la fixation d'amiante de l'ancienne usine de Canari.",
+    servicesTitle: "Ce qu'on fait dans le Cap Corse.",
+    referencesTitle: "Nos références dans le Cap et en Haute-Corse.",
+    references: [CANARI_REF, CAB_REF],
+    areasTitle: "Tout le Cap, côte ouest et côte est.",
+    areasIntro:
+      "Voici les communes du Cap où nous intervenons, depuis notre base d'Ogliastro. La liste n'est pas exhaustive.",
+    areas: [
+      { zone: "Côte ouest", towns: "Ogliastro, Canari, Nonza, Olmeta-di-Capocorso, Olcani, Barrettali, Pino" },
+      { zone: "Pointe du Cap", towns: "Morsiglia, Centuri, Ersa, Rogliano, Macinaggio, Tomino" },
+      { zone: "Côte est", towns: "Meria, Luri, Cagnano, Pietracorbara, Sisco, Brando, Erbalunga" },
+      { zone: "Portes de Bastia", towns: "Santa-Maria-di-Lota, San-Martino-di-Lota, Ville-di-Pietrabugno", href: "/drone-bastia-haute-corse" },
+    ],
+    faq: [
+      { question: "Êtes-vous vraiment sur place dans le Cap Corse ?", answer: "Oui : notre base est à Ogliastro. Pour une intervention dans le Cap, l'équipe et le matériel sont à quelques kilomètres du chantier." },
+      { question: "Traitez-vous les toitures en lauzes des villages ?", answer: "Oui. Le traitement est pulvérisé par drone sans marcher sur la toiture, ce qui évite de déplacer ou de casser les lauzes. La pression et le produit sont adaptés au support." },
+      DELAY_FAQ,
+      { question: "Quelle référence avez-vous dans le Cap ?", answer: "La fixation d'amiante de l'ancienne usine de Canari avec Térélian (groupe Vinci), en mai 2026 : plus de 1 500 m² traités sur 7 zones, avec l'équipe au sol maintenue en zone verte." },
+      { question: "Que se passe-t-il si le vent est trop fort ?", answer: "Les conditions sont vérifiées avant chaque mission. Si le vent ne permet pas de travailler en sécurité, l'intervention est reportée à une date que nous fixons ensemble." },
+    ],
+    ctaTitle: "Un chantier dans le Cap Corse ?",
+    breadcrumb: "Cap Corse",
+    areaServed: [
+      { type: "AdministrativeArea", name: "Cap Corse" },
+      { type: "City", name: "Ogliastro" },
+      { type: "AdministrativeArea", name: "Haute-Corse" },
+    ],
+  },
+
+  plaineOrientale: {
+    path: "/drone-plaine-orientale",
+    eyebrow: "Zone d'intervention · Plaine orientale",
+    titleStart: "Drone professionnel",
+    titleAccent: "dans la plaine orientale.",
+    metaTitle: "Drone professionnel dans la plaine orientale",
+    metaDescription:
+      "Nettoyage de panneaux solaires de hangars et de toitures, thermographie, inspection et relevés 3D par drone de la Casinca à Solenzara, sur la plaine orientale.",
+    intro:
+      "De la Casinca à Solenzara, nous intervenons sur toute la plaine orientale : nettoyage de panneaux solaires de hangars et de toitures, nettoyage de façades, thermographie, inspection et relevés 3D. Le pôle agriculture, avec la cartographie multispectrale, l'épandage et le semis, est en préparation.",
+    servicesTitle: "Ce qu'on fait sur la plaine orientale.",
+    referencesTitle: "Nos références en Corse.",
+    references: [TENERGIE_REF, CAB_REF, CANARI_REF],
+    areasTitle: "De la Casinca au Fium'Orbu.",
+    areasIntro:
+      "Voici les secteurs de la plaine orientale où nous intervenons. La liste n'est pas exhaustive.",
+    areas: [
+      { zone: "Casinca", towns: "Vescovato, Penta-di-Casinca, Folelli, Castellare-di-Casinca, Sorbo-Ocagnano, Venzolasca" },
+      { zone: "Costa Verde", towns: "San-Nicolao, Moriani, Santa-Lucia-di-Moriani, Cervione, Prunete" },
+      { zone: "Plaine d'Aléria", towns: "Aléria, Linguizzetta, Tallone, Antisanti" },
+      { zone: "Fium'Orbu", towns: "Ghisonaccia, Prunelli-di-Fiumorbo, Migliacciaru, Serra-di-Fiumorbo, Sari-Solenzara" },
+    ],
+    faq: [
+      { question: "Nettoyez-vous les panneaux solaires des hangars agricoles ?", answer: "Oui. Les toitures de hangar équipées de panneaux sont nombreuses sur la plaine. Les périodes d'épandage, de labour et de moisson laissent des dépôts qui justifient un nettoyage plus rapproché, jusqu'à deux fois par an." },
+      { question: "Peut-on faire voler un drone près de la base aérienne de Solenzara ?", answer: "Oui, dans un cadre précis. Les abords de la base aérienne 126 de Solenzara sont une zone réglementée : nous vérifions chaque site et faisons les déclarations nécessaires." },
+      DELAY_FAQ,
+      { question: "Proposez-vous des services agricoles ?", answer: "Le pôle agriculture est en préparation : cartographie multispectrale et, avec le DJI Agras T100, épandage et semis. Vous pouvez être prévenu du lancement depuis la page du pôle agriculture." },
+      { question: "Couplez-vous nettoyage et thermographie des panneaux ?", answer: "Oui : sur les grandes toitures et les centrales, nettoyage et thermographie peuvent être faits pendant le même déplacement." },
+    ],
+    ctaTitle: "Un chantier sur la plaine orientale ?",
+    breadcrumb: "Plaine orientale",
+    areaServed: [
+      { type: "AdministrativeArea", name: "Plaine orientale" },
+      { type: "City", name: "Ghisonaccia" },
+      { type: "City", name: "Aléria" },
+      { type: "AdministrativeArea", name: "Haute-Corse" },
+    ],
+  },
+
+  valinco: {
+    path: "/drone-propriano-valinco",
+    eyebrow: "Zone d'intervention · Valinco",
+    titleStart: "Drone professionnel à Propriano",
+    titleAccent: "et dans le Valinco.",
+    metaTitle: "Drone professionnel à Propriano et dans le Valinco",
+    metaDescription:
+      "Thermographie de centrales solaires, nettoyage de panneaux, toitures et façades, inspection par drone à Propriano, Sartène et dans le golfe du Valinco.",
+    intro:
+      "Nous intervenons à Propriano, Sartène, Olmeto et dans tout le golfe du Valinco : thermographie et nettoyage d'installations solaires, nettoyage de toitures et de façades, inspection et relevés 3D. Nous y avons inspecté la centrale solaire au sol de 1 MWc de Tenergie.",
+    servicesTitle: "Ce qu'on fait dans le Valinco.",
+    referencesTitle: "Notre référence dans le Valinco.",
+    references: [TENERGIE_REF, CAB_REF, CANARI_REF],
+    areasTitle: "Du golfe au Sartenais.",
+    areasIntro:
+      "Voici les secteurs où nous intervenons. Les missions sont planifiées à l'avance et regroupées par secteur. La liste n'est pas exhaustive.",
+    areas: [
+      { zone: "Propriano et le golfe", towns: "Propriano, Olmeto, Viggianello, Porto Pollo, Serra-di-Ferro, Belvédère-Campomoro" },
+      { zone: "Sartenais", towns: "Sartène, Foce, Grossa, Bilia, Granace" },
+      { zone: "Taravo", towns: "Petreto-Bicchisano, Sollacaro, Argiusta-Moriccio" },
+      { zone: "Alta Rocca", towns: "Sainte-Lucie-de-Tallano, Levie, Zonza", href: "/drone-porto-vecchio-extreme-sud" },
+    ],
+    faq: [
+      { question: "Qu'avez-vous réalisé pour Tenergie à Propriano ?", answer: "La thermographie d'une centrale solaire au sol de 1 MWc, en une heure de vol, avec une demi-journée de traitement des données. Les anomalies sont classées et positionnées sur l'orthomosaïque dans Spectra." },
+      { question: "Peut-on faire voler un drone près de l'aérodrome de Propriano ?", answer: "Oui, dans un cadre précis. Les abords de l'aérodrome de Propriano-Tavaria sont une zone réglementée : nous vérifions chaque site et faisons les déclarations nécessaires." },
+      DELAY_FAQ,
+      { question: "Couplez-vous nettoyage et thermographie des panneaux ?", answer: "Oui : nettoyage et thermographie peuvent être faits pendant le même déplacement, ce qui limite les frais." },
+      { question: "Vous êtes basés en Haute-Corse : venez-vous dans le Valinco ?", answer: "Oui. Les missions du Valinco sont planifiées à l'avance et regroupées par secteur, pour limiter les déplacements et leur coût." },
+    ],
+    ctaTitle: "Un chantier à Propriano ou dans le Valinco ?",
+    breadcrumb: "Propriano et Valinco",
+    areaServed: [
+      { type: "City", name: "Propriano" },
+      { type: "City", name: "Sartène" },
+      { type: "AdministrativeArea", name: "Corse-du-Sud" },
+    ],
+    detailPages: [
+      { label: "Thermographie photovoltaïque à Propriano", href: "/thermographie-photovoltaique-propriano" },
     ],
   },
 };

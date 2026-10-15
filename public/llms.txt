@@ -32,11 +32,24 @@ Les rapports d'inspection sont livrés sur deux plateformes développées en int
 
 ## Zones d'intervention
 
+- [Toutes les zones](https://corse-drone.com/zones-d-intervention)
+- [Cap Corse](https://corse-drone.com/drone-cap-corse) : siège à Ogliastro.
 - [Bastia et Haute-Corse](https://corse-drone.com/drone-bastia-haute-corse)
 - [Calvi et Balagne](https://corse-drone.com/drone-calvi-balagne)
 - [Corte et centre Corse](https://corse-drone.com/drone-corte-centre-corse)
+- [Plaine orientale](https://corse-drone.com/drone-plaine-orientale)
 - [Ajaccio et Corse-du-Sud](https://corse-drone.com/drone-ajaccio-corse-du-sud)
+- [Propriano et Valinco](https://corse-drone.com/drone-propriano-valinco)
 - [Porto-Vecchio et Extrême-Sud](https://corse-drone.com/drone-porto-vecchio-extreme-sud)
+
+## Prestations par ville
+
+- [Démoussage de toiture à Bastia](https://corse-drone.com/demoussage-toiture-bastia)
+- [Inspection de toiture par drone à Bastia](https://corse-drone.com/inspection-toiture-bastia)
+- [Nettoyage de panneaux solaires à Bastia](https://corse-drone.com/nettoyage-panneaux-solaires-bastia)
+- [Démoussage de toiture à Ajaccio](https://corse-drone.com/demoussage-toiture-ajaccio)
+- [Nettoyage de panneaux solaires à Ajaccio](https://corse-drone.com/nettoyage-panneaux-solaires-ajaccio)
+- [Thermographie photovoltaïque à Propriano](https://corse-drone.com/thermographie-photovoltaique-propriano)
 
 ## Références
 

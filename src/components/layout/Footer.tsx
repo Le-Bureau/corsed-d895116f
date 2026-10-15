@@ -6,12 +6,9 @@ import { POLES } from "@/lib/poles";
 import { EXPERTISES } from "@/lib/expertises";
 import { CONTACT } from "@/lib/contact";
 import { SUB_POLE_CONTENT } from "@/lib/sub-poles";
-import { LOCAL_AREAS } from "@/lib/localAreas";
+import { LOCAL_AREAS, ZONE_ORDER } from "@/lib/localAreas";
 
-// North to south.
-const ZONE_LINKS = (["bastia", "balagne", "corte", "sud", "portoVecchio"] as const).map(
-  (k) => LOCAL_AREAS[k],
-);
+const ZONE_LINKS = ZONE_ORDER.map((k) => LOCAL_AREAS[k]);
 
 const colTitle =
   "text-[11px] font-semibold tracking-[0.18em] uppercase text-text-on-dark-muted mb-1";
@@ -141,6 +138,11 @@ const Footer = () => {
             <div className="flex flex-col gap-4">
               <h3 className={colTitle}>Zones d'intervention</h3>
               <ul className="flex flex-col gap-3">
+                <li>
+                  <Link to="/zones-d-intervention" className={`block ${linkBase}`}>
+                    Toute la Corse
+                  </Link>
+                </li>
                 {ZONE_LINKS.map((z) => (
                   <li key={z.path}>
                     <Link to={z.path} className={`block ${linkBase}`}>

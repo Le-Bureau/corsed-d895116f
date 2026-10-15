@@ -111,6 +111,22 @@ const LocalAreaPage = ({ area }: { area: LocalArea }) => {
               </li>
             ))}
           </ul>
+          {area.detailPages && area.detailPages.length > 0 && (
+            <p className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px]">
+              <span className="font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-text-muted">
+                En détail
+              </span>
+              {area.detailPages.map((d) => (
+                <Link
+                  key={d.href}
+                  to={d.href}
+                  className="font-semibold text-text-primary underline decoration-border-default underline-offset-4 hover:decoration-logo-base-deep"
+                >
+                  {d.label}
+                </Link>
+              ))}
+            </p>
+          )}
         </div>
       </section>
 
