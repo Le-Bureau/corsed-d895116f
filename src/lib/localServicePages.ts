@@ -294,7 +294,7 @@ export const LOCAL_SERVICE_PAGES: LocalServicePageData[] = [
     metaDescription:
       "Thermographie de bâtiments par drone à Bastia : ponts thermiques, défauts d'isolation et infiltrations, en saison de chauffe. Rapport dans Spectra.",
     intro:
-      "Nous réalisons la thermographie des bâtiments par drone à Bastia et dans le Grand Bastia : immeubles et copropriétés, bâtiments publics, locaux d'activité, toitures-terrasses. La caméra radiométrique repère les ponts thermiques, les défauts d'isolation et les infiltrations, sans nacelle ni échafaudage.",
+      "Nous réalisons la thermographie des bâtiments par drone à Bastia et dans le Grand Bastia : immeubles et copropriétés, bâtiments publics, locaux d'activité, toitures-terrasses. La caméra radiométrique repère les ponts thermiques, les défauts d'isolation et les infiltrations, sans nacelle ni cordiste.",
     methodTitle: "Ce que la caméra révèle, et quand",
     method: [
       {
