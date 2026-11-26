@@ -44,23 +44,31 @@ const A = {
     slug: "transport-materiel-drone-corse-2027",
     label: "Transport de matériel par drone en Corse : ce qui arrive en 2027",
   },
+  intemperies: {
+    slug: "inspection-toiture-drone-apres-intemperies-corse",
+    label: "Toiture abîmée après des intempéries : l'inspection par drone",
+  },
+  tenergie: {
+    slug: "inspection-thermique-centrale-photovoltaique-tenergie-propriano",
+    label: "Tenergie : une centrale de 1 MWc inspectée en une heure de vol",
+  },
 } satisfies Record<string, RelatedArticle>;
 
 export const POLE_ARTICLES: Record<string, RelatedArticle[]> = {
   nettoyage: [A.toiture, A.panneaux, A.sahara, A.amiante, A.canari],
-  diagnostic: [A.thermique, A.cab],
+  diagnostic: [A.intemperies, A.thermique, A.cab, A.tenergie],
   transport: [A.transport],
   agriculture: [A.multispectral],
 };
 
 // Keyed by "<pole>/<subSlug>".
 export const SUB_POLE_ARTICLES: Record<string, RelatedArticle[]> = {
-  "nettoyage/toitures": [A.toiture, A.cab, A.amiante],
+  "nettoyage/toitures": [A.toiture, A.cab, A.amiante, A.intemperies],
   "nettoyage/facades": [A.toiture, A.canari],
   "nettoyage/fixation-amiante": [A.canari, A.amiante],
-  "nettoyage/panneaux-solaires": [A.panneaux, A.sahara, A.thermique],
-  "diagnostic/thermique": [A.thermique, A.panneaux],
-  "diagnostic/visuel": [A.cab, A.toiture],
+  "nettoyage/panneaux-solaires": [A.panneaux, A.sahara, A.thermique, A.tenergie],
+  "diagnostic/thermique": [A.thermique, A.tenergie, A.panneaux],
+  "diagnostic/visuel": [A.intemperies, A.cab, A.toiture],
   "diagnostic/photogrammetrie": [A.cab],
   "transport/refuges": [A.transport],
   "transport/alternative-helicoptere": [A.transport],

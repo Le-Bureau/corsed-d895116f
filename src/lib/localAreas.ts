@@ -72,7 +72,7 @@ export const TENERGIE_REF: LocalReference = {
   client: "Tenergie",
   title: "Thermographie d'une centrale solaire au sol",
   figures: "1 MWc inspecté en une heure de vol",
-  // href: "/blog/inspection-thermique-centrale-photovoltaique-tenergie-propriano" once published
+  href: "/blog/inspection-thermique-centrale-photovoltaique-tenergie-propriano",
 };
 
 const DELAY_FAQ = {

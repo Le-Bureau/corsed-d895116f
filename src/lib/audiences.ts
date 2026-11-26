@@ -62,7 +62,7 @@ export const AUDIENCE_PAGES: AudiencePageData[] = [
     metaDescription:
       "Inspection, thermographie, relevés 3D et entretien des bâtiments publics par drone en Corse, sans nacelle ni fermeture du site. Référence : la CAB à Bastia.",
     intro:
-      "Communes, intercommunalités, services techniques : nous inspectons, diagnostiquons et entretenons vos bâtiments et vos ouvrages par drone, sans nacelle ni échafaudage, et sans fermer le bâtiment. Pour la Communauté d'Agglomération de Bastia, nous avons inspecté les toitures de deux bâtiments publics en une journée.",
+      "Communes, intercommunalités, services techniques : nous inspectons, diagnostiquons et entretenons vos bâtiments et vos ouvrages par drone, sans nacelle ni échafaudage, et sans fermer le bâtiment. Nous travaillons pour la Communauté d'Agglomération de Bastia, où nous avons inspecté les toitures de deux bâtiments publics en une journée, et pour la communauté de communes de Fium'Orbu Castellu, à la suite d'un appel d'offres.",
     servicesTitle: "Ce que nous faisons pour les collectivités.",
     services: [
       {
@@ -109,6 +109,8 @@ export const AUDIENCE_PAGES: AudiencePageData[] = [
       "Pas d'échafaudage ni de nacelle à installer sur la voie publique.",
       "Pour une inspection, un rapport PDF et un accès sécurisé à la maquette 3D dans Axio, chaque anomalie positionnée avec sa photo.",
       "Bâtiments classés et secteurs sauvegardés : inspection sans échafaudage ni emprise au sol.",
+      "Après des intempéries, un état des lieux de vos bâtiments sans envoyer d'agent en hauteur, avec des photos datées pour l'assurance.",
+      "Nous répondons aux marchés publics, en appel d'offres comme en consultation directe.",
       REGULATED_ZONES,
       DELAY,
     ],
@@ -135,8 +137,18 @@ export const AUDIENCE_PAGES: AudiencePageData[] = [
         answer:
           "Oui, en Haute-Corse et en Corse-du-Sud, depuis notre base d'Ogliastro, dans le Cap Corse.",
       },
+      {
+        question: "Répondez-vous aux appels d'offres publics ?",
+        answer:
+          "Oui. Nous travaillons déjà pour des collectivités dans le cadre de marchés publics, dont la communauté de communes de Fium'Orbu Castellu. Nous répondons aussi aux consultations directes pour les besoins plus ponctuels.",
+      },
+      {
+        question: "Pouvez-vous intervenir après des intempéries ?",
+        answer:
+          "Oui. L'inspection par drone donne l'état des toitures de vos bâtiments sans envoyer personne en hauteur, avec un rapport photo daté et localisé à joindre à vos déclarations. Plusieurs bâtiments peuvent être inspectés dans la même campagne.",
+      },
     ],
-    articles: [A.cab, A.thermique],
+    articles: [A.intemperies, A.cab, A.thermique],
     ctaTitle: "Un bâtiment ou un ouvrage public à inspecter ?",
     ctaText:
       "Décrivez le site et ce que vous cherchez à savoir : nous revenons vers vous avec la méthode adaptée et un devis.",
@@ -208,7 +220,7 @@ export const AUDIENCE_PAGES: AudiencePageData[] = [
           "Une fois par an au minimum, en sortie d'hiver. Deux fois par an en bord de mer immédiat, en zone agricole ou quand l'inclinaison est faible (moins de 15°).",
       },
     ],
-    articles: [A.thermique, A.panneaux, A.sahara],
+    articles: [A.tenergie, A.thermique, A.panneaux, A.sahara],
     ctaTitle: "Une installation solaire à contrôler ou à nettoyer ?",
     ctaText:
       "Indiquez le type d'installation, sa puissance et sa localisation : nous revenons vers vous avec un devis.",
@@ -359,7 +371,7 @@ export const AUDIENCE_PAGES: AudiencePageData[] = [
           "Pour les opérations sous certification, la réglementation impose au moins 10 jours entre la demande de vol et l'intervention. Nous les intégrons d'office au planning.",
       },
     ],
-    articles: [A.toiture, A.cab],
+    articles: [A.intemperies, A.toiture, A.cab],
     ctaTitle: "Un immeuble à inspecter ou à entretenir ?",
     ctaText:
       "Envoyez-nous l'adresse et quelques photos : nous revenons vers vous avec la méthode adaptée et un devis présentable en assemblée.",
