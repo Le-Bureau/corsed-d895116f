@@ -614,7 +614,14 @@ const AdminBlogEditor = () => {
               control={control}
               name="author_id"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                // Radix Select emits "" when its value is set before the options
+                // exist (post loaded before the authors list): ignore it.
+                <Select
+                  value={field.value}
+                  onValueChange={(v) => {
+                    if (v) field.onChange(v);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Sélectionner" />
                   </SelectTrigger>
@@ -642,7 +649,13 @@ const AdminBlogEditor = () => {
               control={control}
               name="category_id"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
+                // Same guard as the author select above.
+                <Select
+                  value={field.value}
+                  onValueChange={(v) => {
+                    if (v) field.onChange(v);
+                  }}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Sélectionner" />
                   </SelectTrigger>
